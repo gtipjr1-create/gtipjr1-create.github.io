@@ -3,41 +3,763 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tip | Builder</title>
+  <title>Garry Tipler</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
-    body {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b0b0b;
-      color: #f5f5f5;
-      display: grid;
-      place-items: center;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #141414;
+      --border: #1e1e1e;
+      --border-strong: #2b2b2b;
+      --text: #e8e4dc;
+      --muted: #6f6963;
+      --muted-soft: #a79f95;
+      --accent: #c8b89a;
+      --accent-dim: rgba(200, 184, 154, 0.1);
+
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+
+      --container: 1040px;
+      --nav-h: 78px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: rgba(10, 10, 10, 0.84);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.35s ease, background 0.35s ease;
+    }
+
+    nav.scrolled {
+      border-color: var(--border);
+      background: rgba(10, 10, 10, 0.92);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-logo:hover {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    #hero {
       min-height: 100vh;
-      text-align: center;
-      padding: 24px;
+      display: flex;
+      align-items: flex-end;
+      padding: calc(var(--nav-h) + 32px) 48px 88px;
+      position: relative;
+      overflow: hidden;
     }
-    .wrap {
-      max-width: 720px;
+
+    .hero-shell {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      position: relative;
+      padding-left: 40px;
     }
-    h1 {
-      font-size: 2.4rem;
+
+    .hero-rule {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 8%,
+        var(--border) 28%,
+        var(--border) 74%,
+        transparent
+      );
+    }
+
+    .hero-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.75s 0.15s forwards;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(58px, 8vw, 118px);
+      font-weight: 300;
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.85s 0.3s forwards;
+    }
+
+    .hero-tagline {
+      max-width: 520px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.85s 0.45s forwards;
+    }
+
+    .hero-statement {
+      max-width: 760px;
+      font-family: var(--serif);
+      font-size: clamp(21px, 2.35vw, 30px);
+      font-weight: 300;
+      line-height: 1.42;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s forwards;
+    }
+
+    .hero-statement em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 18px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.75s forwards;
+    }
+
+    .hero-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    section {
+      padding: 120px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0 72px;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 8px;
+    }
+
+    .section-label-num {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .section-content h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4vw, 54px);
+      font-weight: 300;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      margin-bottom: 26px;
+      max-width: 680px;
+    }
+
+    .section-content p {
+      max-width: 640px;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--muted-soft);
+      margin-bottom: 18px;
+    }
+
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .project-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px 38px;
+      transition: background 0.28s ease, border-color 0.28s ease, transform 0.28s ease;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      background: var(--surface-2);
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 18px;
       margin-bottom: 12px;
     }
-    p {
-      font-size: 1.05rem;
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .project-status {
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+    }
+
+    .project-tagline {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .project-desc {
+      max-width: 560px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #8e867d;
+      margin-bottom: 0;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+      margin-bottom: 30px;
+    }
+
+    .stack-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .stack-tag:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: rgba(200, 184, 154, 0.04);
+    }
+
+    .build-philosophy {
+      padding: 24px 28px;
+      border-left: 1px solid var(--accent);
+      background: var(--accent-dim);
+      max-width: 700px;
+    }
+
+    .build-philosophy p {
+      font-family: var(--serif);
+      font-size: 19px;
       line-height: 1.6;
-      color: #cfcfcf;
+      font-style: italic;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 38px 36px;
+      transition: background 0.28s ease, border-color 0.28s ease, transform 0.28s ease;
+    }
+
+    .pillar:hover {
+      background: var(--surface-2);
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .pillar-icon {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .pillar h3 {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .pillar p {
+      font-size: 14px;
+      line-height: 1.85;
+      color: #8e867d;
+      margin-bottom: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 64px 48px;
+    }
+
+    .footer-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 32px;
+    }
+
+    .footer-statement {
+      max-width: 520px;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 300;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-meta {
+      text-align: right;
+    }
+
+    .footer-meta p {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .section-inner {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .pillars {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      #hero {
+        padding: calc(var(--nav-h) + 24px) 24px 64px;
+      }
+
+      .hero-shell {
+        padding-left: 24px;
+      }
+
+      section {
+        padding: 84px 24px;
+      }
+
+      .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      footer {
+        padding: 48px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-meta {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-shell {
+        padding-left: 18px;
+      }
+
+      .hero-tagline {
+        max-width: 320px;
+      }
+
+      .project-card,
+      .pillar {
+        padding: 28px 24px;
+      }
+
+      .build-philosophy {
+        padding: 20px 22px;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <h1>Tip — Builder, Coach, and Operator</h1>
-    <p>
-      I’m building products around discipline, training, and self-development.
-      This site will house my projects, writing, and portfolio.
-    </p>
-  </main>
+  <nav id="nav">
+    <a class="nav-logo" href="#hero">GT</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#craft">Craft</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-shell">
+      <div class="hero-rule"></div>
+      <div class="hero-number">001 — Identity</div>
+      <h1 class="hero-name">Garry<br />Tipler</h1>
+      <p class="hero-tagline">
+        Performance systems builder, author, and coach-in-progress.
+      </p>
+      <p class="hero-statement">
+        I build products, writing, and systems around
+        <em>disciplined living</em>, structured training, and clear execution.
+      </p>
+      <div class="hero-links">
+        <a href="https://x.com/garry_tipler?s=21" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://medium.com/tenacious-individual-performance" target="_blank" rel="noopener noreferrer">Medium</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-num">002</span>
+        About
+      </div>
+
+      <div class="section-content reveal">
+        <h2>Built at the intersection of systems, writing, and training.</h2>
+        <p>
+          My work sits at the intersection of product building, writing, and physical
+          training. I care about structure, clarity, discipline, and systems that help
+          people execute with more intention.
+        </p>
+        <p>Current work includes SelfTrainer, FitPulse, and OPP.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-num">003</span>
+        Projects
+      </div>
+
+      <div class="section-content">
+        <div class="projects-grid">
+          <div class="project-card reveal">
+            <div class="project-header">
+              <span class="project-name">SelfTrainer</span>
+              <span class="project-status">In Progress</span>
+            </div>
+            <p class="project-tagline">A focused training app for gym execution.</p>
+            <p class="project-desc">
+              Built for lifters who value structure, clarity, and repeated execution.
+              SelfTrainer helps plan sessions, follow routines, and train with less clutter.
+            </p>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-header">
+              <span class="project-name">FitPulse</span>
+              <span class="project-status">In Development</span>
+            </div>
+            <p class="project-tagline">
+              A coaching system and performance platform for trainers.
+            </p>
+            <p class="project-desc">
+              FitPulse is designed to support program structure, client onboarding,
+              session organization, performance review, and coaching operations with more clarity.
+            </p>
+          </div>
+
+          <div class="project-card reveal">
+            <div class="project-header">
+              <span class="project-name">OPP</span>
+              <span class="project-status">In Development</span>
+            </div>
+            <p class="project-tagline">
+              A personal command center for disciplined living and focused building.
+            </p>
+            <p class="project-desc">
+              OPP brings priorities, standards, domains, and weekly direction into one
+              structured operating system.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-num">004</span>
+        Stack
+      </div>
+
+      <div class="section-content reveal">
+        <h2>Built deliberately for clarity and long-term structure.</h2>
+
+        <div class="stack-tags">
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Supabase</span>
+          <span class="stack-tag">Tailwind CSS</span>
+          <span class="stack-tag">shadcn/ui</span>
+          <span class="stack-tag">Git</span>
+        </div>
+
+        <div class="build-philosophy">
+          <p>
+            A deliberate, quality-first build process focused on clarity, stability, and
+            long-term structure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="craft">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-num">005</span>
+        Craft
+      </div>
+
+      <div class="section-content">
+        <div class="pillars">
+          <div class="pillar reveal">
+            <p class="pillar-icon">// Writing</p>
+            <h3>Discipline<br />on the page.</h3>
+            <p>
+              I write about discipline, recovery, structure, execution, and self-command.
+              My manuals and written work are built around practical philosophy, applied
+              discipline, and long-term personal development.
+            </p>
+          </div>
+
+          <div class="pillar reveal">
+            <p class="pillar-icon">// Training</p>
+            <h3>Structure<br />in the gym.</h3>
+            <p>
+              Bodybuilder, disciplined lifter, and coach-in-progress. My training
+              philosophy is grounded in structure, consistency, recovery, and long-term
+              physical development.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-statement">
+        Building systems for disciplined performance.
+      </p>
+
+      <div class="footer-meta">
+        <p>Garry Tipler</p>
+        <p>Performance Systems Builder</p>
+        <p>© 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, i * 70);
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
-<!-- refresh publish -->
