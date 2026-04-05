@@ -3,479 +3,707 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Garry Tipler</title>
-
+  <title>Garry Tipler — Performance Systems Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    /* ─── TOKENS ─────────────────────────────────────────── */
     :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --surface-2: #141414;
-      --border: #1e1e1e;
-      --border-strong: #2b2b2b;
-      --text: #e8e4dc;
-      --muted: #6f6963;
-     --muted-soft: #b6aea3;
-      --accent: #c8b89a;
-      --accent-dim: rgba(200, 184, 154, 0.1);
+      --bg:         #0b0c0e;
+      --bg-card:    #111316;
+      --bg-raised:  #161820;
+      --border:     rgba(255,255,255,0.07);
+      --border-hi:  rgba(255,255,255,0.13);
+      --text:       #e8e6e1;
+      --muted:      #6b6d72;
+      --accent:     #4a7fa5;
+      --accent-dim: rgba(74,127,165,0.12);
+      --accent-glow:rgba(74,127,165,0.25);
+      --label:      #3e6b89;
 
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'DM Sans', sans-serif;
-      --mono: 'IBM Plex Mono', monospace;
+      --font-head: 'Geist', sans-serif;
+      --font-body: 'Geist', sans-serif;
+      --font-mono: 'Geist Mono', monospace;
 
-      --container: 1040px;
-      --nav-h: 78px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--sans);
+      font-family: var(--font-body);
       font-size: 16px;
-      line-height: 1.6;
       font-weight: 300;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── SUBTLE GRID OVERLAY ────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 40%, transparent 100%);
     }
 
+    /* faint noise on top of grid */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 48px;
-      background: rgba(10, 10, 10, 0.84);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.35s ease, background 0.35s ease;
-    }
-
-    nav.scrolled {
-      border-color: var(--border);
-      background: rgba(10, 10, 10, 0.92);
+      padding: 1.1rem 3rem;
+      background: rgba(11,12,14,0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.09);
     }
 
     .nav-logo {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #8c8479;
-  transition: color 0.2s ease;
-}
-
-    .nav-logo:hover {
-      color: var(--accent);
+      font-family: var(--font-head);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
     }
 
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 2.4rem;
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #857e76;
-  transition: color 0.2s ease;
-}
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-  #hero {
-  min-height: 92vh;
-  display: flex;
-  align-items: center;
-  padding: calc(var(--nav-h) + 24px) 48px 64px;
-  position: relative;
-  overflow: hidden;
-}
-    .hero-shell {
-      width: 100%;
-      max-width: var(--container);
-      margin: 0 auto;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,230,225,0.5);
+      transition: color 0.2s;
       position: relative;
-      padding-left: 40px;
     }
 
-    .hero-rule {
+    .nav-links a::after {
+      content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 1px;
-      background: linear-gradient(
-        to bottom,
-        transparent 8%,
-        var(--border) 28%,
-        var(--border) 74%,
-        transparent
-      );
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s var(--ease);
     }
 
-    .hero-number {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.15em;
-      margin-bottom: 28px;
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-ext { color: rgba(232,230,225,0.3) !important; }
+
+    /* ─── SECTIONS ───────────────────────────────────────── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+      padding: 8rem 3rem 5rem;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* subtle gradient glow behind hero */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -10%; left: -5%;
+      width: 55%; height: 70%;
+      background: radial-gradient(ellipse at 30% 40%, rgba(74,127,165,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeUp 0.75s 0.15s forwards;
+      animation: fadeUp 0.8s var(--ease) 0.1s forwards;
     }
 
-    .hero-name {
-      font-family: var(--serif);
-      font-size: clamp(58px, 8vw, 118px);
+    .hero-headline {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 600;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
       font-weight: 300;
-      line-height: 0.94;
-      letter-spacing: -0.03em;
-      margin-bottom: 24px;
+      color: rgba(232,230,225,0.7);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeUp 0.85s 0.3s forwards;
+      animation: fadeUp 0.8s var(--ease) 0.35s forwards;
     }
 
-    .hero-tagline {
-      max-width: 520px;
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 36px;
-      opacity: 0;
-      animation: fadeUp 0.85s 0.45s forwards;
-    }
-
-    .hero-statement {
-      max-width: 760px;
-      font-family: var(--serif);
-      font-size: clamp(21px, 2.35vw, 30px);
+    .hero-support {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.42;
-      letter-spacing: -0.01em;
+      color: rgba(232,230,225,0.38);
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 2.8rem;
       opacity: 0;
-      animation: fadeUp 0.9s 0.6s forwards;
+      animation: fadeUp 0.8s var(--ease) 0.45s forwards;
     }
 
-    .hero-statement em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-links {
+    .hero-ctas {
       display: flex;
-      gap: 18px;
-      margin-top: 32px;
+      gap: 1rem;
       flex-wrap: wrap;
       opacity: 0;
-      animation: fadeUp 0.9s 0.75s forwards;
+      animation: fadeUp 0.8s var(--ease) 0.55s forwards;
     }
 
-    .hero-links a {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
+    /* ─── HERO INLINE PROOF ──────────────────────────────── */
+    .hero-proof {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      margin-top: 1.6rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease) 0.65s forwards;
+    }
+
+    .hero-proof-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
-      padding-bottom: 4px;
-      border-bottom: 1px solid transparent;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      color: rgba(232,230,225,0.28);
     }
 
-    .hero-links a:hover {
-      color: var(--accent);
+    .hero-proof-item::before {
+      content: '';
+      display: block;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.6rem;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
       border-color: var(--accent);
     }
-
-    section {
-      padding: 120px 48px;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-inner {
-      max-width: var(--container);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 0 72px;
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .btn-primary:hover {
+      background: transparent;
       color: var(--accent);
-      padding-top: 8px;
     }
 
-    .section-label-num {
-      display: block;
+    .btn-ghost {
+      background: transparent;
       color: var(--muted);
-      margin-bottom: 10px;
+      border-color: var(--border-hi);
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.25);
     }
 
-    .section-content h2 {
-      font-family: var(--serif);
-      font-size: clamp(34px, 4vw, 54px);
-      font-weight: 300;
-      line-height: 1.06;
-      letter-spacing: -0.02em;
-      margin-bottom: 26px;
-      max-width: 680px;
+    .btn-arrow::after {
+      content: '→';
+      transition: transform 0.2s var(--ease);
+    }
+    .btn-arrow:hover::after { transform: translateX(4px); }
+
+    /* ─── HERO RIGHT — CARD STACK ────────────────────────── */
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease) 0.5s forwards;
     }
 
-    .section-content p {
-      max-width: 640px;
-      font-size: 15px;
-      line-height: 1.85;
-      color: var(--muted-soft);
-      margin-bottom: 18px;
-    }
-
-    .projects-grid {
+    .card-stack {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-top: 8px;
+      gap: 0.75rem;
     }
 
-    .project-card {
-      position: relative;
-      background: var(--surface);
+    .stack-card {
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 36px 38px;
-      transition: background 0.28s ease, border-color 0.28s ease, transform 0.28s ease;
+      border-radius: 6px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s var(--ease);
+      cursor: default;
+    }
+
+    .stack-card:hover {
+      border-color: var(--border-hi);
+      background: var(--bg-raised);
+      transform: translateX(4px);
+    }
+
+    .stack-card-name {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .stack-card-desc {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 0.15rem;
+    }
+
+    .stack-badge {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+
+    .badge-progress {
+      color: #6fcf97;
+      border-color: rgba(111,207,151,0.25);
+      background: rgba(111,207,151,0.06);
+    }
+
+    .badge-dev {
+      color: var(--accent);
+      border-color: var(--accent-dim);
+      background: var(--accent-dim);
+    }
+
+    /* ─── PROOF STRIP ────────────────────────────────────── */
+    #proof {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+      background: var(--bg-card);
       overflow: hidden;
     }
 
-    .project-card:hover {
-      background: var(--surface-2);
-      border-color: var(--border-strong);
-      transform: translateY(-2px);
+    .proof-inner {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 0 2.5rem;
     }
 
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .proof-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ─── SECTION LABEL ──────────────────────────────────── */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    /* ─── PROJECTS ───────────────────────────────────────── */
+    #projects {
+      padding: 7rem 0;
+    }
+
+    .projects-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, #131518 0%, #0f1113 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s var(--ease);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    /* top accent line */
     .project-card::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--accent);
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent-glow) 50%, transparent 100%);
       opacity: 0;
-      transition: opacity 0.28s ease;
+      transition: opacity 0.4s;
     }
 
-    .project-card:hover::before {
-      opacity: 1;
+    /* mouse-follow spotlight — injected via JS */
+    .project-card .card-glow {
+      position: absolute;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(74,127,165,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+      opacity: 0;
     }
 
-    .project-header {
+    .project-card:hover {
+      border-color: rgba(255,255,255,0.12);
+      box-shadow:
+        0 0 0 1px rgba(74,127,165,0.06),
+        0 12px 40px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+    .project-card:hover .card-glow { opacity: 1; }
+
+    .project-card-left { }
+
+    .project-top {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 18px;
-      margin-bottom: 12px;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
     }
 
     .project-name {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text);
     }
 
-    .project-status {
-      flex-shrink: 0;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 4px 10px;
+    .project-mission {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: rgba(232,230,225,0.55);
+      margin-bottom: 1.3rem;
+      line-height: 1.65;
     }
 
-    .project-tagline {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
-    }
-
-    .project-desc {
-  max-width: 560px;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #9b9388;
-  margin-bottom: 0;
-}
-    .stack-tags {
+    .project-traits {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 26px;
-      margin-bottom: 30px;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    .stack-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 7px 14px;
-      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-
-    .stack-tag:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: rgba(200, 184, 154, 0.04);
-    }
-
-    .build-philosophy {
-      padding: 24px 28px;
-      border-left: 1px solid var(--accent);
-      background: var(--accent-dim);
-      max-width: 700px;
-    }
-
-    .build-philosophy p {
-      font-family: var(--serif);
-      font-size: 19px;
-      line-height: 1.6;
-      font-style: italic;
-      color: var(--text);
-      margin: 0;
-    }
-
-    .pillars {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 8px;
-    }
-
-    .pillar {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 38px 36px;
-      transition: background 0.28s ease, border-color 0.28s ease, transform 0.28s ease;
-    }
-
-    .pillar:hover {
-      background: var(--surface-2);
-      border-color: var(--border-strong);
-      transform: translateY(-2px);
-    }
-
-    .pillar-icon {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .pillar h3 {
-      font-family: var(--serif);
-      font-size: 30px;
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-   .pillar p {
-  font-size: 14px;
-  line-height: 1.85;
-  color: #9b9388;
-  margin-bottom: 0;
-}
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 64px 48px;
-    }
-
-    .footer-inner {
-      max-width: var(--container);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 32px;
-    }
-
-    .footer-statement {
-      max-width: 520px;
-      font-family: var(--serif);
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 300;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
-
-    .footer-meta {
-      text-align: right;
-    }
-
-    .footer-meta p {
-      font-family: var(--mono);
-      font-size: 11px;
+    .trait {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
-      line-height: 2;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.3rem 0.7rem;
+      background: var(--bg-raised);
+      transition: border-color 0.2s, color 0.2s;
     }
 
+    .project-card:hover .trait {
+      border-color: var(--border-hi);
+      color: rgba(232,230,225,0.7);
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .project-card-right {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 0.25rem;
+    }
+
+    .project-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(74,127,165,0.4);
+      font-weight: 300;
+    }
+
+    /* ─── STACK ──────────────────────────────────────────── */
+    #stack {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .stack-header { margin-bottom: 3rem; }
+
+    .stack-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      max-width: 400px;
+    }
+
+    .stack-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stack-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: border-color 0.25s;
+    }
+
+    .stack-group:hover { border-color: var(--border-hi); }
+
+    .stack-group-label {
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 1rem;
+    }
+
+    .stack-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.35rem 0.85rem;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ─── BOTTOM CTA ─────────────────────────────────────── */
+    #connect {
+      padding: 8rem 0 6rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .connect-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 1.4rem;
+    }
+
+    .connect-headline {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--text);
+      max-width: 640px;
+      margin: 0 auto 1.2rem;
+    }
+
+    .connect-sub {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0 auto 2.8rem;
+      line-height: 1.65;
+    }
+
+    .connect-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-name {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(232,230,225,0.3);
+    }
+
+    .footer-year {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(20px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
     }
 
     .reveal.visible {
@@ -483,285 +711,298 @@
       transform: translateY(0);
     }
 
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 900px) {
-      .section-inner {
+      #hero {
         grid-template-columns: 1fr;
-        gap: 22px;
+        gap: 3rem;
+        padding: 7rem 1.5rem 4rem;
       }
 
-      .pillars {
+      .hero-right { display: none; }
+
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+
+      .container { padding: 0 1.5rem; }
+
+      .project-card {
         grid-template-columns: 1fr;
+        padding: 1.6rem;
       }
+
+      .project-card-right { display: none; }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
 
-   @media (max-width: 768px) {
-  nav {
-    padding: 20px 24px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  #hero {
-    min-height: 88vh;
-    padding: calc(var(--nav-h) + 16px) 24px 48px;
-  }
-
-  .hero-shell {
-    padding-left: 24px;
-  }
-
-  section {
-    padding: 84px 24px;
-  }
-
-  .project-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  footer {
-    padding: 48px 24px;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .footer-meta {
-    text-align: left;
-  }
-}
-      .footer-meta {
-        text-align: left;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .hero-shell {
-        padding-left: 18px;
-      }
-
-      .hero-tagline {
-        max-width: 320px;
-      }
-
-      .project-card,
-      .pillar {
-        padding: 28px 24px;
-      }
-
-      .build-philosophy {
-        padding: 20px 22px;
-      }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .proof-inner { gap: 1.5rem; }
+      .connect-actions { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
+
 <body>
-  <nav id="nav">
-    <a class="nav-logo" href="#hero">T.I.P</a>
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav>
+    <span class="nav-logo">T.I.P</span>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#stack">Stack</a></li>
-      <li><a href="#craft">Craft</a></li>
+      <li><a href="#connect">Connect</a></li>
+      <li><a href="https://x.com/garry_tipler?s=21" target="_blank" class="nav-ext">X</a></li>
+      <li><a href="https://medium.com/tenacious-individual-performance" target="_blank" class="nav-ext">Medium</a></li>
     </ul>
   </nav>
 
-  <section id="hero">
-    <div class="hero-shell">
-      <div class="hero-rule"></div>
-      <div class="hero-number">001 — Identity</div>
-      <h1 class="hero-name">Garry<br />Tipler</h1>
-      <p class="hero-tagline">
-        Performance systems builder, author, and coach-in-progress.
-      </p>
-      <p class="hero-statement">
-        I build products, writing, and systems around
-        <em>disciplined living</em>, structured training, and clear execution.
-      </p>
-      <div class="hero-links">
-        <a href="https://x.com/garry_tipler?s=21" target="_blank" rel="noopener noreferrer">X</a>
-        <a href="https://medium.com/tenacious-individual-performance" target="_blank" rel="noopener noreferrer">Medium</a>
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <section>
+    <div id="hero">
+      <div class="hero-left">
+        <p class="eyebrow">001 — Identity</p>
+        <h1 class="hero-headline">Garry<br>Tipler</h1>
+        <p class="hero-sub">Performance systems builder for disciplined living, training, and execution.</p>
+        <p class="hero-support">I build products, writing, and systems around structure, clarity, and long-term performance.</p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary btn-arrow">View Projects</a>
+          <a href="https://medium.com/tenacious-individual-performance" target="_blank" class="btn btn-ghost">Read Writing</a>
+        </div>
+        <div class="hero-proof">
+          <span class="hero-proof-item">3 systems in dev</span>
+          <span class="hero-proof-item">Next.js · Supabase</span>
+          <span class="hero-proof-item">Writing on discipline</span>
+          <span class="hero-proof-item">Coach-in-progress</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card-stack">
+          <div class="stack-card">
+            <div>
+              <div class="stack-card-name">SelfTrainer</div>
+              <div class="stack-card-desc">Execution app · gym structure</div>
+            </div>
+            <span class="stack-badge badge-progress">In Progress</span>
+          </div>
+          <div class="stack-card">
+            <div>
+              <div class="stack-card-name">FitPulse</div>
+              <div class="stack-card-desc">Coaching system · trainer ops</div>
+            </div>
+            <span class="stack-badge badge-dev">In Development</span>
+          </div>
+          <div class="stack-card">
+            <div>
+              <div class="stack-card-name">OPP</div>
+              <div class="stack-card-desc">Personal command center</div>
+            </div>
+            <span class="stack-badge badge-dev">In Development</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="section-label-num">002</span>
-        About
-      </div>
-
-      <div class="section-content reveal">
-        <h2>Built at the intersection of systems, writing, and training.</h2>
-        <p>
-          My work sits at the intersection of product building, writing, and physical
-          training. I care about structure, clarity, discipline, and systems that help
-          people execute with more intention.
-        </p>
-        <p>Current work includes SelfTrainer, FitPulse, and OPP.</p>
-      </div>
+  <!-- ─── PROOF STRIP ──────────────────────────────────────── -->
+  <div id="proof">
+    <div class="proof-inner">
+      <div class="proof-item"><span class="proof-dot"></span>3 systems in development</div>
+      <div class="proof-item"><span class="proof-dot"></span>Writing on discipline &amp; structure</div>
+      <div class="proof-item"><span class="proof-dot"></span>Next.js · Supabase · Tailwind</div>
+      <div class="proof-item"><span class="proof-dot"></span>Coach-in-progress</div>
+      <div class="proof-item"><span class="proof-dot"></span>Performance systems builder</div>
     </div>
-  </section>
+  </div>
 
+  <!-- ─── PROJECTS ─────────────────────────────────────────── -->
   <section id="projects">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="section-label-num">003</span>
-        Projects
+    <div class="container">
+      <div class="projects-header reveal">
+        <p class="section-label">003 — Projects</p>
+        <h2 class="section-title">Active systems.<br>Deliberate builds.</h2>
       </div>
 
-      <div class="section-content">
-        <div class="projects-grid">
-          <div class="project-card reveal">
-            <div class="project-header">
-              <span class="project-name">SelfTrainer</span>
-              <span class="project-status">In Progress</span>
-            </div>
-            <p class="project-tagline">A focused training app for gym execution.</p>
-            <p class="project-desc">
-              Built for lifters who value structure, clarity, and repeated execution.
-              SelfTrainer helps plan sessions, follow routines, and train with less clutter.
-            </p>
-          </div>
+      <div class="projects-grid">
 
-          <div class="project-card reveal">
-            <div class="project-header">
-              <span class="project-name">FitPulse</span>
-              <span class="project-status">In Development</span>
+        <!-- SelfTrainer -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="card-glow"></div>
+          <div class="project-card-left">
+            <div class="project-top">
+              <h3 class="project-name">SelfTrainer</h3>
+              <span class="stack-badge badge-progress">In Progress</span>
             </div>
-            <p class="project-tagline">
-              A coaching system and performance platform for trainers.
-            </p>
-            <p class="project-desc">
-              FitPulse is designed to support program structure, client onboarding,
-              session organization, performance review, and coaching operations with more clarity.
-            </p>
+            <p class="project-mission">A focused training app for gym execution. Built for lifters who value structure, clarity, and repeated execution.</p>
+            <div class="project-traits">
+              <span class="trait">Session clarity</span>
+              <span class="trait">Structured routines</span>
+              <span class="trait">Less clutter</span>
+              <span class="trait">Execution-first</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn-ghost">View Details</a>
+              <a href="#" class="btn btn-ghost">See Vision</a>
+            </div>
           </div>
-
-          <div class="project-card reveal">
-            <div class="project-header">
-              <span class="project-name">OPP</span>
-              <span class="project-status">In Development</span>
-            </div>
-            <p class="project-tagline">
-              A personal command center for disciplined living and focused building.
-            </p>
-            <p class="project-desc">
-              OPP brings priorities, standards, domains, and weekly direction into one
-              structured operating system.
-            </p>
+          <div class="project-card-right">
+            <span class="project-number">01</span>
           </div>
         </div>
+
+        <!-- FitPulse -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="card-glow"></div>
+          <div class="project-card-left">
+            <div class="project-top">
+              <h3 class="project-name">FitPulse</h3>
+              <span class="stack-badge badge-dev">In Development</span>
+            </div>
+            <p class="project-mission">A coaching system and performance platform for trainers. Designed to support program structure, client onboarding, and coaching operations with more clarity.</p>
+            <div class="project-traits">
+              <span class="trait">Program structure</span>
+              <span class="trait">Client onboarding</span>
+              <span class="trait">Session organization</span>
+              <span class="trait">Coaching ops</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn-ghost">View Details</a>
+              <a href="#" class="btn btn-ghost">See Vision</a>
+            </div>
+          </div>
+          <div class="project-card-right">
+            <span class="project-number">02</span>
+          </div>
+        </div>
+
+        <!-- OPP -->
+        <div class="project-card reveal reveal-delay-3">
+          <div class="card-glow"></div>
+          <div class="project-card-left">
+            <div class="project-top">
+              <h3 class="project-name">OPP</h3>
+              <span class="stack-badge badge-dev">In Development</span>
+            </div>
+            <p class="project-mission">A personal command center for disciplined living and focused building. Brings priorities, standards, domains, and weekly direction into one structured operating system.</p>
+            <div class="project-traits">
+              <span class="trait">Priority structure</span>
+              <span class="trait">Weekly direction</span>
+              <span class="trait">Domain management</span>
+              <span class="trait">Disciplined living</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn-ghost">View Details</a>
+              <a href="#" class="btn btn-ghost">See Vision</a>
+            </div>
+          </div>
+          <div class="project-card-right">
+            <span class="project-number">03</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ─── STACK ─────────────────────────────────────────────── -->
   <section id="stack">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="section-label-num">004</span>
-        Stack
+    <div class="container">
+      <div class="stack-header reveal">
+        <p class="section-label">004 — Stack</p>
+        <h2 class="section-title">Built deliberately.</h2>
+        <p class="stack-desc">Quality-first build process focused on clarity, stability, and long-term structure.</p>
       </div>
 
-      <div class="section-content reveal">
-        <h2>Built deliberately for clarity and long-term structure.</h2>
+      <div class="stack-groups reveal reveal-delay-1">
 
-        <div class="stack-tags">
-          <span class="stack-tag">Next.js</span>
-          <span class="stack-tag">TypeScript</span>
-          <span class="stack-tag">Supabase</span>
-          <span class="stack-tag">Tailwind CSS</span>
-          <span class="stack-tag">shadcn/ui</span>
-          <span class="stack-tag">Git</span>
+        <div class="stack-group">
+          <p class="stack-group-label">Frontend</p>
+          <div class="stack-pills">
+            <span class="pill">Next.js</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">Tailwind CSS</span>
+          </div>
         </div>
 
-        <div class="build-philosophy">
-          <p>
-            A deliberate, quality-first build process focused on clarity, stability, and
-            long-term structure.
-          </p>
+        <div class="stack-group">
+          <p class="stack-group-label">Backend / Data</p>
+          <div class="stack-pills">
+            <span class="pill">Supabase</span>
+            <span class="pill">Postgres</span>
+          </div>
         </div>
+
+        <div class="stack-group">
+          <p class="stack-group-label">UI System</p>
+          <div class="stack-pills">
+            <span class="pill">shadcn/ui</span>
+            <span class="pill">Reusable primitives</span>
+          </div>
+        </div>
+
+        <div class="stack-group">
+          <p class="stack-group-label">Workflow</p>
+          <div class="stack-pills">
+            <span class="pill">Git</span>
+            <span class="pill">Quality-first iteration</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="craft">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="section-label-num">005</span>
-        Craft
-      </div>
-
-      <div class="section-content">
-        <div class="pillars">
-          <div class="pillar reveal">
-            <p class="pillar-icon">// Writing</p>
-            <h3>Discipline<br />on the page.</h3>
-            <p>
-              I write about discipline, recovery, structure, execution, and self-command.
-              My manuals and written work are built around practical philosophy, applied
-              discipline, and long-term personal development.
-            </p>
-          </div>
-
-          <div class="pillar reveal">
-            <p class="pillar-icon">// Training</p>
-            <h3>Structure<br />in the gym.</h3>
-            <p>
-              Bodybuilder, disciplined lifter, and coach-in-progress. My training
-              philosophy is grounded in structure, consistency, recovery, and long-term
-              physical development.
-            </p>
-          </div>
-        </div>
+  <!-- ─── BOTTOM CTA ────────────────────────────────────────── -->
+  <section id="connect">
+    <div class="container">
+      <p class="connect-label reveal">009 — Connect</p>
+      <h2 class="connect-headline reveal reveal-delay-1">Building systems for disciplined performance.</h2>
+      <p class="connect-sub reveal reveal-delay-2">Follow the work. Read the writing. Join the build.</p>
+      <div class="connect-actions reveal reveal-delay-3">
+        <a href="https://medium.com/tenacious-individual-performance" target="_blank" class="btn btn-primary btn-arrow">Read on Medium</a>
+        <a href="https://x.com/garry_tipler?s=21" target="_blank" class="btn btn-ghost btn-arrow">Follow on X</a>
       </div>
     </div>
   </section>
 
+  <!-- ─── FOOTER ─────────────────────────────────────────────── -->
   <footer>
-    <div class="footer-inner">
-      <p class="footer-statement">
-        Building systems for disciplined performance.
-      </p>
-
-      <div class="footer-meta">
-        <p>Garry Tipler</p>
-        <p>Performance Systems Builder</p>
-        <p>© 2026</p>
-      </div>
-    </div>
+    <span class="footer-name">Garry Tipler — Performance Systems Builder</span>
+    <span class="footer-year">© 2026</span>
   </footer>
 
+  <!-- ─── SCRIPTS ───────────────────────────────────────────── -->
   <script>
-    const nav = document.getElementById('nav');
-
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
+    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, i * 70);
-
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    reveals.forEach((el) => observer.observe(el));
+    // Card mouse-follow spotlight
+    document.querySelectorAll('.project-card').forEach(card => {
+      const glow = card.querySelector('.card-glow');
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        glow.style.left = x + 'px';
+        glow.style.top  = y + 'px';
+      });
+    });
   </script>
+
 </body>
 </html>
