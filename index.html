@@ -694,7 +694,240 @@
       letter-spacing: 0.08em;
     }
 
-    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    /* ─── CRAFT ──────────────────────────────────────────── */
+    #craft {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .craft-header { margin-bottom: 4rem; }
+
+    .craft-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .craft-panel {
+      padding: 3rem 3.5rem;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .craft-panel:first-child {
+      border-right: 1px solid var(--border);
+    }
+
+    .craft-panel:hover {
+      background: rgba(255,255,255,0.015);
+    }
+
+    .craft-panel-tag {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .craft-panel-tag::before {
+      content: '//';
+      color: rgba(74,127,165,0.5);
+    }
+
+    .craft-panel-title {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+
+    .craft-panel-body {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(232,230,225,0.5);
+      line-height: 1.75;
+      max-width: 340px;
+      margin-bottom: 2rem;
+    }
+
+    .craft-divider {
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+      margin-bottom: 2rem;
+    }
+
+    .craft-link {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s var(--ease), opacity 0.2s;
+      opacity: 0.7;
+    }
+
+    .craft-link:hover { gap: 0.7rem; opacity: 1; }
+    .craft-link::after { content: '→'; }
+
+    /* ─── PRINCIPLES ─────────────────────────────────────── */
+    #principles {
+      padding: 7rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .principles-header { margin-bottom: 4rem; }
+
+    .principles-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .principle-item {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.3s var(--ease);
+    }
+
+    .principle-item:first-child { border-top: 1px solid var(--border); }
+
+    .principle-item:hover {
+      padding-left: 0.5rem;
+    }
+
+    .principle-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: rgba(74,127,165,0.4);
+      padding-top: 0.1rem;
+    }
+
+    .principle-text {
+      font-family: var(--font-head);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: rgba(232,230,225,0.75);
+      line-height: 1.4;
+      transition: color 0.25s;
+    }
+
+    .principle-item:hover .principle-text {
+      color: var(--text);
+    }
+
+    /* ─── MOCK UI PANELS ─────────────────────────────────── */
+    .project-card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+      min-width: 200px;
+    }
+
+    .mock-ui {
+      width: 200px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-family: var(--font-mono);
+    }
+
+    .mock-ui-bar {
+      display: flex;
+      gap: 0.3rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .mock-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .mock-row {
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.06);
+      margin-bottom: 0.45rem;
+    }
+
+    .mock-row.accent { background: rgba(74,127,165,0.3); }
+    .mock-row.short  { width: 60%; }
+    .mock-row.med    { width: 80%; }
+    .mock-row.full   { width: 100%; }
+
+    .mock-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .mock-cell {
+      height: 28px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .mock-cell.hi {
+      background: rgba(74,127,165,0.12);
+      border-color: rgba(74,127,165,0.2);
+    }
+
+    .project-number {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: rgba(74,127,165,0.3);
+      font-weight: 300;
+    }
+
+    /* ─── MOTION POLISH ──────────────────────────────────── */
+    .reveal-slow {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+
+    .reveal-slow.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    @media (max-width: 900px) {
+      .craft-grid { grid-template-columns: 1fr; }
+      .craft-panel:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .mock-ui { display: none; }
+      .project-card-right { min-width: unset; }
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -756,7 +989,8 @@
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
       <li><a href="#stack">Stack</a></li>
-      <li><a href="#connect">Connect</a></li>
+      <li><a href="#craft">Craft</a></li>
+      <li><a href="#principles">Principles</a></li>
       <li><a href="https://x.com/garry_tipler?s=21" target="_blank" class="nav-ext">X</a></li>
       <li><a href="https://medium.com/tenacious-individual-performance" target="_blank" class="nav-ext">Medium</a></li>
     </ul>
@@ -853,6 +1087,18 @@
           </div>
           <div class="project-card-right">
             <span class="project-number">01</span>
+            <div class="mock-ui">
+              <div class="mock-ui-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
+              <div class="mock-row accent short"></div>
+              <div class="mock-row full"></div>
+              <div class="mock-row med"></div>
+              <div class="mock-block">
+                <div class="mock-cell hi"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell hi"></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -878,6 +1124,18 @@
           </div>
           <div class="project-card-right">
             <span class="project-number">02</span>
+            <div class="mock-ui">
+              <div class="mock-ui-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
+              <div class="mock-row accent med"></div>
+              <div class="mock-row short"></div>
+              <div class="mock-row full"></div>
+              <div class="mock-block">
+                <div class="mock-cell"></div>
+                <div class="mock-cell hi"></div>
+                <div class="mock-cell hi"></div>
+                <div class="mock-cell"></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -903,6 +1161,18 @@
           </div>
           <div class="project-card-right">
             <span class="project-number">03</span>
+            <div class="mock-ui">
+              <div class="mock-ui-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
+              <div class="mock-row full"></div>
+              <div class="mock-row accent full"></div>
+              <div class="mock-row med"></div>
+              <div class="mock-block">
+                <div class="mock-cell hi"></div>
+                <div class="mock-cell hi"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell hi"></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -958,10 +1228,73 @@
     </div>
   </section>
 
+  <!-- ─── CRAFT ────────────────────────────────────────────── -->
+  <section id="craft">
+    <div class="container">
+      <div class="craft-header reveal">
+        <p class="section-label">005 — Craft</p>
+        <h2 class="section-title">Two disciplines.<br>One standard.</h2>
+      </div>
+
+      <div class="craft-grid reveal reveal-delay-1">
+
+        <div class="craft-panel">
+          <p class="craft-panel-tag">Writing</p>
+          <h3 class="craft-panel-title">Discipline<br>on the page.</h3>
+          <div class="craft-divider"></div>
+          <p class="craft-panel-body">I write about structure, execution, recovery, self-command, and long-term personal development. Built around practical philosophy and applied discipline.</p>
+          <a href="https://medium.com/tenacious-individual-performance" target="_blank" class="craft-link">Read on Medium</a>
+        </div>
+
+        <div class="craft-panel">
+          <p class="craft-panel-tag">Training</p>
+          <h3 class="craft-panel-title">Structure<br>in the gym.</h3>
+          <div class="craft-divider"></div>
+          <p class="craft-panel-body">Bodybuilder, disciplined lifter, coach-in-progress. My training philosophy is grounded in structure, consistency, recovery, and long-term physical development.</p>
+          <a href="https://x.com/garry_tipler?s=21" target="_blank" class="craft-link">Follow on X</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRINCIPLES ────────────────────────────────────────── -->
+  <section id="principles">
+    <div class="container">
+      <div class="principles-header reveal">
+        <p class="section-label">006 — Principles</p>
+        <h2 class="section-title">What the work<br>is built on.</h2>
+      </div>
+
+      <div class="principles-list">
+        <div class="principle-item reveal">
+          <span class="principle-num">01</span>
+          <p class="principle-text">Structure beats mood.</p>
+        </div>
+        <div class="principle-item reveal reveal-delay-1">
+          <span class="principle-num">02</span>
+          <p class="principle-text">Clear systems protect effort.</p>
+        </div>
+        <div class="principle-item reveal reveal-delay-2">
+          <span class="principle-num">03</span>
+          <p class="principle-text">Repetition builds identity.</p>
+        </div>
+        <div class="principle-item reveal reveal-delay-3">
+          <span class="principle-num">04</span>
+          <p class="principle-text">Discipline is easier when the system is honest.</p>
+        </div>
+        <div class="principle-item reveal reveal-delay-4">
+          <span class="principle-num">05</span>
+          <p class="principle-text">Good tools reduce friction and increase follow-through.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── BOTTOM CTA ────────────────────────────────────────── -->
   <section id="connect">
     <div class="container">
-      <p class="connect-label reveal">009 — Connect</p>
+      <p class="connect-label reveal">007 — Connect</p>
       <h2 class="connect-headline reveal reveal-delay-1">Building systems for disciplined performance.</h2>
       <p class="connect-sub reveal reveal-delay-2">Follow the work. Read the writing. Join the build.</p>
       <div class="connect-actions reveal reveal-delay-3">
@@ -979,8 +1312,8 @@
 
   <!-- ─── SCRIPTS ───────────────────────────────────────────── -->
   <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
+    // Scroll reveal — covers .reveal and .reveal-slow
+    const reveals = document.querySelectorAll('.reveal, .reveal-slow');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -988,7 +1321,7 @@
           observer.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     reveals.forEach(el => observer.observe(el));
 
     // Card mouse-follow spotlight
@@ -996,12 +1329,21 @@
       const glow = card.querySelector('.card-glow');
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        glow.style.left = x + 'px';
-        glow.style.top  = y + 'px';
+        glow.style.left = (e.clientX - rect.left) + 'px';
+        glow.style.top  = (e.clientY - rect.top)  + 'px';
       });
     });
+
+    // Principle items — stagger on scroll
+    const principleObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          principleObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.principle-item').forEach(el => principleObserver.observe(el));
   </script>
 
 </body>
