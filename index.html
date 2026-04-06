@@ -548,44 +548,55 @@
       font-weight: 300;
     }
 
-    /* ─── MOCK UI ────────────────────────────────────────── */
-    .mock-ui {
-      width: 200px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 8px;
-      padding: 0.9rem;
-      transition: border-color 0.3s, background 0.3s;
+    /* ─── PHONE MOCKUP ───────────────────────────────────── */
+    .phone-mockup {
+      position: relative;
+      width: 220px;
+      height: 260px;
+      flex-shrink: 0;
     }
 
-    .mock-ui-bar { display: flex; gap: 0.3rem; margin-bottom: 0.7rem; }
-
-    .mock-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.1); }
-
-    .mock-row {
-      height: 6px;
-      border-radius: 3px;
-      background: rgba(255,255,255,0.06);
-      margin-bottom: 0.45rem;
-      transition: background 0.3s;
+    .phone-screen-back {
+      position: absolute;
+      width: 155px;
+      top: 0;
+      right: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.65);
+      opacity: 0.6;
+      filter: blur(0.5px) brightness(0.85);
+      z-index: 1;
     }
 
-    .mock-row.accent { background: rgba(74,127,165,0.3); }
-    .mock-row.short  { width: 60%; }
-    .mock-row.med    { width: 80%; }
-    .mock-row.full   { width: 100%; }
+    .phone-screen-back img { width: 100%; display: block; }
 
-    .mock-block { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-top: 0.6rem; }
-
-    .mock-cell {
-      height: 28px;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: background 0.3s, border-color 0.3s;
+    .phone-screen-front {
+      position: absolute;
+      width: 155px;
+      bottom: 0;
+      left: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 20px 50px rgba(0,0,0,0.75),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      z-index: 2;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
     }
 
-    .mock-cell.hi { background: rgba(74,127,165,0.12); border-color: rgba(74,127,165,0.2); }
+    .phone-screen-front img { width: 100%; display: block; }
+
+    .project-card:hover .phone-screen-front {
+      transform: translateY(-4px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.07),
+        0 28px 60px rgba(0,0,0,0.8),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
 
     /* ─── STACK ──────────────────────────────────────────── */
     #stack { padding: var(--section-pad) 0; border-top: 1px solid var(--border); }
@@ -1003,14 +1014,12 @@
           </div>
           <div class="project-card-right">
             <span class="project-number">01</span>
-            <div class="mock-ui">
-              <div class="mock-ui-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-              <div class="mock-row accent short"></div>
-              <div class="mock-row full"></div>
-              <div class="mock-row med"></div>
-              <div class="mock-block">
-                <div class="mock-cell hi"></div><div class="mock-cell"></div>
-                <div class="mock-cell"></div><div class="mock-cell hi"></div>
+            <div class="phone-mockup">
+              <div class="phone-screen-back">
+                <img src="selftrainer-session.jpeg" alt="SelfTrainer session view" />
+              </div>
+              <div class="phone-screen-front">
+                <img src="selftrainer-home.jpeg" alt="SelfTrainer home screen" />
               </div>
             </div>
           </div>
@@ -1033,16 +1042,6 @@
           </div>
           <div class="project-card-right">
             <span class="project-number">02</span>
-            <div class="mock-ui">
-              <div class="mock-ui-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-              <div class="mock-row accent med"></div>
-              <div class="mock-row short"></div>
-              <div class="mock-row full"></div>
-              <div class="mock-block">
-                <div class="mock-cell"></div><div class="mock-cell hi"></div>
-                <div class="mock-cell hi"></div><div class="mock-cell"></div>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -1063,16 +1062,6 @@
           </div>
           <div class="project-card-right">
             <span class="project-number">03</span>
-            <div class="mock-ui">
-              <div class="mock-ui-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-              <div class="mock-row full"></div>
-              <div class="mock-row accent full"></div>
-              <div class="mock-row med"></div>
-              <div class="mock-block">
-                <div class="mock-cell hi"></div><div class="mock-cell hi"></div>
-                <div class="mock-cell"></div><div class="mock-cell hi"></div>
-              </div>
-            </div>
           </div>
         </div>
 
