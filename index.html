@@ -548,7 +548,23 @@
       font-weight: 300;
     }
 
-    /* ─── PHONE MOCKUP ───────────────────────────────────── */
+    /* ─── MOBILE SCREENSHOT ──────────────────────────────── */
+    .mobile-screenshot {
+      display: none;
+      margin-top: 1.5rem;
+      justify-content: center;
+    }
+
+    .mobile-screenshot img {
+      width: 160px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+
+    @media (max-width: 900px) {
+      .mobile-screenshot { display: flex; }
+    }
     .phone-mockup {
       position: relative;
       width: 220px;
@@ -841,6 +857,71 @@
       letter-spacing: 0.08em;
     }
 
+    /* ─── HAMBURGER + MOBILE MENU ────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: rgba(232,230,225,0.6);
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+      transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 48px; left: 0; right: 0;
+      background: rgba(11,12,14,0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 1rem 1.25rem 1.5rem;
+      gap: 0;
+      z-index: 99;
+      transform: translateY(-8px);
+      opacity: 0;
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+    }
+
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-menu-link {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(232,230,225,0.55);
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu-link:last-child { border-bottom: none; }
+    .mobile-menu-link:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .nav-hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+    }
+
     /* ─── ANIMATIONS ─────────────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
@@ -866,49 +947,99 @@
     }
 
     @media (max-width: 900px) {
-      :root { --section-pad: 5rem; }
+      :root { --section-pad: 4.5rem; }
+
       nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1.6rem; }
 
       #hero {
         grid-template-columns: 1fr;
-        padding: 6rem 1.5rem 3rem;
-        min-height: auto;
-        gap: 2rem;
+        padding: 5.5rem 1.5rem 3rem;
+        min-height: 100svh;
+        gap: 0;
       }
 
       .hero-right { display: none; }
-      .container { padding: 0 1.5rem; }
+      .container  { padding: 0 1.25rem; }
 
-      .project-card { grid-template-columns: 1fr; padding: 1.8rem; gap: 1rem; }
+      .hero-headline { font-size: clamp(2.8rem, 10vw, 4rem); }
+      .hero-sub { font-size: 1rem; max-width: 100%; }
+      .hero-support { max-width: 100%; }
+      .hero-proof {
+        gap: 1rem;
+        flex-wrap: wrap;
+        overflow: visible;
+      }
+      .hero-proof-item { font-size: 0.58rem; }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        padding: 1.6rem;
+        gap: 0;
+      }
       .project-card-right { display: none; }
+      .project-mission { max-width: 100%; }
 
       .craft-grid { grid-template-columns: 1fr; }
-      .craft-panel { padding: 2.5rem 2rem; }
+      .craft-panel { padding: 2.5rem 1.75rem; }
       .craft-panel:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .craft-panel-body { max-width: 100%; }
 
       .stack-groups { grid-template-columns: 1fr 1fr; }
+
+      #proof { display: none; }
+
       footer { padding: 1.5rem; flex-direction: column; gap: 0.4rem; text-align: center; }
     }
 
     @media (max-width: 600px) {
+      :root { --section-pad: 3.5rem; }
+
+      nav { padding: 0.9rem 1.25rem; }
       .nav-links { display: none; }
-      .hero-headline { font-size: clamp(2.8rem, 11vw, 3.6rem); }
+
+      .hero-headline { font-size: clamp(2.6rem, 11vw, 3.4rem); }
       .hero-sub { font-size: 0.95rem; }
-      .hero-proof { gap: 0.9rem; }
+      .hero-support { font-size: 0.85rem; }
+      .hero-proof { gap: 0.75rem; }
       .hero-proof-item { font-size: 0.55rem; }
-      .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
-      .project-card { padding: 1.4rem; }
-      .project-name { font-size: 1.2rem; }
-      .stack-groups { grid-template-columns: 1fr; }
-      .craft-panel { padding: 2rem 1.5rem; }
-      .craft-panel-title { font-size: 1.35rem; }
-      .connect-headline { font-size: clamp(1.8rem, 7vw, 2.6rem); }
-      .connect-actions { flex-direction: column; align-items: center; }
-      .principle-text { font-size: 0.95rem; }
-      .principle-item { padding: 1.3rem 0.5rem; }
-      .proof-inner { gap: 1.5rem; }
+      .hero-ctas { flex-direction: column; gap: 0.75rem; }
+      .hero-ctas .btn { justify-content: center; }
+
+      .section-label { font-size: 0.62rem; }
+      .section-title { font-size: clamp(1.55rem, 6vw, 2rem); }
+
+      .project-card { padding: 1.25rem; }
+      .project-name { font-size: 1.15rem; }
+      .project-mission { font-size: 0.88rem; }
+      .trait { font-size: 0.58rem; }
+
+      .mobile-screenshot img { width: 140px; }
+
+      .stack-groups { grid-template-columns: 1fr; gap: 0.9rem; }
+
+      .craft-panel { padding: 1.75rem 1.25rem; }
+      .craft-panel-title { font-size: 1.3rem; }
+      .craft-panel-body { font-size: 0.85rem; }
+
+      .principle-text { font-size: 0.92rem; }
+      .principle-item { padding: 1.2rem 0.4rem; gap: 1rem; }
+      .principle-item:hover { padding-left: 0.7rem; }
+
+      .connect-headline { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+      .connect-sub { font-size: 0.88rem; }
+      .connect-actions { flex-direction: column; align-items: stretch; }
+      .connect-actions .btn { justify-content: center; }
+
+      .proof-inner { gap: 1.2rem; }
+
+      footer { padding: 1.25rem; }
+      .footer-name { font-size: 0.58rem; }
     }
+
+    /* prevent any horizontal overflow site-wide */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    * { min-width: 0; }
   </style>
 </head>
 
@@ -927,7 +1058,20 @@
       <li><a href="https://x.com/garry_tipler?s=21" target="_blank" class="nav-ext">X</a></li>
       <li><a href="https://medium.com/tenacious-individual-performance" target="_blank" class="nav-ext">Medium</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#projects" class="mobile-menu-link">Projects</a>
+    <a href="#stack"    class="mobile-menu-link">Stack</a>
+    <a href="#craft"    class="mobile-menu-link">Craft</a>
+    <a href="#principles" class="mobile-menu-link">Principles</a>
+    <a href="https://x.com/garry_tipler?s=21" target="_blank" class="mobile-menu-link">X</a>
+    <a href="https://medium.com/tenacious-individual-performance" target="_blank" class="mobile-menu-link">Medium</a>
+  </div>
 
   <!-- ─── HERO ─────────────────────────────────────────────── -->
   <section>
@@ -1010,6 +1154,9 @@
               <span class="trait">Structured routines</span>
               <span class="trait">Less clutter</span>
               <span class="trait">Execution-first</span>
+            </div>
+            <div class="mobile-screenshot">
+              <img src="selftrainer-home.jpeg" alt="SelfTrainer home screen" />
             </div>
           </div>
           <div class="project-card-right">
@@ -1190,6 +1337,21 @@
 
   <!-- ─── SCRIPTS ───────────────────────────────────────────── -->
   <script>
+    // Hamburger menu
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    // Close menu on link tap
+    document.querySelectorAll('.mobile-menu-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
     // Scroll progress bar
     const bar = document.getElementById('progress-bar');
     window.addEventListener('scroll', () => {
