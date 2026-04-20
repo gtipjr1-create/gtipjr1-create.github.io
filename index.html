@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1041,6 +1042,7 @@
     html, body { max-width: 100%; overflow-x: hidden; }
     * { min-width: 0; }
   </style>
+
 </head>
 
 <body>
@@ -1048,6 +1050,7 @@
   <div id="progress-bar"></div>
 
   <!-- ─── NAV ─────────────────────────────────────────────── -->
+
   <nav>
     <span class="nav-logo">T.I.P</span>
     <ul class="nav-links">
@@ -1064,6 +1067,7 @@
   </nav>
 
   <!-- Mobile menu -->
+
   <div class="mobile-menu" id="mobile-menu">
     <a href="#projects" class="mobile-menu-link">Projects</a>
     <a href="#stack"    class="mobile-menu-link">Stack</a>
@@ -1074,6 +1078,7 @@
   </div>
 
   <!-- ─── HERO ─────────────────────────────────────────────── -->
+
   <section>
     <div id="hero">
       <div class="hero-left">
@@ -1093,35 +1098,39 @@
         </div>
       </div>
 
-      <div class="hero-right">
-        <div class="card-stack">
-          <div class="stack-card">
-            <div>
-              <div class="stack-card-name">SelfTrainer</div>
-              <div class="stack-card-desc">Execution app · gym structure</div>
-            </div>
-            <span class="stack-badge badge-progress">In Progress</span>
-          </div>
-          <div class="stack-card">
-            <div>
-              <div class="stack-card-name">FitPulse</div>
-              <div class="stack-card-desc">Coaching system · trainer ops</div>
-            </div>
-            <span class="stack-badge badge-dev">In Development</span>
-          </div>
-          <div class="stack-card">
-            <div>
-              <div class="stack-card-name">OPP</div>
-              <div class="stack-card-desc">Personal command center</div>
-            </div>
-            <span class="stack-badge badge-dev">In Development</span>
-          </div>
+```
+  <div class="hero-right">
+    <div class="card-stack">
+      <div class="stack-card">
+        <div>
+          <div class="stack-card-name">SelfTrainer</div>
+          <div class="stack-card-desc">Execution app · gym structure</div>
         </div>
+        <span class="stack-badge badge-progress">In Progress</span>
+      </div>
+      <div class="stack-card">
+        <div>
+          <div class="stack-card-name">FitPulse</div>
+          <div class="stack-card-desc">Coaching system · trainer ops</div>
+        </div>
+        <span class="stack-badge badge-dev">In Development</span>
+      </div>
+      <div class="stack-card">
+        <div>
+          <div class="stack-card-name">OPP</div>
+          <div class="stack-card-desc">Personal command center</div>
+        </div>
+        <span class="stack-badge badge-dev">In Development</span>
       </div>
     </div>
+  </div>
+</div>
+```
+
   </section>
 
   <!-- ─── PROOF STRIP ──────────────────────────────────────── -->
+
   <div id="proof">
     <div class="proof-inner">
       <div class="proof-item"><span class="proof-dot"></span>3 systems in development</div>
@@ -1133,6 +1142,7 @@
   </div>
 
   <!-- ─── PROJECTS ─────────────────────────────────────────── -->
+
   <section id="projects">
     <div class="container">
       <div class="projects-header reveal">
@@ -1141,82 +1151,86 @@
       </div>
       <div class="projects-grid">
 
-        <div class="project-card reveal reveal-delay-1">
-          <div class="card-glow"></div>
-          <div class="project-card-left">
-            <div class="project-top">
-              <h3 class="project-name">SelfTrainer</h3>
-              <span class="stack-badge badge-progress">In Progress</span>
-            </div>
-            <p class="project-mission">A focused training app for gym execution. Built for lifters who value structure, clarity, and repeated execution.</p>
-            <div class="project-traits">
-              <span class="trait">Session clarity</span>
-              <span class="trait">Structured routines</span>
-              <span class="trait">Less clutter</span>
-              <span class="trait">Execution-first</span>
-            </div>
-            <div class="mobile-screenshot">
-              <img src="selftrainer-home.jpeg" alt="SelfTrainer home screen" />
-            </div>
+```
+    <div class="project-card reveal reveal-delay-1">
+      <div class="card-glow"></div>
+      <div class="project-card-left">
+        <div class="project-top">
+          <h3 class="project-name">SelfTrainer</h3>
+          <span class="stack-badge badge-progress">In Progress</span>
+        </div>
+        <p class="project-mission">A focused training app for gym execution. Built for lifters who value structure, clarity, and repeated execution.</p>
+        <div class="project-traits">
+          <span class="trait">Session clarity</span>
+          <span class="trait">Structured routines</span>
+          <span class="trait">Less clutter</span>
+          <span class="trait">Execution-first</span>
+        </div>
+        <div class="mobile-screenshot">
+          <img src="selftrainer-onboarding.jpeg" alt="SelfTrainer first session screen" />
+        </div>
+      </div>
+      <div class="project-card-right">
+        <span class="project-number">01</span>
+        <div class="phone-mockup">
+          <div class="phone-screen-back">
+            <img src="selftrainer-history.jpeg" alt="SelfTrainer history screen" />
           </div>
-          <div class="project-card-right">
-            <span class="project-number">01</span>
-            <div class="phone-mockup">
-              <div class="phone-screen-back">
-                <img src="selftrainer-session.jpeg" alt="SelfTrainer session view" />
-              </div>
-              <div class="phone-screen-front">
-                <img src="selftrainer-home.jpeg" alt="SelfTrainer home screen" />
-              </div>
-            </div>
+          <div class="phone-screen-front">
+            <img src="selftrainer-onboarding.jpeg" alt="SelfTrainer first session screen" />
           </div>
         </div>
-
-        <div class="project-card reveal reveal-delay-2">
-          <div class="card-glow"></div>
-          <div class="project-card-left">
-            <div class="project-top">
-              <h3 class="project-name">FitPulse</h3>
-              <span class="stack-badge badge-dev">In Development</span>
-            </div>
-            <p class="project-mission">A coaching system and performance platform for trainers. Designed to support program structure, client onboarding, and coaching operations with more clarity.</p>
-            <div class="project-traits">
-              <span class="trait">Program structure</span>
-              <span class="trait">Client onboarding</span>
-              <span class="trait">Session organization</span>
-              <span class="trait">Coaching ops</span>
-            </div>
-          </div>
-          <div class="project-card-right">
-            <span class="project-number">02</span>
-          </div>
-        </div>
-
-        <div class="project-card reveal reveal-delay-3">
-          <div class="card-glow"></div>
-          <div class="project-card-left">
-            <div class="project-top">
-              <h3 class="project-name">OPP</h3>
-              <span class="stack-badge badge-dev">In Development</span>
-            </div>
-            <p class="project-mission">A personal command center for disciplined living and focused building. Brings priorities, standards, domains, and weekly direction into one structured operating system.</p>
-            <div class="project-traits">
-              <span class="trait">Priority structure</span>
-              <span class="trait">Weekly direction</span>
-              <span class="trait">Domain management</span>
-              <span class="trait">Disciplined living</span>
-            </div>
-          </div>
-          <div class="project-card-right">
-            <span class="project-number">03</span>
-          </div>
-        </div>
-
       </div>
     </div>
+
+    <div class="project-card reveal reveal-delay-2">
+      <div class="card-glow"></div>
+      <div class="project-card-left">
+        <div class="project-top">
+          <h3 class="project-name">FitPulse</h3>
+          <span class="stack-badge badge-dev">In Development</span>
+        </div>
+        <p class="project-mission">A coaching system and performance platform for trainers. Designed to support program structure, client onboarding, and coaching operations with more clarity.</p>
+        <div class="project-traits">
+          <span class="trait">Program structure</span>
+          <span class="trait">Client onboarding</span>
+          <span class="trait">Session organization</span>
+          <span class="trait">Coaching ops</span>
+        </div>
+      </div>
+      <div class="project-card-right">
+        <span class="project-number">02</span>
+      </div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-3">
+      <div class="card-glow"></div>
+      <div class="project-card-left">
+        <div class="project-top">
+          <h3 class="project-name">OPP</h3>
+          <span class="stack-badge badge-dev">In Development</span>
+        </div>
+        <p class="project-mission">A personal command center for disciplined living and focused building. Brings priorities, standards, domains, and weekly direction into one structured operating system.</p>
+        <div class="project-traits">
+          <span class="trait">Priority structure</span>
+          <span class="trait">Weekly direction</span>
+          <span class="trait">Domain management</span>
+          <span class="trait">Disciplined living</span>
+        </div>
+      </div>
+      <div class="project-card-right">
+        <span class="project-number">03</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+```
+
   </section>
 
   <!-- ─── STACK ─────────────────────────────────────────────── -->
+
   <section id="stack">
     <div class="container">
       <div class="stack-header reveal">
@@ -1259,6 +1273,7 @@
   </section>
 
   <!-- ─── CRAFT ────────────────────────────────────────────── -->
+
   <section id="craft">
     <div class="container">
       <div class="craft-header reveal">
@@ -1285,6 +1300,7 @@
   </section>
 
   <!-- ─── PRINCIPLES ────────────────────────────────────────── -->
+
   <section id="principles">
     <div class="container">
       <div class="principles-header reveal">
@@ -1317,6 +1333,7 @@
   </section>
 
   <!-- ─── CONNECT ───────────────────────────────────────────── -->
+
   <section id="connect">
     <div class="container">
       <p class="connect-label reveal">007 — Connect</p>
@@ -1330,12 +1347,14 @@
   </section>
 
   <!-- ─── FOOTER ─────────────────────────────────────────────── -->
+
   <footer>
     <span class="footer-name">Garry Tipler — Performance Systems Builder</span>
     <span class="footer-year">© 2026</span>
   </footer>
 
   <!-- ─── SCRIPTS ───────────────────────────────────────────── -->
+
   <script>
     // Hamburger menu
     const toggle = document.getElementById('nav-toggle');
