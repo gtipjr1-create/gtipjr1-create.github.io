@@ -389,6 +389,34 @@
   /* ---------- WRITING ---------- */
   .writing-desc { color: var(--ink-dim); margin-bottom: 22px; max-width: 540px; }
 
+  /* WEB3 — essay teaser list */
+  .essays { margin-bottom: 26px; }
+  .essay {
+    display: block;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line-soft);
+    transition: padding-left .2s ease;
+  }
+  .essay:first-child { border-top: 1px solid var(--line-soft); }
+  .essay:hover { padding-left: 8px; }
+  .essay-title {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--ink);
+    transition: color .2s ease;
+  }
+  .essay:hover .essay-title { color: var(--accent); }
+  .essay-desc {
+    display: block;
+    color: var(--ink-dim);
+    font-size: 15px;
+    margin-top: 4px;
+    max-width: 540px;
+  }
+
   /* ---------- PRINCIPLES ---------- */
   .principles { list-style: none; }
   .principles li {
@@ -622,8 +650,24 @@
       Essays and fragments on discipline, structure, execution, recovery,
       self-command, and the long rebuild.
     </p>
+
+    <div class="essays">
+      <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/there-is-a-point-where-effort-stops-feeling-like-effort-9a7ae823bdf4">
+        <span class="essay-title">There is a point where effort stops feeling like effort.</span>
+        <span class="essay-desc">The moment discipline stops being forced and starts carrying itself — and what it took to get there.</span>
+      </a>
+      <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/from-thought-to-form-67d0dec5c6f7">
+        <span class="essay-title">From Thought to Form</span>
+        <span class="essay-desc">On publishing the first book: how months of lived practice became a finished thing.</span>
+      </a>
+      <a class="essay reveal" href="https://medium.com/@Garry_Tipler/fragments-4-the-fire-7301b68ca8b1">
+        <span class="essay-title">Fragments #4 — The Fire</span>
+        <span class="essay-desc">A field note on setbacks: reading a forced slowdown as instruction, not interruption.</span>
+      </a>
+    </div>
+
     <a class="book-link reveal" href="https://medium.com/@Garry_Tipler">
-      Read on Medium <span class="arrow">→</span>
+      All essays on Medium <span class="arrow">→</span>
     </a>
   </section>
 
