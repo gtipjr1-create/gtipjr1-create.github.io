@@ -90,7 +90,7 @@
 
   a { color: inherit; text-decoration: none; }
   ::selection { background: rgba(203, 163, 92, 0.28); color: var(--ink); }
-  a:focus-visible, button:focus-visible {
+  a:focus-visible, button:focus-visible, input:focus-visible {
     outline: 1px solid var(--accent-hi);
     outline-offset: 4px;
   }
@@ -106,7 +106,6 @@
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 26px;
-    box-shadow: 0 22px 60px rgba(0,0,0,0.20);
   }
   h1.name {
     font-family: 'Fraunces', serif;
@@ -252,6 +251,13 @@
     transform: translateY(-1px);
     transition: transform .2s ease, border-color .2s ease;
   }
+  /* WEB4 — price beside Gumroad links, mirrors .btn-price */
+  .link-price {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 13px;
+    color: var(--ink-faint);
+    letter-spacing: 0.01em;
+  }
 
   /* ---------- PROOF / APPS ---------- */
   .proof-intro {
@@ -266,6 +272,36 @@
     margin-bottom: 30px;
     font-size: 16px;
   }
+
+  /* WEB2 — receipts strip */
+  .receipts {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin: 0 0 34px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .receipt-value {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .receipt-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 8px;
+  }
+
   .app {
     display: flex;
     flex-wrap: wrap;
@@ -297,6 +333,57 @@
     color: var(--ink-dim);
     font-size: 15.5px;
     margin-top: 2px;
+  }
+
+  /* ---------- SIGNAL (WEB1 — email capture) ---------- */
+  .signal-desc {
+    color: var(--ink-dim);
+    max-width: 540px;
+    margin-bottom: 26px;
+  }
+  .signal-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    max-width: 540px;
+  }
+  .signal-form input[type="email"] {
+    flex: 1 1 240px;
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 15px 16px;
+    transition: border-color .2s ease;
+  }
+  .signal-form input[type="email"]::placeholder { color: var(--ink-faint); }
+  .signal-form input[type="email"]:focus { border-color: var(--accent); }
+  .signal-form .btn { cursor: pointer; }
+  .signal-form .btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+  .signal-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    margin-top: 16px;
+    min-height: 1.2em;
+  }
+  .signal-status.ok  { color: var(--accent); }
+  .signal-status.err { color: var(--ink-dim); }
+  .signal-fineprint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 20px;
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
 
   /* ---------- WRITING ---------- */
@@ -378,6 +465,7 @@
     .wrap { padding: 0 22px; }
     .book.flagship { padding: 24px 20px; }
     .connect-label { width: 76px; }
+    .receipts { gap: 32px; }
   }
 </style>
 </head>
@@ -427,10 +515,11 @@
     </div>
 
     <div class="book reveal">
-      <div class="book-title">Discipline Field Guide</div>
+      <div class="book-title">The Discipline Training Field Guide</div>
       <p class="book-desc">The core systems for daily discipline that survives bad days.</p>
       <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-field-guide">
         Get it on Gumroad <span class="arrow">→</span>
+        <span class="link-price">$7</span>
       </a>
     </div>
 
@@ -442,6 +531,7 @@
       </p>
       <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
         Get it on Gumroad <span class="arrow">→</span>
+        <span class="link-price">$7</span>
       </a>
     </div>
   </section>
@@ -457,6 +547,23 @@
       Each system starts from lived pressure, gets tested in real routines,
       then gets refined into something cleaner, calmer, and repeatable.
     </p>
+
+    <!-- WEB2: receipts strip. Rule: real numbers only, hand-updated,
+         never estimated. Sessions logged comes from the SelfTrainer PWA. -->
+    <div class="receipts reveal">
+      <div class="receipt">
+        <span class="receipt-value">82</span>
+        <span class="receipt-label">Sessions logged</span>
+      </div>
+      <div class="receipt">
+        <span class="receipt-value">27</span>
+        <span class="receipt-label">Weeks in system</span>
+      </div>
+      <div class="receipt">
+        <span class="receipt-value">3</span>
+        <span class="receipt-label">Titles shipped</span>
+      </div>
+    </div>
 
     <div class="app reveal">
       <span class="app-name">SelfTrainer</span>
@@ -477,10 +584,38 @@
     </div>
   </section>
 
-  <!-- 003 — WRITING -->
-  <section>
+  <!-- 003 — THE SIGNAL (WEB1 — email capture) -->
+  <section id="signal">
     <div class="sec-head reveal">
       <span class="sec-num">003</span>
+      <span class="sec-title">The Signal</span>
+    </div>
+    <p class="signal-desc reveal">
+      One email when there's something worth running — a system, a fix,
+      a field note. Tested on me before it reaches you. Unsubscribe anytime.
+    </p>
+    <form class="signal-form reveal" id="signal-form" novalidate>
+      <label class="sr-only" for="signal-email">Email address</label>
+      <input
+        type="email"
+        id="signal-email"
+        name="email_address"
+        placeholder="you@domain.com"
+        autocomplete="email"
+        required
+      />
+      <button type="submit" class="btn btn-primary" id="signal-submit">
+        Subscribe <span class="arrow">→</span>
+      </button>
+    </form>
+    <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
+    <p class="signal-fineprint reveal">No spam. No sequences you didn't ask for. Leave anytime.</p>
+  </section>
+
+  <!-- 004 — WRITING -->
+  <section>
+    <div class="sec-head reveal">
+      <span class="sec-num">004</span>
       <span class="sec-title">Writing</span>
     </div>
     <p class="writing-desc reveal">
@@ -492,10 +627,10 @@
     </a>
   </section>
 
-  <!-- 004 — PRINCIPLES -->
+  <!-- 005 — PRINCIPLES -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">004</span>
+      <span class="sec-num">005</span>
       <span class="sec-title">Principles</span>
     </div>
     <ul class="principles">
@@ -506,10 +641,10 @@
     </ul>
   </section>
 
-  <!-- 005 — CONNECT -->
+  <!-- 006 — CONNECT -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">005</span>
+      <span class="sec-num">006</span>
       <span class="sec-title">Connect</span>
     </div>
     <div class="connect-row">
@@ -554,6 +689,54 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('section .reveal, footer .reveal').forEach(function (el) {
       io.observe(el);
+    });
+  })();
+
+  // WEB1 — Kit subscription (custom HTML form, AJAX, no redirect)
+  (function () {
+    var KIT_FORM_ID = '9676498';
+    var form = document.getElementById('signal-form');
+    var status = document.getElementById('signal-status');
+    var button = document.getElementById('signal-submit');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('signal-email').value.trim();
+
+      if (!email || email.indexOf('@') === -1) {
+        status.textContent = 'Enter a valid email address.';
+        status.className = 'signal-status err';
+        return;
+      }
+
+      button.disabled = true;
+      status.textContent = 'Sending…';
+      status.className = 'signal-status';
+
+      var data = new FormData();
+      data.append('email_address', email);
+
+      fetch('https://app.kit.com/forms/' + KIT_FORM_ID + '/subscriptions', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (json) {
+          if (json.status === 'success' || json.subscription) {
+            status.textContent = 'Check your inbox — confirm and you\'re in.';
+            status.className = 'signal-status ok';
+            form.reset();
+          } else {
+            throw new Error('rejected');
+          }
+        })
+        .catch(function () {
+          status.textContent = 'That didn\'t send. Check the address and try again.';
+          status.className = 'signal-status err';
+          button.disabled = false;
+        });
     });
   })();
 </script>
