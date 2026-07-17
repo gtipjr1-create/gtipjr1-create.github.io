@@ -126,7 +126,6 @@ a:focus-visible {
 .eyebrow,
 .section-number,
 .status-label,
-.media-kicker,
 .mobile-label {
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
@@ -304,28 +303,9 @@ main section {
 }
 
 .media-frame {
-  display: flex;
-  aspect-ratio: 1080 / 2090;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(18px, 3vw, 26px);
   overflow: hidden;
   border: 1px solid var(--line-strong);
   border-radius: 3px;
-  background:
-    linear-gradient(var(--line), var(--line)) 50% 50% / 1px 100% no-repeat,
-    linear-gradient(90deg, var(--line), var(--line)) 50% 50% / 100% 1px no-repeat,
-    var(--bg-raised);
-  color: var(--ink-faint);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.05em;
-}
-
-.media-frame--image {
-  display: block;
-  aspect-ratio: auto;
-  padding: 0;
   background: #080809;
 }
 
@@ -333,10 +313,6 @@ main section {
   display: block;
   width: 100%;
   height: auto;
-}
-
-.media-kicker {
-  color: var(--accent);
 }
 
 .media-item figcaption {

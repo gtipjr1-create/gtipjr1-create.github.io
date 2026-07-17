@@ -7,6 +7,9 @@
   <meta name="description" content="A case study of SelfTrainer, an execution-first training system for serious independent lifters, now being rebuilt as a native product." />
   <meta name="theme-color" content="#0b0b0c" />
   <link rel="canonical" href="https://garrytipler.com/projects/selftrainer/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SelfTrainer — An Execution-First Training System" />
@@ -18,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./selftrainer.css" />
 </head>
 <body>
@@ -42,7 +45,7 @@
       </p>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
       <section aria-labelledby="problem-title">
         <div class="section-heading">
           <span class="section-number" aria-hidden="true">01</span>
@@ -92,41 +95,41 @@
         <p class="section-intro">The interface evidence below comes from the mature SelfTrainer PWA, the current behavioral and persistence benchmark. The Native rebuild is translating these established workflows into a device-native experience.</p>
 
         <div class="media-grid">
-          <figure class="media-item" aria-labelledby="media-home-caption">
+          <figure class="media-item">
             <div class="media-frame media-frame--image">
               <img src="../../assets/selftrainer/selftrainer-home-up-next-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA home screen showing Precision Build as session two in the selected rotation, with a start action and a lineup comparing target work with prior performance." />
             </div>
-            <figcaption id="media-home-caption"><strong>Home / Up Next — PWA</strong><span>Current-program authority turns the home screen into a clear next action while preserving target and prior-performance context.</span></figcaption>
+            <figcaption><strong>Home / Up Next — PWA</strong><span>Current-program authority turns the home screen into a clear next action while preserving target and prior-performance context.</span></figcaption>
           </figure>
-          <figure class="media-item" aria-labelledby="media-session-caption">
+          <figure class="media-item">
             <div class="media-frame media-frame--image">
               <img src="../../assets/selftrainer/selftrainer-active-session-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA session screen showing the second goblet-squat set, its target and previous result, editable weight and reps, completion controls, and a persistent rest timer." />
             </div>
-            <figcaption id="media-session-caption"><strong>Active Session — PWA</strong><span>Planned and logged values remain distinct while completed sets and the persistent rest system support the gym-floor workflow.</span></figcaption>
+            <figcaption><strong>Active Session — PWA</strong><span>Planned and logged values remain distinct while completed sets and the persistent rest system support the gym-floor workflow.</span></figcaption>
           </figure>
-          <figure class="media-item" aria-labelledby="media-routine-caption">
+          <figure class="media-item">
             <div class="media-frame media-frame--image">
               <img src="../../assets/selftrainer/selftrainer-routine-editor-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA routine editor showing Precision Force, with resistance, set, rep, load, and executable-set controls for two exercises." />
             </div>
-            <figcaption id="media-routine-caption"><strong>Routine Editor — PWA</strong><span>Authored targets and executable set structure remain related without collapsing into the same data.</span></figcaption>
+            <figcaption><strong>Routine Editor — PWA</strong><span>Authored targets and executable set structure remain related without collapsing into the same data.</span></figcaption>
           </figure>
-          <figure class="media-item" aria-labelledby="media-program-caption">
+          <figure class="media-item">
             <div class="media-frame media-frame--image">
               <img src="../../assets/selftrainer/selftrainer-program-management-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA rotation editor showing Ascend: Precision, the next routine, two following slots, drag controls, and routines available to add." />
             </div>
-            <figcaption id="media-program-caption"><strong>Program Management — PWA</strong><span>Rotation order, next-workout authority, and routine placement remain explicit rather than inferred.</span></figcaption>
+            <figcaption><strong>Program Management — PWA</strong><span>Rotation order, next-workout authority, and routine placement remain explicit rather than inferred.</span></figcaption>
           </figure>
-          <figure class="media-item" aria-labelledby="media-history-caption">
+          <figure class="media-item">
             <div class="media-frame media-frame--image">
               <img src="../../assets/selftrainer/selftrainer-history-detail-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA completed training record showing session duration, sets, volume, best set, and exercise-by-exercise target and actual results." />
             </div>
-            <figcaption id="media-history-caption"><strong>History Detail — PWA</strong><span>Completed-session-owned facts preserve the original training record, including target, actual work, volume, and outcome.</span></figcaption>
+            <figcaption><strong>History Detail — PWA</strong><span>Completed-session-owned facts preserve the original training record, including target, actual work, volume, and outcome.</span></figcaption>
           </figure>
-          <figure class="media-item" aria-labelledby="media-profile-caption">
+          <figure class="media-item">
             <div class="media-frame media-frame--image">
               <img src="../../assets/selftrainer/selftrainer-profile-adherence-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA profile showing intentionally published session and volume totals, July adherence markers, recovery adjustments, and accumulated record categories." />
             </div>
-            <figcaption id="media-profile-caption"><strong>Profile / Plan Adherence — PWA</strong><span>Consistency, monthly adherence, recovery options, and accumulated training proof are presented without fabricating unavailable data.</span></figcaption>
+            <figcaption><strong>Profile / Plan Adherence — PWA</strong><span>Consistency, monthly adherence, recovery options, and accumulated training proof are presented without fabricating unavailable data.</span></figcaption>
           </figure>
         </div>
       </section>

@@ -7,20 +7,36 @@
 <meta name="description" content="I rebuilt my life through discipline, structure, training, writing, and systems. Everything here is a field-tested framework — built first for myself, then shared so others can run it too." />
 <meta name="theme-color" content="#0b0b0c" />
 <link rel="canonical" href="https://garrytipler.com/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
 <!-- Open Graph / Twitter (for X link previews) -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Garry Tipler — Systems for rebuilding a life" />
 <meta property="og:description" content="Field-tested systems for rebuilding a life — built first through discipline, structure, training, writing, and systems." />
 <meta property="og:url" content="https://garrytipler.com/" />
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Garry Tipler — Systems for rebuilding a life" />
 <meta name="twitter:description" content="Field-tested systems for rebuilding a life — built first through discipline, structure, training, writing, and systems." />
 <meta name="twitter:site" content="@garry_tipler" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Garry Tipler",
+  "url": "https://garrytipler.com/",
+  "sameAs": [
+    "https://x.com/garry_tipler",
+    "https://medium.com/@Garry_Tipler"
+  ]
+}
+</script>
 
 <style>
   :root {
@@ -29,7 +45,7 @@
     --bg-card:   #141416;
     --ink:       #ECEAE3;
     --ink-dim:   #9d9b92;
-    --ink-faint: #65635d;
+    --ink-faint: #7f7d76;
     --line:      rgba(236, 234, 227, 0.10);
     --line-soft: rgba(236, 234, 227, 0.06);
     --accent:    #cba35c;
@@ -92,9 +108,24 @@
   a { color: inherit; text-decoration: none; }
   ::selection { background: rgba(203, 163, 92, 0.28); color: var(--ink); }
   a:focus-visible, button:focus-visible, input:focus-visible {
-    outline: 1px solid var(--accent-hi);
+    outline: 2px solid var(--accent-hi);
     outline-offset: 4px;
   }
+  .skip-link {
+    position: fixed;
+    z-index: 10;
+    top: 12px;
+    left: 12px;
+    min-height: 44px;
+    padding: 10px 16px;
+    transform: translateY(-160%);
+    background: var(--accent);
+    color: #14110a;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .skip-link:focus { transform: none; }
 
   /* ---------- HERO ---------- */
   header.hero {
@@ -229,6 +260,7 @@
   .sec-title {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
+    font-weight: 400;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-dim);
@@ -272,6 +304,7 @@
     margin-bottom: 20px;
   }
   .book-link {
+    min-height: 44px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     letter-spacing: 0.04em;
@@ -291,7 +324,7 @@
     transform: translateY(-1px);
     transition: transform .2s ease, border-color .2s ease;
   }
-  /* WEB4 — price beside Gumroad links, mirrors .btn-price */
+  /* Price beside Gumroad links, mirrors .btn-price. */
   .link-price {
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: 13px;
@@ -313,7 +346,7 @@
     font-size: 16px;
   }
 
-  /* WEB2 — receipts strip */
+  /* Receipts strip. */
   .receipts {
     display: flex;
     gap: 48px;
@@ -413,7 +446,7 @@
   .app-featured .app-desc { margin-top: 4px; }
   .app-featured .app-project-link { margin-top: 4px; }
 
-  /* ---------- SIGNAL (WEB1 — email capture) ---------- */
+  /* ---------- SIGNAL ---------- */
   .signal-desc {
     color: var(--ink-dim);
     max-width: 540px;
@@ -467,7 +500,7 @@
   /* ---------- WRITING ---------- */
   .writing-desc { color: var(--ink-dim); margin-bottom: 22px; max-width: 540px; }
 
-  /* WEB3 — essay teaser list */
+  /* Essay teaser list. */
   .essays {
     display: grid;
     gap: 12px;
@@ -605,8 +638,8 @@
 
   /* ---------- LOAD / REVEAL ANIMATION ---------- */
   @media (prefers-reduced-motion: no-preference) {
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.in { opacity: 1; transform: none; }
+    .reveal.reveal-ready { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.reveal-ready.in { opacity: 1; transform: none; }
     .hero .reveal { transition-delay: var(--d, 0ms); }
   }
 
@@ -639,6 +672,8 @@
     .wrap { padding: 0 22px; }
     .current-work { padding: 18px; }
     .book.flagship { padding: 24px 20px; }
+    .book.flagship .btn { max-width: 100%; flex-wrap: wrap; }
+    .book.flagship .btn .btn-price { flex-basis: 100%; margin-left: 0; }
     .app-featured { padding: 22px 18px; }
     .essay { padding: 22px 18px; }
     .connect-label { width: 76px; }
@@ -647,6 +682,8 @@
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <div class="wrap">
 
@@ -676,11 +713,12 @@
     </aside>
   </header>
 
+  <main id="main-content" tabindex="-1">
   <!-- 001 — BOOKS -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">001</span>
-      <span class="sec-title">Start Here — The Books</span>
+      <span class="sec-num" aria-hidden="true">001</span>
+      <h2 class="sec-title">Start Here — The Books</h2>
     </div>
 
     <div class="book flagship reveal">
@@ -721,8 +759,8 @@
   <!-- 002 — PROOF OF PRACTICE -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">002</span>
-      <span class="sec-title">Proof of Practice</span>
+      <span class="sec-num" aria-hidden="true">002</span>
+      <h2 class="sec-title">Proof of Practice</h2>
     </div>
     <p class="proof-intro reveal">The books are the doctrine. The apps are the operating surface.</p>
     <p class="proof-copy reveal">
@@ -730,7 +768,7 @@
       then gets refined into something cleaner, calmer, and repeatable.
     </p>
 
-    <!-- WEB2: receipts strip. Rule: real numbers only, hand-updated,
+    <!-- Receipts rule: real numbers only, hand-updated,
          never estimated. Sessions logged comes from the SelfTrainer PWA. -->
     <div class="receipts reveal">
       <div class="receipt">
@@ -770,11 +808,11 @@
     </div>
   </section>
 
-  <!-- 003 — THE SIGNAL (WEB1 — email capture) -->
+  <!-- 003 — THE SIGNAL -->
   <section id="signal">
     <div class="sec-head reveal">
-      <span class="sec-num">003</span>
-      <span class="sec-title">The Signal</span>
+      <span class="sec-num" aria-hidden="true">003</span>
+      <h2 class="sec-title">The Signal</h2>
     </div>
     <p class="signal-desc reveal">
       One email when there's something worth running — a system, a fix,
@@ -801,8 +839,8 @@
   <!-- 004 — WRITING -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">004</span>
-      <span class="sec-title">Writing</span>
+      <span class="sec-num" aria-hidden="true">004</span>
+      <h2 class="sec-title">Writing</h2>
     </div>
     <p class="writing-desc reveal">
       Essays and fragments on discipline, structure, execution, recovery,
@@ -838,8 +876,8 @@
   <!-- 005 — PRINCIPLES -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">005</span>
-      <span class="sec-title">Principles</span>
+      <span class="sec-num" aria-hidden="true">005</span>
+      <h2 class="sec-title">Principles</h2>
     </div>
     <ul class="principles">
       <li class="reveal">Structure beats mood.</li>
@@ -852,8 +890,8 @@
   <!-- 006 — CONNECT -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num">006</span>
-      <span class="sec-title">Connect</span>
+      <span class="sec-num" aria-hidden="true">006</span>
+      <h2 class="sec-title">Connect</h2>
     </div>
     <div class="connect-row">
       <a class="connect-link reveal" href="https://x.com/garry_tipler">
@@ -870,6 +908,7 @@
       </a>
     </div>
   </section>
+  </main>
 
   <footer>
     <div class="footer-mark reveal">© 2026 Garry Tipler · The proof is the work.</div>
@@ -886,21 +925,32 @@
       items.forEach(function (el) { el.classList.add('in'); });
       return;
     }
-    // hero reveals fire immediately on load
-    document.querySelectorAll('.hero .reveal').forEach(function (el) {
-      requestAnimationFrame(function () { el.classList.add('in'); });
-    });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    try {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      var heroItems = document.querySelectorAll('.hero .reveal');
+      var sectionItems = document.querySelectorAll('section .reveal, footer .reveal');
+
+      heroItems.forEach(function (el) { el.classList.add('reveal-ready'); });
+      sectionItems.forEach(function (el) {
+        el.classList.add('reveal-ready');
+        io.observe(el);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('section .reveal, footer .reveal').forEach(function (el) {
-      io.observe(el);
-    });
+      requestAnimationFrame(function () {
+        heroItems.forEach(function (el) { el.classList.add('in'); });
+      });
+    } catch (error) {
+      items.forEach(function (el) {
+        el.classList.remove('reveal-ready');
+        el.classList.add('in');
+      });
+    }
   })();
 
-  // WEB1 — Kit subscription (custom HTML form, AJAX, no redirect)
+  // Kit subscription (custom HTML form, AJAX, no redirect)
   (function () {
     var KIT_FORM_ID = '9676498';
     var form = document.getElementById('signal-form');
