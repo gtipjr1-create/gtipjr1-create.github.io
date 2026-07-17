@@ -354,6 +354,25 @@
     color: #14110a;
     border-bottom-color: var(--accent);
   }
+  .app-featured {
+    margin: 6px 0 18px;
+    padding: 26px 24px 22px;
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--accent);
+    border-radius: 3px;
+    background: var(--bg-card);
+  }
+  .app-eyebrow {
+    flex-basis: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .app-featured .app-desc { margin-top: 4px; }
+  .app-featured .app-project-link { margin-top: 4px; }
 
   /* ---------- SIGNAL (WEB1 — email capture) ---------- */
   .signal-desc {
@@ -410,15 +429,46 @@
   .writing-desc { color: var(--ink-dim); margin-bottom: 22px; max-width: 540px; }
 
   /* WEB3 — essay teaser list */
-  .essays { margin-bottom: 26px; }
+  .essays {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
   .essay {
     display: block;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--line-soft);
-    transition: padding-left .2s ease;
+    padding: 24px 22px;
+    border: 1px solid var(--line-soft);
+    border-left: 2px solid transparent;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.008);
+    transition: background-color .2s ease, border-color .2s ease;
   }
-  .essay:first-child { border-top: 1px solid var(--line-soft); }
-  .essay:hover { padding-left: 8px; }
+  .essay:hover {
+    background: var(--bg-raised);
+    border-color: var(--line);
+    border-left-color: var(--accent);
+  }
+  .essay:focus-visible {
+    outline: 2px solid var(--accent-hi);
+    outline-offset: 3px;
+  }
+  .essay:active {
+    background: var(--accent-dim);
+    border-color: rgba(203, 163, 92, 0.38);
+  }
+  .essay-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .essay-theme { color: var(--accent); }
   .essay-title {
     display: block;
     font-family: 'Fraunces', serif;
@@ -426,16 +476,28 @@
     font-size: 20px;
     line-height: 1.3;
     color: var(--ink);
+    margin-top: 11px;
     transition: color .2s ease;
   }
-  .essay:hover .essay-title { color: var(--accent); }
+  .essay:hover .essay-title { color: var(--accent-hi); }
   .essay-desc {
     display: block;
     color: var(--ink-dim);
     font-size: 15px;
-    margin-top: 4px;
+    margin-top: 7px;
     max-width: 540px;
   }
+  .essay-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+  }
+  .essay:hover .essay-cta { color: var(--accent-hi); }
 
   /* ---------- PRINCIPLES ---------- */
   .principles { list-style: none; }
@@ -510,13 +572,17 @@
 
   @media (prefers-reduced-motion: reduce) {
     .app-project-link,
-    .app-project-link .arrow { transition: none; }
+    .app-project-link .arrow,
+    .essay,
+    .essay-title { transition: none; }
   }
 
   @media (max-width: 540px) {
     body { font-size: 16px; }
     .wrap { padding: 0 22px; }
     .book.flagship { padding: 24px 20px; }
+    .app-featured { padding: 22px 18px; }
+    .essay { padding: 22px 18px; }
     .connect-label { width: 76px; }
     .receipts { gap: 32px; }
   }
@@ -618,7 +684,8 @@
       </div>
     </div>
 
-    <div class="app reveal">
+    <div class="app app-featured reveal">
+      <span class="app-eyebrow">Flagship build</span>
       <span class="app-name">SelfTrainer</span>
       <span class="app-status">In progress</span>
       <span class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</span>
@@ -681,16 +748,22 @@
 
     <div class="essays">
       <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/there-is-a-point-where-effort-stops-feeling-like-effort-9a7ae823bdf4">
+        <span class="essay-meta"><span class="essay-theme">Identity</span><span aria-hidden="true">·</span><span>4 min read</span></span>
         <span class="essay-title">There is a point where effort stops feeling like effort.</span>
         <span class="essay-desc">The moment discipline stops being forced and starts carrying itself — and what it took to get there.</span>
+        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
       </a>
       <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/from-thought-to-form-67d0dec5c6f7">
+        <span class="essay-meta"><span class="essay-theme">Creation</span><span aria-hidden="true">·</span><span>5 min read</span></span>
         <span class="essay-title">From Thought to Form</span>
         <span class="essay-desc">On publishing the first book: how months of lived practice became a finished thing.</span>
+        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
       </a>
       <a class="essay reveal" href="https://medium.com/@Garry_Tipler/fragments-4-the-fire-7301b68ca8b1">
+        <span class="essay-meta"><span class="essay-theme">Recovery</span><span aria-hidden="true">·</span><span>4 min read</span></span>
         <span class="essay-title">Fragments #4 — The Fire</span>
         <span class="essay-desc">A field note on setbacks: reading a forced slowdown as instruction, not interruption.</span>
+        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
       </a>
     </div>
 
