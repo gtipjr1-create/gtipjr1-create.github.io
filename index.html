@@ -335,6 +335,25 @@
     font-size: 15.5px;
     margin-top: 2px;
   }
+  .app-project-link {
+    min-height: 44px;
+    align-items: center;
+    margin: 0 0 -8px -10px;
+    padding: 8px 10px;
+    border-radius: 2px;
+  }
+  .app-project-link:hover {
+    background: var(--accent-dim);
+  }
+  .app-project-link:focus-visible {
+    outline: 2px solid var(--accent-hi);
+    outline-offset: 3px;
+  }
+  .app-project-link:active {
+    background: var(--accent);
+    color: #14110a;
+    border-bottom-color: var(--accent);
+  }
 
   /* ---------- SIGNAL (WEB1 — email capture) ---------- */
   .signal-desc {
@@ -489,6 +508,11 @@
     .hero .reveal { transition-delay: var(--d, 0ms); }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .app-project-link,
+    .app-project-link .arrow { transition: none; }
+  }
+
   @media (max-width: 540px) {
     body { font-size: 16px; }
     .wrap { padding: 0 22px; }
@@ -598,6 +622,9 @@
       <span class="app-name">SelfTrainer</span>
       <span class="app-status">In progress</span>
       <span class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</span>
+      <a class="book-link app-project-link" href="/projects/selftrainer/">
+        View the build <span class="arrow" aria-hidden="true">→</span>
+      </a>
     </div>
 
     <div class="app reveal">
