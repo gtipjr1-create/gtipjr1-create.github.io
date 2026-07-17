@@ -142,6 +142,39 @@
   }
   .proofline span { color: var(--accent); }
 
+  /* ---------- CURRENT WORK ---------- */
+  .current-work {
+    margin-top: clamp(46px, 7vh, 64px);
+    padding: 20px 22px 18px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-left: 2px solid var(--accent);
+    background: rgba(255, 255, 255, 0.012);
+  }
+  .current-work-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .current-work-status {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 3.5vw, 21px);
+    line-height: 1.4;
+    max-width: 600px;
+  }
+  .current-work-updated {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    margin-top: 10px;
+  }
+
   /* ---------- BUTTONS ---------- */
   .btn {
     display: inline-flex;
@@ -165,6 +198,11 @@
     box-shadow: 0 16px 34px var(--shadow);
   }
   .btn-primary:hover { background: var(--accent-hi); transform: translateY(-1px); }
+  .btn-primary:active {
+    background: var(--accent);
+    box-shadow: 0 8px 18px var(--shadow);
+    transform: none;
+  }
   .btn-price {
     font-size: 12px;
     color: var(--ink-faint);
@@ -247,6 +285,7 @@
   .book-link .arrow { transition: transform .2s ease; display:inline-block; }
   .book-link:hover { color: var(--accent-hi); border-bottom-color: var(--accent-hi); }
   .book-link:hover .arrow { transform: translateX(3px); }
+  .book-link:active { color: var(--ink); border-bottom-color: var(--accent); }
   .book.flagship:hover {
     border-color: rgba(203, 163, 92, 0.34);
     transform: translateY(-1px);
@@ -535,10 +574,11 @@
     gap: 14px;
     padding: 14px 0;
     border-bottom: 1px solid var(--line-soft);
-    transition: padding-left .2s ease;
+    transition: background-color .2s ease;
   }
   .connect-link:last-child { border-bottom: none; }
-  .connect-link:hover { padding-left: 8px; }
+  .connect-link:hover { background: rgba(255, 255, 255, 0.012); }
+  .connect-link:active { background: var(--accent-dim); }
   .connect-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -548,7 +588,7 @@
     width: 90px;
     flex-shrink: 0;
   }
-  .connect-handle { font-size: 16px; color: var(--ink); }
+  .connect-handle { font-size: 16px; color: var(--ink); transition: color .2s ease; }
   .connect-link:hover .connect-handle { color: var(--accent); }
 
   /* ---------- FOOTER ---------- */
@@ -571,15 +611,33 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .btn,
+    .btn .arrow,
+    .book-link,
+    .book-link .arrow,
+    .book.flagship,
     .app-project-link,
     .app-project-link .arrow,
     .essay,
-    .essay-title { transition: none; }
+    .essay-title,
+    .connect-link,
+    .connect-handle { transition: none; }
+    .btn:hover,
+    .btn:hover .arrow,
+    .book-link:hover .arrow,
+    .book.flagship:hover { transform: none; }
   }
 
   @media (max-width: 540px) {
     body { font-size: 16px; }
     .wrap { padding: 0 22px; }
+    .current-work { padding: 18px; }
     .book.flagship { padding: 24px 20px; }
     .app-featured { padding: 22px 18px; }
     .essay { padding: 22px 18px; }
@@ -595,15 +653,15 @@
   <!-- HERO -->
   <header class="hero">
     <div class="eyebrow reveal" style="--d:0ms">Building in public</div>
-    <h1 class="name reveal" style="--d:80ms">Garry Tipler</h1>
-    <p class="tagline reveal" style="--d:170ms">Systems for rebuilding a life.</p>
-    <p class="lede reveal" style="--d:260ms">
+    <h1 class="name reveal" style="--d:70ms">Garry Tipler</h1>
+    <p class="tagline reveal" style="--d:140ms">Systems for rebuilding a life.</p>
+    <p class="lede reveal" style="--d:210ms">
       I rebuilt my life through discipline, structure, training, writing, and systems.
       Everything here is a field-tested framework — built first for myself,
       then shared so others can run it too.
     </p>
-    <div class="reveal" style="--d:350ms">
-      <p class="proofline reveal" style="--d:320ms">
+    <div class="reveal" style="--d:280ms">
+      <p class="proofline">
         Books <span>·</span> field guides <span>·</span> tools <span>·</span> proof of practice
       </p>
      <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GX379N1L">
@@ -611,6 +669,11 @@
       </a>
       <span class="btn-price">$4.99 · free on Kindle Unlimited</span>
     </div>
+    <aside class="current-work reveal" style="--d:340ms">
+      <p class="current-work-label">Currently</p>
+      <p class="current-work-status">Building SelfTrainer Native toward App Store release while documenting the systems behind the work.</p>
+      <p class="current-work-updated">Updated July 2026</p>
+    </aside>
   </header>
 
   <!-- 001 — BOOKS -->
