@@ -454,6 +454,89 @@
   .app-featured .app-desc { margin-top: 4px; }
   .app-featured .app-project-link { margin-top: 4px; }
 
+  /* ---------- DISCIPLINE REBUILD ---------- */
+  .discipline-rebuild {
+    padding: clamp(4rem, 8vw, 7rem) 1.25rem;
+    background: var(--bg-card);
+    color: var(--ink);
+  }
+  .discipline-rebuild__inner {
+    width: min(100%, 760px);
+    margin: 0 auto;
+  }
+  .discipline-rebuild__eyebrow {
+    margin: 0 0 0.75rem;
+    color: var(--accent);
+    font: 600 0.78rem/1.2 'JetBrains Mono', monospace;
+    letter-spacing: 0.14em;
+  }
+  .discipline-rebuild h2 {
+    max-width: 680px;
+    margin: 0;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 6vw, 4.7rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  .discipline-rebuild__copy {
+    max-width: 650px;
+    margin: 1.5rem 0 0;
+    color: var(--ink-dim);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.7;
+  }
+  .discipline-rebuild__copy strong { color: var(--ink); }
+  .discipline-rebuild__contents {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.75rem 0 2rem;
+    padding: 0;
+    list-style: none;
+  }
+  .discipline-rebuild__contents li {
+    position: relative;
+    padding-left: 1.35rem;
+    color: var(--ink);
+  }
+  .discipline-rebuild__contents li::before {
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    content: ">";
+  }
+  .discipline-rebuild__cta {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.15rem;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    background: var(--accent);
+    color: #14110a;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: transform 160ms ease, background 160ms ease;
+  }
+  .discipline-rebuild__cta:hover {
+    transform: translateY(-2px);
+    background: var(--accent-hi);
+  }
+  .discipline-rebuild__cta:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+  }
+  .discipline-rebuild__note {
+    margin: 0.85rem 0 0;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
   /* ---------- SIGNAL ---------- */
   .signal-desc {
     color: var(--ink-dim);
@@ -665,6 +748,7 @@
     .book.flagship,
     .app-project-link,
     .app-project-link .arrow,
+    .discipline-rebuild__cta,
     .essay,
     .essay-title,
     .connect-link,
@@ -672,7 +756,8 @@
     .btn:hover,
     .btn:hover .arrow,
     .book-link:hover .arrow,
-    .book.flagship:hover { transform: none; }
+    .book.flagship:hover,
+    .discipline-rebuild__cta:hover { transform: none; }
   }
 
   @media (max-width: 540px) {
@@ -809,6 +894,38 @@
       <a class="book-link app-project-link" href="/projects/fitpulse/">
         View the project <span class="arrow" aria-hidden="true">→</span>
       </a>
+    </div>
+  </section>
+
+  <!-- 7-Day Discipline Rebuild lead magnet -->
+  <section class="discipline-rebuild" aria-labelledby="discipline-rebuild-title">
+    <div class="discipline-rebuild__inner reveal">
+      <p class="discipline-rebuild__eyebrow">FREE FIELD GUIDE</p>
+      <h2 id="discipline-rebuild-title">Rebuild Your Discipline in Seven Days</h2>
+      <p class="discipline-rebuild__copy">
+        You do not need another dramatic restart. You need a clear way to return.
+        <strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol
+        for restoring structure, rebuilding self-trust, and returning to action.
+      </p>
+
+      <ul class="discipline-rebuild__contents">
+        <li>A focused seven-day rebuilding protocol</li>
+        <li>Simple daily actions and reflection prompts</li>
+        <li>A printable discipline rebuild scorecard</li>
+        <li>A sustainable plan for the next 14 days</li>
+      </ul>
+
+      <a
+        class="discipline-rebuild__cta"
+        href="/assets/downloads/the-7-day-discipline-rebuild.pdf"
+        download
+      >
+        Download the Free Field Guide
+      </a>
+
+      <p class="discipline-rebuild__note">
+        Free PDF. No dramatic overhaul - just seven deliberate days of returning to what matters.
+      </p>
     </div>
   </section>
 
