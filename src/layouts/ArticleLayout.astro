@@ -1,0 +1,116 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import {
+  formatReadingTime,
+  formatWritingDate,
+  getEffectivePublicationDate,
+  getWritingPath,
+  toDateString,
+  type WritingEntry,
+} from "../lib/writing";
+
+interface Props {
+  entry: WritingEntry;
+  readingTime: number;
+}
+
+const { entry, readingTime } = Astro.props;
+const { data } = entry;
+const canonicalPath = getWritingPath(data);
+const effectivePublicationDate = getEffectivePublicationDate(data);
+const effectiveDateString = toDateString(effectivePublicationDate);
+const modifiedDate = toDateString(data.updatedDate ?? data.publishedDate ?? effectivePublicationDate);
+const typeLabel = data.type === "fragment" ? `Fragment ${data.fragmentNumber}` : data.type;
+
+if (!Astro.site) {
+  throw new Error("Astro site URL is required to generate Article JSON-LD.");
+}
+
+const canonicalUrl = new URL(canonicalPath, Astro.site).toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: data.title,
+  description: data.summary,
+  url: canonicalUrl,
+  mainEntityOfPage: canonicalUrl,
+  datePublished: effectiveDateString,
+  dateModified: modifiedDate,
+  articleSection: data.category,
+  keywords: data.tags,
+  author: {
+    "@type": "Person",
+    name: "Garry Tipler",
+    url: "https://garrytipler.com/",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Garry Tipler",
+    url: "https://garrytipler.com/",
+  },
+};
+const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.summary}
+  canonicalPath={canonicalPath}
+  ogType="article"
+  publishedDate={effectiveDateString}
+  modifiedDate={modifiedDate}
+>
+  <script
+    slot="head"
+    id="article-jsonld"
+    type="application/ld+json"
+    set:html={serializedJsonLd}
+  />
+
+  <div class="article-shell">
+    <header class="article-masthead">
+      <nav aria-label="Breadcrumb">
+        <a class="back-link" href="/"><span aria-hidden="true">←</span> Garry Tipler</a>
+      </nav>
+      <p class="article-eyebrow">Writing / {typeLabel}</p>
+      <h1>{data.title}</h1>
+      <p class="article-summary">{data.summary}</p>
+      <p class="article-meta">
+        <span>{data.category}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={effectiveDateString}>{formatWritingDate(effectivePublicationDate)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{formatReadingTime(readingTime)}</span>
+      </p>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <article class="article-prose">
+        <slot />
+      </article>
+
+      {
+        data.mediumUrl && (
+          <aside class="medium-attribution" aria-label="Medium attribution">
+            {data.originalPublishedDate ? (
+              <p>
+                Originally published on Medium on {formatWritingDate(data.originalPublishedDate)}. {" "}
+                <a href={data.mediumUrl} rel="external">View the original Medium post.</a>
+              </p>
+            ) : (
+              <p>
+                Also available on Medium. {" "}
+                <a href={data.mediumUrl} rel="external">View the Medium post.</a>
+              </p>
+            )}
+          </aside>
+        )
+      }
+    </main>
+
+    <footer class="article-footer">
+      <a class="back-link" href="/">Return to garrytipler.com <span aria-hidden="true">→</span></a>
+    </footer>
+  </div>
+</BaseLayout>
+

@@ -1,0 +1,15 @@
+:root {
+  --bg: #0b0b0c;
+  --bg-raised: #131315;
+  --bg-card: #141416;
+  --ink: #eceae3;
+  --ink-dim: #9d9b92;
+  --ink-faint: #7f7d76;
+  --line: rgba(236, 234, 227, 0.1);
+  --line-soft: rgba(236, 234, 227, 0.06);
+  --accent: #cba35c;
+  --accent-hi: #e0bd78;
+  --accent-dim: rgba(203, 163, 92, 0.14);
+  --copy-width: 700px;
+}
+

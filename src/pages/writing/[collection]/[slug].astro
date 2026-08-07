@@ -1,0 +1,34 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import ArticleLayout from "../../../layouts/ArticleLayout.astro";
+import {
+  calculateReadingTime,
+  getPublishedWritingEntries,
+  getWritingCollectionSegment,
+} from "../../../lib/writing";
+
+export async function getStaticPaths() {
+  const entries = await getPublishedWritingEntries();
+
+  return entries.map((entry) => ({
+    params: {
+      collection: getWritingCollectionSegment(entry.data),
+      slug: entry.data.slug,
+    },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"writing">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const readingTime = calculateReadingTime(entry.body ?? "");
+---
+
+<ArticleLayout entry={entry} readingTime={readingTime}>
+  <Content />
+</ArticleLayout>
+
