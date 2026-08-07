@@ -16,9 +16,10 @@ interface Props {
   readingTime: number;
   previous?: WritingEntry;
   next?: WritingEntry;
+  relatedEntries: WritingEntry[];
 }
 
-const { entry, readingTime, previous, next } = Astro.props;
+const { entry, readingTime, previous, next, relatedEntries } = Astro.props;
 const { data } = entry;
 const canonicalPath = getWritingPath(data);
 const collectionPath = getWritingCollectionPath(data.type);
@@ -110,6 +111,55 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
               </p>
             )}
           </aside>
+        )
+      }
+
+      {
+        (relatedEntries.length > 0 || data.connections.length > 0) && (
+          <div class="article-discovery">
+            {relatedEntries.length > 0 && (
+              <section class="article-discovery-section" aria-labelledby="related-writing-heading">
+                <p class="library-kicker">Related writing</p>
+                <h2 id="related-writing-heading">Continue reading</h2>
+                <ul class="related-writing-list">
+                  {relatedEntries.map((relatedEntry) => (
+                    <li>
+                      <a href={getWritingPath(relatedEntry.data)}>
+                        <span class="related-writing-type">
+                          {relatedEntry.data.type === "fragment"
+                            ? `Fragment ${relatedEntry.data.fragmentNumber}`
+                            : relatedEntry.data.type}
+                        </span>
+                        <span class="related-writing-title">{relatedEntry.data.title}</span>
+                        <span class="related-writing-arrow" aria-hidden="true">→</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {data.connections.length > 0 && (
+              <section class="article-discovery-section" aria-labelledby="connected-work-heading">
+                <p class="library-kicker">Connections</p>
+                <h2 id="connected-work-heading">Connected work</h2>
+                <ul class="connection-list">
+                  {data.connections.map((connection) => (
+                    <li>
+                      <a
+                        href={connection.url}
+                        rel={connection.url.startsWith("http") ? "external" : undefined}
+                      >
+                        <span class="connection-kind">{connection.kind}</span>
+                        <span class="connection-label">{connection.label}</span>
+                        <span aria-hidden="true">→</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </div>
         )
       }
     </main>

@@ -10,6 +10,11 @@ export interface AdjacentWritingEntries {
   next?: WritingEntry;
 }
 
+export interface WritingArchiveGroup {
+  year: number;
+  entries: WritingEntry[];
+}
+
 const collectionSegments: Record<WritingType, string> = {
   fragment: "fragments",
   essay: "essays",
@@ -54,6 +59,10 @@ export function getEffectivePublicationDate(data: WritingData): Date {
 
 export function getWritingPath(data: WritingData): string {
   return `/writing/${collectionSegments[data.type]}/${data.slug}/`;
+}
+
+export function getWritingIdentifier(data: WritingData): string {
+  return `${data.type}:${data.slug}`;
 }
 
 export function getWritingCollectionSegment(data: WritingData): string {
@@ -128,6 +137,59 @@ export function getAdjacentWritingEntries(
     previous: collectionEntries[currentIndex - 1],
     next: collectionEntries[currentIndex + 1],
   };
+}
+
+export function getStartHereEntries(entries: WritingEntry[]): WritingEntry[] {
+  return entries
+    .filter(
+      (entry) =>
+        entry.data.status === "published" && entry.data.startHereOrder !== undefined,
+    )
+    .sort((left, right) => {
+      const orderDifference = left.data.startHereOrder! - right.data.startHereOrder!;
+      if (orderDifference !== 0) return orderDifference;
+      return getWritingIdentifier(left.data).localeCompare(getWritingIdentifier(right.data));
+    });
+}
+
+export function groupWritingArchive(entries: WritingEntry[]): WritingArchiveGroup[] {
+  const groups = new Map<number, WritingEntry[]>();
+
+  for (const entry of sortWritingByPublicationDate(
+    entries.filter((candidate) => candidate.data.status === "published"),
+  )) {
+    const year = getEffectivePublicationDate(entry.data).getUTCFullYear();
+    const yearEntries = groups.get(year) ?? [];
+    yearEntries.push(entry);
+    groups.set(year, yearEntries);
+  }
+
+  return [...groups.entries()]
+    .sort(([leftYear], [rightYear]) => rightYear - leftYear)
+    .map(([year, yearEntries]) => ({ year, entries: yearEntries }));
+}
+
+export function resolveRelatedWritingEntries(
+  entry: WritingEntry,
+  entries: WritingEntry[],
+): WritingEntry[] {
+  const publicEntriesByIdentifier = new Map(
+    entries
+      .filter((candidate) => candidate.data.status === "published")
+      .map((candidate) => [getWritingIdentifier(candidate.data), candidate]),
+  );
+
+  return entry.data.related.map((identifier) => {
+    const relatedEntry = publicEntriesByIdentifier.get(identifier);
+
+    if (!relatedEntry) {
+      throw new Error(
+        `Published writing "${getWritingIdentifier(entry.data)}" has unavailable related writing "${identifier}".`,
+      );
+    }
+
+    return relatedEntry;
+  });
 }
 
 export function calculateReadingTime(markdown: string, wordsPerMinute = 225): number {

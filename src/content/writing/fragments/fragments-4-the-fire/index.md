@@ -13,6 +13,7 @@ tags:
 publishedDate: "2026-08-06"
 fragmentNumber: 4
 featured: true
+startHereOrder: 1
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-4-the-fire-7301b68ca8b1"
 status: "published"
 ---
@@ -40,4 +41,3 @@ And no matter what happens, I’m ready for the outcome.
 I persevere. I overcome. Always.
 
 Fragments continue.
-

@@ -43,7 +43,11 @@ const writingSchema = z
           "Related writing identifiers must use type:slug.",
         ),
       )
-      .default([]),
+      .default([])
+      .refine(
+        (identifiers) => new Set(identifiers).size === identifiers.length,
+        "Related writing identifiers must be unique.",
+      ),
     connections: z
       .array(
         z.object({

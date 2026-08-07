@@ -6,6 +6,7 @@ import {
   getAdjacentWritingEntries,
   getPublishedWritingEntries,
   getWritingCollectionSegment,
+  resolveRelatedWritingEntries,
 } from "../../../lib/writing";
 
 export async function getStaticPaths() {
@@ -13,13 +14,14 @@ export async function getStaticPaths() {
 
   return entries.map((entry) => {
     const adjacentEntries = getAdjacentWritingEntries(entry, entries);
+    const relatedEntries = resolveRelatedWritingEntries(entry, entries);
 
     return {
       params: {
         collection: getWritingCollectionSegment(entry.data),
         slug: entry.data.slug,
       },
-      props: { entry, ...adjacentEntries },
+      props: { entry, relatedEntries, ...adjacentEntries },
     };
   });
 }
@@ -28,13 +30,20 @@ interface Props {
   entry: CollectionEntry<"writing">;
   previous?: CollectionEntry<"writing">;
   next?: CollectionEntry<"writing">;
+  relatedEntries: CollectionEntry<"writing">[];
 }
 
-const { entry, previous, next } = Astro.props;
+const { entry, previous, next, relatedEntries } = Astro.props;
 const { Content } = await render(entry);
 const readingTime = calculateReadingTime(entry.body ?? "");
 ---
 
-<ArticleLayout entry={entry} readingTime={readingTime} previous={previous} next={next}>
+<ArticleLayout
+  entry={entry}
+  readingTime={readingTime}
+  previous={previous}
+  next={next}
+  relatedEntries={relatedEntries}
+>
   <Content />
 </ArticleLayout>

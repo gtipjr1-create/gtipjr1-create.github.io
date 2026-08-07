@@ -1,0 +1,28 @@
+---
+import WritingList from "../../../components/WritingList.astro";
+import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
+import { getPublishedWritingEntries, getStartHereEntries } from "../../../lib/writing";
+
+const entries = getStartHereEntries(await getPublishedWritingEntries());
+---
+
+<WritingIndexLayout
+  title="Start Here"
+  description="A curated reading path through the pieces that establish the central ideas of the library."
+  canonicalPath="/writing/start-here/"
+  eyebrow="Writing / Start Here"
+  returnHref="/writing/"
+  returnLabel="Writing"
+>
+  {
+    entries.length > 0 && (
+      <section class="library-section start-here-list" aria-labelledby="start-here-heading">
+        <div class="library-section-heading">
+          <p class="library-kicker">Curated sequence</p>
+          <h2 id="start-here-heading">Read in this order</h2>
+        </div>
+        <WritingList entries={entries} emptyMessage="" />
+      </section>
+    )
+  }
+</WritingIndexLayout>

@@ -1,0 +1,30 @@
+---
+import WritingList from "../../../components/WritingList.astro";
+import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
+import { getPublishedWritingEntries, groupWritingArchive } from "../../../lib/writing";
+
+const archiveGroups = groupWritingArchive(await getPublishedWritingEntries());
+---
+
+<WritingIndexLayout
+  title="Archive"
+  description="Every published piece, grouped by its effective original publication year."
+  canonicalPath="/writing/archive/"
+  eyebrow="Writing / Archive"
+  returnHref="/writing/"
+  returnLabel="Writing"
+>
+  {
+    archiveGroups.map((group) => (
+      <section class="library-section archive-year" aria-labelledby={`archive-${group.year}`}>
+        <div class="archive-year-heading">
+          <h2 id={`archive-${group.year}`}>{group.year}</h2>
+          <p>
+            {group.entries.length} {group.entries.length === 1 ? "piece" : "pieces"}
+          </p>
+        </div>
+        <WritingList entries={group.entries} emptyMessage="" />
+      </section>
+    ))
+  }
+</WritingIndexLayout>
