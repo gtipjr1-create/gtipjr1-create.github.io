@@ -4,6 +4,8 @@ import {
   formatReadingTime,
   formatWritingDate,
   getEffectivePublicationDate,
+  getWritingCollectionLabel,
+  getWritingCollectionPath,
   getWritingPath,
   toDateString,
   type WritingEntry,
@@ -12,11 +14,15 @@ import {
 interface Props {
   entry: WritingEntry;
   readingTime: number;
+  previous?: WritingEntry;
+  next?: WritingEntry;
 }
 
-const { entry, readingTime } = Astro.props;
+const { entry, readingTime, previous, next } = Astro.props;
 const { data } = entry;
 const canonicalPath = getWritingPath(data);
+const collectionPath = getWritingCollectionPath(data.type);
+const collectionLabel = getWritingCollectionLabel(data.type);
 const effectivePublicationDate = getEffectivePublicationDate(data);
 const effectiveDateString = toDateString(effectivePublicationDate);
 const modifiedDate = toDateString(data.updatedDate ?? data.publishedDate ?? effectivePublicationDate);
@@ -70,7 +76,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
   <div class="article-shell">
     <header class="article-masthead">
       <nav aria-label="Breadcrumb">
-        <a class="back-link" href="/"><span aria-hidden="true">←</span> Garry Tipler</a>
+        <a class="back-link" href={collectionPath}><span aria-hidden="true">←</span> {collectionLabel}</a>
       </nav>
       <p class="article-eyebrow">Writing / {typeLabel}</p>
       <h1>{data.title}</h1>
@@ -109,8 +115,27 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
     </main>
 
     <footer class="article-footer">
-      <a class="back-link" href="/">Return to garrytipler.com <span aria-hidden="true">→</span></a>
+      {
+        (previous || next) && (
+          <nav class="article-navigation" aria-label="Writing sequence">
+            {previous ? (
+              <a class="sequence-link sequence-previous" href={getWritingPath(previous.data)}>
+                <span class="sequence-direction">Previous</span>
+                <span class="sequence-title">{previous.data.title}</span>
+              </a>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <a class="sequence-link sequence-next" href={getWritingPath(next.data)}>
+                <span class="sequence-direction">Next</span>
+                <span class="sequence-title">{next.data.title}</span>
+              </a>
+            )}
+          </nav>
+        )
+      }
+      <a class="back-link" href="/writing/">Return to Writing <span aria-hidden="true">→</span></a>
     </footer>
   </div>
 </BaseLayout>
-

@@ -1,0 +1,27 @@
+---
+import WritingList from "../../../components/WritingList.astro";
+import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
+import {
+  getPublishedWritingEntriesByType,
+  sortWritingCollection,
+} from "../../../lib/writing";
+
+const entries = sortWritingCollection(await getPublishedWritingEntriesByType("fragment"));
+---
+
+<WritingIndexLayout
+  title="Fragments"
+  description="Numbered field notes on discipline, recovery, identity, and the work of rebuilding. Gaps in the sequence are intentional."
+  canonicalPath="/writing/fragments/"
+  eyebrow="Writing / Fragments"
+  returnHref="/writing/"
+  returnLabel="Writing"
+>
+  <section class="library-section collection-index" aria-labelledby="fragments-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">{entries.length} {entries.length === 1 ? "fragment" : "fragments"}</p>
+      <h2 id="fragments-heading">Numbered index</h2>
+    </div>
+    <WritingList entries={entries} emptyMessage="Published fragments will appear here." />
+  </section>
+</WritingIndexLayout>

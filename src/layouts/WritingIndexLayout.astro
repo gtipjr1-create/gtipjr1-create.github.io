@@ -1,0 +1,42 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  eyebrow: string;
+  returnHref?: string;
+  returnLabel?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  eyebrow,
+  returnHref = "/",
+  returnLabel = "Garry Tipler",
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath}>
+  <div class="article-shell library-shell">
+    <header class="library-masthead">
+      <nav aria-label="Breadcrumb">
+        <a class="back-link" href={returnHref}><span aria-hidden="true">←</span> {returnLabel}</a>
+      </nav>
+      <p class="article-eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="library-intro">{description}</p>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="article-footer">
+      <a class="back-link" href={returnHref}>Return to {returnLabel} <span aria-hidden="true">→</span></a>
+    </footer>
+  </div>
+</BaseLayout>

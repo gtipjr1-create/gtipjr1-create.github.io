@@ -1,0 +1,53 @@
+---
+import {
+  calculateReadingTime,
+  formatReadingTime,
+  formatWritingDate,
+  getEffectivePublicationDate,
+  getWritingPath,
+  type WritingEntry,
+} from "../lib/writing";
+
+interface Props {
+  entries: WritingEntry[];
+  emptyMessage: string;
+}
+
+const { entries, emptyMessage } = Astro.props;
+---
+
+{
+  entries.length > 0 ? (
+    <ol class="writing-list">
+      {entries.map((entry) => {
+        const effectiveDate = getEffectivePublicationDate(entry.data);
+        const readingTime = calculateReadingTime(entry.body ?? "");
+        const typeLabel =
+          entry.data.type === "fragment"
+            ? `Fragment ${entry.data.fragmentNumber}`
+            : entry.data.type;
+
+        return (
+          <li>
+            <a class="writing-list-item" href={getWritingPath(entry.data)}>
+              <span class="writing-list-meta">
+                <span>{typeLabel}</span>
+                <span aria-hidden="true">·</span>
+                <time datetime={effectiveDate.toISOString().slice(0, 10)}>
+                  {formatWritingDate(effectiveDate)}
+                </time>
+                <span aria-hidden="true">·</span>
+                <span>{formatReadingTime(readingTime)}</span>
+              </span>
+              <span class="writing-list-title">{entry.data.title}</span>
+              <span class="writing-list-summary">{entry.data.summary}</span>
+              <span class="writing-list-cta">Read <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  ) : (
+    <p class="writing-empty">{emptyMessage}</p>
+  )
+}

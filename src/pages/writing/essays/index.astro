@@ -1,0 +1,30 @@
+---
+import WritingList from "../../../components/WritingList.astro";
+import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
+import {
+  getPublishedWritingEntriesByType,
+  sortWritingCollection,
+} from "../../../lib/writing";
+
+const entries = sortWritingCollection(await getPublishedWritingEntriesByType("essay"));
+---
+
+<WritingIndexLayout
+  title="Essays"
+  description="Longer arguments, observations, and practical systems drawn from lived work."
+  canonicalPath="/writing/essays/"
+  eyebrow="Writing / Essays"
+  returnHref="/writing/"
+  returnLabel="Writing"
+>
+  <section class="library-section collection-index" aria-labelledby="essays-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">{entries.length} {entries.length === 1 ? "essay" : "essays"}</p>
+      <h2 id="essays-heading">Essay index</h2>
+    </div>
+    <WritingList
+      entries={entries}
+      emptyMessage="Essays will appear here as verified pieces are migrated into the library."
+    />
+  </section>
+</WritingIndexLayout>

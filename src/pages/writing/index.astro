@@ -1,0 +1,51 @@
+---
+import WritingList from "../../components/WritingList.astro";
+import WritingIndexLayout from "../../layouts/WritingIndexLayout.astro";
+import {
+  getPublishedWritingEntries,
+  sortWritingByPublicationDate,
+} from "../../lib/writing";
+
+const publishedEntries = await getPublishedWritingEntries();
+const latestEntries = sortWritingByPublicationDate(publishedEntries);
+const fragmentCount = publishedEntries.filter((entry) => entry.data.type === "fragment").length;
+const essayCount = publishedEntries.filter((entry) => entry.data.type === "essay").length;
+---
+
+<WritingIndexLayout
+  title="Writing"
+  description="Essays and fragments on discipline, structure, execution, recovery, self-command, and the long rebuild."
+  canonicalPath="/writing/"
+  eyebrow="Writing library"
+>
+  <section class="library-section" aria-labelledby="collections-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">Collections</p>
+      <h2 id="collections-heading">Browse the library</h2>
+    </div>
+
+    <div class="collection-grid">
+      <a class="collection-card" href="/writing/fragments/">
+        <span class="collection-count">{fragmentCount} {fragmentCount === 1 ? "piece" : "pieces"}</span>
+        <span class="collection-title">Fragments</span>
+        <span class="collection-description">Numbered field notes from the work of rebuilding.</span>
+        <span class="collection-cta">Browse fragments <span aria-hidden="true">→</span></span>
+      </a>
+
+      <a class="collection-card" href="/writing/essays/">
+        <span class="collection-count">{essayCount} {essayCount === 1 ? "piece" : "pieces"}</span>
+        <span class="collection-title">Essays</span>
+        <span class="collection-description">Longer arguments, observations, and systems put into practice.</span>
+        <span class="collection-cta">Browse essays <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="library-section" aria-labelledby="latest-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">Latest</p>
+      <h2 id="latest-heading">Recent writing</h2>
+    </div>
+    <WritingList entries={latestEntries} emptyMessage="Published writing will appear here." />
+  </section>
+</WritingIndexLayout>
