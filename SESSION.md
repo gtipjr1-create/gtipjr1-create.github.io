@@ -1,8 +1,8 @@
 # GarryTipler.com Writing Library — Project Record
 
-**Record date:** August 7, 2026
+**Record date:** August 8, 2026
 **Production branch:** `main`
-**Production head:** `acceb91` — `Publish Discipline Should Not Cost Me My Heart`
+**Production head:** `553f052` — `feat: reshape homepage hierarchy and flow`
 **Canonical domain:** `https://garrytipler.com/`
 
 ## Purpose
@@ -279,6 +279,33 @@ Completed the first real Essay migration from user-supplied Medium source materi
 
 The local build produced seven pages. GitHub Pages deployment completed successfully, and the public Essay route and image both returned HTTP 200 with correct canonical metadata and Medium attribution.
 
+### Session 6 follow-up — Article hero and social metadata
+
+**Commit:** `5675401` — `Add article hero social metadata`
+
+Implemented:
+
+- Article hero images render from the existing `heroImage` content contract.
+- Article-specific hero images populate Open Graph and Twitter metadata.
+- Article JSON-LD includes the canonical hero-image URL when present.
+- Generated-output verification protects hero rendering and social metadata for published writing.
+
+### Session 6 follow-up — Homepage hierarchy and flow
+
+**Commit:** `553f052` — `feat: reshape homepage hierarchy and flow`
+
+Implemented the approved restrained homepage refinement without changing routes, dependencies, project pages, or the writing architecture:
+
+- Added a compact GT navigation with direct paths to Writing, Projects, and the free guide.
+- Reframed the hero around exploration rather than an immediate purchase.
+- Consolidated the homepage into five clearer stages: books, proof, writing, continuation, and principles.
+- Added one approved SelfTrainer screenshot as compact product evidence.
+- Promoted the self-hosted Essay and Fragment in the Writing section.
+- Combined the free guide and newsletter into one continuation surface.
+- Moved social links into the footer and corrected the mobile Kindle price layout.
+
+`npm.cmd run validate` and `git diff --check` passed. The generated homepage and screenshot asset were inspected in `dist/`. The page was visually reviewed at `1440 × 1000` and `390 × 844`, then the deployed homepage was verified live with the new navigation, hero action, and proof image present.
+
 ## Current discovery behavior
 
 ### Writing landing page
@@ -392,7 +419,7 @@ npm.cmd run validate
 
 ## Current production routes
 
-Verified live after Session 6:
+The homepage was verified live after commit `553f052`. The remaining routes were verified live after Session 6 and remain protected by the repository build verifier:
 
 - `https://garrytipler.com/`
 - `https://garrytipler.com/projects/selftrainer/`
@@ -418,16 +445,20 @@ Verified live after Session 6:
 - Automatic related-work inference.
 - CMS or database adoption.
 - MDX expansion.
-- Homepage redesign.
+- Further homepage redesign while the Medium import session is active.
 
 ## Next phase
 
 Session 7 will inspect the untouched Medium account export and extend the migration toolkit with a safe batch-to-review importer and manifest. It will stop before bulk publication.
 
-See `NEXT_SESSION.md` for the Saturday handoff and acceptance criteria.
+See `NEXT_SESSION.md` for the active importer handoff and acceptance criteria.
 
 ## Repository status at this record
 
-The application worktree was clean after Session 6 at production commit `acceb91`. Local review artifacts under `.migration-output/` remain ignored and do not affect Git status or public output.
+Production branch `main` and `origin/main` are aligned at `553f052`. The homepage implementation is committed, pushed, deployed, and live-verified.
 
-The Medium account-data export was requested on August 7, 2026 and is expected by email within 24 hours. The raw ZIP must remain private and untracked when it arrives.
+This handoff updates `SESSION.md` and `NEXT_SESSION.md` without committing or pushing them. It also leaves a mobile-only footer adjustment in `index.html` that prevents the copyright line from wrapping on the user’s physical phone. The adjustment passed `npm.cmd run validate`, `git diff --check`, and a `390 × 844` local browser check showing a single 305px-wide line with no horizontal overflow. It is not committed, pushed, or deployed.
+
+The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
+
+The Medium account-data export was requested on August 7, 2026 and had not arrived when this record was updated on August 8. The raw ZIP must remain private and untracked when it arrives.

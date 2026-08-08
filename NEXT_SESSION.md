@@ -1,14 +1,14 @@
 # Next Session — Session 7: Medium Export Importer
 
-**Planned continuation:** Saturday, August 8, 2026
+**Planned continuation:** Begin when the untouched Medium account-data ZIP arrives.
 
-**Current production head:** `acceb91` — `Publish Discipline Should Not Cost Me My Heart`
+**Current production head:** `553f052` — `feat: reshape homepage hierarchy and flow`
 
 **Scope:** Inspect the real Medium export and build a safe batch-to-review workflow. Do not bulk publish.
 
 ## Current position
 
-Sessions 5–6 are complete, committed, deployed, and verified on GarryTipler.com.
+Sessions 5–6 and the approved homepage refinement are complete, committed, deployed, and verified on GarryTipler.com.
 
 The repository now has:
 
@@ -21,8 +21,12 @@ The repository now has:
   - Fragment #4 — The Fire.
   - Discipline Should Not Cost Me My Heart.
 - One completed real migration proving exact prose preservation, historical-date evidence, image handling, publication, deployment, and live verification.
+- Article hero images now drive on-page presentation, Open Graph, Twitter, and Article JSON-LD metadata when supplied.
+- The restrained homepage refinement is live with clearer navigation, stronger hierarchy, compact SelfTrainer evidence, promoted self-hosted writing, and consolidated continuation surfaces.
 
-The user requested a Medium account-data export on Friday, August 7. Medium indicated delivery by email within 24 hours. Use the untouched ZIP as the authoritative format sample when it arrives.
+The user requested a Medium account-data export on Friday, August 7. It had not arrived when this handoff was updated on Saturday, August 8. Do not design or start the importer before the untouched ZIP is present; use that archive as the authoritative format sample.
+
+The homepage implementation commit is synchronized with `origin/main`, but this handoff leaves `index.html`, `SESSION.md`, and `NEXT_SESSION.md` modified and `artifacts/` untracked. The `index.html` change is a validated mobile-only footer adjustment that keeps the copyright line from wrapping on the user’s physical phone; it is not committed, pushed, or deployed. The screenshots in `artifacts/` are homepage-review output, not Medium export input. Preserve them unless the user explicitly decides otherwise.
 
 Read `AGENTS.md`, `SESSION.md`, and `docs/writing-migration.md` before changing code.
 
@@ -52,12 +56,13 @@ The importer should remove mechanical extraction work while keeping every public
 
 ## First actions
 
-1. Confirm the worktree is clean and the ZIP is present.
-2. Record the ZIP filename, size, and SHA-256 hash without printing private contents broadly.
-3. Ensure the raw export and extraction directory are ignored by Git before unpacking.
-4. Inventory only the archive structure needed to identify authored posts, metadata, and assets.
-5. Determine whether the export contains drafts, responses, bookmarks, profile data, or other private records that must be excluded.
-6. Inspect one Essay and one Fragment-like entry before generalizing parsing rules.
+1. Inspect the inherited worktree and preserve the uncommitted handoff docs and untracked homepage-review artifacts.
+2. Confirm the untouched Medium ZIP is present before beginning importer work.
+3. Record the ZIP filename, size, and SHA-256 hash without printing private contents broadly.
+4. Ensure the raw export and extraction directory are ignored by Git before unpacking.
+5. Inventory only the archive structure needed to identify authored posts, metadata, and assets.
+6. Determine whether the export contains drafts, responses, bookmarks, profile data, or other private records that must be excluded.
+7. Inspect one Essay and one Fragment-like entry before generalizing parsing rules.
 
 ## In scope
 
@@ -145,6 +150,6 @@ $env:ASTRO_TELEMETRY_DISABLED='1'
 npm.cmd run validate
 ```
 
-## Saturday stopping point
+## Session stopping point
 
 Stop after the export format, importer, manifest, documentation, representative fixtures, and clean validation are complete. Report supported and unsupported export records, output counts, warnings, unresolved metadata decisions, files changed, validation evidence, and the recommended first review batch. Do not bulk publish automatically.
