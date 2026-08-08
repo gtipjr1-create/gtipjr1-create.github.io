@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { collectionByType, validateWritingRepository } from "./writing-content.mjs";
 
 const outputRoot = new URL("../dist/", import.meta.url);
+const projectRoot = fileURLToPath(new URL("../", import.meta.url));
 const pilotPath = "writing/fragments/fragments-4-the-fire/index.html";
 
 async function requireOutput(relativePath) {
@@ -36,6 +39,31 @@ const [
 
 const pilotHtml = await requireOutput(pilotPath);
 const canonicalUrl = "https://garrytipler.com/writing/fragments/fragments-4-the-fire/";
+
+const writingEntries = await validateWritingRepository({ root: projectRoot });
+const draftEntries = writingEntries.filter((entry) => entry.status === "draft");
+const discoveryOutput = [
+  writingIndexHtml,
+  fragmentsIndexHtml,
+  essaysIndexHtml,
+  archiveHtml,
+  startHereHtml,
+  sitemapXml,
+  rssXml,
+].join("\n");
+for (const draft of draftEntries) {
+  const draftRoute = `writing/${collectionByType[draft.data.type]}/${draft.data.slug}/`;
+  await assert.rejects(
+    access(new URL(`${draftRoute}index.html`, outputRoot)),
+    (error) => error.code === "ENOENT",
+    `Draft "${draft.data.type}:${draft.data.slug}" must not generate a public route.`,
+  );
+  assert.doesNotMatch(
+    discoveryOutput,
+    new RegExp(`/${draftRoute.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`),
+    `Draft "${draft.data.type}:${draft.data.slug}" must not enter discovery output.`,
+  );
+}
 
 assert.match(
   homepageHtml,
