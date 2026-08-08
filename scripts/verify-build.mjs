@@ -42,6 +42,7 @@ const canonicalUrl = "https://garrytipler.com/writing/fragments/fragments-4-the-
 
 const writingEntries = await validateWritingRepository({ root: projectRoot });
 const draftEntries = writingEntries.filter((entry) => entry.status === "draft");
+const publishedEntries = writingEntries.filter((entry) => entry.status === "published");
 const discoveryOutput = [
   writingIndexHtml,
   fragmentsIndexHtml,
@@ -62,6 +63,25 @@ for (const draft of draftEntries) {
     discoveryOutput,
     new RegExp(`/${draftRoute.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`),
     `Draft "${draft.data.type}:${draft.data.slug}" must not enter discovery output.`,
+  );
+}
+
+for (const entry of publishedEntries) {
+  const route = `writing/${collectionByType[entry.data.type]}/${entry.data.slug}/`;
+  const canonical = `https://garrytipler.com/${route}`;
+  const articleHtml = await requireOutput(`${route}index.html`);
+  assert.match(
+    articleHtml,
+    new RegExp(`<link rel="canonical" href="${canonical}"`),
+    `Published writing "${entry.data.type}:${entry.data.slug}" must generate its canonical route.`,
+  );
+  assert.ok(
+    sitemapXml.includes(`<loc>${canonical}</loc>`),
+    `Sitemap must contain published writing "${entry.data.type}:${entry.data.slug}".`,
+  );
+  assert.ok(
+    rssXml.includes(`<link>${canonical}</link>`),
+    `RSS must contain published writing "${entry.data.type}:${entry.data.slug}".`,
   );
 }
 
@@ -98,8 +118,17 @@ assert.match(
   archiveHtml,
   /<link rel="canonical" href="https:\/\/garrytipler\.com\/writing\/archive\/"/,
 );
-assert.match(archiveHtml, /id="archive-2026"/);
-assert.match(archiveHtml, />1 piece</);
+const publishedCountsByYear = new Map();
+for (const entry of publishedEntries) {
+  const effectiveDate = entry.data.originalPublishedDate ?? entry.data.publishedDate;
+  assert.ok(effectiveDate, `Published writing "${entry.id}" must have an effective date.`);
+  const year = effectiveDate.slice(0, 4);
+  publishedCountsByYear.set(year, (publishedCountsByYear.get(year) ?? 0) + 1);
+}
+for (const [year, count] of publishedCountsByYear) {
+  assert.match(archiveHtml, new RegExp(`id="archive-${year}"`));
+  assert.match(archiveHtml, new RegExp(`>${count} ${count === 1 ? "piece" : "pieces"}<`));
+}
 assert.match(archiveHtml, /Fragments #4/);
 assert.match(
   startHereHtml,
