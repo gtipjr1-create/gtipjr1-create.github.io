@@ -113,6 +113,37 @@
     padding: 0 28px;
   }
 
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .site-mark {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+  }
+  .site-mark img { display: block; width: 42px; height: 42px; }
+  .site-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px 22px;
+    color: var(--ink-dim);
+  }
+  .site-links a { transition: color .2s ease; }
+  .site-links a:hover { color: var(--ink); }
+  .site-mark { transition: opacity .2s ease; }
+  .site-mark:hover { opacity: .82; }
+
   a { color: inherit; text-decoration: none; }
   ::selection { background: rgba(203, 163, 92, 0.28); color: var(--ink); }
   a:focus-visible, button:focus-visible, input:focus-visible {
@@ -137,7 +168,7 @@
 
   /* ---------- HERO ---------- */
   header.hero {
-    padding: clamp(90px, 16vh, 150px) 0 clamp(64px, 10vh, 96px);
+    padding: clamp(64px, 11vh, 104px) 0 clamp(56px, 8vh, 80px);
   }
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -180,6 +211,23 @@
     margin-bottom: 38px;
   }
   .proofline span { color: var(--accent); }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 22px;
+  }
+  .text-action {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    transition: color .2s ease;
+  }
+  .text-action:hover { color: var(--accent-hi); }
 
   /* ---------- CURRENT WORK ---------- */
   .current-work {
@@ -252,7 +300,7 @@
   }
 
   /* ---------- SECTIONS ---------- */
-  section { padding: clamp(48px, 8vh, 72px) 0; border-top: 1px solid var(--line-soft); }
+  section { padding: clamp(44px, 7vh, 68px) 0; border-top: 1px solid var(--line-soft); }
   .sec-head {
     display: flex;
     align-items: baseline;
@@ -332,6 +380,22 @@
     transform: translateY(-1px);
     transition: transform .2s ease, border-color .2s ease;
   }
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .guide-grid .book {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100%;
+    padding: 22px 20px;
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 255, 255, 0.008);
+  }
+  .guide-grid .book-title { font-size: 22px; }
+  .guide-grid .book-desc { flex: 1; }
   /* Price beside Gumroad links, mirrors .btn-price. */
   .link-price {
     font-family: 'Hanken Grotesk', sans-serif;
@@ -434,14 +498,6 @@
     color: #14110a;
     border-bottom-color: var(--accent);
   }
-  .app-featured {
-    margin: 6px 0 18px;
-    padding: 26px 24px 22px;
-    border: 1px solid var(--line);
-    border-left: 2px solid var(--accent);
-    border-radius: 3px;
-    background: var(--bg-card);
-  }
   .app-eyebrow {
     flex-basis: 100%;
     font-family: 'JetBrains Mono', monospace;
@@ -451,12 +507,54 @@
     text-transform: uppercase;
     color: var(--accent);
   }
-  .app-featured .app-desc { margin-top: 4px; }
-  .app-featured .app-project-link { margin-top: 4px; }
+  .proof-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
+    gap: 28px;
+    align-items: start;
+    margin: 6px 0 18px;
+    padding: 26px 24px;
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--accent);
+    border-radius: 3px;
+    background: var(--bg-card);
+  }
+  .proof-feature__copy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .proof-feature__copy .app-desc { margin-top: 4px; }
+  .proof-feature__copy .app-project-link { margin-top: 4px; }
+  .proof-visual img {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--line);
+    background: #050506;
+  }
+  .proof-visual figcaption {
+    margin-top: 10px;
+    color: var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+  }
 
   /* ---------- DISCIPLINE REBUILD ---------- */
-  .discipline-rebuild {
-    padding: clamp(4rem, 8vw, 7rem) 1.25rem;
+  .continue-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: 16px;
+  }
+  .discipline-rebuild,
+  .signal-panel {
+    padding: 28px 26px;
+    border: 1px solid var(--line);
     background: var(--bg-card);
     color: var(--ink);
   }
@@ -474,7 +572,7 @@
     max-width: 680px;
     margin: 0;
     font-family: 'Fraunces', serif;
-    font-size: clamp(2.2rem, 6vw, 4.7rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 500;
     line-height: 0.98;
     letter-spacing: -0.035em;
@@ -536,6 +634,12 @@
     font-size: 0.85rem;
     line-height: 1.5;
   }
+  .signal-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .signal-panel .signal-desc { margin-bottom: 22px; }
 
   /* ---------- SIGNAL ---------- */
   .signal-desc {
@@ -594,6 +698,7 @@
   /* Essay teaser list. */
   .essays {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
     margin-bottom: 30px;
   }
@@ -661,9 +766,20 @@
     color: var(--accent);
   }
   .essay:hover .essay-cta { color: var(--accent-hi); }
+  .essay:first-child {
+    grid-column: 1 / -1;
+    border-color: var(--line);
+    border-left-color: var(--accent);
+    background: var(--bg-card);
+  }
 
   /* ---------- PRINCIPLES ---------- */
-  .principles { list-style: none; }
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+    list-style: none;
+  }
   .principles li {
     font-family: 'Fraunces', serif;
     font-size: clamp(20px, 4vw, 25px);
@@ -685,41 +801,28 @@
     top: 18px;
   }
 
-  /* ---------- CONNECT ---------- */
-  .connect-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px 0;
-    flex-direction: column;
-  }
-  .connect-link {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line-soft);
-    transition: background-color .2s ease;
-  }
-  .connect-link:last-child { border-bottom: none; }
-  .connect-link:hover { background: rgba(255, 255, 255, 0.012); }
-  .connect-link:active { background: var(--accent-dim); }
-  .connect-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    width: 90px;
-    flex-shrink: 0;
-  }
-  .connect-handle { font-size: 16px; color: var(--ink); transition: color .2s ease; }
-  .connect-link:hover .connect-handle { color: var(--accent); }
-
   /* ---------- FOOTER ---------- */
   footer {
-    padding: 54px 0 70px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 38px 0 54px;
     border-top: 1px solid var(--line-soft);
   }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .footer-links a { transition: color .2s ease; }
+  .footer-links a:hover { color: var(--accent); }
   .footer-mark {
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -741,6 +844,8 @@
       transform: none;
       transition: none;
     }
+    .site-mark,
+    .site-links a,
     .btn,
     .btn .arrow,
     .book-link,
@@ -751,8 +856,7 @@
     .discipline-rebuild__cta,
     .essay,
     .essay-title,
-    .connect-link,
-    .connect-handle { transition: none; }
+    .footer-links a { transition: none; }
     .btn:hover,
     .btn:hover .arrow,
     .book-link:hover .arrow,
@@ -763,14 +867,26 @@
   @media (max-width: 540px) {
     body { font-size: 16px; }
     .wrap { padding: 0 22px; }
+    .site-nav { align-items: flex-start; padding-top: 20px; }
+    .site-links { max-width: 240px; gap: 8px 14px; }
+    header.hero { padding-top: 54px; }
     .current-work { padding: 18px; }
     .book.flagship { padding: 24px 20px; }
-    .book.flagship .btn { max-width: 100%; flex-wrap: wrap; }
-    .book.flagship .btn .btn-price { flex-basis: 100%; margin-left: 0; }
-    .app-featured { padding: 22px 18px; }
+    .book.flagship .btn { width: 100%; justify-content: center; flex-wrap: wrap; }
+    .book.flagship .btn .btn-price { flex-basis: 100%; margin-left: 0; text-align: center; }
+    .guide-grid,
+    .proof-feature,
+    .continue-grid,
+    .essays,
+    .principles { grid-template-columns: 1fr; }
+    .proof-feature { padding: 22px 18px; }
+    .proof-visual { max-width: 240px; }
+    .discipline-rebuild,
+    .signal-panel { padding: 24px 20px; }
     .essay { padding: 22px 18px; }
-    .connect-label { width: 76px; }
+    .essay:first-child { grid-column: auto; }
     .receipts { gap: 32px; }
+    footer { align-items: flex-start; flex-direction: column; }
   }
 </style>
 </head>
@@ -779,6 +895,17 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <div class="wrap">
+
+  <nav class="site-nav" aria-label="Primary">
+    <a class="site-mark" href="/" aria-label="Garry Tipler home">
+      <img src="/favicon.svg" alt="" width="42" height="42" />
+    </a>
+    <div class="site-links">
+      <a href="/writing/">Writing</a>
+      <a href="#proof">Projects</a>
+      <a href="#field-guide">Free guide</a>
+    </div>
+  </nav>
 
   <!-- HERO -->
   <header class="hero">
@@ -794,10 +921,12 @@
       <p class="proofline">
         Books <span>·</span> field guides <span>·</span> tools <span>·</span> proof of practice
       </p>
-     <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GX379N1L">
-        Start with I Am the Proof <span class="arrow">→</span>
-      </a>
-      <span class="btn-price">$4.99 · free on Kindle Unlimited</span>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/writing/">
+          Explore the writing <span class="arrow">→</span>
+        </a>
+        <a class="text-action" href="#proof">See what I’m building →</a>
+      </div>
     </div>
     <aside class="current-work reveal" style="--d:340ms">
       <p class="current-work-label">Currently</p>
@@ -826,30 +955,32 @@
       </a>
     </div>
 
-    <div class="book reveal">
-      <div class="book-title">The Discipline Training Field Guide</div>
-      <p class="book-desc">The core systems for daily discipline that survives bad days.</p>
-      <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-field-guide">
-        Get it on Gumroad <span class="arrow">→</span>
-        <span class="link-price">$7</span>
-      </a>
-    </div>
+    <div class="guide-grid">
+      <div class="book reveal">
+        <div class="book-title">The Discipline Training Field Guide</div>
+        <p class="book-desc">The core systems for daily discipline that survives bad days.</p>
+        <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-field-guide">
+          Get it on Gumroad <span class="arrow">→</span>
+          <span class="link-price">$7</span>
+        </a>
+      </div>
 
-    <div class="book reveal">
-      <div class="book-title">Discipline Recovery Field Guide</div>
-      <p class="book-desc">
-        What to do when discipline slips — the system for getting back on track
-        without starting over.
-      </p>
-      <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
-        Get it on Gumroad <span class="arrow">→</span>
-        <span class="link-price">$7</span>
-      </a>
+      <div class="book reveal">
+        <div class="book-title">Discipline Recovery Field Guide</div>
+        <p class="book-desc">
+          What to do when discipline slips — the system for getting back on track
+          without starting over.
+        </p>
+        <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
+          Get it on Gumroad <span class="arrow">→</span>
+          <span class="link-price">$7</span>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- 002 — PROOF OF PRACTICE -->
-  <section>
+  <section id="proof">
     <div class="sec-head reveal">
       <span class="sec-num" aria-hidden="true">002</span>
       <h2 class="sec-title">Proof of Practice</h2>
@@ -877,14 +1008,26 @@
       </div>
     </div>
 
-    <div class="app app-featured reveal">
-      <span class="app-eyebrow">Flagship build</span>
-      <span class="app-name">SelfTrainer</span>
-      <span class="app-status">In progress</span>
-      <span class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</span>
-      <a class="book-link app-project-link" href="/projects/selftrainer/">
-        View the build <span class="arrow" aria-hidden="true">→</span>
-      </a>
+    <div class="proof-feature reveal">
+      <div class="proof-feature__copy">
+        <span class="app-eyebrow">Flagship build</span>
+        <span class="app-name">SelfTrainer</span>
+        <span class="app-status">In progress</span>
+        <span class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</span>
+        <a class="book-link app-project-link" href="/projects/selftrainer/">
+          View the build <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <figure class="proof-visual">
+        <img
+          src="/assets/selftrainer/selftrainer-home-up-next-pwa.webp"
+          alt="SelfTrainer home screen showing the next session in the selected training rotation."
+          loading="lazy"
+          width="944"
+          height="2048"
+        />
+        <figcaption>Home / Up Next — the planned work stays close to the next honest action.</figcaption>
+      </figure>
     </div>
 
     <div class="app reveal">
@@ -897,70 +1040,10 @@
     </div>
   </section>
 
-  <!-- 7-Day Discipline Rebuild lead magnet -->
-  <section class="discipline-rebuild" aria-labelledby="discipline-rebuild-title">
-    <div class="discipline-rebuild__inner reveal">
-      <p class="discipline-rebuild__eyebrow">FREE FIELD GUIDE</p>
-      <h2 id="discipline-rebuild-title">Rebuild Your Discipline in Seven Days</h2>
-      <p class="discipline-rebuild__copy">
-        You do not need another dramatic restart. You need a clear way to return.
-        <strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol
-        for restoring structure, rebuilding self-trust, and returning to action.
-      </p>
-
-      <ul class="discipline-rebuild__contents">
-        <li>A focused seven-day rebuilding protocol</li>
-        <li>Simple daily actions and reflection prompts</li>
-        <li>A printable discipline rebuild scorecard</li>
-        <li>A sustainable plan for the next 14 days</li>
-      </ul>
-
-      <a
-        class="discipline-rebuild__cta"
-        href="/assets/downloads/the-7-day-discipline-rebuild.pdf"
-        download
-      >
-        Download the Free Field Guide
-      </a>
-
-      <p class="discipline-rebuild__note">
-        Free PDF. No dramatic overhaul - just seven deliberate days of returning to what matters.
-      </p>
-    </div>
-  </section>
-
-  <!-- 003 — THE SIGNAL -->
-  <section id="signal">
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">003</span>
-      <h2 class="sec-title">The Signal</h2>
-    </div>
-    <p class="signal-desc reveal">
-      Roughly one email a month when there’s something worth running — a system,
-      a fix, or a field note. Tested on me before it reaches you. Unsubscribe anytime.
-    </p>
-    <form class="signal-form reveal" id="signal-form" novalidate>
-      <label class="sr-only" for="signal-email">Email address</label>
-      <input
-        type="email"
-        id="signal-email"
-        name="email_address"
-        placeholder="you@domain.com"
-        autocomplete="email"
-        required
-      />
-      <button type="submit" class="btn btn-primary" id="signal-submit">
-        Subscribe <span class="arrow">→</span>
-      </button>
-    </form>
-    <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
-    <p class="signal-fineprint reveal">No spam. No sequences you didn't ask for. Leave anytime.</p>
-  </section>
-
-  <!-- 004 — WRITING -->
+  <!-- 003 — WRITING -->
   <section>
     <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">004</span>
+      <span class="sec-num" aria-hidden="true">003</span>
       <h2 class="sec-title">Writing</h2>
     </div>
     <p class="writing-desc reveal">
@@ -969,16 +1052,10 @@
     </p>
 
     <div class="essays">
-      <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/there-is-a-point-where-effort-stops-feeling-like-effort-9a7ae823bdf4">
-        <span class="essay-meta"><span class="essay-theme">Identity</span><span aria-hidden="true">·</span><span>4 min read</span></span>
-        <span class="essay-title">There is a point where effort stops feeling like effort.</span>
-        <span class="essay-desc">The moment discipline stops being forced and starts carrying itself — and what it took to get there.</span>
-        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/from-thought-to-form-67d0dec5c6f7">
-        <span class="essay-meta"><span class="essay-theme">Creation</span><span aria-hidden="true">·</span><span>5 min read</span></span>
-        <span class="essay-title">From Thought to Form</span>
-        <span class="essay-desc">On publishing the first book: how months of lived practice became a finished thing.</span>
+      <a class="essay reveal" href="/writing/essays/discipline-should-not-cost-me-my-heart/">
+        <span class="essay-meta"><span class="essay-theme">Discipline</span><span aria-hidden="true">·</span><span>8 min read</span></span>
+        <span class="essay-title">Discipline Should Not Cost Me My Heart</span>
+        <span class="essay-desc">Staying focused without becoming cold.</span>
         <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
       </a>
       <a class="essay reveal" href="/writing/fragments/fragments-4-the-fire/">
@@ -987,11 +1064,81 @@
         <span class="essay-desc">A field note on setbacks: reading a forced slowdown as instruction, not interruption.</span>
         <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
       </a>
+      <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/from-thought-to-form-67d0dec5c6f7">
+        <span class="essay-meta"><span class="essay-theme">Creation</span><span aria-hidden="true">·</span><span>5 min read</span></span>
+        <span class="essay-title">From Thought to Form</span>
+        <span class="essay-desc">On publishing the first book: how months of lived practice became a finished thing.</span>
+        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
+      </a>
     </div>
 
     <a class="book-link reveal" href="/writing/">
       Explore the writing library <span class="arrow">→</span>
     </a>
+  </section>
+
+  <!-- 004 — CONTINUE -->
+  <section id="field-guide">
+    <div class="sec-head reveal">
+      <span class="sec-num" aria-hidden="true">004</span>
+      <h2 class="sec-title">Keep going</h2>
+    </div>
+    <div class="continue-grid">
+      <article class="discipline-rebuild reveal" aria-labelledby="discipline-rebuild-title">
+        <div class="discipline-rebuild__inner">
+          <p class="discipline-rebuild__eyebrow">Free field guide</p>
+          <h2 id="discipline-rebuild-title">Rebuild Your Discipline in Seven Days</h2>
+          <p class="discipline-rebuild__copy">
+            You do not need another dramatic restart. You need a clear way to return.
+            <strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol
+            for restoring structure, rebuilding self-trust, and returning to action.
+          </p>
+
+          <ul class="discipline-rebuild__contents">
+            <li>A focused seven-day rebuilding protocol</li>
+            <li>Simple daily actions and reflection prompts</li>
+            <li>A printable discipline rebuild scorecard</li>
+            <li>A sustainable plan for the next 14 days</li>
+          </ul>
+
+          <a
+            class="discipline-rebuild__cta"
+            href="/assets/downloads/the-7-day-discipline-rebuild.pdf"
+            download
+          >
+            Download the Free Field Guide
+          </a>
+
+          <p class="discipline-rebuild__note">
+            Free PDF. No dramatic overhaul - just seven deliberate days of returning to what matters.
+          </p>
+        </div>
+      </article>
+
+      <aside class="signal-panel reveal" id="signal" aria-labelledby="signal-title">
+        <p class="discipline-rebuild__eyebrow">The Signal</p>
+        <h2 class="book-title" id="signal-title">One useful email when there is something worth running.</h2>
+        <p class="signal-desc">
+          Roughly once a month: a system, a fix, or a field note. Tested on me before it reaches you.
+        </p>
+        <form class="signal-form" id="signal-form" novalidate>
+          <label class="sr-only" for="signal-email">Email address</label>
+          <input
+            type="email"
+            id="signal-email"
+            name="email_address"
+            placeholder="you@domain.com"
+            autocomplete="email"
+            required
+          />
+          <button type="submit" class="btn btn-primary" id="signal-submit">
+            Subscribe <span class="arrow">→</span>
+          </button>
+        </form>
+        <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
+        <p class="signal-fineprint">No spam. Leave anytime.</p>
+      </aside>
+    </div>
   </section>
 
   <!-- 005 — PRINCIPLES -->
@@ -1008,31 +1155,15 @@
     </ul>
   </section>
 
-  <!-- 006 — CONNECT -->
-  <section>
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">006</span>
-      <h2 class="sec-title">Connect</h2>
-    </div>
-    <div class="connect-row">
-      <a class="connect-link reveal" href="https://x.com/garry_tipler">
-        <span class="connect-label">X</span>
-        <span class="connect-handle">@garry_tipler</span>
-      </a>
-      <a class="connect-link reveal" href="https://garrytip.gumroad.com">
-        <span class="connect-label">Gumroad</span>
-        <span class="connect-handle">All field guides</span>
-      </a>
-      <a class="connect-link reveal" href="https://medium.com/@Garry_Tipler">
-        <span class="connect-label">Medium</span>
-        <span class="connect-handle">@Garry_Tipler</span>
-      </a>
-    </div>
-  </section>
   </main>
 
   <footer>
     <div class="footer-mark reveal">© 2026 Garry Tipler · The proof is the work.</div>
+    <nav class="footer-links reveal" aria-label="Connect">
+      <a href="https://x.com/garry_tipler">X</a>
+      <a href="https://garrytip.gumroad.com">Gumroad</a>
+      <a href="https://medium.com/@Garry_Tipler">Medium</a>
+    </nav>
   </footer>
 
 </div>
