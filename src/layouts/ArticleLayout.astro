@@ -34,6 +34,9 @@ if (!Astro.site) {
 }
 
 const canonicalUrl = new URL(canonicalPath, Astro.site).toString();
+const heroImageUrl = data.heroImage
+  ? new URL(data.heroImage.src, Astro.site).toString()
+  : undefined;
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -45,6 +48,7 @@ const jsonLd = {
   dateModified: modifiedDate,
   articleSection: data.category,
   keywords: data.tags,
+  ...(heroImageUrl ? { image: heroImageUrl } : {}),
   author: {
     "@type": "Person",
     name: "Garry Tipler",
@@ -66,6 +70,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
   ogType="article"
   publishedDate={effectiveDateString}
   modifiedDate={modifiedDate}
+  socialImage={data.heroImage ? { src: data.heroImage.src, alt: data.heroImage.alt } : undefined}
 >
   <script
     slot="head"
@@ -93,6 +98,25 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 
     <main id="main-content" tabindex="-1">
       <article class="article-prose">
+        {
+          data.heroImage && (
+            <figure class="article-hero">
+              <img
+                src={data.heroImage.src}
+                alt={data.heroImage.alt}
+                decoding="async"
+                fetchpriority="high"
+              />
+              {(data.heroImage.caption || data.heroImage.credit) && (
+                <figcaption>
+                  {data.heroImage.caption}
+                  {data.heroImage.caption && data.heroImage.credit && " "}
+                  {data.heroImage.credit && <span>Credit: {data.heroImage.credit}</span>}
+                </figcaption>
+              )}
+            </figure>
+          )
+        }
         <slot />
       </article>
 

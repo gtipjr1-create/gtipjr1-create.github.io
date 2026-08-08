@@ -9,6 +9,10 @@ interface Props {
   ogType?: "website" | "article";
   publishedDate?: string;
   modifiedDate?: string;
+  socialImage?: {
+    src: string;
+    alt: string;
+  };
 }
 
 const {
@@ -18,6 +22,7 @@ const {
   ogType = "website",
   publishedDate,
   modifiedDate,
+  socialImage,
 } = Astro.props;
 
 if (!Astro.site) {
@@ -25,7 +30,24 @@ if (!Astro.site) {
 }
 
 const canonicalUrl = new URL(canonicalPath, Astro.site).toString();
-const socialImageUrl = new URL("/assets/social/garry-tipler-social-card.png", Astro.site).toString();
+const defaultSocialImage = {
+  src: "/assets/social/garry-tipler-social-card.png",
+  alt: "Black-and-gold card reading Garry Tipler and Systems for rebuilding a life, with the GT mark.",
+};
+const selectedSocialImage = socialImage ?? defaultSocialImage;
+const socialImageUrl = new URL(selectedSocialImage.src, Astro.site).toString();
+const socialImageTypes = {
+  ".avif": "image/avif",
+  ".gif": "image/gif",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".webp": "image/webp",
+};
+const socialImageExtension = new URL(socialImageUrl).pathname.match(/\.[a-z0-9]+$/i)?.[0].toLowerCase();
+const socialImageType = socialImageExtension
+  ? socialImageTypes[socialImageExtension as keyof typeof socialImageTypes]
+  : undefined;
 const documentTitle = `${title} | Garry Tipler`;
 ---
 
@@ -49,10 +71,10 @@ const documentTitle = `${title} | Garry Tipler`;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImageUrl} />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Black-and-gold card reading Garry Tipler and Systems for rebuilding a life, with the GT mark." />
+    {socialImageType && <meta property="og:image:type" content={socialImageType} />}
+    {!socialImage && <meta property="og:image:width" content="1200" />}
+    {!socialImage && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:alt" content={selectedSocialImage.alt} />
     {publishedDate && <meta property="article:published_time" content={publishedDate} />}
     {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
 
@@ -61,7 +83,7 @@ const documentTitle = `${title} | Garry Tipler`;
     <meta name="twitter:title" content={documentTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="twitter:image:alt" content="Black-and-gold card reading Garry Tipler and Systems for rebuilding a life, with the GT mark." />
+    <meta name="twitter:image:alt" content={selectedSocialImage.alt} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

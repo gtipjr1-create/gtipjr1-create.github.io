@@ -83,6 +83,32 @@ for (const entry of publishedEntries) {
     rssXml.includes(`<link>${canonical}</link>`),
     `RSS must contain published writing "${entry.data.type}:${entry.data.slug}".`,
   );
+
+  if (entry.data.heroImage) {
+    const heroImageUrl = `https://garrytipler.com${entry.data.heroImage.src}`;
+    assert.ok(
+      articleHtml.includes(`<meta property="og:image" content="${heroImageUrl}">`),
+      `Published writing "${entry.data.type}:${entry.data.slug}" must use its hero for Open Graph.`,
+    );
+    assert.ok(
+      articleHtml.includes(`<meta name="twitter:image" content="${heroImageUrl}">`),
+      `Published writing "${entry.data.type}:${entry.data.slug}" must use its hero for Twitter.`,
+    );
+    assert.ok(
+      articleHtml.includes(`<figure class="article-hero"><img src="${entry.data.heroImage.src}"`),
+      `Published writing "${entry.data.type}:${entry.data.slug}" must render its hero.`,
+    );
+
+    const articleJsonLdMatch = articleHtml.match(
+      /<script[^>]*id="article-jsonld"[^>]*>([\s\S]*?)<\/script>/,
+    );
+    assert.ok(articleJsonLdMatch, `Published writing "${entry.id}" must include Article JSON-LD.`);
+    assert.equal(
+      JSON.parse(articleJsonLdMatch[1]).image,
+      heroImageUrl,
+      `Published writing "${entry.data.type}:${entry.data.slug}" must expose its hero in JSON-LD.`,
+    );
+  }
 }
 
 assert.match(

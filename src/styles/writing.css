@@ -451,6 +451,27 @@ main:focus {
   margin: 2.4em auto;
 }
 
+.article-prose .article-hero {
+  margin: 2.4em 0;
+}
+
+.article-prose .article-hero:first-child {
+  margin-top: 2.4em;
+}
+
+.article-prose .article-hero img {
+  margin: 0;
+}
+
+.article-hero figcaption {
+  margin-top: 12px;
+  color: var(--ink-faint);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
 .medium-attribution {
   margin-top: clamp(64px, 10vw, 96px);
   padding: 22px 0;

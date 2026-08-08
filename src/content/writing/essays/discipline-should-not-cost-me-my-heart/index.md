@@ -16,9 +16,10 @@ mediumUrl: "https://medium.com/tenacious-individual-performance/discipline-shoul
 status: "published"
 related: []
 connections: []
+heroImage:
+  src: "/assets/writing/essays/discipline-should-not-cost-me-my-heart/hero.webp"
+  alt: "Warm sunlight streams through a window into a dark room with a vase and low table."
 ---
-
-![Warm sunlight streams through a window into a dark room with a vase and low table.](/assets/writing/essays/discipline-should-not-cost-me-my-heart/hero.webp)
 
 Discipline has given me a lot.
 
