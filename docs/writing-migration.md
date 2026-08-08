@@ -1,6 +1,6 @@
 # Writing migration workflow
 
-This workflow turns deliberately supplied Markdown into a reviewable repository draft. It does not scrape Medium, rewrite prose, infer metadata, publish content, or write into `src/content`.
+The current workflow turns deliberately supplied Markdown into a reviewable repository draft. It does not scrape Medium, rewrite prose, infer metadata, publish content, or write into `src/content`.
 
 ## Supported input and output
 
@@ -11,7 +11,24 @@ Use two explicit input files:
 
 The default output is `.migration-output/<collection>/<slug>/index.md`. That directory is ignored by Git and is outside Astro's content collection. Generation always sets `status: "draft"`, omits `publishedDate`, and refuses to overwrite either an existing review draft or an existing repository slug.
 
-HTML, Medium ZIP exports, live URLs, and bulk directories are not supported yet because no representative source exists in this repository. Convert or deliberately copy one verified source to Markdown before using this command. Do not use a live scraper as publication evidence.
+This path was proven with the first real Essay migration, “Discipline Should Not Cost Me My Heart.” The review draft preserved the supplied prose, exact historical date evidence, Medium URL, tags, and lead image before manual publication.
+
+HTML, Medium ZIP exports, live URLs, and bulk directories are not supported by the current command. A Medium account-data export was requested on August 7, 2026 and is expected within 24 hours. Session 7 will inspect that untouched ZIP before defining or implementing batch parsing rules. Do not use a live scraper as publication evidence.
+
+## Planned Medium export path
+
+The export ZIP is private source input, not a repository artifact. When it arrives:
+
+- Keep the original ZIP untouched until its filename, size, and SHA-256 hash are recorded.
+- Do not commit the ZIP, extracted account data, or unrelated private records.
+- Inspect the real archive structure before adding format assumptions.
+- Distinguish authored published stories from drafts, responses, bookmarks, profile data, and other account records.
+- Normalize supported stories into the existing Markdown-plus-metadata contract rather than creating a second publication path.
+- Generate a review manifest and draft packages under `.migration-output`; never write batch output directly into `src/content`.
+- Report missing dates, assets, URLs, or editorial metadata explicitly instead of guessing.
+- Detect already migrated pieces and refuse to overwrite their immutable identifiers.
+
+The planned importer will reduce mechanical extraction for the full archive, but publication will still happen in small explicitly approved batches after prose, metadata, assets, and presentation are reviewed.
 
 ## Metadata input contract
 

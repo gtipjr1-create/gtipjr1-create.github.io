@@ -1,8 +1,8 @@
 # GarryTipler.com Writing Library — Project Record
 
-**Record date:** August 6, 2026
+**Record date:** August 7, 2026
 **Production branch:** `main`
-**Production head:** `d54ec13` — `Add Session 4 archive and discovery`
+**Production head:** `acceb91` — `Publish Discipline Should Not Cost Me My Heart`
 **Canonical domain:** `https://garrytipler.com/`
 
 ## Purpose
@@ -44,10 +44,11 @@ src/content/writing/
   letters/
 ```
 
-The current published content inventory contains one real piece:
+The current published content inventory contains two real pieces:
 
 ```text
 src/content/writing/fragments/fragments-4-the-fire/index.md
+src/content/writing/essays/discipline-should-not-cost-me-my-heart/index.md
 ```
 
 ### Public route structure
@@ -237,6 +238,47 @@ Temporary fixture validation confirmed:
 
 All temporary fixtures were removed before the production commit.
 
+### Session 5 — Migration tooling
+
+**Commit:** `ce3d295` — `Add Session 5 migration tooling`
+
+Implemented:
+
+- Root repository working instructions in `AGENTS.md`.
+- Canonical Fragment and Essay templates.
+- A documented Markdown-plus-JSON migration contract.
+- A deterministic review-draft generator that always emits drafts outside `src/content`.
+- Required private source-evidence notes and exact-date evidence enforcement.
+- Collision refusal for existing repository identifiers and review outputs.
+- Repository validation for metadata, exact dates, file locations, duplicate identifiers, Fragment numbers, Start Here order, relationships, and missing assets.
+- Disposable fixture tests for deterministic prose preservation and failure behavior.
+- Generated-output verification that drafts do not create routes or discovery entries.
+- Shared article asset convention under `assets/writing/<collection>/<slug>/`.
+
+The supported input remained deliberately narrow because no representative Medium export was available: explicit Markdown prose plus JSON metadata. HTML, ZIP, live scraping, and bulk publication were intentionally deferred.
+
+Validation completed with disposable fixtures, a temporary in-collection draft exclusion build, clean final validation, and `git diff --check`.
+
+### Session 6 — First controlled migration
+
+**Commit:** `acceb91` — `Publish Discipline Should Not Cost Me My Heart`
+
+Completed the first real Essay migration from user-supplied Medium source material:
+
+- Preserved the supplied prose without editorial rewriting.
+- Removed only identified Medium interface artifacts.
+- Recorded the verified original date `2026-07-27` from the supplied byline and screenshot.
+- Published the GarryTipler.com copy on `2026-08-07`.
+- Used the explicit immutable slug `discipline-should-not-cost-me-my-heart`.
+- Preserved the Medium URL as attribution rather than canonical destination.
+- Stored the verified lead image under the article-specific writing asset path.
+- Added descriptive alt text and rendered the lead image as the first Markdown element.
+- Added the Essay to Writing, Essays, Archive, sitemap, and RSS while intentionally leaving it out of Start Here.
+- Replaced the archive verifier's hard-coded one-piece assumption with metadata-derived yearly counts.
+- Added permanent route, canonical, sitemap, and RSS checks for every published writing entry.
+
+The local build produced seven pages. GitHub Pages deployment completed successfully, and the public Essay route and image both returned HTTP 200 with correct canonical metadata and Medium attribution.
+
 ## Current discovery behavior
 
 ### Writing landing page
@@ -298,6 +340,7 @@ npm.cmd run validate
 This runs:
 
 ```text
+node scripts/validate-writing.mjs
 astro build
 node scripts/verify-build.mjs
 ```
@@ -313,6 +356,9 @@ The verifier protects:
 - Archive.
 - Start Here.
 - Pilot article and canonical metadata.
+- Every published writing route, canonical URL, sitemap entry, and RSS entry.
+- Draft route and discovery exclusion.
+- Metadata-derived archive year counts.
 - Sitemap.
 - RSS.
 - robots.txt.
@@ -346,7 +392,7 @@ npm.cmd run validate
 
 ## Current production routes
 
-Verified live after Session 4:
+Verified live after Session 6:
 
 - `https://garrytipler.com/`
 - `https://garrytipler.com/projects/selftrainer/`
@@ -357,14 +403,16 @@ Verified live after Session 4:
 - `https://garrytipler.com/writing/archive/`
 - `https://garrytipler.com/writing/start-here/`
 - `https://garrytipler.com/writing/fragments/fragments-4-the-fire/`
+- `https://garrytipler.com/writing/essays/discipline-should-not-cost-me-my-heart/`
 - `https://garrytipler.com/sitemap.xml`
 - `https://garrytipler.com/rss.xml`
 - `https://garrytipler.com/robots.txt`
 
 ## Intentionally deferred
 
-- Bulk writing migration.
-- Session 5 migration tooling.
+- Medium export inspection until the requested account-data ZIP arrives.
+- Batch-to-review import tooling until the real export format is inspected.
+- Bulk writing publication.
 - Full-text search.
 - Tag-filter UI until content volume justifies it.
 - Automatic related-work inference.
@@ -374,17 +422,12 @@ Verified live after Session 4:
 
 ## Next phase
 
-Session 5 will build repeatable migration tooling, templates, checklists, and validation support. It will stop before bulk migration unless that work is explicitly authorized.
+Session 7 will inspect the untouched Medium account export and extend the migration toolkit with a safe batch-to-review importer and manifest. It will stop before bulk publication.
 
-See `NEXT_SESSION.md` for the Friday handoff and acceptance criteria.
+See `NEXT_SESSION.md` for the Saturday handoff and acceptance criteria.
 
 ## Repository status at this record
 
-The application worktree was clean after Session 4. Two pre-existing untracked editor workspace files remain intentionally untouched:
+The application worktree was clean after Session 6 at production commit `acceb91`. Local review artifacts under `.migration-output/` remain ignored and do not affect Git status or public output.
 
-```text
-GarryTipler-Site.code-workspace
-projects/selftrainer/GarryTipler-Site.code-workspace
-```
-
-`NEXT_SESSION.md` and `SESSION.md` are documentation created after the Session 4 production commit and are not committed unless separately authorized.
+The Medium account-data export was requested on August 7, 2026 and is expected by email within 24 hours. The raw ZIP must remain private and untracked when it arrives.

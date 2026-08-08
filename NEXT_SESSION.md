@@ -1,174 +1,150 @@
-# Next Session — Session 5: Migration Tooling
+# Next Session — Session 7: Medium Export Importer
 
-**Planned continuation:** Friday, August 7, 2026
-**Current production head:** `d54ec13` — `Add Session 4 archive and discovery`
-**Scope:** Migration tooling only. Do not begin bulk migration automatically.
+**Planned continuation:** Saturday, August 8, 2026
+
+**Current production head:** `acceb91` — `Publish Discipline Should Not Cost Me My Heart`
+
+**Scope:** Inspect the real Medium export and build a safe batch-to-review workflow. Do not bulk publish.
 
 ## Current position
 
-Sessions 2–4 are approved, committed, deployed, and verified on GarryTipler.com.
+Sessions 5–6 are complete, committed, deployed, and verified on GarryTipler.com.
 
 The repository now has:
 
-- Astro 7 static output and GitHub Pages workflow deployment from generated `dist/`.
-- A validated Markdown Writing content collection.
-- Writing, Fragments, Essays, Archive, and Start Here pages.
-- Reusable article/index layouts.
-- Previous/next navigation.
-- Explicit related-writing and project/book/guide connection support.
-- Self-canonical SEO metadata and Article JSON-LD.
-- Generated sitemap, RSS, and robots.txt.
-- One real published pilot: Fragment #4 — The Fire.
+- A deterministic Markdown-plus-JSON draft generator.
+- Permanent writing validation for metadata, dates, collisions, relationships, draft exclusion, and assets.
+- Canonical Fragment and Essay templates.
+- A documented manual-review and publication workflow.
+- Dynamic generated-output checks for every published writing route, sitemap entry, RSS entry, and archive-year count.
+- Two verified live pieces:
+  - Fragment #4 — The Fire.
+  - Discipline Should Not Cost Me My Heart.
+- One completed real migration proving exact prose preservation, historical-date evidence, image handling, publication, deployment, and live verification.
 
-Read `SESSION.md` for the full implementation record before changing code.
+The user requested a Medium account-data export on Friday, August 7. Medium indicated delivery by email within 24 hours. Use the untouched ZIP as the authoritative format sample when it arrives.
 
-## Session 5 objective
+Read `AGENTS.md`, `SESSION.md`, and `docs/writing-migration.md` before changing code.
 
-Create a repeatable, safe workflow for turning verified source material—especially Medium exports or deliberately copied source—into repository-ready Markdown without weakening the permanent content contract.
+## Session 7 objective
 
-The tooling should reduce mechanical work while keeping editorial and historical decisions explicit. It must not invent dates, rewrite prose, auto-create relationships, or publish content without review.
+Extend the migration toolkit so one untouched Medium export can produce a deterministic review queue for many authored stories without manual article-by-article copying.
+
+The importer should remove mechanical extraction work while keeping every publication decision explicit. It must generate review drafts and a manifest, not public content.
 
 ## Locked contracts
 
-- The repository remains the source of truth.
+- Treat the export as private input. Never commit the ZIP or unrelated account data.
+- Inspect the actual archive before designing or changing the importer.
+- Use exported source material instead of live scraping.
+- The repository remains the source of truth after review and publication.
 - Markdown remains the default authoring format.
 - Existing Medium posts remain online.
 - GarryTipler.com remains self-canonical.
-- Slugs are explicit, immutable publication identifiers.
-- `originalPublishedDate` is recorded only when an exact date is verified.
-- If an exact historical date cannot be verified, leave `originalPublishedDate` unset and document the gap.
-- Never convert relative dates such as “17 hours ago” into historical truth.
-- `publishedDate` means the date the GarryTipler.com copy goes live.
-- Migrated prose must remain exact except for formatting required by Markdown.
-- Drafts must remain absent from routes, indexes, archive, Start Here, sitemap, RSS, and discovery.
-- Related-writing identifiers remain explicit and authoritative.
-- Do not infer relationships from overlapping tags.
-- Do not add a CMS, database, MDX, React runtime, or full-text search.
-- Do not redesign existing pages.
-- Do not begin Session 6 or unrelated work.
+- Slugs are explicit and immutable after publication.
+- Never infer an exact historical date from a relative label.
+- Never rewrite or “improve” exported prose.
+- Never infer related writing from tags or text similarity.
+- Every generated item must remain `status: "draft"` with no `publishedDate`.
+- Existing repository slugs must fail visibly or be reported as already migrated; never overwrite them.
+- Do not add a CMS, database, MDX, React runtime, live scraper, search UI, or redesign.
 - Do not commit or push unless explicitly instructed.
+
+## First actions
+
+1. Confirm the worktree is clean and the ZIP is present.
+2. Record the ZIP filename, size, and SHA-256 hash without printing private contents broadly.
+3. Ensure the raw export and extraction directory are ignored by Git before unpacking.
+4. Inventory only the archive structure needed to identify authored posts, metadata, and assets.
+5. Determine whether the export contains drafts, responses, bookmarks, profile data, or other private records that must be excluded.
+6. Inspect one Essay and one Fragment-like entry before generalizing parsing rules.
 
 ## In scope
 
-Implement the smallest durable migration toolkit that may include:
+### Export inspection
 
-1. **A canonical writing template**
-   - Valid frontmatter fields.
-   - Clear required/optional annotations.
-   - Separate examples for Fragment and Essay where useful.
-   - No placeholder value that could be mistaken for verified metadata.
+- Identify story files, asset directories, filenames, encodings, and internal references.
+- Determine which fields reliably provide title, subtitle, canonical Medium URL, exact publication date, tags, and publication status.
+- Establish how authored stories differ from drafts, responses, and non-story account data.
+- Document any missing or ambiguous fields rather than guessing.
 
-2. **A migration checklist**
-   - Source verification.
-   - Exact-title and prose-preservation checks.
-   - Historical-date evidence.
-   - Slug selection and immutability warning.
-   - Image and attribution checks.
-   - Local build, route, metadata, and visual review.
+### Safe batch importer
 
-3. **A validation command or script**
-   - Required metadata.
-   - Exact dates.
-   - Duplicate `type + slug`.
-   - Duplicate Fragment number.
-   - Duplicate Start Here order.
-   - Missing/self/draft related-writing references.
-   - Draft exclusion.
-   - Clear, actionable failure output.
+- Accept one explicit ZIP or extracted-export path.
+- Default to dry-run or review-only behavior.
+- Normalize supported stories into the existing Markdown-plus-metadata contract.
+- Reuse the current single-item generator where practical.
+- Preserve prose and structural elements deterministically.
+- Copy verified local export images into article-specific review asset directories.
+- Produce `.migration-output/<collection>/<slug>/` review packages.
+- Refuse output collisions and existing repository identifiers.
 
-4. **A repeatable conversion path**
-   - Prefer a Medium export or user-supplied source file over live scraping.
-   - Accept copied HTML/Markdown only through an explicit input path.
-   - Normalize structural formatting without rewriting prose.
-   - Produce a reviewable Markdown draft rather than publishing directly.
-   - Use dry-run behavior where practical.
+### Review manifest
 
-5. **Asset conventions**
-   - Define where migrated article images live.
-   - Preserve alt text, captions, and credits when verified.
-   - Detect missing referenced assets before publication.
+Produce a concise machine-readable and human-readable manifest showing, for every candidate:
 
-6. **Documentation**
-   - Exact commands.
-   - Input and output expectations.
-   - Manual-review boundaries.
-   - Failure recovery.
+- Source filename or export identifier.
+- Exact title.
+- Proposed type and slug.
+- Verified original date or an explicit missing-date warning.
+- Medium URL when present.
+- Asset count and unresolved asset references.
+- Metadata still requiring editorial approval.
+- Import status: ready for review, skipped, already migrated, or blocked.
+
+### Validation
+
+- Exercise the importer with disposable copies of representative export entries.
+- Prove deterministic output and source-prose preservation.
+- Prove existing published slugs are not overwritten.
+- Prove export drafts and non-story account data cannot become public content.
+- Remove temporary fixtures and run the clean final validation.
 
 ## Out of scope
 
-- Bulk migration of the writing library.
-- Silent or automatic publication.
-- Guessing original publication dates.
-- Rewriting or “improving” migrated prose.
-- Automated semantic tagging or related-work inference.
-- Archive, Start Here, or index redesign.
-- Search or tag-filter UI.
-- CMS or database work.
-- Homepage redesign.
-
-## Decisions to make before implementation
-
-Inspect available source material and choose the narrowest supported input:
-
-1. Medium export files, if available.
-2. Authoritative local source files.
-3. Deliberately copied Medium HTML or Markdown.
-4. Manual Markdown entry using the canonical template.
-
-Do not make a live Medium scraper a required publishing dependency. If more than one input format is justified, normalize them into one intermediate record before generating Markdown.
-
-Also confirm:
-
-- Whether migrated images will be article-local or stored under a shared writing asset directory.
-- Whether the first tooling trial uses a disposable fixture or one explicitly approved real essay.
-- How source evidence for exact historical dates will be recorded in the migration checklist without exposing private material publicly.
-
-## Recommended work order
-
-1. Re-read `AGENTS.md`, `NEXT_SESSION.md`, and `SESSION.md`.
-2. Inspect the current schema, validation, loader, and pilot Markdown.
-3. Inspect the available Medium/export/source format before choosing tooling.
-4. Write the migration input/output contract.
-5. Add the template and checklist.
-6. Implement the smallest conversion/validation command.
-7. Exercise it with disposable fixtures.
-8. Confirm generated Markdown passes the existing collection contract.
-9. Remove all fixtures and run the clean final validation.
-10. Stop before bulk migration and report results.
+- Publishing the generated review queue automatically.
+- Migrating every generated draft into `src/content` during the same session.
+- Updating Medium canonical settings.
+- Guessing categories, tags, relationships, dates, captions, credits, or alt text.
+- Downloading remote images when the export does not contain a verified local asset without an explicit decision.
+- Editing prose.
+- Page redesign, homepage changes, search, tag filters, CMS, or database work.
 
 ## Acceptance criteria
 
-- `npm run validate` passes on the clean repository.
-- A representative input can produce reviewable Markdown deterministically.
-- Prose is preserved exactly.
-- Unverified historical dates remain unset rather than inferred.
-- Invalid required metadata fails clearly.
-- Duplicate slugs, Fragment numbers, and Start Here orders fail clearly.
-- Broken, self-referencing, or draft-target related identifiers fail clearly.
-- Draft output does not enter any public route or generated discovery output.
-- Generated files follow the existing content and route conventions.
-- The workflow cannot overwrite an existing published slug without an explicit, visible failure.
-- Migration documentation is sufficient to repeat the process later.
+- The raw export and extracted private data remain untracked and ignored.
+- The supported export structure is documented from observed evidence.
+- One command can inspect or import the explicit export path.
+- Multiple representative stories produce deterministic review packages.
+- Exported prose remains exact except for documented Markdown structure normalization.
+- Exact dates come only from reliable export metadata.
+- Ambiguous or absent dates remain unset and appear in the manifest.
+- Images are copied only from verified export assets and missing references fail or warn clearly.
+- Existing published pieces are reported without overwrite.
+- Generated entries remain drafts outside `src/content`.
+- `npm.cmd run test:writing-tools` passes.
+- `npm.cmd run validate` passes on the clean repository.
 - `git diff --check` passes.
-- No temporary fixtures remain.
+- No disposable fixtures remain.
 - No commit or push occurs without explicit approval.
 
 ## Useful commands
 
 ```powershell
-npm.cmd run dev
+git status --short
+Get-FileHash -Algorithm SHA256 <export.zip>
+npm.cmd run test:writing-tools
 npm.cmd run validate
 git diff --check
-git status --short
 ```
 
-Astro telemetry may need to be disabled in restricted local environments:
+Astro telemetry may need to be disabled in restricted environments:
 
 ```powershell
 $env:ASTRO_TELEMETRY_DISABLED='1'
 npm.cmd run validate
 ```
 
-## Friday stopping point
+## Saturday stopping point
 
-Stop after the migration toolkit, documentation, fixtures, and validation are complete. Report the exact files changed, supported inputs, commands, validation evidence, limitations, unresolved source questions, Git status, and recommended first migration batch. Do not start bulk migration automatically.
+Stop after the export format, importer, manifest, documentation, representative fixtures, and clean validation are complete. Report supported and unsupported export records, output counts, warnings, unresolved metadata decisions, files changed, validation evidence, and the recommended first review batch. Do not bulk publish automatically.
