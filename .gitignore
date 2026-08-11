@@ -2,3 +2,5 @@ node_modules/
 dist/
 .astro/
 .migration-output/
+medium-export-*.zip
+.medium-export-private/

@@ -7,8 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "import:medium": "node scripts/import-medium-export.mjs",
     "migrate:writing": "node scripts/migrate-writing.mjs",
-    "test:writing-tools": "node scripts/test-writing-tools.mjs",
+    "test:writing-tools": "node scripts/test-writing-tools.mjs && node scripts/test-medium-export.mjs",
     "validate:writing": "node scripts/validate-writing.mjs",
     "validate": "node scripts/validate-writing.mjs && astro build && node scripts/verify-build.mjs"
   },

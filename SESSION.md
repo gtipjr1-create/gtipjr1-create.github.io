@@ -1,8 +1,8 @@
 # GarryTipler.com Writing Library — Project Record
 
-**Record date:** August 8, 2026
+**Record date:** August 10, 2026
 **Production branch:** `main`
-**Production head:** `553f052` — `feat: reshape homepage hierarchy and flow`
+**Production head:** `eaa1038` — `fix: prevent mobile footer metadata wrapping`
 **Canonical domain:** `https://garrytipler.com/`
 
 ## Purpose
@@ -306,6 +306,23 @@ Implemented the approved restrained homepage refinement without changing routes,
 
 `npm.cmd run validate` and `git diff --check` passed. The generated homepage and screenshot asset were inspected in `dist/`. The page was visually reviewed at `1440 × 1000` and `390 × 844`, then the deployed homepage was verified live with the new navigation, hero action, and proof image present.
 
+### Session 7 — Medium export importer
+
+Inspected the untouched August 10 Medium account-data ZIP and implemented a conservative batch-to-review workflow:
+
+- Recorded the 257826-byte archive and SHA-256 `1DE4C661935979440AEEC075F0D09E4B32C38988E11DDF2855D66450727721E5`.
+- Identified 133 HTML records, including 110 under `posts/`; non-post account groups are inventoried by path only and never parsed as content.
+- Added direct ZIP-stream parsing so Windows-invalid entry names require no extraction or sanitization.
+- Preserved each exact archive entry name, stable Medium post ID, source HTML, source SHA-256, UTC timestamp, and canonical Medium URL in review evidence.
+- Added deterministic Medium HTML-to-Markdown normalization for the observed headings, paragraphs, links, emphasis, quotations, lists, separators, figures, and captions.
+- Added conservative classification: explicit numbered Fragments, proposed Essays, skipped drafts, already-migrated detection, duplicate blocking, and short unnumbered response ambiguity.
+- Generated ignored JSON and Markdown manifests plus draft-only review packages under `.migration-output`.
+- Produced 47 ready packages, blocked 58 ambiguous short or empty records, identified 2 already migrated pieces, and skipped 3 drafts.
+- Flagged all remote Medium images because the export contains no local image assets.
+- Added disposable ZIP fixtures proving deterministic output, exact prose/source preservation, archive-name identity, draft and non-story exclusion, collisions, output refusal, and the `src/content` boundary.
+
+The importer does not publish, scrape Medium, infer final editorial metadata, download images, overwrite content, or change public routes.
+
 ## Current discovery behavior
 
 ### Writing landing page
@@ -437,28 +454,27 @@ The homepage was verified live after commit `553f052`. The remaining routes were
 
 ## Intentionally deferred
 
-- Medium export inspection until the requested account-data ZIP arrives.
-- Batch-to-review import tooling until the real export format is inspected.
+- Editorial review and publication of generated Medium packages.
+- Bulk reclassification of response-ambiguous short records.
+- Remote-image downloads or inferred image metadata.
 - Bulk writing publication.
 - Full-text search.
 - Tag-filter UI until content volume justifies it.
 - Automatic related-work inference.
 - CMS or database adoption.
 - MDX expansion.
-- Further homepage redesign while the Medium import session is active.
+- Further homepage redesign while writing migration is active.
 
 ## Next phase
 
-Session 7 will inspect the untouched Medium account export and extend the migration toolkit with a safe batch-to-review importer and manifest. It will stop before bulk publication.
+Review the generated packages for Fragments #1–#3 as the first asset-free editorial batch. Confirm prose, title punctuation, immutable slugs, summaries, categories, tags, and historical calendar dates before any publication decision.
 
-See `NEXT_SESSION.md` for the active importer handoff and acceptance criteria.
+See `NEXT_SESSION.md` for the bounded review handoff and explicit non-goals.
 
 ## Repository status at this record
 
-Production branch `main` and `origin/main` are aligned at `553f052`. The homepage implementation is committed, pushed, deployed, and live-verified.
-
-This handoff updates `SESSION.md` and `NEXT_SESSION.md` without committing or pushing them. It also leaves a mobile-only footer adjustment in `index.html` that prevents the copyright line from wrapping on the user’s physical phone. The adjustment passed `npm.cmd run validate`, `git diff --check`, and a `390 × 844` local browser check showing a single 305px-wide line with no horizontal overflow. It is not committed, pushed, or deployed.
+Production branch `main` and `origin/main` are aligned at `eaa1038`. Session 7 importer code, tests, documentation, ignore rules, and handoff updates are uncommitted and unpushed.
 
 The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
 
-The Medium account-data export was requested on August 7, 2026 and had not arrived when this record was updated on August 8. The raw ZIP must remain private and untracked when it arrives.
+The untouched Medium ZIP and generated `.migration-output` review queue are ignored private inputs/artifacts and must not be staged. No public content, routes, deployment configuration, external service, commit, or push changed during Session 7.
