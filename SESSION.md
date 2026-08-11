@@ -2,7 +2,7 @@
 
 **Record date:** August 10, 2026
 **Production branch:** `main`
-**Production head:** `eaa1038` — `fix: prevent mobile footer metadata wrapping`
+**Record branch:** `main`
 **Canonical domain:** `https://garrytipler.com/`
 
 ## Purpose
@@ -44,9 +44,12 @@ src/content/writing/
   letters/
 ```
 
-The current published content inventory contains two real pieces:
+The current published content inventory contains five real pieces:
 
 ```text
+src/content/writing/fragments/fragments-1-feelings-dont-build-futures/index.md
+src/content/writing/fragments/fragments-2-the-test-the-boundary-the-shift/index.md
+src/content/writing/fragments/fragments-3-i-must-write/index.md
 src/content/writing/fragments/fragments-4-the-fire/index.md
 src/content/writing/essays/discipline-should-not-cost-me-my-heart/index.md
 ```
@@ -323,6 +326,22 @@ Inspected the untouched August 10 Medium account-data ZIP and implemented a cons
 
 The importer does not publish, scrape Medium, infer final editorial metadata, download images, overwrite content, or change public routes.
 
+### Session 7 follow-up — Parser fidelity and first migration batch
+
+**Committed checkpoints:**
+
+- `09be810` — `feat: add Medium export review importer`
+- `e94bc1d` — `fix: preserve Medium review draft structure`
+- `feat: publish first Medium Fragment batch`
+
+The importer foundation and subsequent parser fixes are committed and pushed. The parser follow-up restores direct-text block quotations, keeps surrounding spaces outside Markdown emphasis delimiters, escapes paragraph-leading numeric markers, and adds regression coverage for each case.
+
+Fragments #1–#3 were then approved and committed as the first production migration batch with explicit metadata and no inferred editorial relationships. The Fragments index renders numbered entries in ascending sequence, and generated-output verification protects the complete previous/next chain across published numbered Fragments.
+
+The batch passed the writing-tool tests, full repository validation, corrected-draft prose comparison, desktop review, and true 390px mobile review. The index rendered #1 → #2 → #3 → #4, and previous/next behavior was verified across all four entries.
+
+After the full Medium archive has been imported and classified, unnumbered Fragment-like pieces require a separate editorial sequencing pass. The importer must not assign those numbers. Existing explicit Fragment numbers remain unchanged unless a later approved renumbering decision says otherwise.
+
 ## Current discovery behavior
 
 ### Writing landing page
@@ -436,7 +455,7 @@ npm.cmd run validate
 
 ## Current production routes
 
-The homepage was verified live after commit `553f052`. The remaining routes were verified live after Session 6 and remain protected by the repository build verifier:
+The homepage was verified live after commit `553f052`. The established routes were verified live after Session 6, and the first Fragment migration routes were added in Session 7. All remain protected by the repository build verifier:
 
 - `https://garrytipler.com/`
 - `https://garrytipler.com/projects/selftrainer/`
@@ -446,6 +465,9 @@ The homepage was verified live after commit `553f052`. The remaining routes were
 - `https://garrytipler.com/writing/essays/`
 - `https://garrytipler.com/writing/archive/`
 - `https://garrytipler.com/writing/start-here/`
+- `https://garrytipler.com/writing/fragments/fragments-1-feelings-dont-build-futures/`
+- `https://garrytipler.com/writing/fragments/fragments-2-the-test-the-boundary-the-shift/`
+- `https://garrytipler.com/writing/fragments/fragments-3-i-must-write/`
 - `https://garrytipler.com/writing/fragments/fragments-4-the-fire/`
 - `https://garrytipler.com/writing/essays/discipline-should-not-cost-me-my-heart/`
 - `https://garrytipler.com/sitemap.xml`
@@ -454,8 +476,9 @@ The homepage was verified live after commit `553f052`. The remaining routes were
 
 ## Intentionally deferred
 
-- Editorial review and publication of generated Medium packages.
+- Editorial review and publication of later generated Medium packages.
 - Bulk reclassification of response-ambiguous short records.
+- Final numbering of Fragment-like pieces originally published without a number; this is deferred until the archive import is complete.
 - Remote-image downloads or inferred image metadata.
 - Bulk writing publication.
 - Full-text search.
@@ -467,14 +490,14 @@ The homepage was verified live after commit `553f052`. The remaining routes were
 
 ## Next phase
 
-Review the generated packages for Fragments #1–#3 as the first asset-free editorial batch. Confirm prose, title punctuation, immutable slugs, summaries, categories, tags, and historical calendar dates before any publication decision.
+Review Fragment #5 — Refinement as a single bounded package. Resolve its remote-image dependency locally with approved provenance and alt text before any publication decision; do not combine it with Fragment #6.
 
 See `NEXT_SESSION.md` for the bounded review handoff and explicit non-goals.
 
 ## Repository status at this record
 
-Production branch `main` and `origin/main` are aligned at `eaa1038`. Session 7 importer code, tests, documentation, ignore rules, and handoff updates are uncommitted and unpushed.
+At this stop point, `main` and `origin/main` include the importer foundation, parser fidelity fixes, and the approved Fragments #1–#3 production migration batch.
 
 The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
 
-The untouched Medium ZIP and generated `.migration-output` review queue are ignored private inputs/artifacts and must not be staged. No public content, routes, deployment configuration, external service, commit, or push changed during Session 7.
+The untouched Medium ZIP and generated `.migration-output` review queues are ignored private inputs/artifacts and must not be staged. Direct ZIP-stream parsing preserves exact archive entry names and Medium IDs as canonical evidence; sanitized filenames are never canonical content identity. No deployment configuration or external service was changed directly during Session 7.

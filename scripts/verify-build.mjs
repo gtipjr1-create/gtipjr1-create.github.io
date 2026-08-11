@@ -111,6 +111,48 @@ for (const entry of publishedEntries) {
   }
 }
 
+const publishedFragments = publishedEntries
+  .filter((entry) => entry.data.type === "fragment")
+  .sort((left, right) => left.data.fragmentNumber - right.data.fragmentNumber);
+let previousFragmentIndexPosition = -1;
+for (const [index, entry] of publishedFragments.entries()) {
+  const titleMarker = `<span class="writing-list-title">${entry.data.title}</span>`;
+  const indexPosition = fragmentsIndexHtml.indexOf(titleMarker);
+  assert.ok(indexPosition >= 0, `Fragments index must contain "${entry.data.title}".`);
+  assert.ok(
+    indexPosition > previousFragmentIndexPosition,
+    "Fragments index must order Fragment numbers from lowest to highest.",
+  );
+  previousFragmentIndexPosition = indexPosition;
+
+  const route = `writing/fragments/${entry.data.slug}/`;
+  const articleHtml = await requireOutput(`${route}index.html`);
+  const previous = publishedFragments[index - 1];
+  const next = publishedFragments[index + 1];
+
+  if (previous) {
+    assert.ok(
+      articleHtml.includes(
+        `class="sequence-link sequence-previous" href="/writing/fragments/${previous.data.slug}/"`,
+      ),
+      `Fragment ${entry.data.fragmentNumber} must link back to Fragment ${previous.data.fragmentNumber}.`,
+    );
+  } else {
+    assert.doesNotMatch(articleHtml, /class="sequence-link sequence-previous"/);
+  }
+
+  if (next) {
+    assert.ok(
+      articleHtml.includes(
+        `class="sequence-link sequence-next" href="/writing/fragments/${next.data.slug}/"`,
+      ),
+      `Fragment ${entry.data.fragmentNumber} must link forward to Fragment ${next.data.fragmentNumber}.`,
+    );
+  } else {
+    assert.doesNotMatch(articleHtml, /class="sequence-link sequence-next"/);
+  }
+}
+
 assert.match(
   homepageHtml,
   /href="\/writing\/fragments\/fragments-4-the-fire\/"/,

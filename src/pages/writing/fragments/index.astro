@@ -6,7 +6,10 @@ import {
   sortWritingCollection,
 } from "../../../lib/writing";
 
-const entries = sortWritingCollection(await getPublishedWritingEntriesByType("fragment"));
+const entries = sortWritingCollection(
+  await getPublishedWritingEntriesByType("fragment"),
+  "ascending",
+);
 ---
 
 <WritingIndexLayout
