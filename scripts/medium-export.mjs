@@ -250,12 +250,22 @@ function escapeMarkdownText(value) {
   return value.replace(/([\\*_[\]])/g, "\\$1");
 }
 
+function wrapInline(contents, marker) {
+  const match = contents.match(/^(\s*)([\s\S]*?\S)(\s*)$/);
+  if (!match) return contents;
+  return `${match[1]}${marker}${match[2]}${marker}${match[3]}`;
+}
+
+function escapeParagraphPrefix(value) {
+  return value.replace(/^(\d+)\.(?=\s)/, "$1\\.");
+}
+
 function renderInline(node) {
   if (node.tag === "#text") return escapeMarkdownText(node.value);
   const contents = (node.children ?? []).map(renderInline).join("");
   if (node.tag === "br") return "  \n";
-  if (node.tag === "strong" || node.tag === "b") return `**${contents}**`;
-  if (node.tag === "em" || node.tag === "i") return `*${contents}*`;
+  if (node.tag === "strong" || node.tag === "b") return wrapInline(contents, "**");
+  if (node.tag === "em" || node.tag === "i") return wrapInline(contents, "*");
   if (node.tag === "a" && node.attributes.href) return `[${contents}](${node.attributes.href})`;
   return contents;
 }
@@ -293,7 +303,7 @@ function renderBlocks(node) {
     }
     if (child.tag === "p") {
       const text = plainText(child).trim();
-      blocks.push({ kind: text ? "paragraph" : "empty", text, markdown: renderInline(child).trim() });
+      blocks.push({ kind: text ? "paragraph" : "empty", text, markdown: escapeParagraphPrefix(renderInline(child).trim()) });
       continue;
     }
     if (child.tag === "figure") {
@@ -301,10 +311,11 @@ function renderBlocks(node) {
       continue;
     }
     if (child.tag === "blockquote") {
-      const quote = renderBlocks(child)
+      const nestedQuote = renderBlocks(child)
         .map((block) => block.markdown)
         .filter(Boolean)
         .join("\n\n");
+      const quote = nestedQuote || renderInline(child).trim();
       blocks.push({ kind: "blockquote", text: plainText(child).trim(), markdown: quote.split("\n").map((line) => `> ${line}`).join("\n") });
       continue;
     }

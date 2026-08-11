@@ -73,7 +73,7 @@ try {
       subtitle: "An exact exported subtitle.",
       id: "111111111111",
       image: true,
-      body: `<p>Café &amp; resolve remain exact.</p><blockquote><p>Quoted truth.</p></blockquote><ul><li>First item</li><li>Second item</li></ul>`,
+      body: `<p>Café &amp; resolve remain exact.</p><p>1. <strong>Numbered paragraph</strong></p><p><strong>Label: </strong>Exact.</p><blockquote>Direct quoted truth.</blockquote><blockquote><p>Nested quoted truth.</p></blockquote><ul><li>First item</li><li>Second item</li></ul>`,
     }),
     "posts/2026-01-02_Fragments--1---Begin-222222222222.html": postHtml({
       title: "Fragments #1 — Begin",
@@ -139,7 +139,10 @@ try {
   assert.doesNotMatch(review, /publishedDate:/);
   assert.match(review, /originalPublishedDate: "2026-01-03"/);
   assert.match(review, /Café & resolve remain exact\./);
-  assert.match(review, /> Quoted truth\./);
+  assert.match(review, /1\\\. \*\*Numbered paragraph\*\*/);
+  assert.match(review, /\*\*Label:\*\* Exact\./);
+  assert.match(review, /> Direct quoted truth\./);
+  assert.match(review, /> Nested quoted truth\./);
   assert.match(review, /- First item/);
   assert.match(review, /Remote Medium image fixture\.jpg/);
   assert.doesNotMatch(review, /^## A Careful Story\?/m, "duplicate exported title must be structurally removed");
