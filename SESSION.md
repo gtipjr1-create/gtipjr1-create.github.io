@@ -340,7 +340,7 @@ Fragments #1–#3 were then approved and committed as the first production migra
 
 The batch passed the writing-tool tests, full repository validation, corrected-draft prose comparison, desktop review, and true 390px mobile review. The index rendered #1 → #2 → #3 → #4, and previous/next behavior was verified across all four entries.
 
-After the full Medium archive has been imported and classified, unnumbered Fragment-like pieces require a separate editorial sequencing pass. The importer must not assign those numbers. Existing explicit Fragment numbers remain unchanged unless a later approved renumbering decision says otherwise.
+On September 13, 2026, the author approved the previously unnumbered Fragment classifications and numbering ledger recorded in `docs/writing-migration.md`. Established numbers #1–#6 remain unchanged; #7–#17 are approved; and recovered `From Thought to Form` is #18 despite its earlier March source timestamp. The two Pride drafts remain retained source evidence for #9 rather than additional pieces. Generated review packages and manifests remain unchanged until individual review.
 
 ## Current discovery behavior
 
@@ -478,7 +478,7 @@ The homepage was verified live after commit `553f052`. The established routes we
 
 - Editorial review and publication of later generated Medium packages.
 - Bulk reclassification of response-ambiguous short records.
-- Final numbering of Fragment-like pieces originally published without a number; this is deferred until the archive import is complete.
+- Individual review and implementation of the approved Fragment #5–#18 migration ledger; numbering is decided, while final display titles, slugs, summaries, tags, historical calendar dates, images, and publication remain deferred.
 - Remote-image downloads or inferred image metadata.
 - Bulk writing publication.
 - Full-text search.

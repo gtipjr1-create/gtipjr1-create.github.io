@@ -36,6 +36,44 @@ The exact UTC timestamp is preserved in the manifest. Its `YYYY-MM-DD` prefix is
 
 The export ZIP, extracted private data, `.migration-output`, and unrelated account records remain ignored and must never be committed. Publication still happens in small explicitly approved batches after prose, metadata, assets, and presentation are reviewed.
 
+## Approved Fragment migration ledger
+
+The author approved this Fragment-series classification and numbering ledger on September 13, 2026. It is the authoritative numbering record for the supplied Medium export. All 12 records formerly proposed as Essays are author-confirmed Fragments. The importer-generated Essay classifications for Fragments #7–#18 are superseded editorial proposals; generated packages, manifests, and source evidence remain unchanged until each piece is reviewed individually.
+
+Established Fragment numbers #1–#6 remain unchanged. Fragments #7–#17 follow the approved sequence below. `From Thought to Form` is Fragment #18: a recovered, previously unnumbered Fragment whose exact source timestamp places it historically between Fragments #5 and #6. Its later series number is intentional; do not renumber published or established pieces and do not invent an insertion number.
+
+The names in this ledger identify source pieces. Except for already approved published metadata, they do not approve final display-title normalization, immutable slugs, summaries, categories, tags, images, or exact historical calendar dates. Preserve each exact UTC source timestamp as evidence and resolve the author-calendar date during the individual content review.
+
+| Number | Ledger identifier | Stable Medium ID | Exact source timestamp | Decision state |
+| ---: | --- | --- | --- | --- |
+| #1 | Fragments #1 — Feelings Don’t Build Futures | `85172d4a99bb` | `2026-02-09T22:14:21.202Z` | Established; unchanged |
+| #2 | Fragments #2 — The Test, The Boundary, The Shift | `23df67a490b5` | `2026-02-15T20:24:31.336Z` | Established; unchanged |
+| #3 | Fragments #3 — I Must Write | `cebd9516e906` | `2026-02-24T04:33:48.151Z` | Established; unchanged |
+| #4 | Fragments #4 — The Fire | `7301b68ca8b1` | `2026-03-03T05:24:37.207Z` | Established; unchanged |
+| #5 | Fragments #5 — Refinement | `7c0c94fad28b` | `2026-03-10T03:01:17.830Z` | Established; reviewed repository draft |
+| #6 | Fragments #6 — Ordering Effort | `3a9207b6326f` | `2026-03-24T04:31:01.256Z` | Established; unchanged |
+| #7 | From Thought to Structure | `bf876e2dcbed` | `2026-03-31T04:49:59.008Z` | Author-approved Fragment number |
+| #8 | There is a point where effort stops feeling like effort. | `9a7ae823bdf4` | `2026-04-21T02:26:05.128Z` | Author-approved Fragment number |
+| #9 | Pride Is a Trap | `cfad708fd606` | `2026-04-27T23:36:11.189Z` | Author-approved Fragment number |
+| #10 | Evidence | `35305e3dda5e` | `2026-05-05T06:57:08.415Z` | Author-approved Fragment number |
+| #11 | Stewardship | `fb3e11bd3307` | `2026-05-12T02:13:05.728Z` | Author-approved Fragment number |
+| #12 | I Am Not Behind | `52e78d543e3f` | `2026-05-19T05:10:28.217Z` | Author-approved Fragment number |
+| #13 | I Am Learning to Live Again | `e928236b05e7` | `2026-06-02T07:01:21.868Z` | Author-approved Fragment number |
+| #14 | Good Morning, Giant | `1ccc5f50d63b` | `2026-06-16T02:29:50.611Z` | Author-approved Fragment number |
+| #15 | The Quiet Return | `53804a0f815b` | `2026-06-30T04:34:11.957Z` | Author-approved Fragment number |
+| #16 | I’m Doing Alright | `c21346d405f0` | `2026-07-07T02:18:11.089Z` | Author-approved Fragment number |
+| #17 | Restraint | `3aa53729ddf0` | `2026-07-16T02:56:32.117Z` | Author-approved Fragment number |
+| #18 | From Thought to Form | `67d0dec5c6f7` | `2026-03-17T03:42:10.864Z` | Recovered, previously unnumbered Fragment; non-chronological placement approved |
+
+The two skipped Medium drafts titled `Pride isn’t always a good thing.` are superseded source versions of Fragment #9, `Pride Is a Trap`. Retain both records and their distinct archive identities as source evidence; do not delete, migrate, publish, or count them as additional Fragments:
+
+- Medium ID `564cb01905e8`; source `posts/draft_Pride-isn-t-always-a-good-thing--564cb01905e8.html`; source SHA-256 `007701cebab6d87872c1b84440cd5602c2ea98d6b0ad7392afd2b425ed97bf88`.
+- Medium ID `95effaa9a36c`; source `posts/draft_Pride-isn-t-always-a-good-thing--95effaa9a36c.html`; source SHA-256 `935e6efe2e3f62fdb7cea591c6ad09ee026c7702f0e0ab6698b65a6ee2f512be`.
+
+For Fragment #5, retain the exact export timestamp `2026-03-10T03:01:17.830Z` as migration evidence. The author approved `2026-03-09` as the historical calendar date based on the live Medium page showing March 9 and the timestamp's Los Angeles conversion to March 9 at 8:01:17 p.m. PDT. The preserved source archive and `source.html` remain unchanged.
+
+Fragment #5 — Refinement remains the next individual content-review boundary. Its reviewed repository draft omits the remote Medium image by author approval and is not published. Do not use this ledger approval to combine reviews, publish drafts, or bypass prose, metadata, asset, presentation, and canonical checks for any piece.
+
 ## Medium export commands
 
 Inspect an explicit ZIP without writing output:
