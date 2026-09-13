@@ -455,7 +455,7 @@ npm.cmd run validate
 
 ## Current production routes
 
-The homepage was verified live after commit `553f052`. The established routes were verified live after Session 6, and the first Fragment migration routes were added in Session 7. All remain protected by the repository build verifier:
+The homepage was verified live after commit `553f052`. The established routes were verified live after Session 6, and the first Fragment migration routes were added in Session 7. Fragment #5 — Refinement was author-approved for site publication on September 13, 2026 while preserving its original March 9, 2026 Medium date and approved image omission. All remain protected by the repository build verifier:
 
 - `https://garrytipler.com/`
 - `https://garrytipler.com/projects/selftrainer/`
@@ -469,6 +469,7 @@ The homepage was verified live after commit `553f052`. The established routes we
 - `https://garrytipler.com/writing/fragments/fragments-2-the-test-the-boundary-the-shift/`
 - `https://garrytipler.com/writing/fragments/fragments-3-i-must-write/`
 - `https://garrytipler.com/writing/fragments/fragments-4-the-fire/`
+- `https://garrytipler.com/writing/fragments/fragments-5-refinement/`
 - `https://garrytipler.com/writing/essays/discipline-should-not-cost-me-my-heart/`
 - `https://garrytipler.com/sitemap.xml`
 - `https://garrytipler.com/rss.xml`
@@ -478,7 +479,7 @@ The homepage was verified live after commit `553f052`. The established routes we
 
 - Editorial review and publication of later generated Medium packages.
 - Bulk reclassification of response-ambiguous short records.
-- Individual review and implementation of the approved Fragment #5–#18 migration ledger; numbering is decided, while final display titles, slugs, summaries, tags, historical calendar dates, images, and publication remain deferred.
+- Individual review and implementation of the approved Fragment #6–#18 migration ledger; numbering is decided, while final display titles, slugs, summaries, tags, historical calendar dates, images, and publication remain deferred.
 - Remote-image downloads or inferred image metadata.
 - Bulk writing publication.
 - Full-text search.
@@ -490,13 +491,13 @@ The homepage was verified live after commit `553f052`. The established routes we
 
 ## Next phase
 
-Review Fragment #5 — Refinement as a single bounded package. Resolve its remote-image dependency locally with approved provenance and alt text before any publication decision; do not combine it with Fragment #6.
+No next migration item is authorized. Fragment #5 — Refinement is complete; do not begin Fragment #6 without explicit approval.
 
 See `NEXT_SESSION.md` for the bounded review handoff and explicit non-goals.
 
 ## Repository status at this record
 
-At this stop point, `main` and `origin/main` include the importer foundation, parser fidelity fixes, and the approved Fragments #1–#3 production migration batch.
+At this stop point, `main` includes the importer foundation, parser fidelity fixes, the approved Fragments #1–#3 production migration batch, and the author-approved Fragment #5 publication.
 
 The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
 

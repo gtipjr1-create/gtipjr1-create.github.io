@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-03-09"
+publishedDate: "2026-09-13"
 fragmentNumber: 5
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/refinement-7c0c94fad28b"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---
