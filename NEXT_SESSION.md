@@ -1,8 +1,8 @@
-# Next Session — Review Fragment #8
+# Next Session — Review Fragments #12–#15 Batch
 
-**Stop point:** Fragment #5 — Refinement is published. Fragments #6–#8 now have author-approved private repository drafts with their exact source timestamps preserved as migration evidence. Later ledger entries have not been applied to content or generated review packages.
+**Stop point:** Fragment #5 — Refinement is published. Fragments #6–#11 have author-approved private repository drafts with their exact source timestamps preserved as migration evidence. Fragments #9–#11 completed the first controlled migration batch and passed consolidated validation; later ledger entries have not been applied to content or generated review packages.
 
-**Next scope:** Review or publish Fragment #8 only with explicit approval. Do not publish any current draft, begin Fragment #9, implement later ledger entries, or alter Medium without separate authorization.
+**Next scope:** Review the source and metadata packages for Fragments #12–#15 individually as one batch. Do not prepare those drafts until each package is approved; do not begin Fragment #16, publish any current draft, deploy, or alter Medium without separate authorization.
 
 ## Completed Session 7 scope
 
@@ -122,11 +122,49 @@ Completed review decisions:
 5. The piece remains `status: draft` with no `publishedDate`, no `startHereOrder`, and `featured: false`.
 6. Publication remains a separate approval boundary. Do not expose the draft publicly or alter Medium canonical settings.
 
+## Current Fragment #9–#11 batch
+
+The first controlled batch completed private-draft preparation with each source and metadata package reviewed individually:
+
+### Fragment #9 — Pride Is a Trap
+
+- Medium ID: `cfad708fd606`
+- Draft path: `src/content/writing/fragments/fragments-9-pride-is-a-trap/index.md`
+- Exact export timestamp: `2026-04-27T23:36:11.189Z`
+- Historical date: April 27, 2026, matching the date Medium presented
+- Omitted the unresolved remote image
+- Preserved the CuriousMind acknowledgment as text while removing its Medium profile link
+- The published source remains authoritative over the two retained superseded Pride drafts
+
+### Fragment #10 — Evidence
+
+- Medium ID: `35305e3dda5e`
+- Draft path: `src/content/writing/fragments/fragments-10-evidence/index.md`
+- Exact export timestamp: `2026-05-05T06:57:08.415Z`
+- Historical date: May 5, 2026, matching the date Medium presented
+- Used the opening source line as the subtitle and omitted its duplicate body occurrence
+- Removed the promotional Amazon Author Page block
+- Preserved `I AM THE PROOF` and the three-line closing exactly
+
+### Fragment #11 — Stewardship
+
+- Medium ID: `fb3e11bd3307`
+- Draft path: `src/content/writing/fragments/fragments-11-stewardship/index.md`
+- Exact export timestamp: `2026-05-12T02:13:05.728Z`
+- Historical date: May 12, 2026, matching the date Medium presented
+- Normalized the malformed exported title to `Fragments #11 — Stewardship`
+- Used the opening source line as the subtitle and omitted its duplicate body occurrence
+- Preserved all remaining prose exactly
+
+All three entries are `status: draft`, `featured: false`, have no `publishedDate` or `startHereOrder`, and keep `related` and `connections` empty. Publication remains a separate approval boundary.
+
+The batch passed `npm.cmd run test:writing-tools`, `npm.cmd run validate`, exact approved-transformation comparisons for all three entries, draft exclusion checks across Fragments #6–#11, and `git diff --check`.
+
 ## Approved later Fragment ledger
 
 The author-approved Fragment classification and numbering decisions are recorded in `docs/writing-migration.md` under “Approved Fragment migration ledger.” Established numbers #1–#6 remain unchanged; #7–#17 are approved; and recovered, previously unnumbered `From Thought to Form` is #18 despite its historical position between #5 and #6. The two Pride drafts are retained as superseded source versions of #9 rather than additional pieces.
 
-This ledger approval does not reclassify generated packages or approve final display titles, slugs, summaries, tags, historical calendar dates, or images for later entries. Apply each decision only during its individual review. Fragment #8 is the current private review draft; Fragment #9 has not begun and requires separate authorization.
+This ledger approval does not reclassify generated packages or approve final display titles, slugs, summaries, tags, historical calendar dates, or images for later entries. Apply each decision only during its individual review. Fragments #9–#11 completed the first private batch; Fragments #12–#15 are the next authorized review boundary and have not begun.
 
 ## Preserved private and unrelated files
 
