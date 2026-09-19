@@ -1,8 +1,8 @@
-# Next Session — Review Fragment #6
+# Next Session — Review Fragment #7
 
-**Stop point:** Fragment #5 — Refinement is published. Fragment #6 — Ordering Effort now has an author-approved private repository draft with its exact source timestamp preserved as migration evidence. Later ledger entries have not been applied to content or generated review packages.
+**Stop point:** Fragment #5 — Refinement is published. Fragments #6 and #7 now have author-approved private repository drafts with their exact source timestamps preserved as migration evidence. Later ledger entries have not been applied to content or generated review packages.
 
-**Next scope:** Review or publish Fragment #6 only with explicit approval. Do not publish the current draft, begin Fragment #7, implement later ledger entries, or alter Medium without separate authorization.
+**Next scope:** Review or publish Fragment #7 only with explicit approval. Do not publish either current draft, begin Fragment #8, implement later ledger entries, or alter Medium without separate authorization.
 
 ## Completed Session 7 scope
 
@@ -74,11 +74,35 @@ Completed review decisions:
 5. The piece remains `status: draft` with no `publishedDate`, no `startHereOrder`, and `featured: false`.
 6. Publication remains a separate approval boundary. Do not expose the draft publicly or alter Medium canonical settings.
 
+## Current Fragment #7 draft
+
+Fragment #7 completed its bounded private-draft preparation:
+
+- Source archive entry: `posts/2026-03-31_From-Thought-to-Structure-bf876e2dcbed.html`
+- Medium ID: `bf876e2dcbed`
+- Approved display title: `Fragments #7 — From Thought to Structure`
+- Repository slug: `fragments-7-from-thought-to-structure`
+- Draft path: `src/content/writing/fragments/fragments-7-from-thought-to-structure/index.md`
+- Medium URL: `https://medium.com/@Garry_Tipler/from-thought-to-structure-bf876e2dcbed`
+- Exact export timestamp retained as evidence: `2026-03-31T04:49:59.008Z`
+- Author-approved historical date: March 31, 2026, matching the date Medium presented
+- Classification decision: the approved Fragment ledger overrides the importer's earlier Essay proposal
+- Asset decision: omit the Medium image; the repository draft has no remote image dependency
+
+Completed review decisions:
+
+1. The original subtitle and prose are preserved exactly, including the structural hinge `Structure is what preserves it.`.
+2. `Fragments continue.` is retained as the closing line.
+3. Title, slug, summary, category, controlled-vocabulary tags, historical date, and empty relationship fields are approved.
+4. The Medium URL is retained through the existing attribution field.
+5. The piece remains `status: draft` with no `publishedDate`, no `startHereOrder`, and `featured: false`.
+6. Publication remains a separate approval boundary. Do not expose the draft publicly or alter Medium canonical settings.
+
 ## Approved later Fragment ledger
 
 The author-approved Fragment classification and numbering decisions are recorded in `docs/writing-migration.md` under “Approved Fragment migration ledger.” Established numbers #1–#6 remain unchanged; #7–#17 are approved; and recovered, previously unnumbered `From Thought to Form` is #18 despite its historical position between #5 and #6. The two Pride drafts are retained as superseded source versions of #9 rather than additional pieces.
 
-This ledger approval does not reclassify generated packages or approve final display titles, slugs, summaries, tags, historical calendar dates, or images for later entries. Apply each decision only during its individual review. Fragment #6 is the current private review draft; Fragment #7 has not begun and requires separate authorization.
+This ledger approval does not reclassify generated packages or approve final display titles, slugs, summaries, tags, historical calendar dates, or images for later entries. Apply each decision only during its individual review. Fragment #7 is the current private review draft; Fragment #8 has not begun and requires separate authorization.
 
 ## Preserved private and unrelated files
 
