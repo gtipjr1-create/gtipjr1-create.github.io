@@ -51,7 +51,7 @@ The names in this ledger identify source pieces. Except for already approved pub
 | #3 | Fragments #3 — I Must Write | `cebd9516e906` | `2026-02-24T04:33:48.151Z` | Established; unchanged |
 | #4 | Fragments #4 — The Fire | `7301b68ca8b1` | `2026-03-03T05:24:37.207Z` | Established; unchanged |
 | #5 | Fragments #5 — Refinement | `7c0c94fad28b` | `2026-03-10T03:01:17.830Z` | Established; published on GarryTipler.com September 13, 2026 |
-| #6 | Fragments #6 — Ordering Effort | `3a9207b6326f` | `2026-03-24T04:31:01.256Z` | Established; unchanged |
+| #6 | Fragments #6 — Ordering Effort | `3a9207b6326f` | `2026-03-24T04:31:01.256Z` | Established; reviewed repository draft |
 | #7 | From Thought to Structure | `bf876e2dcbed` | `2026-03-31T04:49:59.008Z` | Author-approved Fragment number |
 | #8 | There is a point where effort stops feeling like effort. | `9a7ae823bdf4` | `2026-04-21T02:26:05.128Z` | Author-approved Fragment number |
 | #9 | Pride Is a Trap | `cfad708fd606` | `2026-04-27T23:36:11.189Z` | Author-approved Fragment number |
@@ -73,6 +73,8 @@ The two skipped Medium drafts titled `Pride isn’t always a good thing.` are su
 For Fragment #5, retain the exact export timestamp `2026-03-10T03:01:17.830Z` as migration evidence. The author approved `2026-03-09` as the historical calendar date based on the live Medium page showing March 9 and the timestamp's Los Angeles conversion to March 9 at 8:01:17 p.m. PDT. The preserved source archive and `source.html` remain unchanged.
 
 The author approved Fragment #5 — Refinement for GarryTipler.com publication on September 13, 2026. Its repository entry preserves `originalPublishedDate: 2026-03-09`, records `publishedDate: 2026-09-13`, and omits the remote Medium image by author approval. This publication does not authorize work on Fragment #6 or any later ledger entry.
+
+For Fragment #6, retain the exact export timestamp `2026-03-24T04:31:01.256Z` as migration evidence. The author approved `2026-03-24` as the public historical calendar date because it is the date Medium presented, while the exact UTC timestamp remains preserved for provenance. The reviewed repository draft omits the remote Medium image and Medium-only book CTA by author approval, retains `Fragments continue.`, and remains unpublished. This draft does not authorize publication, changes to Medium, or work on Fragment #7.
 
 ## Medium export commands
 
