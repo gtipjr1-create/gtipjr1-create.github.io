@@ -1,8 +1,8 @@
-# Next Session — Review Fragment #7
+# Next Session — Review Fragment #8
 
-**Stop point:** Fragment #5 — Refinement is published. Fragments #6 and #7 now have author-approved private repository drafts with their exact source timestamps preserved as migration evidence. Later ledger entries have not been applied to content or generated review packages.
+**Stop point:** Fragment #5 — Refinement is published. Fragments #6–#8 now have author-approved private repository drafts with their exact source timestamps preserved as migration evidence. Later ledger entries have not been applied to content or generated review packages.
 
-**Next scope:** Review or publish Fragment #7 only with explicit approval. Do not publish either current draft, begin Fragment #8, implement later ledger entries, or alter Medium without separate authorization.
+**Next scope:** Review or publish Fragment #8 only with explicit approval. Do not publish any current draft, begin Fragment #9, implement later ledger entries, or alter Medium without separate authorization.
 
 ## Completed Session 7 scope
 
@@ -98,11 +98,35 @@ Completed review decisions:
 5. The piece remains `status: draft` with no `publishedDate`, no `startHereOrder`, and `featured: false`.
 6. Publication remains a separate approval boundary. Do not expose the draft publicly or alter Medium canonical settings.
 
+## Current Fragment #8 draft
+
+Fragment #8 completed its bounded private-draft preparation:
+
+- Source archive entry: `posts/2026-04-21_There-is-a-point-where-effort-stops-feeling-like-effort--9a7ae823bdf4.html`
+- Medium ID: `9a7ae823bdf4`
+- Approved display title: `Fragments #8 — There Is a Point Where Effort Stops Feeling Like Effort`
+- Repository slug: `fragments-8-there-is-a-point-where-effort-stops-feeling-like-effort`
+- Draft path: `src/content/writing/fragments/fragments-8-there-is-a-point-where-effort-stops-feeling-like-effort/index.md`
+- Medium URL: `https://medium.com/@Garry_Tipler/there-is-a-point-where-effort-stops-feeling-like-effort-9a7ae823bdf4`
+- Exact export timestamp retained as evidence: `2026-04-21T02:26:05.128Z`
+- Author-approved historical date: April 21, 2026, matching the date Medium presented
+- Classification decision: the approved Fragment ledger overrides the importer's earlier Essay proposal
+- Asset state: the source contains no image
+
+Completed review decisions:
+
+1. The original subtitle `Proof through repetition` is retained.
+2. The duplicate opening title line is omitted; all remaining prose is preserved exactly.
+3. Title, slug, summary, category, controlled-vocabulary tags, historical date, and empty relationship fields are approved.
+4. The Medium URL is retained through the existing attribution field; the source contains no Medium CTA.
+5. The piece remains `status: draft` with no `publishedDate`, no `startHereOrder`, and `featured: false`.
+6. Publication remains a separate approval boundary. Do not expose the draft publicly or alter Medium canonical settings.
+
 ## Approved later Fragment ledger
 
 The author-approved Fragment classification and numbering decisions are recorded in `docs/writing-migration.md` under “Approved Fragment migration ledger.” Established numbers #1–#6 remain unchanged; #7–#17 are approved; and recovered, previously unnumbered `From Thought to Form` is #18 despite its historical position between #5 and #6. The two Pride drafts are retained as superseded source versions of #9 rather than additional pieces.
 
-This ledger approval does not reclassify generated packages or approve final display titles, slugs, summaries, tags, historical calendar dates, or images for later entries. Apply each decision only during its individual review. Fragment #7 is the current private review draft; Fragment #8 has not begun and requires separate authorization.
+This ledger approval does not reclassify generated packages or approve final display titles, slugs, summaries, tags, historical calendar dates, or images for later entries. Apply each decision only during its individual review. Fragment #8 is the current private review draft; Fragment #9 has not begun and requires separate authorization.
 
 ## Preserved private and unrelated files
 

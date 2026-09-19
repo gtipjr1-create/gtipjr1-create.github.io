@@ -53,7 +53,7 @@ The names in this ledger identify source pieces. Except for already approved pub
 | #5 | Fragments #5 — Refinement | `7c0c94fad28b` | `2026-03-10T03:01:17.830Z` | Established; published on GarryTipler.com September 13, 2026 |
 | #6 | Fragments #6 — Ordering Effort | `3a9207b6326f` | `2026-03-24T04:31:01.256Z` | Established; reviewed repository draft |
 | #7 | Fragments #7 — From Thought to Structure | `bf876e2dcbed` | `2026-03-31T04:49:59.008Z` | Author-approved reviewed repository draft |
-| #8 | There is a point where effort stops feeling like effort. | `9a7ae823bdf4` | `2026-04-21T02:26:05.128Z` | Author-approved Fragment number |
+| #8 | Fragments #8 — There Is a Point Where Effort Stops Feeling Like Effort | `9a7ae823bdf4` | `2026-04-21T02:26:05.128Z` | Author-approved reviewed repository draft |
 | #9 | Pride Is a Trap | `cfad708fd606` | `2026-04-27T23:36:11.189Z` | Author-approved Fragment number |
 | #10 | Evidence | `35305e3dda5e` | `2026-05-05T06:57:08.415Z` | Author-approved Fragment number |
 | #11 | Stewardship | `fb3e11bd3307` | `2026-05-12T02:13:05.728Z` | Author-approved Fragment number |
@@ -77,6 +77,8 @@ The author approved Fragment #5 — Refinement for GarryTipler.com publication o
 For Fragment #6, retain the exact export timestamp `2026-03-24T04:31:01.256Z` as migration evidence. The author approved `2026-03-24` as the public historical calendar date because it is the date Medium presented, while the exact UTC timestamp remains preserved for provenance. The reviewed repository draft omits the remote Medium image and Medium-only book CTA by author approval, retains `Fragments continue.`, and remains unpublished. This draft does not authorize publication, changes to Medium, or work on Fragment #7.
 
 For Fragment #7, retain the exact export timestamp `2026-03-31T04:49:59.008Z` as migration evidence. The author approved `2026-03-31` as the public historical calendar date because it is the date Medium presented, while the exact UTC timestamp remains preserved for provenance. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft preserves the subtitle and prose exactly, including `Structure is what preserves it.`, omits the unresolved remote Medium image, retains `Fragments continue.`, and remains unpublished. This draft does not authorize publication, changes to Medium, or work on Fragment #8.
+
+For Fragment #8, retain the exact export timestamp `2026-04-21T02:26:05.128Z` as migration evidence. The author approved `2026-04-21` as the public historical calendar date because it is the date Medium presented, while the exact UTC timestamp remains preserved for provenance. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft retains the subtitle, omits the duplicate opening title line, preserves all remaining prose exactly, and remains unpublished. The source has no image or Medium CTA. This draft does not authorize publication, changes to Medium, or work on Fragment #9.
 
 ## Medium export commands
 
