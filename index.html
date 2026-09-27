@@ -31,7 +31,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <script type="application/ld+json">
 {
@@ -39,6 +39,8 @@
   "@type": "Person",
   "name": "Garry Tipler",
   "url": "https://garrytipler.com/",
+  "image": "https://garrytipler.com/assets/about/garry-tipler-portrait.webp",
+  "jobTitle": "Performance Systems Builder",
   "sameAs": [
     "https://x.com/garry_tipler",
     "https://medium.com/@Garry_Tipler"
@@ -50,17 +52,21 @@
   :root {
     --bg:        #0b0b0c;
     --bg-raised: #131315;
-    --bg-card:   #141416;
+    --bg-card:   #111113;
     --ink:       #ECEAE3;
-    --ink-dim:   #9d9b92;
-    --ink-faint: #7f7d76;
-    --line:      rgba(236, 234, 227, 0.10);
-    --line-soft: rgba(236, 234, 227, 0.06);
+    --ink-soft:  #c9c5bb;
+    --ink-dim:   #a8a399;
+    --ink-faint: #8a867c;
+    --line:      rgba(236, 234, 227, 0.12);
+    --line-soft: rgba(236, 234, 227, 0.07);
     --accent:    #cba35c;
     --accent-hi: #e0bd78;
     --accent-dim:rgba(203, 163, 92, 0.14);
-    --shadow:    rgba(0, 0, 0, 0.34);
-    --maxw: 720px;
+    --maxw: 1120px;
+    --textw: 600px;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -70,7 +76,7 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Hanken Grotesk', sans-serif;
+    font-family: var(--sans);
     font-size: 17px;
     line-height: 1.6;
     letter-spacing: 0.005em;
@@ -93,13 +99,13 @@
   /* warm glow behind hero */
   body::after {
     content: "";
-    position: fixed;
-    top: -20%;
+    position: absolute;
+    top: -10%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80vw;
-    height: 60vh;
-    max-width: 900px;
+    width: 90vw;
+    height: 70vh;
+    max-width: 1100px;
     pointer-events: none;
     z-index: 0;
     background: radial-gradient(ellipse at center, rgba(203,163,92,0.06), transparent 65%);
@@ -110,39 +116,8 @@
     z-index: 2;
     max-width: var(--maxw);
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 0 40px;
   }
-
-  .site-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding-top: 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .site-mark {
-    display: inline-flex;
-    width: 42px;
-    height: 42px;
-    align-items: center;
-    justify-content: center;
-  }
-  .site-mark img { display: block; width: 42px; height: 42px; }
-  .site-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 10px 22px;
-    color: var(--ink-dim);
-  }
-  .site-links a { transition: color .2s ease; }
-  .site-links a:hover { color: var(--ink); }
-  .site-mark { transition: opacity .2s ease; }
-  .site-mark:hover { opacity: .82; }
 
   a { color: inherit; text-decoration: none; }
   ::selection { background: rgba(203, 163, 92, 0.28); color: var(--ink); }
@@ -160,645 +135,537 @@
     transform: translateY(-160%);
     background: var(--accent);
     color: #14110a;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
   }
   .skip-link:focus { transform: none; }
 
-  /* ---------- HERO ---------- */
-  header.hero {
-    padding: clamp(64px, 11vh, 104px) 0 clamp(56px, 8vh, 80px);
+  /* ---------- NAV ---------- */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line-soft);
   }
-  .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 26px;
+  .site-mark {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .2s ease;
   }
-  h1.name {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(54px, 11vw, 92px);
-    line-height: 0.94;
-    letter-spacing: -0.02em;
-    margin-bottom: 22px;
-  }
-  .tagline {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(22px, 4.5vw, 30px);
-    line-height: 1.25;
-    color: var(--ink);
-    margin-bottom: 28px;
-  }
-  .lede {
-    font-size: 18px;
-    color: var(--ink-dim);
-    max-width: 575px;
-    margin-bottom: 18px;
-  }
-
-  .proofline {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 38px;
-  }
-  .proofline span { color: var(--accent); }
-  .hero-actions {
+  .site-mark img { display: block; width: 42px; height: 42px; }
+  .site-mark:hover { opacity: .82; }
+  .site-links {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: center;
-    gap: 12px 22px;
-  }
-  .text-action {
-    display: inline-flex;
-    min-height: 44px;
-    align-items: center;
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    transition: color .2s ease;
-  }
-  .text-action:hover { color: var(--accent-hi); }
-
-  /* ---------- CURRENT WORK ---------- */
-  .current-work {
-    margin-top: clamp(46px, 7vh, 64px);
-    padding: 20px 22px 18px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    border-left: 2px solid var(--accent);
-    background: rgba(255, 255, 255, 0.012);
-  }
-  .current-work-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    line-height: 1.5;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .current-work-status {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(18px, 3.5vw, 21px);
-    line-height: 1.4;
-    max-width: 600px;
-  }
-  .current-work-updated {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    line-height: 1.5;
-    letter-spacing: 0.08em;
+    gap: 6px 28px;
+    font-size: 15px;
     color: var(--ink-dim);
-    margin-top: 10px;
   }
+  .site-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .site-links a:hover { color: var(--ink); }
+  .site-links .nav-guide {
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  .site-links .nav-guide:hover { border-color: var(--accent); }
 
   /* ---------- BUTTONS ---------- */
   .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 15px 24px;
+    min-height: 52px;
+    padding: 0 26px;
     border: 1px solid transparent;
-    border-radius: 2px;
+    border-radius: 4px;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
     transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
   }
   .btn .arrow { transition: transform .2s ease; }
   .btn:hover .arrow { transform: translateX(4px); }
-  .btn-primary {
-    background: var(--accent);
-    color: #14110a;
-    font-weight: 600;
-    box-shadow: 0 16px 34px var(--shadow);
-  }
+  .btn-primary { background: var(--accent); color: #14110a; }
   .btn-primary:hover { background: var(--accent-hi); transform: translateY(-1px); }
-  .btn-primary:active {
-    background: var(--accent);
-    box-shadow: 0 8px 18px var(--shadow);
-    transform: none;
-  }
-  .btn-price {
-    font-size: 12px;
-    color: var(--ink-faint);
-    margin-left: 4px;
-    text-transform: none;
-    letter-spacing: 0.01em;
-    font-family: 'Hanken Grotesk', sans-serif;
-  }
+  .btn-primary:active { background: var(--accent); transform: none; }
+  .btn-secondary { border-color: var(--line); color: var(--ink); font-weight: 500; }
+  .btn-secondary:hover { border-color: var(--accent); }
 
-  /* ---------- SECTIONS ---------- */
-  section { padding: clamp(44px, 7vh, 68px) 0; border-top: 1px solid var(--line-soft); }
-  .sec-head {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-  .sec-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
     color: var(--accent);
-    letter-spacing: 0.04em;
+    font-weight: 500;
+    transition: color .2s ease;
   }
-  .sec-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-  }
+  .text-link .arrow { display: inline-block; transition: transform .2s ease; }
+  .text-link:hover { color: var(--accent-hi); }
+  .text-link:hover .arrow { transform: translateX(3px); }
 
-  /* ---------- BOOKS ---------- */
-  .book {
-    padding: 26px 0;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .book:last-child { border-bottom: none; }
-  .book.flagship {
-    background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0)) var(--bg-card);
-    border: 1px solid var(--line);
-    border-left: 2px solid var(--accent);
-    border-radius: 3px;
-    padding: 30px 28px;
-    margin-bottom: 26px;
-    box-shadow: 0 22px 60px rgba(0,0,0,0.20);
-  }
-  .book-title {
-    font-family: 'Fraunces', serif;
+  .eyebrow {
+    font-size: 14px;
     font-weight: 600;
-    font-size: 26px;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-    margin-bottom: 6px;
-  }
-  .book.flagship .book-title { font-size: 30px; }
-  .book-sub {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 16px;
+    letter-spacing: 0.02em;
     color: var(--accent);
     margin-bottom: 14px;
   }
-  .book-desc {
-    color: var(--ink-dim);
-    font-size: 16px;
-    max-width: 540px;
-    margin-bottom: 20px;
-  }
-  .book-link {
-    min-height: 44px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--accent);
-    border-bottom: 1px solid transparent;
-    transition: border-color .2s ease, color .2s ease;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 8px;
-  }
-  .book-link .arrow { transition: transform .2s ease; display:inline-block; }
-  .book-link:hover { color: var(--accent-hi); border-bottom-color: var(--accent-hi); }
-  .book-link:hover .arrow { transform: translateX(3px); }
-  .book-link:active { color: var(--ink); border-bottom-color: var(--accent); }
-  .book.flagship:hover {
-    border-color: rgba(203, 163, 92, 0.34);
-    transform: translateY(-1px);
-    transition: transform .2s ease, border-color .2s ease;
-  }
-  .guide-grid {
+
+  /* ---------- HERO ---------- */
+  header.hero {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+    align-items: center;
+    padding: clamp(64px, 10vh, 104px) 0 clamp(72px, 10vh, 104px);
+  }
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .identity img {
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    object-fit: cover;
+  }
+  .identity-name {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .identity-role {
+    margin-top: 3px;
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--ink-dim);
+  }
+  h1.tagline {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(44px, 6.4vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 26px;
+  }
+  .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin-bottom: 34px;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
     gap: 14px;
   }
-  .guide-grid .book {
+
+  /* Field log: the only boxed data surface on the page. */
+  .field-log {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg-card);
+    font-family: var(--mono);
+    font-size: 13.5px;
+  }
+  .field-log__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-dim);
+  }
+  .field-log__title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 500;
+  }
+  .field-log__title::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .field-log__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .field-log__stat {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    min-height: 100%;
-    padding: 22px 20px;
-    border: 1px solid var(--line-soft);
-    background: rgba(255, 255, 255, 0.008);
+    gap: 8px;
+    padding: 18px 20px;
   }
-  .guide-grid .book-title { font-size: 22px; }
-  .guide-grid .book-desc { flex: 1; }
-  /* Price beside Gumroad links, mirrors .btn-price. */
-  .link-price {
-    font-family: 'Hanken Grotesk', sans-serif;
-    font-size: 13px;
-    color: var(--ink-faint);
-    letter-spacing: 0.01em;
-  }
-
-  /* ---------- PROOF / APPS ---------- */
-  .proof-intro {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .proof-copy {
-    color: var(--ink-dim);
-    max-width: 560px;
-    margin-bottom: 30px;
-    font-size: 16px;
-  }
-
-  /* Receipts strip. */
-  .receipts {
-    display: flex;
-    gap: 48px;
-    flex-wrap: wrap;
-    margin: 0 0 34px;
-    padding: 22px 0;
-    border-top: 1px solid var(--line-soft);
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .receipt-value {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 26px;
+  .field-log__stat + .field-log__stat { border-left: 1px solid var(--line-soft); }
+  .field-log__value {
+    font-size: 30px;
     font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.02em;
     line-height: 1;
+    color: var(--accent);
   }
-  .receipt-label {
-    display: block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+  .field-log__label {
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: var(--ink-dim);
+  }
+  .field-log__rows {
+    display: grid;
+    gap: 12px;
+    padding: 18px 20px;
+    line-height: 1.5;
+  }
+  .field-log__row {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .field-log__key { color: var(--ink-faint); }
+  .field-log__val { color: var(--ink-soft); }
+  .field-log__val a {
+    text-decoration: underline;
+    text-decoration-color: rgba(203, 163, 92, 0.45);
+    text-underline-offset: 3px;
+    transition: color .2s ease;
+  }
+  .field-log__val a:hover { color: var(--accent-hi); }
+  .field-log__note {
+    padding: 0 20px 16px;
+    font-size: 11.5px;
     color: var(--ink-faint);
-    margin-top: 8px;
   }
 
-  .app {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 12px;
-    padding: 21px 0;
-    border-bottom: 1px solid var(--line-soft);
+  /* ---------- SECTIONS ---------- */
+  section {
+    padding: clamp(64px, 10vh, 104px) 0;
+    border-top: 1px solid var(--line-soft);
   }
-  .app:last-child { border-bottom: none; }
-  .app-name {
-    font-family: 'Fraunces', serif;
+  .sec-title {
+    font-family: var(--serif);
     font-weight: 500;
-    font-size: 21px;
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
   }
-  .app-status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-dim);
-    padding: 3px 9px;
-    border-radius: 999px;
-    white-space: nowrap;
-    border: 1px solid rgba(203, 163, 92, 0.16);
-  }
-  .app-desc {
-    flex-basis: 100%;
+  .sec-copy {
+    max-width: var(--textw);
     color: var(--ink-dim);
-    font-size: 15.5px;
-    margin-top: 2px;
+    margin-top: 14px;
   }
-  .app-project-link {
-    min-height: 44px;
-    align-items: center;
-    margin: 0 0 -8px -10px;
-    padding: 8px 10px;
-    border-radius: 2px;
-  }
-  .app-project-link:hover {
-    background: var(--accent-dim);
-  }
-  .app-project-link:focus-visible {
-    outline: 2px solid var(--accent-hi);
-    outline-offset: 3px;
-  }
-  .app-project-link:active {
-    background: var(--accent);
-    color: #14110a;
-    border-bottom-color: var(--accent);
-  }
-  .app-eyebrow {
-    flex-basis: 100%;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    line-height: 1.5;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .proof-feature {
+
+  /* ---------- BOOK ---------- */
+  .book-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
-    gap: 28px;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: 64px;
     align-items: start;
-    margin: 6px 0 18px;
-    padding: 26px 24px;
-    border: 1px solid var(--line);
-    border-left: 2px solid var(--accent);
+  }
+  .book-cover {
+    display: block;
+    max-width: 300px;
     border-radius: 3px;
-    background: var(--bg-card);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    transition: transform .25s ease;
   }
-  .proof-feature__copy {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 12px;
-  }
-  .proof-feature__copy .app-desc { margin-top: 4px; }
-  .proof-feature__copy .app-project-link { margin-top: 4px; }
-  .proof-visual img {
+  .book-cover:hover { transform: translateY(-2px); }
+  .book-cover img {
     display: block;
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position: top;
-    border: 1px solid var(--line);
-    background: #050506;
+    height: auto;
+    border-radius: 3px;
+    border: 1px solid var(--line-soft);
   }
-  .proof-visual figcaption {
-    margin-top: 10px;
-    color: var(--ink-faint);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    line-height: 1.5;
-    letter-spacing: 0.06em;
+  .book-body { padding-top: 8px; }
+  .book-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(38px, 5vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+  .book-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--accent);
+    margin-top: 12px;
+  }
+  .book-desc {
+    max-width: 560px;
+    color: var(--ink-soft);
+    font-size: 18px;
+    margin-top: 18px;
+  }
+  .book-buy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    margin-top: 28px;
+  }
+  .book-price { font-size: 15px; color: var(--ink-dim); }
+
+  .guides { margin-top: 48px; }
+  .guides-title {
+    font-size: 15px;
+    font-weight: 600;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .guide-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line-soft);
+    transition: background-color .2s ease;
+  }
+  .guide-row__name {
+    display: block;
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.25;
+    transition: color .2s ease;
+  }
+  .guide-row:hover .guide-row__name { color: var(--accent-hi); }
+  .guide-row__desc {
+    display: block;
+    margin-top: 4px;
+    font-size: 15px;
+    color: var(--ink-dim);
+  }
+  .guide-row__price {
+    flex: none;
+    font-size: 15px;
+    color: var(--accent);
+    white-space: nowrap;
   }
 
-  /* ---------- DISCIPLINE REBUILD ---------- */
-  .continue-grid {
+  /* ---------- FREE GUIDE + SIGNAL ---------- */
+  #field-guide { border-top: none; padding-top: 0; }
+  .guide-offer {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-    gap: 16px;
-  }
-  .discipline-rebuild,
-  .signal-panel {
-    padding: 28px 26px;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+    align-items: center;
+    padding: 52px;
     border: 1px solid var(--line);
+    border-radius: 12px;
     background: var(--bg-card);
-    color: var(--ink);
   }
-  .discipline-rebuild__inner {
-    width: min(100%, 760px);
-    margin: 0 auto;
-  }
-  .discipline-rebuild__eyebrow {
-    margin: 0 0 0.75rem;
-    color: var(--accent);
-    font: 600 0.78rem/1.2 'JetBrains Mono', monospace;
-    letter-spacing: 0.14em;
-  }
-  .discipline-rebuild h2 {
-    max-width: 680px;
-    margin: 0;
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 500;
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-  }
-  .discipline-rebuild__copy {
-    max-width: 650px;
-    margin: 1.5rem 0 0;
-    color: var(--ink-dim);
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    line-height: 1.7;
-  }
-  .discipline-rebuild__copy strong { color: var(--ink); }
-  .discipline-rebuild__contents {
+  .guide-offer .sec-copy strong { color: var(--ink); font-weight: 500; }
+  .guide-contents {
     display: grid;
-    gap: 0.6rem;
-    margin: 1.75rem 0 2rem;
-    padding: 0;
+    gap: 8px;
+    margin-top: 22px;
     list-style: none;
+    color: var(--ink-soft);
+    font-size: 16px;
   }
-  .discipline-rebuild__contents li {
-    position: relative;
-    padding-left: 1.35rem;
-    color: var(--ink);
-  }
-  .discipline-rebuild__contents li::before {
+  .guide-contents li { position: relative; padding-left: 22px; }
+  .guide-contents li::before {
+    content: "—";
     position: absolute;
     left: 0;
     color: var(--accent);
-    content: ">";
-  }
-  .discipline-rebuild__cta {
-    display: inline-flex;
-    min-height: 48px;
-    align-items: center;
-    justify-content: center;
-    padding: 0.85rem 1.15rem;
-    border: 1px solid var(--accent);
-    border-radius: 2px;
-    background: var(--accent);
-    color: #14110a;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: transform 160ms ease, background 160ms ease;
-  }
-  .discipline-rebuild__cta:hover {
-    transform: translateY(-2px);
-    background: var(--accent-hi);
-  }
-  .discipline-rebuild__cta:focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 4px;
-  }
-  .discipline-rebuild__note {
-    margin: 0.85rem 0 0;
-    color: var(--ink-faint);
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  .signal-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .signal-panel .signal-desc { margin-bottom: 22px; }
-
-  /* ---------- SIGNAL ---------- */
-  .signal-desc {
-    color: var(--ink-dim);
-    max-width: 540px;
-    margin-bottom: 26px;
   }
   .signal-form {
-    display: flex;
+    display: grid;
     gap: 12px;
-    flex-wrap: wrap;
-    max-width: 540px;
+  }
+  .signal-form label {
+    font-size: 15px;
+    color: var(--ink-soft);
   }
   .signal-form input[type="email"] {
-    flex: 1 1 240px;
-    background: var(--bg-card);
+    min-height: 52px;
+    padding: 0 16px;
+    background: var(--bg);
     border: 1px solid var(--line);
-    border-radius: 2px;
+    border-radius: 4px;
     color: var(--ink);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    padding: 15px 16px;
+    font-family: var(--sans);
+    font-size: 16px;
     transition: border-color .2s ease;
   }
   .signal-form input[type="email"]::placeholder { color: var(--ink-faint); }
   .signal-form input[type="email"]:focus { border-color: var(--accent); }
-  .signal-form .btn { cursor: pointer; }
+  .signal-form .btn { width: 100%; }
   .signal-form .btn:disabled { opacity: 0.5; cursor: default; transform: none; }
   .signal-status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    margin-top: 16px;
-    min-height: 1.2em;
+    font-size: 15px;
+    min-height: 1.4em;
+    margin-top: 12px;
   }
   .signal-status.ok  { color: var(--accent); }
   .signal-status.err { color: var(--ink-dim); }
+  .guide-download { margin-top: 4px; }
+  .guide-download[hidden] { display: none; }
   .signal-fineprint {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.55;
     color: var(--ink-faint);
-    margin-top: 20px;
-  }
-  .sr-only {
-    position: absolute; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden;
-    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
   }
 
-  /* ---------- WRITING ---------- */
-  .writing-desc { color: var(--ink-dim); margin-bottom: 22px; max-width: 540px; }
-
-  /* Essay teaser list. */
-  .essays {
+  /* ---------- PROOF / APPS ---------- */
+  .proof-head {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 30px;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+    align-items: end;
+    margin-bottom: 48px;
   }
-  .essay {
-    display: block;
-    padding: 24px 22px;
-    border: 1px solid var(--line-soft);
-    border-left: 2px solid transparent;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.008);
-    transition: background-color .2s ease, border-color .2s ease;
+  .proof-head .sec-copy { margin-top: 0; }
+  .app-status {
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding: 4px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    white-space: nowrap;
   }
-  .essay:hover {
-    background: var(--bg-raised);
-    border-color: var(--line);
-    border-left-color: var(--accent);
+  .app-name {
+    font-family: var(--serif);
+    font-weight: 600;
   }
-  .essay:focus-visible {
-    outline: 2px solid var(--accent-hi);
-    outline-offset: 3px;
+  .app-desc { color: var(--ink-dim); }
+  .proof-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 56px;
+    align-items: center;
+    padding: 48px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg-card);
   }
-  .essay:active {
-    background: var(--accent-dim);
-    border-color: rgba(203, 163, 92, 0.38);
-  }
-  .essay-meta {
+  .proof-feature .app-title {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    gap: 12px 14px;
+  }
+  .proof-feature .app-name { font-size: 34px; line-height: 1.1; }
+  .proof-feature .app-desc {
+    max-width: 460px;
+    font-size: 18px;
+    margin: 16px 0 12px;
+  }
+  .proof-visual { max-width: 320px; justify-self: end; width: 100%; }
+  .proof-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #000;
+  }
+  .proof-visual figcaption {
+    margin-top: 12px;
+    color: var(--ink-faint);
+    font-size: 13.5px;
     line-height: 1.5;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  }
+  .app-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 32px;
+    padding: 28px 48px 0;
+  }
+  .app-row__main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    flex: 1 1 520px;
+  }
+  .app-row .app-name { font-size: 24px; }
+  .app-row .app-desc { flex-basis: 100%; font-size: 16px; }
+
+  /* ---------- WRITING ---------- */
+  .writing-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 32px;
+    margin-bottom: 28px;
+  }
+  .writing-list { border-bottom: 1px solid var(--line-soft); }
+  .entry {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
+    gap: 8px 32px;
+    align-items: baseline;
+    padding: 26px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .entry-meta {
+    font-family: var(--mono);
+    font-size: 12.5px;
     color: var(--ink-faint);
   }
-  .essay-theme { color: var(--accent); }
-  .essay-title {
-    display: block;
-    font-family: 'Fraunces', serif;
+  .entry-title {
+    font-family: var(--serif);
     font-weight: 500;
-    font-size: 20px;
-    line-height: 1.3;
-    color: var(--ink);
-    margin-top: 11px;
+    font-size: 24px;
+    line-height: 1.25;
     transition: color .2s ease;
   }
-  .essay:hover .essay-title { color: var(--accent-hi); }
-  .essay-desc {
-    display: block;
-    color: var(--ink-dim);
-    font-size: 15px;
-    margin-top: 7px;
-    max-width: 540px;
-  }
-  .essay-cta {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    margin-top: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-  }
-  .essay:hover .essay-cta { color: var(--accent-hi); }
-  .essay:first-child {
-    grid-column: 1 / -1;
-    border-color: var(--line);
-    border-left-color: var(--accent);
-    background: var(--bg-card);
-  }
+  .entry:hover .entry-title { color: var(--accent-hi); }
+  .entry-desc { font-size: 15.5px; color: var(--ink-dim); }
+  .writing-more { margin-top: 20px; }
 
   /* ---------- PRINCIPLES ---------- */
   .principles {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 28px;
+    gap: 0 64px;
+    margin-top: 28px;
     list-style: none;
   }
   .principles li {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(20px, 4vw, 25px);
-    line-height: 1.35;
-    padding: 14px 0;
-    color: var(--ink);
-    border-bottom: 1px solid var(--line-soft);
-    position: relative;
-    padding-left: 30px;
-  }
-  .principles li:last-child { border-bottom: none; }
-  .principles li::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
-    top: 18px;
+    font-family: var(--serif);
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.25;
+    padding: 24px 0;
+    border-top: 1px solid var(--line-soft);
   }
 
   /* ---------- FOOTER ---------- */
@@ -807,28 +674,32 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px 24px;
     padding: 38px 0 54px;
     border-top: 1px solid var(--line-soft);
+  }
+  .footer-mark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
   }
   .footer-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px 22px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    align-items: center;
+    gap: 6px 24px;
+    font-size: 15px;
     color: var(--ink-dim);
   }
-  .footer-links a { transition: color .2s ease; }
-  .footer-links a:hover { color: var(--accent); }
-  .footer-mark {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: var(--ink-faint);
+  .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    transition: color .2s ease;
   }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { color: var(--ink-faint); }
 
   /* ---------- LOAD / REVEAL ANIMATION ---------- */
   @media (prefers-reduced-motion: no-preference) {
@@ -839,59 +710,72 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
+    .reveal { opacity: 1; transform: none; transition: none; }
     .site-mark,
     .site-links a,
     .btn,
     .btn .arrow,
-    .book-link,
-    .book-link .arrow,
-    .book.flagship,
-    .app-project-link,
-    .app-project-link .arrow,
-    .discipline-rebuild__cta,
-    .essay,
-    .essay-title,
+    .text-link,
+    .text-link .arrow,
+    .book-cover,
+    .guide-row,
+    .guide-row__name,
+    .entry-title,
     .footer-links a { transition: none; }
     .btn:hover,
     .btn:hover .arrow,
-    .book-link:hover .arrow,
-    .book.flagship:hover,
-    .discipline-rebuild__cta:hover { transform: none; }
+    .text-link:hover .arrow,
+    .book-cover:hover { transform: none; }
   }
 
-  @media (max-width: 540px) {
+  /* ---------- TABLET ---------- */
+  @media (max-width: 960px) {
+    .wrap { padding: 0 32px; }
+    header.hero,
+    .guide-offer,
+    .proof-head,
+    .proof-feature { grid-template-columns: 1fr; gap: 40px; }
+    .field-log { max-width: 560px; }
+    .book-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 40px; }
+    .proof-visual { justify-self: start; }
+    .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    .entry-desc { max-width: var(--textw); }
+  }
+
+  /* ---------- PHONE ---------- */
+  @media (max-width: 600px) {
     body { font-size: 16px; }
-    .wrap { padding: 0 22px; }
-    .site-nav { align-items: flex-start; padding-top: 20px; }
-    .site-links { max-width: 240px; gap: 8px 14px; }
-    header.hero { padding-top: 54px; }
-    .current-work { padding: 18px; }
-    .book.flagship { padding: 24px 20px; }
-    .book.flagship .btn { width: 100%; justify-content: center; flex-wrap: wrap; }
-    .book.flagship .btn .btn-price { flex-basis: 100%; margin-left: 0; text-align: center; }
-    .guide-grid,
-    .proof-feature,
-    .continue-grid,
-    .essays,
+    .wrap { padding: 0 20px; }
+    .site-nav { padding: 14px 0; gap: 12px; }
+    .site-links { gap: 0 16px; font-size: 14px; }
+    .site-links .nav-book, .site-links .nav-projects { display: none; }
+    .site-links .nav-guide { padding: 0 12px; }
+    header.hero { padding: 44px 0 64px; gap: 36px; }
+    .identity { margin-bottom: 24px; }
+    .identity img { width: 60px; height: 60px; }
+    .lede { font-size: 17.5px; }
+    .hero-actions .btn { width: 100%; }
+    .field-log__head { padding: 12px 16px; font-size: 12px; }
+    .field-log__stat { padding: 16px 14px; }
+    .field-log__value { font-size: 26px; }
+    .field-log__label { font-size: 11px; }
+    .field-log__rows { padding: 16px; }
+    .field-log__row { grid-template-columns: 48px minmax(0, 1fr); gap: 10px; }
+    .field-log__note { padding: 0 16px 14px; }
+    .book-grid { grid-template-columns: 1fr; gap: 28px; }
+    .book-cover { max-width: 200px; }
+    .book-body { padding-top: 0; }
+    .book-sub { font-size: 18px; }
+    .book-buy .btn { width: 100%; }
+    .guide-row { align-items: flex-start; flex-direction: column; gap: 6px; }
+    .guide-offer { padding: 28px 20px; gap: 28px; }
+    .proof-feature { padding: 28px 20px; gap: 32px; }
+    .proof-feature .app-name { font-size: 30px; }
+    .proof-visual { max-width: 260px; }
+    .app-row { padding: 24px 0 0; }
     .principles { grid-template-columns: 1fr; }
-    .proof-feature { padding: 22px 18px; }
-    .proof-visual { max-width: 240px; }
-    .discipline-rebuild,
-    .signal-panel { padding: 24px 20px; }
-    .essay { padding: 22px 18px; }
-    .essay:first-child { grid-column: auto; }
-    .receipts { gap: 32px; }
-    footer { align-items: flex-start; flex-direction: column; }
-    .footer-mark {
-      font-size: clamp(9px, 2.82vw, 11px);
-      letter-spacing: 0.03em;
-      white-space: nowrap;
-    }
+    .principles li { padding: 18px 0; }
+    footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -906,228 +790,137 @@
       <img src="/favicon.svg" alt="" width="42" height="42" />
     </a>
     <div class="site-links">
+      <a class="nav-book" href="#book">Book</a>
       <a href="/writing/">Writing</a>
-      <a href="#proof">Projects</a>
-      <a href="#field-guide">Free guide</a>
+      <a class="nav-projects" href="#proof">Projects</a>
+      <a class="nav-guide" href="#field-guide">Free guide</a>
     </div>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
-    <div class="eyebrow reveal" style="--d:0ms">Building in public</div>
-    <h1 class="name reveal" style="--d:70ms">Garry Tipler</h1>
-    <p class="tagline reveal" style="--d:140ms">Systems for rebuilding a life.</p>
-    <p class="lede reveal" style="--d:210ms">
-      I rebuilt my life through discipline, structure, training, writing, and systems.
-      Everything here is a field-tested framework — built first for myself,
-      then shared so others can run it too.
-    </p>
-    <div class="reveal" style="--d:280ms">
-      <p class="proofline">
-        Books <span>·</span> field guides <span>·</span> tools <span>·</span> proof of practice
+    <div>
+      <div class="identity reveal" style="--d:0ms">
+        <img src="/assets/about/garry-tipler-portrait.webp" alt="Portrait of Garry Tipler outdoors." width="320" height="320" />
+        <div>
+          <p class="identity-name">Garry Tipler</p>
+          <p class="identity-role">Performance Systems Builder · Author · Founder of T.I.P.</p>
+        </div>
+      </div>
+      <h1 class="tagline reveal" style="--d:70ms">Systems for rebuilding a life.</h1>
+      <p class="lede reveal" style="--d:140ms">
+        My rebuild started in a shelter. The systems that carried me out —
+        discipline, training, and writing — are all here. I tested them on
+        myself first, then wrote them down so you can run them too.
       </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/writing/">
-          Explore the writing <span class="arrow">→</span>
-        </a>
-        <a class="text-action" href="#proof">See what I’m building →</a>
+      <div class="hero-actions reveal" style="--d:210ms">
+        <a class="btn btn-primary" href="#book">Start with the book <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-secondary" href="#field-guide">Get the free 7-day guide</a>
       </div>
     </div>
-    <aside class="current-work reveal" style="--d:340ms">
-      <p class="current-work-label">Currently</p>
-      <p class="current-work-status">Building SelfTrainer Native toward App Store release while documenting the systems behind the work.</p>
+
+    <!-- Field log rule: real numbers only, never estimated.
+         Sessions comes from the SelfTrainer PWA and is hand-updated with its
+         as-of date. Weeks is counted forward from data-start by the script
+         below (37 weeks on 2026-09-26). -->
+    <aside class="field-log reveal" style="--d:280ms" aria-labelledby="field-log-title">
+      <div class="field-log__head">
+        <h2 class="field-log__title" id="field-log-title">Field log</h2>
+        <span>proof of practice</span>
+      </div>
+      <div class="field-log__stats">
+        <div class="field-log__stat">
+          <span class="field-log__value">101</span>
+          <span class="field-log__label">sessions logged in SelfTrainer</span>
+        </div>
+        <div class="field-log__stat">
+          <span class="field-log__value" id="weeks-in-system" data-start="2026-01-10">37</span>
+          <span class="field-log__label">weeks in the system</span>
+        </div>
+        <div class="field-log__stat">
+          <span class="field-log__value">3</span>
+          <span class="field-log__label">titles shipped</span>
+        </div>
+      </div>
+      <div class="field-log__rows">
+        <div class="field-log__row">
+          <span class="field-log__key">now</span>
+          <span class="field-log__val">Building SelfTrainer Native toward App Store release.</span>
+        </div>
+        <div class="field-log__row">
+          <span class="field-log__key">latest</span>
+          <span class="field-log__val"><a id="latest-writing" href="/writing/fragments/fragments-4-the-fire/">Fragments #4 — The Fire</a></span>
+        </div>
+      </div>
+      <p class="field-log__note">Sessions as of Sep 26, 2026.</p>
     </aside>
   </header>
 
   <main id="main-content" tabindex="-1">
-  <!-- 001 — BOOKS -->
-  <section>
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">001</span>
-      <h2 class="sec-title">Start Here — The Books</h2>
-    </div>
-
-    <div class="book flagship reveal">
-      <div class="book-title">I Am the Proof</div>
-      <div class="book-sub">Building in the Dark — A Journey from a Shelter to My Higher Self</div>
-      <p class="book-desc">
-        The full story and the framework underneath it: where the rebuild started,
-        and how the systems held when nothing else did.
-      </p>
-     <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GX379N1L">
-        Get it on Kindle <span class="arrow">→</span>
-        <span class="btn-price">$4.99 · free on KU</span>
+  <!-- BOOK -->
+  <section id="book" aria-labelledby="book-heading">
+    <div class="book-grid">
+      <a class="book-cover reveal" href="https://www.amazon.com/dp/B0GX379N1L" aria-label="I Am the Proof on Amazon Kindle">
+        <img src="/assets/books/i-am-the-proof-cover.webp" alt="Cover of I Am the Proof: Building in the Dark by Garry Tipler." width="600" height="960" loading="lazy" />
       </a>
-    </div>
-
-    <div class="guide-grid">
-      <div class="book reveal">
-        <div class="book-title">The Discipline Training Field Guide</div>
-        <p class="book-desc">The core systems for daily discipline that survives bad days.</p>
-        <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-field-guide">
-          Get it on Gumroad <span class="arrow">→</span>
-          <span class="link-price">$7</span>
-        </a>
-      </div>
-
-      <div class="book reveal">
-        <div class="book-title">Discipline Recovery Field Guide</div>
-        <p class="book-desc">
-          What to do when discipline slips — the system for getting back on track
-          without starting over.
+      <div class="book-body">
+        <p class="eyebrow reveal">Start with the book</p>
+        <h2 class="book-title reveal" id="book-heading">I Am the Proof</h2>
+        <p class="book-sub reveal">Building in the Dark — A Journey from a Shelter to My Higher Self</p>
+        <p class="book-desc reveal">
+          The full story and the framework underneath it: where the rebuild started,
+          and how the systems held when nothing else did.
         </p>
-        <a class="book-link" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
-          Get it on Gumroad <span class="arrow">→</span>
-          <span class="link-price">$7</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 002 — PROOF OF PRACTICE -->
-  <section id="proof">
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">002</span>
-      <h2 class="sec-title">Proof of Practice</h2>
-    </div>
-    <p class="proof-intro reveal">The books are the doctrine. The apps are the operating surface.</p>
-    <p class="proof-copy reveal">
-      Each system starts from lived pressure, gets tested in real routines,
-      then gets refined into something cleaner, calmer, and repeatable.
-    </p>
-
-    <!-- Receipts rule: real numbers only, hand-updated,
-         never estimated. Sessions logged comes from the SelfTrainer PWA. -->
-    <div class="receipts reveal">
-      <div class="receipt">
-        <span class="receipt-value">95</span>
-        <span class="receipt-label">Sessions logged</span>
-      </div>
-      <div class="receipt">
-        <span class="receipt-value">35</span>
-        <span class="receipt-label">Weeks in system</span>
-      </div>
-      <div class="receipt">
-        <span class="receipt-value">3</span>
-        <span class="receipt-label">Titles shipped</span>
-      </div>
-    </div>
-
-    <div class="proof-feature reveal">
-      <div class="proof-feature__copy">
-        <span class="app-eyebrow">Flagship build</span>
-        <span class="app-name">SelfTrainer</span>
-        <span class="app-status">In progress</span>
-        <span class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</span>
-        <a class="book-link app-project-link" href="/projects/selftrainer/">
-          View the build <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-      <figure class="proof-visual">
-        <img
-          src="/assets/selftrainer/selftrainer-home-up-next-pwa.webp"
-          alt="SelfTrainer home screen showing the next session in the selected training rotation."
-          loading="lazy"
-          width="944"
-          height="2048"
-        />
-        <figcaption>Home / Up Next — the planned work stays close to the next honest action.</figcaption>
-      </figure>
-    </div>
-
-    <div class="app reveal">
-      <span class="app-name">FitPulse</span>
-      <span class="app-status">In development</span>
-      <span class="app-desc">A coaching operating system for trainers who need clearer client structure, program visibility, and performance context.</span>
-      <a class="book-link app-project-link" href="/projects/fitpulse/">
-        View the project <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 003 — WRITING -->
-  <section>
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">003</span>
-      <h2 class="sec-title">Writing</h2>
-    </div>
-    <p class="writing-desc reveal">
-      Essays and fragments on discipline, structure, execution, recovery,
-      self-command, and the long rebuild.
-    </p>
-
-    <div class="essays">
-      <a class="essay reveal" href="/writing/essays/discipline-should-not-cost-me-my-heart/">
-        <span class="essay-meta"><span class="essay-theme">Discipline</span><span aria-hidden="true">·</span><span>8 min read</span></span>
-        <span class="essay-title">Discipline Should Not Cost Me My Heart</span>
-        <span class="essay-desc">Staying focused without becoming cold.</span>
-        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="essay reveal" href="/writing/fragments/fragments-4-the-fire/">
-        <span class="essay-meta"><span class="essay-theme">Recovery</span><span aria-hidden="true">·</span><span>1 min read</span></span>
-        <span class="essay-title">Fragments #4 — The Fire</span>
-        <span class="essay-desc">A field note on setbacks: reading a forced slowdown as instruction, not interruption.</span>
-        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="essay reveal" href="https://medium.com/tenacious-individual-performance/from-thought-to-form-67d0dec5c6f7">
-        <span class="essay-meta"><span class="essay-theme">Creation</span><span aria-hidden="true">·</span><span>5 min read</span></span>
-        <span class="essay-title">From Thought to Form</span>
-        <span class="essay-desc">On publishing the first book: how months of lived practice became a finished thing.</span>
-        <span class="essay-cta">Read essay <span aria-hidden="true">→</span></span>
-      </a>
-    </div>
-
-    <a class="book-link reveal" href="/writing/">
-      Explore the writing library <span class="arrow">→</span>
-    </a>
-  </section>
-
-  <!-- 004 — CONTINUE -->
-  <section id="field-guide">
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">004</span>
-      <h2 class="sec-title">Keep going</h2>
-    </div>
-    <div class="continue-grid">
-      <article class="discipline-rebuild reveal" aria-labelledby="discipline-rebuild-title">
-        <div class="discipline-rebuild__inner">
-          <p class="discipline-rebuild__eyebrow">Free field guide</p>
-          <h2 id="discipline-rebuild-title">Rebuild Your Discipline in Seven Days</h2>
-          <p class="discipline-rebuild__copy">
-            You do not need another dramatic restart. You need a clear way to return.
-            <strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol
-            for restoring structure, rebuilding self-trust, and returning to action.
-          </p>
-
-          <ul class="discipline-rebuild__contents">
-            <li>A focused seven-day rebuilding protocol</li>
-            <li>Simple daily actions and reflection prompts</li>
-            <li>A printable discipline rebuild scorecard</li>
-            <li>A sustainable plan for the next 14 days</li>
-          </ul>
-
-          <a
-            class="discipline-rebuild__cta"
-            href="/assets/downloads/the-7-day-discipline-rebuild.pdf"
-            download
-          >
-            Download the Free Field Guide
+        <div class="book-buy reveal">
+          <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GX379N1L">
+            Get it on Kindle <span class="arrow" aria-hidden="true">→</span>
           </a>
-
-          <p class="discipline-rebuild__note">
-            Free PDF. No dramatic overhaul - just seven deliberate days of returning to what matters.
-          </p>
+          <span class="book-price">$4.99 · free on Kindle Unlimited</span>
         </div>
-      </article>
 
-      <aside class="signal-panel reveal" id="signal" aria-labelledby="signal-title">
-        <p class="discipline-rebuild__eyebrow">The Signal</p>
-        <h2 class="book-title" id="signal-title">One useful email when there is something worth running.</h2>
-        <p class="signal-desc">
-          Roughly once a month: a system, a fix, or a field note. Tested on me before it reaches you.
+        <div class="guides reveal">
+          <h3 class="guides-title">Field guides</h3>
+          <a class="guide-row" href="https://garrytip.gumroad.com/l/discipline-field-guide">
+            <span>
+              <span class="guide-row__name">The Discipline Training Field Guide</span>
+              <span class="guide-row__desc">The core systems for daily discipline that survives bad days.</span>
+            </span>
+            <span class="guide-row__price">$7 on Gumroad →</span>
+          </a>
+          <a class="guide-row" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
+            <span>
+              <span class="guide-row__name">Discipline Recovery Field Guide</span>
+              <span class="guide-row__desc">What to do when discipline slips — the system for getting back on track without starting over.</span>
+            </span>
+            <span class="guide-row__price">$7 on Gumroad →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE GUIDE + THE SIGNAL -->
+  <section id="field-guide" aria-labelledby="discipline-rebuild-title">
+    <div class="guide-offer reveal">
+      <div>
+        <p class="eyebrow">Free field guide</p>
+        <h2 class="sec-title" id="discipline-rebuild-title">Rebuild Your Discipline in Seven Days</h2>
+        <p class="sec-copy">
+          You do not need another dramatic restart. You need a clear way to return.
+          <strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol
+          for restoring structure, rebuilding self-trust, and returning to action.
         </p>
+        <ul class="guide-contents">
+          <li>A focused seven-day rebuilding protocol</li>
+          <li>Simple daily actions and reflection prompts</li>
+          <li>A printable discipline rebuild scorecard</li>
+          <li>A sustainable plan for the next 14 days</li>
+        </ul>
+      </div>
+
+      <div id="signal">
         <form class="signal-form" id="signal-form" novalidate>
-          <label class="sr-only" for="signal-email">Email address</label>
+          <label for="signal-email">Email address</label>
           <input
             type="email"
             id="signal-email"
@@ -1137,21 +930,107 @@
             required
           />
           <button type="submit" class="btn btn-primary" id="signal-submit">
-            Subscribe <span class="arrow">→</span>
+            Send me the guide <span class="arrow" aria-hidden="true">→</span>
           </button>
         </form>
         <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
-        <p class="signal-fineprint">No spam. Leave anytime.</p>
-      </aside>
+        <a class="text-link guide-download" id="guide-download" href="/assets/downloads/the-7-day-discipline-rebuild.pdf" download hidden>
+          Download the guide (PDF) <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="signal-fineprint">
+          You’ll also get The Signal: roughly once a month, a system, a fix, or a
+          field note. Tested on me before it reaches you. No spam. Leave anytime.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- 005 — PRINCIPLES -->
-  <section>
-    <div class="sec-head reveal">
-      <span class="sec-num" aria-hidden="true">005</span>
-      <h2 class="sec-title">Principles</h2>
+  <!-- PROOF OF PRACTICE -->
+  <section id="proof" aria-labelledby="proof-heading">
+    <div class="proof-head">
+      <div>
+        <p class="eyebrow reveal">Proof of practice</p>
+        <h2 class="sec-title reveal" id="proof-heading">The books are the doctrine. The apps are the operating surface.</h2>
+      </div>
+      <p class="sec-copy reveal">
+        Each system starts from lived pressure, gets tested in real routines,
+        then gets refined into something cleaner, calmer, and repeatable.
+      </p>
     </div>
+
+    <div class="proof-feature reveal">
+      <div>
+        <div class="app-title">
+          <h3 class="app-name">SelfTrainer</h3>
+          <span class="app-status">In progress</span>
+        </div>
+        <p class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</p>
+        <a class="text-link" href="/projects/selftrainer/">
+          View the build <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+      <figure class="proof-visual">
+        <img
+          src="/assets/selftrainer/selftrainer-home-up-next-crop.webp"
+          alt="SelfTrainer home screen showing the next session in the selected training rotation."
+          loading="lazy"
+          width="720"
+          height="1093"
+        />
+        <figcaption>Home / Up Next — the planned work stays close to the next honest action.</figcaption>
+      </figure>
+    </div>
+
+    <div class="app-row reveal">
+      <div class="app-row__main">
+        <h3 class="app-name">FitPulse</h3>
+        <span class="app-status">In development</span>
+        <p class="app-desc">A coaching operating system for trainers who need clearer client structure, program visibility, and performance context.</p>
+      </div>
+      <a class="text-link" href="/projects/fitpulse/">
+        View the project <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section aria-labelledby="writing-heading">
+    <div class="writing-head">
+      <div>
+        <h2 class="sec-title reveal" id="writing-heading">Writing</h2>
+        <p class="sec-copy reveal">
+          Essays and fragments on discipline, structure, execution, recovery,
+          self-command, and the long rebuild.
+        </p>
+      </div>
+    </div>
+
+    <div class="writing-list">
+      <a class="entry reveal" href="/writing/fragments/fragments-4-the-fire/">
+        <span class="entry-meta">Aug 6, 2026 · Fragment</span>
+        <span class="entry-title">Fragments #4 — The Fire</span>
+        <span class="entry-desc">A field note on setbacks: reading a forced slowdown as instruction, not interruption.</span>
+      </a>
+      <a class="entry reveal" href="/writing/essays/discipline-should-not-cost-me-my-heart/">
+        <span class="entry-meta">Jul 27, 2026 · Essay</span>
+        <span class="entry-title">Discipline Should Not Cost Me My Heart</span>
+        <span class="entry-desc">Staying focused without becoming cold.</span>
+      </a>
+      <a class="entry reveal" href="/writing/fragments/fragments-5-refinement/">
+        <span class="entry-meta">Mar 9, 2026 · Fragment</span>
+        <span class="entry-title">Fragments #5 — Refinement</span>
+        <span class="entry-desc">A field note on refinement through faith, responsibility, and the discipline of letting go of limiting beliefs.</span>
+      </a>
+    </div>
+
+    <a class="text-link writing-more reveal" href="/writing/">
+      Explore the writing library <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section aria-labelledby="principles-heading">
+    <h2 class="sec-title reveal" id="principles-heading">Principles</h2>
     <ul class="principles">
       <li class="reveal">Structure beats mood.</li>
       <li class="reveal">Clear systems protect honest effort.</li>
@@ -1163,11 +1042,12 @@
   </main>
 
   <footer>
-    <div class="footer-mark reveal">© 2026 Garry Tipler · The proof is the work.</div>
-    <nav class="footer-links reveal" aria-label="Connect">
+    <p class="footer-mark">The proof is the work.</p>
+    <nav class="footer-links" aria-label="Connect">
       <a href="https://x.com/garry_tipler">X</a>
       <a href="https://garrytip.gumroad.com">Gumroad</a>
       <a href="https://medium.com/@Garry_Tipler">Medium</a>
+      <span class="footer-copy">© 2026 Garry Tipler</span>
     </nav>
   </footer>
 
@@ -1207,12 +1087,42 @@
     }
   })();
 
-  // Kit subscription (custom HTML form, AJAX, no redirect)
+  // Field log: weeks in the system counts forward from its start date.
+  (function () {
+    var el = document.getElementById('weeks-in-system');
+    if (!el) return;
+    var start = Date.parse(el.getAttribute('data-start') + 'T00:00:00');
+    var weeks = Math.floor((Date.now() - start) / 604800000);
+    if (weeks > Number(el.textContent)) el.textContent = String(weeks);
+  })();
+
+  // Field log: latest writing follows the first item in the site's own RSS feed.
+  (function () {
+    var link = document.getElementById('latest-writing');
+    if (!link || !window.fetch || !window.DOMParser) return;
+    fetch('/rss.xml')
+      .then(function (res) { return res.ok ? res.text() : Promise.reject(); })
+      .then(function (xml) {
+        var item = new DOMParser().parseFromString(xml, 'application/xml').querySelector('item');
+        var title = item && item.querySelector('title');
+        var href = item && item.querySelector('link');
+        if (!title || !href) return;
+        var url = new URL(href.textContent.trim());
+        if (url.hostname !== 'garrytipler.com') return;
+        link.textContent = title.textContent.trim();
+        link.setAttribute('href', url.pathname);
+      })
+      .catch(function () {});
+  })();
+
+  // Kit subscription (custom HTML form, AJAX, no redirect).
+  // A successful signup reveals the free guide download.
   (function () {
     var KIT_FORM_ID = '9676498';
     var form = document.getElementById('signal-form');
     var status = document.getElementById('signal-status');
     var button = document.getElementById('signal-submit');
+    var download = document.getElementById('guide-download');
     if (!form) return;
 
     form.addEventListener('submit', function (e) {
@@ -1240,9 +1150,11 @@
         .then(function (res) { return res.json(); })
         .then(function (json) {
           if (json.status === 'success' || json.subscription) {
-            status.textContent = 'Check your inbox — confirm and you\'re in.';
+            status.textContent = 'You’re in. Your guide is ready below — check your inbox to confirm The Signal.';
             status.className = 'signal-status ok';
             form.reset();
+            button.disabled = false;
+            if (download) download.hidden = false;
           } else {
             throw new Error('rejected');
           }
