@@ -7,7 +7,7 @@ import {
 } from "../../lib/writing";
 
 const publishedEntries = await getPublishedWritingEntries();
-const latestEntries = sortWritingByPublicationDate(publishedEntries);
+const latestEntries = sortWritingByPublicationDate(publishedEntries).slice(0, 6);
 const fragmentCount = publishedEntries.filter((entry) => entry.data.type === "fragment").length;
 const essayCount = publishedEntries.filter((entry) => entry.data.type === "essay").length;
 const pieces = (count: number) => `${count} ${count === 1 ? "piece" : "pieces"}`;
@@ -69,6 +69,7 @@ const collectionNote = `${fragmentCount} ${fragmentCount === 1 ? "fragment" : "f
     <div class="library-section-heading">
       <p class="library-kicker">Latest</p>
       <h2 id="latest-heading">Recent writing</h2>
+      <a class="back-link" href="/writing/archive/">View all writing <span aria-hidden="true">→</span></a>
     </div>
     <WritingList entries={latestEntries} emptyMessage="Published writing will appear here." />
   </section>
