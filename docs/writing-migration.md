@@ -104,6 +104,8 @@ For Fragment #19, `What I Carry Forward` (Medium ID `438368cc6eab`) was publishe
 
 On September 28, 2026, the author approved publication of Fragments #6–#15 as one batch. Each entry kept its reviewed historical date and gained `publishedDate: 2026-09-28` and `status: published`. Medium canonical settings were not changed.
 
+For Fragment #20, `Fragments #20 — I’m Not Waiting to Arrive` (Medium ID `82a4ff5d19db`) was reviewed from the live Medium story. The author confirmed `originalPublishedDate: 2026-09-28` and approved the review draft and metadata on September 29, 2026. All 116 prose blocks and 26 hard line breaks remain unchanged; the UTF-8 LF source SHA-256 is `94cdf2d3ddabc850e2b0a66a96908f82e9f948abc4c2de16b137c2cbbf35d2b9`. The single lead image is saved locally, with its original caption and approved descriptive alt text. The author approved publication, commit and push. The repository entry records `publishedDate: 2026-09-29` and `status: published`; live deployment is verified separately after push. Writing-tool tests and full validation passed with 26 published entries. The article was visually reviewed at 1440px and 390px. Medium canonical settings remain unchanged.
+
 ## Historical date and image reconciliation
 
 The author clarified that the dates in the owner-facing Medium Stories list are the original publication dates to carry onto GarryTipler.com. This later decision supersedes the historical-date choices recorded in the individual review notes above where those choices used the export's next-day UTC date. Preserve every existing `publishedDate`, which records when the site first published the article.
