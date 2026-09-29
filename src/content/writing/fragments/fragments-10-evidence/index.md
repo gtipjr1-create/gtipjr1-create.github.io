@@ -9,7 +9,7 @@ tags:
   - "mindset"
   - "personal-development"
   - "self-improvement"
-originalPublishedDate: "2026-05-05"
+originalPublishedDate: "2026-05-04"
 publishedDate: "2026-09-28"
 fragmentNumber: 10
 featured: false

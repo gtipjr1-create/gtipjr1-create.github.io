@@ -9,7 +9,7 @@ tags:
   - "mindset"
   - "personal-development"
   - "self-improvement"
-originalPublishedDate: "2026-03-31"
+originalPublishedDate: "2026-03-30"
 publishedDate: "2026-09-28"
 fragmentNumber: 7
 featured: false
@@ -17,6 +17,9 @@ mediumUrl: "https://medium.com/@Garry_Tipler/from-thought-to-structure-bf876e2dc
 status: "published"
 related: []
 connections: []
+heroImage:
+  src: "/assets/writing/fragments/fragments-7-from-thought-to-structure/hero.jpeg"
+  alt: "Open handwritten notebook against a pale background."
 ---
 
 #### On preserving what matters

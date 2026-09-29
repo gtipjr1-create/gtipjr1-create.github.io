@@ -17,6 +17,9 @@ mediumUrl: "https://medium.com/@Garry_Tipler/pride-is-a-trap-cfad708fd606"
 status: "published"
 related: []
 connections: []
+heroImage:
+  src: "/assets/writing/fragments/fragments-9-pride-is-a-trap/hero.jpeg"
+  alt: "Black-and-white photograph of a seated woman holding a dumbbell."
 ---
 
 #### On unlearning what once defined you

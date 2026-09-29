@@ -207,10 +207,9 @@ assert.match(startHereHtml, /Fragments #4/);
 
 assert.match(pilotHtml, new RegExp(`<link rel="canonical" href="${canonicalUrl}"`));
 assert.match(pilotHtml, /property="og:type" content="article"/);
-assert.match(pilotHtml, /property="article:published_time" content="2026-08-06"/);
+assert.match(pilotHtml, /property="article:published_time" content="2026-03-02"/);
 assert.match(pilotHtml, />1 min read</);
-assert.match(pilotHtml, /Also available on Medium\./);
-assert.doesNotMatch(pilotHtml, /Originally published on Medium on/);
+assert.match(pilotHtml, /Originally published on Medium on March 2, 2026\./);
 assert.match(
   pilotHtml,
   /https:\/\/medium\.com\/@Garry_Tipler\/fragments-4-the-fire-7301b68ca8b1/,
@@ -245,7 +244,7 @@ assert.doesNotMatch(sitemapXml, /medium\.com/i);
 
 assert.match(rssXml, /<title>Fragments #4 — The Fire<\/title>/);
 assert.match(rssXml, new RegExp(`<link>${canonicalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</link>`));
-assert.match(rssXml, /<pubDate>Thu, 06 Aug 2026 00:00:00 GMT<\/pubDate>/);
+assert.match(rssXml, /<pubDate>Mon, 02 Mar 2026 00:00:00 GMT<\/pubDate>/);
 assert.match(rssXml, /<atom:link href="https:\/\/garrytipler\.com\/rss\.xml"/);
 assert.doesNotMatch(rssXml, /medium\.com/i);
 
@@ -262,7 +261,7 @@ const jsonLd = JSON.parse(jsonLdMatch[1]);
 assert.equal(jsonLd["@type"], "Article");
 assert.equal(jsonLd.url, canonicalUrl);
 assert.equal(jsonLd.mainEntityOfPage, canonicalUrl);
-assert.equal(jsonLd.datePublished, "2026-08-06");
+assert.equal(jsonLd.datePublished, "2026-03-02");
 assert.equal(jsonLd.headline, "Fragments #4 — The Fire");
 
 console.log(

@@ -10,7 +10,9 @@ tags:
   - "discipline"
   - "mindset"
   - "fitness"
+originalPublishedDate: "2026-03-02"
 publishedDate: "2026-08-06"
+updatedDate: "2026-09-28"
 fragmentNumber: 4
 featured: true
 startHereOrder: 1

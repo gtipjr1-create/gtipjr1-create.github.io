@@ -98,6 +98,24 @@ For Fragment #16, retain the exact export timestamp `2026-07-07T02:18:11.089Z` a
 
 On September 28, 2026, the author approved publication of Fragments #6–#15 as one batch. Each entry kept its reviewed historical date and gained `publishedDate: 2026-09-28` and `status: published`. Medium canonical settings were not changed.
 
+## Historical date and image reconciliation
+
+The author clarified that the dates in the owner-facing Medium Stories list are the original publication dates to carry onto GarryTipler.com. This later decision supersedes the historical-date choices recorded in the individual review notes above where those choices used the export's next-day UTC date. Preserve every existing `publishedDate`, which records when the site first published the article.
+
+| Fragment | Medium Stories date | Site correction |
+| ---: | --- | --- |
+| #4 | 2026-03-02 | Add missing `originalPublishedDate` |
+| #6 | 2026-03-23 | Replace 2026-03-24 |
+| #7 | 2026-03-30 | Replace 2026-03-31 |
+| #8 | 2026-04-20 | Replace 2026-04-21 |
+| #10 | 2026-05-04 | Replace 2026-05-05 |
+| #11 | 2026-05-11 | Replace 2026-05-12 |
+| #12 | 2026-05-18 | Replace 2026-05-19 |
+| #14 | 2026-06-15 | Replace 2026-06-16 |
+| #15 | 2026-06-29 | Replace 2026-06-30 |
+
+The author also requested that images from published Medium pieces come over. The four previously omitted images for Fragments #5, #6, #7, and #9 are now local site assets. Images for #5, #7, and #9 appear before the article prose; #6 remains between `Order does not reduce ambition. It strengthens it.` and `Fragments continue.` as in the source. The existing Essay image stays unchanged. The author-approved omission of the Medium-only book CTA in #6 remains in effect.
+
 ## Medium export commands
 
 Inspect an explicit ZIP without writing output:
