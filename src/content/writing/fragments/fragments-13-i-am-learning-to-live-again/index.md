@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-06-02"
+publishedDate: "2026-09-28"
 fragmentNumber: 13
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/i-am-learning-to-live-again-e928236b05e7"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---

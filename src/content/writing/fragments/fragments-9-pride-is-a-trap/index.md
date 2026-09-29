@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-04-27"
+publishedDate: "2026-09-28"
 fragmentNumber: 9
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/pride-is-a-trap-cfad708fd606"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---

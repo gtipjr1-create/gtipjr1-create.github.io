@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-06-16"
+publishedDate: "2026-09-28"
 fragmentNumber: 14
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/good-morning-giant-1ccc5f50d63b"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---

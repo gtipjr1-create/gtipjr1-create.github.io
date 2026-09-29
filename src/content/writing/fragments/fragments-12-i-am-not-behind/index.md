@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-05-19"
+publishedDate: "2026-09-28"
 fragmentNumber: 12
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/i-am-not-behind-52e78d543e3f"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---

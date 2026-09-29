@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-04-21"
+publishedDate: "2026-09-28"
 fragmentNumber: 8
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/there-is-a-point-where-effort-stops-feeling-like-effort-9a7ae823bdf4"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---

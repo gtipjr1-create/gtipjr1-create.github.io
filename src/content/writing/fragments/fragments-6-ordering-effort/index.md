@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-03-24"
+publishedDate: "2026-09-28"
 fragmentNumber: 6
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-6-ordering-effort-3a9207b6326f"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---

@@ -44,7 +44,7 @@ src/content/writing/
   letters/
 ```
 
-The current published content inventory contains six real pieces:
+The initial published content inventory contained these six pieces:
 
 ```text
 src/content/writing/fragments/fragments-1-feelings-dont-build-futures/index.md
@@ -55,7 +55,7 @@ src/content/writing/fragments/fragments-5-refinement/index.md
 src/content/writing/essays/discipline-should-not-cost-me-my-heart/index.md
 ```
 
-Fragments #6–#15 also exist as private repository drafts. They remain excluded from routes, indexes, archive, sitemap, RSS, and all other generated public output.
+Fragments #6–#15 were subsequently published on GarryTipler.com on September 28, 2026. All 15 Fragments and the Essay now have public routes and discovery entries.
 
 ### Public route structure
 
@@ -361,6 +361,8 @@ Fragments #12–#15 completed private-draft preparation and were committed and p
 
 The private batches establish `Recovery` as an approved Fragment category alongside `Discipline`: Fragments #13 and #15 use `Recovery` based on their focus on reintegration, openness, and life after protective structure. Final display titles, slugs, dates, subtitles, summaries, taxonomy, image/CTA handling, and prose transformations are recorded per entry in `docs/writing-migration.md` and `NEXT_SESSION.md`.
 
+On September 28, 2026, the author approved publication of Fragments #6–#15 together. Their reviewed historical dates remain unchanged. Each entry gained `publishedDate: 2026-09-28` and `status: published`; titles, slugs, summaries, categories, tags, prose, relationships, and images were not changed. The writing-tool tests and full repository validation passed with 16 published entries. Generated routes, canonical URLs, sitemap, RSS, and Fragment sequence links passed the build verifier. The Fragments index and representative articles were visually reviewed at desktop and 390px mobile widths.
+
 ## Current discovery behavior
 
 ### Writing landing page
@@ -499,9 +501,8 @@ The homepage was verified live after commit `553f052`. The established routes we
 - Editorial review and publication of later generated Medium packages.
 - Bulk reclassification of response-ambiguous short records.
 - Review and private-draft preparation of Fragments #16–#18; numbering is approved, but their final titles, slugs, summaries, taxonomy, historical dates, images, and transformations remain undecided.
-- Publication selection for the private Fragment #6–#15 drafts.
 - Remote-image downloads or inferred image metadata.
-- Bulk writing publication.
+- Further bulk writing publication without individual source and metadata review.
 - Full-text search.
 - Tag-filter UI until content volume justifies it.
 - Automatic related-work inference.
@@ -511,13 +512,13 @@ The homepage was verified live after commit `553f052`. The established routes we
 
 ## Next phase
 
-Fragments #12–#15 are committed private drafts. The next bounded slice is individual source and metadata review for Fragment #16 when requested. Do not publish any private draft without separate approval.
+Fragments #6–#15 are published. The next bounded slice is individual source and metadata review for Fragment #16 when requested. Medium canonical changes remain separate from site publication and require verification of each live article first.
 
 See `NEXT_SESSION.md` for the restart-ready handoff, validation evidence, and explicit non-goals.
 
 ## Repository status at this record
 
-At this stop point, `main` includes the importer foundation, parser fidelity fixes, published Fragments #1–#5, and committed private Fragments #6–#15. The #12–#15 checkpoint was based on `a101e78`, which also contains the subsequent homepage refresh.
+At this stop point, `main` includes the importer foundation, parser fidelity fixes, published Fragments #1–#15, and the existing Essay. The #6–#15 publication batch was based on `1c95dfc`.
 
 The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
 

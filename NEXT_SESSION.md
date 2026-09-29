@@ -1,15 +1,15 @@
-# Next Session — Review Fragment #16
+# Next Session — Published Fragments #6–#15
 
-**Stop point:** Fragment #5 is the latest published Fragment. Fragments #6–#15 are author-approved private drafts committed on `main`. None is published.
+**Stop point:** Fragments #1–#15 and the existing Essay are published on GarryTipler.com. Fragments #6–#15 received the site publication date `2026-09-28`; their verified historical Medium dates remain unchanged.
 
-**Next safest step:** With a new bounded instruction, review Fragment #16's source and metadata package before preparing a private draft. Do not publish any draft, deploy, alter Medium, or stage `artifacts/`.
+**Next safest step:** With a new bounded instruction, review Fragment #16's source and metadata package before preparing a private draft. Medium canonical settings remain untouched; update them only after separately verifying each live GarryTipler.com article. Do not stage `artifacts/`.
 
 ## Repository state
 
-- Branch: `main`; the base before the #12–#15 checkpoint was `a101e78` — `feat: refresh homepage with field log, book cover, and gated guide`.
-- The #12–#15 checkpoint was committed and pushed after author approval.
+- Branch: `main`; the base before the publication batch was `1c95dfc` — `chore: prepare fragments 12-15 private drafts`.
+- The #6–#15 publication batch was approved by the author.
 - Checkpoint documentation: `docs/writing-migration.md`, `NEXT_SESSION.md`, and `SESSION.md`.
-- Committed private drafts:
+- Published entries in the prior #12–#15 checkpoint:
   - `src/content/writing/fragments/fragments-12-i-am-not-behind/index.md`
   - `src/content/writing/fragments/fragments-13-i-am-learning-to-live-again/index.md`
   - `src/content/writing/fragments/fragments-14-good-morning-giant/index.md`
@@ -19,7 +19,7 @@
 
 ## Approved #12–#15 batch
 
-All four entries are `type: fragment`, `status: draft`, `featured: false`, have no `publishedDate` or `startHereOrder`, and keep `related` and `connections` empty. Exact UTC timestamps remain in `docs/writing-migration.md`; reader-facing historical dates use the dates Medium displayed.
+All four entries are `type: fragment`, `status: published`, `publishedDate: 2026-09-28`, `featured: false`, have no `startHereOrder`, and keep `related` and `connections` empty. Exact UTC timestamps remain in `docs/writing-migration.md`; reader-facing historical dates use the dates Medium displayed.
 
 ### Fragment #12 — I Am Not Behind
 
@@ -60,16 +60,14 @@ All four entries are `type: fragment`, `status: draft`, `featured: false`, have 
 ## Validation completed
 
 - `npm.cmd run test:writing-tools` — passed.
-- `npm.cmd run validate` — passed; 16 entries recognized as 6 published and 10 drafts.
+- `npm.cmd run validate` — passed after publication metadata changes; 16 entries recognized as 16 published and 0 drafts.
 - Exact body comparisons passed for Fragments #12–#15 after only their approved transformations.
-- Draft exclusion checks passed for every Fragment #6–#15 slug: no route and no reference exists in `dist/`.
+- Before publication, draft exclusion checks passed for every Fragment #6–#15 slug. After publication, the build verifier checked all new routes, canonical URLs, sitemap and RSS entries, and the full Fragment sequence.
 - `git diff --check` — passed, with only informational CRLF conversion warnings for edited documentation.
-- No visual page review was required because the drafts are intentionally excluded from generated routes.
+- The Fragments index and representative articles were visually reviewed at the default desktop viewport and a 390px narrow-mobile viewport.
 
 ## Locked boundaries
 
-- Published: Fragments #1–#5 and the existing Essay.
-- Private and committed: Fragments #6–#15.
+- Published: Fragments #1–#15 and the existing Essay.
 - Untouched: Fragments #16–#18.
-- No publication set has been approved.
-- No Medium canonical settings, deployment configuration, or external service was changed.
+- Medium canonical settings and deployment configuration were not changed.

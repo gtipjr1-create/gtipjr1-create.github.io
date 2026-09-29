@@ -10,10 +10,11 @@ tags:
   - "personal-development"
   - "self-improvement"
 originalPublishedDate: "2026-05-12"
+publishedDate: "2026-09-28"
 fragmentNumber: 11
 featured: false
 mediumUrl: "https://medium.com/@Garry_Tipler/fragment-s-stewardship-fb3e11bd3307"
-status: "draft"
+status: "published"
 related: []
 connections: []
 ---
