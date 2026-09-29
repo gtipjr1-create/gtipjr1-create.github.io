@@ -31,7 +31,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/assets/about/garry-tipler-hero.webp" />
 
 <script type="application/ld+json">
 {
@@ -51,74 +52,40 @@
 <style>
   :root {
     --bg:        #0b0b0c;
-    --bg-raised: #131315;
-    --bg-card:   #111113;
-    --ink:       #ECEAE3;
-    --ink-soft:  #c9c5bb;
-    --ink-dim:   #a8a399;
-    --ink-faint: #8a867c;
-    --line:      rgba(236, 234, 227, 0.12);
-    --line-soft: rgba(236, 234, 227, 0.07);
+    --bg-2:      #0e0e0d;
+    --bg-card:   #121210;
+    --bg-card-2: #141412;
+    --ink:       #eceae3;
+    --ink-soft:  #d9d4cb;
+    --ink-dim:   #b9b3a8;
+    --ink-mute:  #a8a39a;
+    --ink-faint: #8a857c;
+    --ink-off:   #6f6a61;
+    --line:      #26241f;
+    --line-2:    #3a372f;
     --accent:    #cba35c;
-    --accent-hi: #e0bd78;
-    --accent-dim:rgba(203, 163, 92, 0.14);
-    --maxw: 1120px;
-    --textw: 600px;
+    --accent-hi: #e2c07e;
+    --glow:      rgba(203, 163, 92, 0.14);
+    --maxw: 1280px;
+    --gutter: 80px;
     --serif: 'Fraunces', Georgia, serif;
     --sans: 'Hanken Grotesk', system-ui, sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, monospace;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
   body {
     background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 17px;
     line-height: 1.6;
-    letter-spacing: 0.005em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    position: relative;
     overflow-x: hidden;
   }
-
-  /* subtle grain for depth */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  /* warm glow behind hero */
-  body::after {
-    content: "";
-    position: absolute;
-    top: -10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    height: 70vh;
-    max-width: 1100px;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(ellipse at center, rgba(203,163,92,0.06), transparent 65%);
-  }
-
-  .wrap {
-    position: relative;
-    z-index: 2;
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
+  img { display: block; max-width: 100%; }
   a { color: inherit; text-decoration: none; }
   ::selection { background: rgba(203, 163, 92, 0.28); color: var(--ink); }
   a:focus-visible, button:focus-visible, input:focus-visible {
@@ -126,655 +93,404 @@
     outline-offset: 4px;
   }
   .skip-link {
-    position: fixed;
-    z-index: 10;
-    top: 12px;
-    left: 12px;
-    min-height: 44px;
-    padding: 10px 16px;
+    position: fixed; z-index: 50; top: 12px; left: 12px;
+    min-height: 44px; padding: 10px 16px;
     transform: translateY(-160%);
-    background: var(--accent);
-    color: #14110a;
-    font-size: 14px;
-    font-weight: 600;
+    background: var(--accent); color: #14110a;
+    font-size: 14px; font-weight: 600;
   }
   .skip-link:focus { transform: none; }
 
-  /* ---------- NAV ---------- */
-  .site-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--line-soft);
+  .wrap { position: relative; max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
+  .kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
-  .site-mark {
-    display: inline-flex;
-    width: 42px;
-    height: 42px;
-    align-items: center;
-    justify-content: center;
-    transition: opacity .2s ease;
-  }
-  .site-mark img { display: block; width: 42px; height: 42px; }
-  .site-mark:hover { opacity: .82; }
-  .site-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 6px 28px;
-    font-size: 15px;
-    color: var(--ink-dim);
-  }
-  .site-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    transition: color .2s ease, border-color .2s ease;
-  }
-  .site-links a:hover { color: var(--ink); }
-  .site-links .nav-guide {
-    padding: 0 16px;
-    border: 1px solid var(--line);
-    border-radius: 4px;
+  .display {
+    font-family: var(--serif);
+    font-weight: 300;
+    letter-spacing: -0.025em;
     color: var(--ink);
   }
-  .site-links .nav-guide:hover { border-color: var(--accent); }
+  .display em { font-style: italic; color: var(--accent); }
+  .glow {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, var(--glow) 0%, rgba(203,163,92,0) 62%);
+  }
 
   /* ---------- BUTTONS ---------- */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 52px;
-    padding: 0 26px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 56px; padding: 0 28px;
     border: 1px solid transparent;
-    border-radius: 4px;
-    font-family: var(--sans);
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.2;
+    font-family: var(--sans); font-size: 16px; font-weight: 600; line-height: 1.2;
     cursor: pointer;
-    transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    transition: background .25s ease, color .25s ease, border-color .25s ease;
   }
-  .btn .arrow { transition: transform .2s ease; }
+  .btn .arrow { transition: transform .25s ease; }
   .btn:hover .arrow { transform: translateX(4px); }
-  .btn-primary { background: var(--accent); color: #14110a; }
-  .btn-primary:hover { background: var(--accent-hi); transform: translateY(-1px); }
-  .btn-primary:active { background: var(--accent); transform: none; }
-  .btn-secondary { border-color: var(--line); color: var(--ink); font-weight: 500; }
-  .btn-secondary:hover { border-color: var(--accent); }
-
+  .btn-primary { background: var(--accent); color: #0b0b0c; }
+  .btn-primary:hover { background: var(--accent-hi); }
+  .btn-ghost { border-color: var(--line-2); color: var(--ink); font-weight: 500; }
+  .btn-ghost:hover { border-color: var(--accent); }
   .text-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    color: var(--accent);
-    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+    color: var(--accent); font-size: 15px; font-weight: 600;
     transition: color .2s ease;
   }
-  .text-link .arrow { display: inline-block; transition: transform .2s ease; }
+  .text-link .arrow { transition: transform .2s ease; }
   .text-link:hover { color: var(--accent-hi); }
   .text-link:hover .arrow { transform: translateX(3px); }
 
-  .eyebrow {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: var(--accent);
-    margin-bottom: 14px;
-  }
-
   /* ---------- HERO ---------- */
-  header.hero {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 56px;
-    align-items: center;
-    padding: clamp(64px, 10vh, 104px) 0 clamp(72px, 10vh, 104px);
+  .hero {
+    position: relative;
+    min-height: 940px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    isolation: isolate;
   }
-  .identity {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 30px;
+  .hero-media {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 49%;
+    z-index: -2;
   }
-  .identity img {
-    flex: none;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    object-fit: cover;
+  .hero-media img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 58% 50%;
+    filter: saturate(0.7) contrast(1.05) brightness(0.92);
   }
-  .identity-name {
-    font-family: var(--serif);
-    font-size: 21px;
-    font-weight: 500;
-    line-height: 1.2;
+  .hero-media::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, var(--bg) 0%, rgba(11,11,12,0.55) 32%, rgba(11,11,12,0) 60%),
+      linear-gradient(0deg, var(--bg) 0%, rgba(11,11,12,0) 38%);
   }
-  .identity-role {
-    margin-top: 3px;
-    font-size: 14.5px;
-    line-height: 1.45;
-    color: var(--ink-dim);
-  }
-  h1.tagline {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(44px, 6.4vw, 76px);
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    margin-bottom: 26px;
-  }
-  .lede {
-    font-size: 19px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    max-width: 560px;
-    margin-bottom: 34px;
-  }
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
+  .hero-texture { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .hero-texture .glow { top: 120px; right: 12%; width: 720px; height: 720px; background: radial-gradient(circle, rgba(203,163,92,0.16) 0%, rgba(203,163,92,0) 62%); }
+  .hero-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(236,234,227,0.035) 1px, transparent 1px); background-size: 100% 96px; }
+  .hero-grain {
+    position: absolute; inset: -40px; opacity: 0.09;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Field log: the only boxed data surface on the page. */
+  .site-nav {
+    position: relative; z-index: 5;
+    margin-top: 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    min-height: 64px; padding: 0 12px 0 16px;
+    background: rgba(20, 20, 18, 0.62);
+    border: 1px solid rgba(236, 234, 227, 0.08);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  }
+  .site-mark { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; }
+  .site-mark img { width: 34px; height: 34px; }
+  .site-mark span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-mute); }
+  .site-links { display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500; }
+  .site-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-soft); transition: color .2s ease; }
+  .site-links a:hover { color: var(--ink); }
+  .nav-guide { min-height: 44px !important; padding: 0 18px; background: var(--accent); color: #0b0b0c !important; font-weight: 600; font-size: 14px; transition: background .25s ease !important; }
+  .nav-guide:hover { background: var(--accent-hi); }
+
+  .hero-copy {
+    position: relative; z-index: 2;
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center; gap: 36px;
+    max-width: 760px;
+    padding: 96px 0 72px;
+  }
+  .hero-role { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--ink-mute); text-transform: uppercase; }
+  .pulse { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--accent); }
+  .hero h1 { font-size: clamp(56px, 8.9vw, 128px); line-height: 0.95; letter-spacing: -0.035em; }
+  .lede { max-width: 560px; font-size: 20px; line-height: 1.6; color: var(--ink-dim); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Field log: real numbers only, never estimated. */
   .field-log {
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: var(--bg-card);
-    font-family: var(--mono);
-    font-size: 13.5px;
+    position: relative; z-index: 2;
+    margin-bottom: 56px;
+    display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1.7fr;
+    background: rgba(18, 18, 16, 0.72);
+    border: 1px solid rgba(236, 234, 227, 0.09);
+    -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    overflow: hidden;
   }
-  .field-log__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--line-soft);
-    color: var(--ink-dim);
-  }
-  .field-log__title {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: var(--ink);
-    font-size: 13.5px;
-    font-weight: 500;
-  }
-  .field-log__title::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .field-log__stats {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .field-log__stat {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 18px 20px;
-  }
-  .field-log__stat + .field-log__stat { border-left: 1px solid var(--line-soft); }
-  .field-log__value {
-    font-size: 30px;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--accent);
-  }
-  .field-log__label {
-    font-size: 11.5px;
-    line-height: 1.45;
-    color: var(--ink-dim);
-  }
-  .field-log__rows {
-    display: grid;
-    gap: 12px;
-    padding: 18px 20px;
-    line-height: 1.5;
-  }
-  .field-log__row {
-    display: grid;
-    grid-template-columns: 56px minmax(0, 1fr);
-    gap: 14px;
-  }
-  .field-log__key { color: var(--ink-faint); }
-  .field-log__val { color: var(--ink-soft); }
-  .field-log__val a {
-    text-decoration: underline;
-    text-decoration-color: rgba(203, 163, 92, 0.45);
-    text-underline-offset: 3px;
-    transition: color .2s ease;
-  }
-  .field-log__val a:hover { color: var(--accent-hi); }
-  .field-log__note {
-    padding: 0 20px 16px;
-    font-size: 11.5px;
-    color: var(--ink-faint);
-  }
-
-  /* ---------- SECTIONS ---------- */
-  section {
-    padding: clamp(64px, 10vh, 104px) 0;
-    border-top: 1px solid var(--line-soft);
-  }
-  .sec-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(30px, 4vw, 40px);
-    line-height: 1.12;
-    letter-spacing: -0.01em;
-  }
-  .sec-copy {
-    max-width: var(--textw);
-    color: var(--ink-dim);
-    margin-top: 14px;
-  }
+  .field-log__sweep { position: absolute; top: 0; left: 0; width: 100%; height: 1px; overflow: hidden; }
+  .field-log__sweep::before { content: ""; position: absolute; top: 0; left: 0; width: 40%; height: 1px; background: linear-gradient(90deg, rgba(203,163,92,0), var(--accent), rgba(203,163,92,0)); transform: translateX(-100%); }
+  .field-log > div { padding: 26px 24px; display: flex; flex-direction: column; gap: 6px; }
+  .field-log > div + div { border-left: 1px solid rgba(236, 234, 227, 0.08); }
+  .field-log__title { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase; }
+  .field-log__title .pulse { width: 6px; height: 6px; }
+  .field-log__note { font-size: 14px; line-height: 1.45; color: var(--ink-mute); }
+  .field-log__value { font-family: var(--serif); font-size: 52px; font-weight: 300; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .field-log__label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--ink-mute); text-transform: uppercase; }
+  .field-log__now { justify-content: center; gap: 8px !important; }
+  .field-log__now .field-log__label { color: var(--accent); }
+  .field-log__now p { font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
 
   /* ---------- BOOK ---------- */
-  .book-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-    gap: 64px;
-    align-items: start;
+  .book { position: relative; padding: 112px 0 140px; overflow: hidden; }
+  .book .glow { top: 60px; left: 40px; width: 820px; height: 820px; background: radial-gradient(circle, rgba(203,163,92,0.13) 0%, rgba(203,163,92,0) 60%); }
+  .book-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: center; }
+  .book-stage { position: relative; height: 700px; display: flex; align-items: center; justify-content: center; }
+  .book-shadow { position: absolute; bottom: 70px; left: 50%; width: 360px; height: 40px; margin-left: -180px; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%); }
+  .book-object {
+    position: relative; display: block; width: 360px; aspect-ratio: 600 / 960;
+    transform: perspective(1400px) rotateY(-22deg) rotateX(4deg);
   }
-  .book-cover {
-    display: block;
-    max-width: 300px;
-    border-radius: 3px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
-    transition: transform .25s ease;
-  }
-  .book-cover:hover { transform: translateY(-2px); }
-  .book-cover img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 3px;
-    border: 1px solid var(--line-soft);
-  }
-  .book-body { padding-top: 8px; }
-  .book-title {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(38px, 5vw, 52px);
-    line-height: 1.02;
-    letter-spacing: -0.015em;
-  }
-  .book-sub {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 20px;
-    line-height: 1.4;
-    color: var(--accent);
-    margin-top: 12px;
-  }
-  .book-desc {
-    max-width: 560px;
-    color: var(--ink-soft);
-    font-size: 18px;
-    margin-top: 18px;
-  }
-  .book-buy {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 20px;
-    margin-top: 28px;
-  }
-  .book-price { font-size: 15px; color: var(--ink-dim); }
+  .book-object img { width: 100%; height: 100%; object-fit: cover; border: 1px solid #34302a; box-shadow: 40px 40px 80px rgba(0,0,0,0.6); }
+  .book-object::after { content: ""; position: absolute; top: 0; left: 0; width: 16px; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.5), rgba(255,255,255,0.06) 60%, rgba(0,0,0,0.2)); }
+  .book-body { display: flex; flex-direction: column; gap: 28px; }
+  .book-body h2 { font-size: clamp(52px, 6.7vw, 96px); line-height: 0.95; letter-spacing: -0.03em; }
+  .book-sub { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 26px; line-height: 1.35; color: var(--ink-soft); }
+  .book-desc { max-width: 540px; font-size: 18px; line-height: 1.65; color: var(--ink-mute); }
+  .book-buy { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding-top: 8px; }
+  .book-price { display: flex; flex-direction: column; gap: 2px; }
+  .book-price strong { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .book-price span { font-size: 13px; color: var(--ink-mute); }
 
-  .guides { margin-top: 48px; }
-  .guides-title {
-    font-size: 15px;
-    font-weight: 600;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--line);
+  .guides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-bottom: 160px; }
+  .guide-card {
+    display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 32px; align-items: center;
+    padding: 32px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--bg-card-2), #0f0f0e);
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease;
   }
-  .guide-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--line-soft);
-    transition: background-color .2s ease;
+  .guide-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .guide-num { height: 160px; display: flex; align-items: center; justify-content: center; border-right: 1px solid #2e2b25; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 72px; color: var(--accent); }
+  .guide-card__body { display: flex; flex-direction: column; gap: 10px; }
+  .guide-card__kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--accent); text-transform: uppercase; }
+  .guide-card__name { font-family: var(--serif); font-size: 28px; line-height: 1.12; color: var(--ink); }
+  .guide-card__desc { font-size: 15px; line-height: 1.55; color: var(--ink-mute); }
+  .guide-card__cta { font-size: 14px; font-weight: 600; color: var(--accent); }
+
+  /* ---------- APPS ---------- */
+  .apps { position: relative; padding: 150px 0 160px; background: var(--bg-2); border-top: 1px solid #1f1e1a; border-bottom: 1px solid #1f1e1a; overflow: hidden; }
+  .apps-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(236,234,227,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(236,234,227,0.04) 1px, transparent 1px); background-size: 64px 64px; }
+  .apps .glow { top: 380px; left: 50%; width: 1100px; height: 700px; margin-left: -550px; background: radial-gradient(ellipse, rgba(203,163,92,0.12) 0%, rgba(203,163,92,0) 62%); }
+  .apps-head { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+  .apps-head h2 { max-width: 980px; font-size: clamp(38px, 4.7vw, 68px); line-height: 1.02; }
+  .apps-head p { max-width: 620px; font-size: 18px; line-height: 1.6; color: var(--ink-mute); }
+  .showcase { position: relative; margin-top: 88px; aspect-ratio: 1280 / 560; }
+  .showcase-browser {
+    position: absolute; left: 9.4%; top: 7.1%; width: 67.2%;
+    display: flex; flex-direction: column;
+    background: #151513; border: 1px solid #2e2b25;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
   }
-  .guide-row__name {
-    display: block;
-    font-family: var(--serif);
-    font-size: 21px;
-    font-weight: 500;
-    line-height: 1.25;
-    transition: color .2s ease;
+  .showcase-browser__bar { height: 40px; flex: none; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-bottom: 1px solid var(--line); }
+  .showcase-browser__bar span { width: 10px; height: 10px; border-radius: 50%; background: #34302a; }
+  .showcase-browser img { width: 100%; height: auto; aspect-ratio: 860 / 460; object-fit: cover; object-position: left top; }
+  .showcase-phone {
+    position: absolute; right: 11.7%; top: 0; width: 21.9%; aspect-ratio: 1 / 2;
+    border-radius: clamp(22px, 3.1vw, 44px);
+    border: 1px solid var(--line-2);
+    box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 0 8px #161614;
+    overflow: hidden; background: #000;
   }
-  .guide-row:hover .guide-row__name { color: var(--accent-hi); }
-  .guide-row__desc {
-    display: block;
-    margin-top: 4px;
-    font-size: 15px;
-    color: var(--ink-dim);
-  }
-  .guide-row__price {
-    flex: none;
-    font-size: 15px;
-    color: var(--accent);
-    white-space: nowrap;
-  }
+  .showcase-phone img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .app-notes { position: relative; margin-top: 72px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .app-note { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding-top: 24px; border-top: 1px solid var(--line-2); }
+  .app-note__title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .app-note h3 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.1; color: var(--ink); }
+  .app-status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--ink-mute); text-transform: uppercase; }
+  .app-status--live { color: var(--accent); }
+  .app-status--live .pulse { width: 6px; height: 6px; }
+  .app-note p { max-width: 520px; font-size: 16px; line-height: 1.55; color: var(--ink-mute); }
+
+  /* ---------- PRINCIPLES ---------- */
+  .principles { padding: 150px 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
+  .principles-head { grid-column: span 4; display: flex; flex-direction: column; gap: 22px; position: sticky; top: 40px; }
+  .principles-head h2 { font-size: clamp(40px, 3.9vw, 56px); line-height: 1.02; }
+  .principles ol { grid-column: 6 / span 7; list-style: none; }
+  .principle { position: relative; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 30px 0; border-top: 1px solid var(--line); }
+  .principle::before { content: ""; position: absolute; top: -1px; left: 0; height: 1px; width: 0; background: var(--accent); transition: width 2.4s linear; }
+  .principle__num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; color: var(--ink-faint); transition: color .6s ease; }
+  .principle__text { font-family: var(--serif); font-weight: 300; font-size: clamp(26px, 2.7vw, 38px); line-height: 1.18; color: var(--ink-off); transition: color .6s ease; }
+  .principle.is-active::before { width: 100%; }
+  .principle.is-active .principle__num { color: var(--accent); }
+  .principle.is-active .principle__text { color: var(--ink); }
+  .principles.is-static .principle__text { color: var(--ink); }
+
+  /* ---------- WRITING ---------- */
+  .writing { padding: 0 0 150px; display: flex; flex-direction: column; gap: 48px; }
+  .writing-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 32px; }
+  .writing-head > div { display: flex; flex-direction: column; gap: 20px; }
+  .writing-head h2 { font-size: clamp(40px, 3.9vw, 56px); line-height: 1.02; }
+  .writing-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+  .writing-side { display: flex; flex-direction: column; gap: 24px; }
+  .card { border: 1px solid var(--line); background: var(--bg-card); transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease; }
+  .card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .card-feature { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; min-height: 460px; padding: 44px; overflow: hidden; }
+  .card-feature .glow { top: -120px; right: -120px; width: 460px; height: 460px; background: radial-gradient(circle, rgba(203,163,92,0.2) 0%, rgba(203,163,92,0) 65%); }
+  .card-feature__mark { position: absolute; top: 12px; left: 32px; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 300px; line-height: 1; letter-spacing: -0.04em; color: rgba(203,163,92,0.13); pointer-events: none; }
+  .card-feature > *:not(.glow):not(.card-feature__mark) { position: relative; }
+  .card-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-faint); text-transform: uppercase; }
+  .card-feature .card-meta { color: var(--accent); }
+  .card-feature h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(38px, 3.9vw, 56px); line-height: 1; color: var(--ink); }
+  .card-feature p { max-width: 520px; font-size: 17px; line-height: 1.55; color: var(--ink-mute); }
+  .card-row { flex: 1; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; align-items: center; padding: 20px; }
+  .card-row img { width: 180px; height: 160px; object-fit: cover; }
+  .book-object img, .showcase-phone img { max-width: none; }
+  .card-row__body { display: flex; flex-direction: column; gap: 10px; }
+  .card-row h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.12; color: var(--ink); }
+  .card-row p { font-size: 15px; line-height: 1.5; color: var(--ink-mute); }
 
   /* ---------- FREE GUIDE + SIGNAL ---------- */
-  #field-guide { border-top: none; padding-top: 0; }
-  .guide-offer {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 56px;
-    align-items: center;
-    padding: 52px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
+  .offer {
+    position: relative; overflow: hidden;
+    padding: 96px 88px;
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center;
     background: var(--bg-card);
+    border: 1px solid var(--line); border-top: 2px solid var(--accent);
   }
-  .guide-offer .sec-copy strong { color: var(--ink); font-weight: 500; }
-  .guide-contents {
-    display: grid;
-    gap: 8px;
-    margin-top: 22px;
-    list-style: none;
-    color: var(--ink-soft);
-    font-size: 16px;
-  }
-  .guide-contents li { position: relative; padding-left: 22px; }
-  .guide-contents li::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
-  .signal-form {
-    display: grid;
-    gap: 12px;
-  }
-  .signal-form label {
-    font-size: 15px;
-    color: var(--ink-soft);
-  }
+  .offer .glow { bottom: -260px; right: -160px; width: 640px; height: 640px; }
+  .offer-copy { position: relative; grid-column: span 6; display: flex; flex-direction: column; gap: 22px; }
+  .offer-copy h2 { font-size: clamp(36px, 4vw, 58px); line-height: 1.02; }
+  .offer-copy > p { font-size: 17px; line-height: 1.6; color: var(--ink-dim); }
+  .offer-copy strong { color: var(--ink); font-weight: 500; }
+  .offer-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; font-size: 15px; color: var(--ink-soft); }
+  .offer-list li { display: flex; gap: 10px; }
+  .offer-list li span { color: var(--accent); }
+  .signal { position: relative; grid-column: 8 / span 5; padding: 36px; background: rgba(11,11,12,0.7); border: 1px solid #2e2b25; }
+  .signal-form { display: grid; gap: 14px; }
+  .signal-form label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--ink-mute); text-transform: uppercase; }
   .signal-form input[type="email"] {
-    min-height: 52px;
-    padding: 0 16px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
+    min-height: 56px; padding: 0 18px;
+    background: var(--bg); border: 1px solid var(--line-2); border-radius: 0;
+    color: var(--ink); font-family: var(--sans); font-size: 16px;
     transition: border-color .2s ease;
   }
   .signal-form input[type="email"]::placeholder { color: var(--ink-faint); }
   .signal-form input[type="email"]:focus { border-color: var(--accent); }
   .signal-form .btn { width: 100%; }
-  .signal-form .btn:disabled { opacity: 0.5; cursor: default; transform: none; }
-  .signal-status {
-    font-size: 15px;
-    min-height: 1.4em;
-    margin-top: 12px;
-  }
-  .signal-status.ok  { color: var(--accent); }
+  .signal-form .btn:disabled { opacity: 0.5; cursor: default; }
+  .signal-status { min-height: 1.4em; margin-top: 12px; font-size: 15px; }
+  .signal-status.ok { color: var(--accent); }
   .signal-status.err { color: var(--ink-dim); }
-  .guide-download { margin-top: 4px; }
   .guide-download[hidden] { display: none; }
-  .signal-fineprint {
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--ink-faint);
-  }
+  .signal-fineprint { margin-top: 10px; font-size: 13px; line-height: 1.55; color: var(--ink-faint); }
 
-  /* ---------- PROOF / APPS ---------- */
-  .proof-head {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 56px;
-    align-items: end;
-    margin-bottom: 48px;
-  }
-  .proof-head .sec-copy { margin-top: 0; }
-  .app-status {
-    font-size: 13px;
-    color: var(--ink-soft);
-    padding: 4px 12px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .app-name {
-    font-family: var(--serif);
-    font-weight: 600;
-  }
-  .app-desc { color: var(--ink-dim); }
-  .proof-feature {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 56px;
-    align-items: center;
-    padding: 48px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--bg-card);
-  }
-  .proof-feature .app-title {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 14px;
-  }
-  .proof-feature .app-name { font-size: 34px; line-height: 1.1; }
-  .proof-feature .app-desc {
-    max-width: 460px;
-    font-size: 18px;
-    margin: 16px 0 12px;
-  }
-  .proof-visual { max-width: 320px; justify-self: end; width: 100%; }
-  .proof-visual img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #000;
-  }
-  .proof-visual figcaption {
-    margin-top: 12px;
-    color: var(--ink-faint);
-    font-size: 13.5px;
-    line-height: 1.5;
-  }
-  .app-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px 32px;
-    padding: 28px 48px 0;
-  }
-  .app-row__main {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 18px;
-    flex: 1 1 520px;
-  }
-  .app-row .app-name { font-size: 24px; }
-  .app-row .app-desc { flex-basis: 100%; font-size: 16px; }
+  /* ---------- CLOSE + FOOTER ---------- */
+  .close { position: relative; padding: 180px 0 120px; display: flex; flex-direction: column; align-items: center; gap: 36px; text-align: center; overflow: hidden; }
+  .close .glow { top: 60px; left: 50%; width: 900px; height: 500px; margin-left: -450px; background: radial-gradient(ellipse, rgba(203,163,92,0.12) 0%, rgba(203,163,92,0) 65%); }
+  .close p { position: relative; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(56px, 8.9vw, 128px); line-height: 0.95; letter-spacing: -0.035em; color: var(--ink); }
+  .close p em { color: var(--accent); }
+  .close .btn { position: relative; }
+  footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; min-height: 96px; padding: 20px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-faint); }
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+  .footer-brand img { width: 26px; height: 26px; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 0 32px; }
+  .footer-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); transition: color .2s ease; }
+  .footer-links a:hover { color: var(--accent-hi); }
 
-  /* ---------- WRITING ---------- */
-  .writing-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px 32px;
-    margin-bottom: 28px;
-  }
-  .writing-list { border-bottom: 1px solid var(--line-soft); }
-  .entry {
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
-    gap: 8px 32px;
-    align-items: baseline;
-    padding: 26px 0;
-    border-top: 1px solid var(--line-soft);
-  }
-  .entry-meta {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--ink-faint);
-  }
-  .entry-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 1.25;
-    transition: color .2s ease;
-  }
-  .entry:hover .entry-title { color: var(--accent-hi); }
-  .entry-desc { font-size: 15.5px; color: var(--ink-dim); }
-  .writing-more { margin-top: 20px; }
-
-  /* ---------- PRINCIPLES ---------- */
-  .principles {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 64px;
-    margin-top: 28px;
-    list-style: none;
-  }
-  .principles li {
-    font-family: var(--serif);
-    font-size: clamp(22px, 3vw, 30px);
-    line-height: 1.25;
-    padding: 24px 0;
-    border-top: 1px solid var(--line-soft);
-  }
-
-  /* ---------- FOOTER ---------- */
-  footer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px 24px;
-    padding: 38px 0 54px;
-    border-top: 1px solid var(--line-soft);
-  }
-  .footer-mark {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 18px;
-    color: var(--ink-soft);
-  }
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px 24px;
-    font-size: 15px;
-    color: var(--ink-dim);
-  }
-  .footer-links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    transition: color .2s ease;
-  }
-  .footer-links a:hover { color: var(--accent); }
-  .footer-copy { color: var(--ink-faint); }
-
-  /* ---------- LOAD / REVEAL ANIMATION ---------- */
+  /* ---------- MOTION (only when the visitor allows it) ---------- */
+  @keyframes gtPulse { 0% { box-shadow: 0 0 0 0 rgba(203,163,92,.55); } 70% { box-shadow: 0 0 0 10px rgba(203,163,92,0); } 100% { box-shadow: 0 0 0 0 rgba(203,163,92,0); } }
+  @keyframes gtGrain { 0% { transform: translate(0,0); } 25% { transform: translate(-2%,1%); } 50% { transform: translate(1%,-2%); } 75% { transform: translate(2%,2%); } 100% { transform: translate(0,0); } }
+  @keyframes gtFloat { 0%,100% { transform: perspective(1400px) rotateY(-22deg) rotateX(4deg) translateY(0); } 50% { transform: perspective(1400px) rotateY(-22deg) rotateX(4deg) translateY(-12px); } }
+  @keyframes gtRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes gtSweep { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
   @media (prefers-reduced-motion: no-preference) {
-    .reveal.reveal-ready { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+    .pulse { animation: gtPulse 2.2s ease-out infinite; }
+    .hero-grain { animation: gtGrain 1.2s steps(4) infinite; }
+    .book-object { animation: gtFloat 7s ease-in-out infinite; }
+    .field-log__sweep::before { animation: gtSweep 5s linear infinite; }
+    .rise { animation: gtRise 1s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0ms); }
+    .reveal.reveal-ready { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
     .reveal.reveal-ready.in { opacity: 1; transform: none; }
-    .hero .reveal { transition-delay: var(--d, 0ms); }
   }
-
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .site-mark,
-    .site-links a,
-    .btn,
-    .btn .arrow,
-    .text-link,
-    .text-link .arrow,
-    .book-cover,
-    .guide-row,
-    .guide-row__name,
-    .entry-title,
-    .footer-links a { transition: none; }
-    .btn:hover,
-    .btn:hover .arrow,
-    .text-link:hover .arrow,
-    .book-cover:hover { transform: none; }
+    *, *::before, *::after { transition: none !important; }
+    .card:hover, .guide-card:hover { transform: none; }
   }
 
   /* ---------- TABLET ---------- */
-  @media (max-width: 960px) {
-    .wrap { padding: 0 32px; }
-    header.hero,
-    .guide-offer,
-    .proof-head,
-    .proof-feature { grid-template-columns: 1fr; gap: 40px; }
-    .field-log { max-width: 560px; }
-    .book-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 40px; }
-    .proof-visual { justify-self: start; }
-    .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-    .entry-desc { max-width: var(--textw); }
+  @media (max-width: 1100px) {
+    :root { --gutter: 40px; }
+    .hero-media { width: 56%; }
+    .field-log { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .field-log > div:first-of-type, .field-log__now { grid-column: 1 / -1; }
+    .field-log > div + div { border-left: 0; }
+    .field-log > div:nth-of-type(3), .field-log > div:nth-of-type(4) { border-left: 1px solid rgba(236,234,227,0.08); }
+    .field-log > div:nth-of-type(2), .field-log > div:nth-of-type(3), .field-log > div:nth-of-type(4), .field-log__now { border-top: 1px solid rgba(236,234,227,0.08); }
+    .book-stage { height: 600px; }
+    .book-object { width: 300px; }
+    .guides, .writing-grid, .app-notes { grid-template-columns: 1fr; }
+    .principles-head { grid-column: 1 / -1; position: static; margin-bottom: 40px; }
+    .principles ol { grid-column: 1 / -1; }
+    .offer { padding: 64px 48px; }
+    .offer-copy, .signal { grid-column: 1 / -1; }
+    .signal { margin-top: 40px; }
   }
 
   /* ---------- PHONE ---------- */
-  @media (max-width: 600px) {
+  @media (max-width: 720px) {
+    :root { --gutter: 20px; }
     body { font-size: 16px; }
-    .wrap { padding: 0 20px; }
-    .site-nav { padding: 14px 0; gap: 12px; }
-    .site-links { gap: 0 16px; font-size: 14px; }
-    .site-links .nav-book, .site-links .nav-projects { display: none; }
-    .site-links .nav-guide { padding: 0 12px; }
-    header.hero { padding: 44px 0 64px; gap: 36px; }
-    .identity { margin-bottom: 24px; }
-    .identity img { width: 60px; height: 60px; }
-    .lede { font-size: 17.5px; }
+    .hero { min-height: 0; }
+    .hero-media { left: 0; width: 100%; bottom: auto; height: 560px; }
+    .hero-media img { object-position: 62% 30%; }
+    .hero-media::after { background: linear-gradient(0deg, var(--bg) 6%, rgba(11,11,12,0.72) 40%, rgba(11,11,12,0.15) 100%); }
+    .hero-texture .glow { display: none; }
+    .site-nav { margin-top: 12px; padding: 0 8px 0 10px; gap: 12px; }
+    .site-mark span { display: none; }
+    .site-links { gap: 18px; font-size: 14px; }
+    .nav-book, .nav-projects { display: none !important; }
+    .nav-guide { padding: 0 14px; }
+    .hero-copy { padding: 250px 0 40px; gap: 24px; }
+    .hero-role { align-items: flex-start; font-size: 10px; line-height: 1.7; letter-spacing: 0.14em; }
+    .hero-role .pulse { margin-top: 5px; }
+    .hero h1 { font-size: 54px; line-height: 0.98; }
+    .lede { font-size: 17px; }
     .hero-actions .btn { width: 100%; }
-    .field-log__head { padding: 12px 16px; font-size: 12px; }
-    .field-log__stat { padding: 16px 14px; }
-    .field-log__value { font-size: 26px; }
-    .field-log__label { font-size: 11px; }
-    .field-log__rows { padding: 16px; }
-    .field-log__row { grid-template-columns: 48px minmax(0, 1fr); gap: 10px; }
-    .field-log__note { padding: 0 16px 14px; }
-    .book-grid { grid-template-columns: 1fr; gap: 28px; }
-    .book-cover { max-width: 200px; }
-    .book-body { padding-top: 0; }
-    .book-sub { font-size: 18px; }
+    .field-log { margin-bottom: 40px; }
+    .field-log > div { padding: 18px 14px; }
+    .field-log__value { font-size: 38px; }
+    .field-log__label { font-size: 9px; line-height: 1.5; letter-spacing: 0.12em; }
+    .book { padding: 72px 0 80px; }
+    .book-grid { grid-template-columns: 1fr; gap: 8px; }
+    .book-stage { height: 440px; }
+    .book-object { width: 230px; }
+    .book-shadow { width: 240px; margin-left: -120px; bottom: 36px; }
+    .book-body { gap: 20px; }
+    .book-sub { font-size: 20px; }
+    .book-desc { font-size: 16px; }
     .book-buy .btn { width: 100%; }
-    .guide-row { align-items: flex-start; flex-direction: column; gap: 6px; }
-    .guide-offer { padding: 28px 20px; gap: 28px; }
-    .proof-feature { padding: 28px 20px; gap: 32px; }
-    .proof-feature .app-name { font-size: 30px; }
-    .proof-visual { max-width: 260px; }
-    .app-row { padding: 24px 0 0; }
-    .principles { grid-template-columns: 1fr; }
-    .principles li { padding: 18px 0; }
+    .guides { padding-bottom: 96px; gap: 14px; }
+    .guide-card { grid-template-columns: 64px minmax(0, 1fr); gap: 20px; padding: 22px 20px; }
+    .guide-num { height: 96px; font-size: 44px; }
+    .guide-card__name { font-size: 22px; }
+    .apps { padding: 88px 0 96px; }
+    .apps-head { align-items: flex-start; text-align: left; }
+    .apps-head p { font-size: 16px; }
+    .showcase { margin-top: 48px; aspect-ratio: 350 / 290; }
+    .showcase-browser { left: 0; top: 12%; width: 84%; }
+    .showcase-browser__bar { height: 22px; padding: 0 8px; gap: 5px; }
+    .showcase-browser__bar span { width: 6px; height: 6px; }
+    .showcase-browser img { aspect-ratio: 860 / 620; }
+    .showcase-phone { right: 0; width: 38%; box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 5px #161614; }
+    .app-notes { margin-top: 40px; gap: 32px; }
+    .app-note h3 { font-size: 28px; }
+    .principles { padding: 96px 0; }
+    .principles-head { margin-bottom: 24px; }
+    .principle { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 22px 0; }
+    .writing { padding-bottom: 96px; gap: 32px; }
+    .card-feature { min-height: 400px; padding: 28px 24px; }
+    .card-feature__mark { font-size: 150px; top: 8px; left: 16px; }
+    .card-row { grid-template-columns: 1fr; padding: 14px; }
+    .card-row img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+    .card-row h3 { font-size: 24px; }
+    .offer { padding: 36px 22px; }
+    .offer-list { grid-template-columns: 1fr; }
+    .signal { padding: 24px 18px; margin-top: 32px; }
+    .close { padding: 110px 0 80px; gap: 28px; }
+    .close p { font-size: 50px; }
     footer { flex-direction: column; align-items: flex-start; }
   }
 </style>
@@ -783,39 +499,41 @@
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<div class="wrap">
+<header class="hero">
+  <div class="hero-media">
+    <img src="/assets/about/garry-tipler-hero.webp" alt="Garry Tipler outdoors under the trees, looking up." width="1206" height="1063" fetchpriority="high" />
+  </div>
+  <div class="hero-texture" aria-hidden="true">
+    <div class="glow"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-lines"></div>
+  </div>
 
-  <nav class="site-nav" aria-label="Primary">
-    <a class="site-mark" href="/" aria-label="Garry Tipler home">
-      <img src="/favicon.svg" alt="" width="42" height="42" />
-    </a>
-    <div class="site-links">
-      <a class="nav-book" href="#book">Book</a>
-      <a href="/writing/">Writing</a>
-      <a class="nav-projects" href="#proof">Projects</a>
-      <a class="nav-guide" href="#field-guide">Free guide</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div>
-      <div class="identity reveal" style="--d:0ms">
-        <img src="/assets/about/garry-tipler-portrait.webp" alt="Portrait of Garry Tipler outdoors." width="320" height="320" />
-        <div>
-          <p class="identity-name">Garry Tipler</p>
-          <p class="identity-role">Performance Systems Builder · Author · Founder of T.I.P.</p>
-        </div>
+  <div class="wrap" style="display: flex; flex-direction: column; flex: 1; width: 100%;">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-mark" href="/" aria-label="Garry Tipler home">
+        <img src="/favicon.svg" alt="" width="34" height="34" />
+        <span aria-hidden="true">GARRY TIPLER</span>
+      </a>
+      <div class="site-links">
+        <a class="nav-book" href="#book">Book</a>
+        <a href="/writing/">Writing</a>
+        <a class="nav-projects" href="#proof">Projects</a>
+        <a class="nav-guide" href="#field-guide">Free 7-day guide</a>
       </div>
-      <h1 class="tagline reveal" style="--d:70ms">Systems for rebuilding a life.</h1>
-      <p class="lede reveal" style="--d:140ms">
+    </nav>
+
+    <div class="hero-copy">
+      <p class="hero-role rise" style="--d:0ms"><span class="pulse" aria-hidden="true"></span><span>Performance Systems Builder · Author · Founder of T.I.P.</span></p>
+      <h1 class="display rise" style="--d:120ms">Systems for <em>rebuilding</em> a life.</h1>
+      <p class="lede rise" style="--d:240ms">
         My rebuild started in a shelter. The systems that carried me out —
         discipline, training, and writing — are all here. I tested them on
         myself first, then wrote them down so you can run them too.
       </p>
-      <div class="hero-actions reveal" style="--d:210ms">
-        <a class="btn btn-primary" href="#book">Start with the book <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn-secondary" href="#field-guide">Get the free 7-day guide</a>
+      <div class="hero-actions rise" style="--d:320ms">
+        <a class="btn btn-primary" href="#book">Read the book <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#field-guide">Get the free guide</a>
       </div>
     </div>
 
@@ -823,267 +541,235 @@
          Sessions comes from the SelfTrainer PWA and is hand-updated with its
          as-of date. Weeks is counted forward from data-start by the script
          below (37 weeks on 2026-09-26). -->
-    <aside class="field-log reveal" style="--d:280ms" aria-labelledby="field-log-title">
-      <div class="field-log__head">
-        <h2 class="field-log__title" id="field-log-title">Field log</h2>
-        <span>proof of practice</span>
-      </div>
-      <div class="field-log__stats">
-        <div class="field-log__stat">
-          <span class="field-log__value">101</span>
-          <span class="field-log__label">sessions logged in SelfTrainer</span>
-        </div>
-        <div class="field-log__stat">
-          <span class="field-log__value" id="weeks-in-system" data-start="2026-01-10">37</span>
-          <span class="field-log__label">weeks in the system</span>
-        </div>
-        <div class="field-log__stat">
-          <span class="field-log__value">3</span>
-          <span class="field-log__label">titles shipped</span>
-        </div>
-      </div>
-      <div class="field-log__rows">
-        <div class="field-log__row">
-          <span class="field-log__key">now</span>
-          <span class="field-log__val">Building SelfTrainer Native toward App Store release.</span>
-        </div>
-        <div class="field-log__row">
-          <span class="field-log__key">latest</span>
-          <span class="field-log__val"><a id="latest-writing" href="/writing/fragments/fragments-4-the-fire/">Fragments #4 — The Fire</a></span>
-        </div>
-      </div>
-      <p class="field-log__note">Sessions as of Sep 26, 2026.</p>
-    </aside>
-  </header>
-
-  <main id="main-content" tabindex="-1">
-  <!-- BOOK -->
-  <section id="book" aria-labelledby="book-heading">
-    <div class="book-grid">
-      <a class="book-cover reveal" href="https://www.amazon.com/dp/B0GX379N1L" aria-label="I Am the Proof on Amazon Kindle">
-        <img src="/assets/books/i-am-the-proof-cover.webp" alt="Cover of I Am the Proof: Building in the Dark by Garry Tipler." width="600" height="960" loading="lazy" />
-      </a>
-      <div class="book-body">
-        <p class="eyebrow reveal">Start with the book</p>
-        <h2 class="book-title reveal" id="book-heading">I Am the Proof</h2>
-        <p class="book-sub reveal">Building in the Dark — A Journey from a Shelter to My Higher Self</p>
-        <p class="book-desc reveal">
-          The full story and the framework underneath it: where the rebuild started,
-          and how the systems held when nothing else did.
-        </p>
-        <div class="book-buy reveal">
-          <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GX379N1L">
-            Get it on Kindle <span class="arrow" aria-hidden="true">→</span>
-          </a>
-          <span class="book-price">$4.99 · free on Kindle Unlimited</span>
-        </div>
-
-        <div class="guides reveal">
-          <h3 class="guides-title">Field guides</h3>
-          <a class="guide-row" href="https://garrytip.gumroad.com/l/discipline-field-guide">
-            <span>
-              <span class="guide-row__name">The Discipline Training Field Guide</span>
-              <span class="guide-row__desc">The core systems for daily discipline that survives bad days.</span>
-            </span>
-            <span class="guide-row__price">$7 on Gumroad →</span>
-          </a>
-          <a class="guide-row" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
-            <span>
-              <span class="guide-row__name">Discipline Recovery Field Guide</span>
-              <span class="guide-row__desc">What to do when discipline slips — the system for getting back on track without starting over.</span>
-            </span>
-            <span class="guide-row__price">$7 on Gumroad →</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FREE GUIDE + THE SIGNAL -->
-  <section id="field-guide" aria-labelledby="discipline-rebuild-title">
-    <div class="guide-offer reveal">
+    <aside class="field-log rise" style="--d:420ms" aria-labelledby="field-log-title">
+      <span class="field-log__sweep" aria-hidden="true"></span>
       <div>
-        <p class="eyebrow">Free field guide</p>
-        <h2 class="sec-title" id="discipline-rebuild-title">Rebuild Your Discipline in Seven Days</h2>
-        <p class="sec-copy">
-          You do not need another dramatic restart. You need a clear way to return.
-          <strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol
-          for restoring structure, rebuilding self-trust, and returning to action.
-        </p>
-        <ul class="guide-contents">
-          <li>A focused seven-day rebuilding protocol</li>
-          <li>Simple daily actions and reflection prompts</li>
-          <li>A printable discipline rebuild scorecard</li>
-          <li>A sustainable plan for the next 14 days</li>
-        </ul>
+        <h2 class="field-log__title" id="field-log-title"><span class="pulse" aria-hidden="true"></span>Field log</h2>
+        <p class="field-log__note">Proof of practice. Sessions as of Sep 26, 2026.</p>
       </div>
+      <div>
+        <span class="field-log__value" data-count>101</span>
+        <span class="field-log__label">Sessions logged in SelfTrainer</span>
+      </div>
+      <div>
+        <span class="field-log__value" id="weeks-in-system" data-count data-start="2026-01-10">37</span>
+        <span class="field-log__label">Weeks in the system</span>
+      </div>
+      <div>
+        <span class="field-log__value" data-count>3</span>
+        <span class="field-log__label">Titles shipped</span>
+      </div>
+      <div class="field-log__now">
+        <span class="field-log__label">Now building</span>
+        <p>SelfTrainer Native, headed for the App Store.</p>
+      </div>
+    </aside>
+  </div>
+</header>
 
-      <div id="signal">
-        <form class="signal-form" id="signal-form" novalidate>
-          <label for="signal-email">Email address</label>
-          <input
-            type="email"
-            id="signal-email"
-            name="email_address"
-            placeholder="you@domain.com"
-            autocomplete="email"
-            required
-          />
-          <button type="submit" class="btn btn-primary" id="signal-submit">
-            Send me the guide <span class="arrow" aria-hidden="true">→</span>
-          </button>
-        </form>
-        <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
-        <a class="text-link guide-download" id="guide-download" href="/assets/downloads/the-7-day-discipline-rebuild.pdf" download hidden>
-          Download the guide (PDF) <span class="arrow" aria-hidden="true">→</span>
+<main id="main-content" tabindex="-1">
+
+  <!-- BOOK -->
+  <section class="book" id="book" aria-labelledby="book-heading">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap book-grid">
+      <div class="book-stage reveal">
+        <div class="book-shadow" aria-hidden="true"></div>
+        <a class="book-object" href="https://www.amazon.com/dp/B0GX379N1L" aria-label="I Am the Proof on Amazon Kindle">
+          <img src="/assets/books/i-am-the-proof-cover.webp" alt="Cover of I Am the Proof: Building in the Dark by Garry Tipler." width="600" height="960" loading="lazy" />
         </a>
-        <p class="signal-fineprint">
-          You’ll also get The Signal: roughly once a month, a system, a fix, or a
-          field note. Tested on me before it reaches you. No spam. Leave anytime.
-        </p>
+      </div>
+      <div class="book-body reveal">
+        <span class="kicker">01 — The doctrine</span>
+        <h2 class="display" id="book-heading">I Am the Proof</h2>
+        <p class="book-sub">Building in the Dark — A Journey from a Shelter to My Higher Self</p>
+        <p class="book-desc">The full story and the framework underneath it: where the rebuild started, and how the systems held when nothing else did.</p>
+        <div class="book-buy">
+          <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GX379N1L">Get it on Kindle <span class="arrow" aria-hidden="true">→</span></a>
+          <span class="book-price"><strong>$4.99</strong><span>Free on Kindle Unlimited</span></span>
+        </div>
       </div>
     </div>
   </section>
+
+  <div class="wrap">
+    <div class="guides" aria-label="Field guides">
+      <a class="guide-card reveal" href="https://garrytip.gumroad.com/l/discipline-field-guide">
+        <span class="guide-num" aria-hidden="true">01</span>
+        <span class="guide-card__body">
+          <span class="guide-card__kicker">Field guide · $7</span>
+          <span class="guide-card__name">The Discipline Training Field Guide</span>
+          <span class="guide-card__desc">The core systems for daily discipline that survives bad days.</span>
+          <span class="guide-card__cta">On Gumroad →</span>
+        </span>
+      </a>
+      <a class="guide-card reveal" href="https://garrytip.gumroad.com/l/discipline-recovery-field-guide">
+        <span class="guide-num" aria-hidden="true">02</span>
+        <span class="guide-card__body">
+          <span class="guide-card__kicker">Field guide · $7</span>
+          <span class="guide-card__name">Discipline Recovery Field Guide</span>
+          <span class="guide-card__desc">What to do when discipline slips — the system for getting back on track without starting over.</span>
+          <span class="guide-card__cta">On Gumroad →</span>
+        </span>
+      </a>
+    </div>
+  </div>
 
   <!-- PROOF OF PRACTICE -->
-  <section id="proof" aria-labelledby="proof-heading">
-    <div class="proof-head">
-      <div>
-        <p class="eyebrow reveal">Proof of practice</p>
-        <h2 class="sec-title reveal" id="proof-heading">The books are the doctrine. The apps are the operating surface.</h2>
+  <section class="apps" id="proof" aria-labelledby="proof-heading">
+    <div class="apps-grid" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="apps-head reveal">
+        <span class="kicker">02 — The operating surface</span>
+        <h2 class="display" id="proof-heading">The books are the doctrine. The apps are where it <em>runs.</em></h2>
+        <p>Each system starts from lived pressure, gets tested in real routines, then gets refined into something cleaner, calmer, and repeatable.</p>
       </div>
-      <p class="sec-copy reveal">
-        Each system starts from lived pressure, gets tested in real routines,
-        then gets refined into something cleaner, calmer, and repeatable.
-      </p>
-    </div>
-
-    <div class="proof-feature reveal">
-      <div>
-        <div class="app-title">
-          <h3 class="app-name">SelfTrainer</h3>
-          <span class="app-status">In progress</span>
+      <div class="showcase reveal">
+        <figure class="showcase-browser">
+          <div class="showcase-browser__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+          <img src="/assets/fitpulse/fitpulse-dashboard.webp" alt="FitPulse dashboard showing the coach's decision queue." width="1916" height="835" loading="lazy" />
+        </figure>
+        <figure class="showcase-phone">
+          <img src="/assets/selftrainer/selftrainer-home-up-next-pwa.webp" alt="SelfTrainer home screen showing the next session in the training rotation." width="1080" height="2348" loading="lazy" />
+        </figure>
+      </div>
+      <div class="app-notes">
+        <div class="app-note reveal">
+          <div class="app-note__title">
+            <h3>SelfTrainer</h3>
+            <span class="app-status app-status--live"><span class="pulse" aria-hidden="true"></span>In progress</span>
+          </div>
+          <p>Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</p>
+          <a class="text-link" href="/projects/selftrainer/">View the build <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <p class="app-desc">Execution-first training system for serious lifters — focused on sessions, progression, and the work itself.</p>
-        <a class="text-link" href="/projects/selftrainer/">
-          View the build <span class="arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-      <figure class="proof-visual">
-        <img
-          src="/assets/selftrainer/selftrainer-home-up-next-crop.webp"
-          alt="SelfTrainer home screen showing the next session in the selected training rotation."
-          loading="lazy"
-          width="720"
-          height="1093"
-        />
-        <figcaption>Home / Up Next — the planned work stays close to the next honest action.</figcaption>
-      </figure>
-    </div>
-
-    <div class="app-row reveal">
-      <div class="app-row__main">
-        <h3 class="app-name">FitPulse</h3>
-        <span class="app-status">In development</span>
-        <p class="app-desc">A coaching operating system for trainers who need clearer client structure, program visibility, and performance context.</p>
-      </div>
-      <a class="text-link" href="/projects/fitpulse/">
-        View the project <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- WRITING -->
-  <section aria-labelledby="writing-heading">
-    <div class="writing-head">
-      <div>
-        <h2 class="sec-title reveal" id="writing-heading">Writing</h2>
-        <p class="sec-copy reveal">
-          Essays and fragments on discipline, structure, execution, recovery,
-          self-command, and the long rebuild.
-        </p>
+        <div class="app-note reveal">
+          <div class="app-note__title">
+            <h3>FitPulse</h3>
+            <span class="app-status">In development</span>
+          </div>
+          <p>A coaching operating system for trainers who need clearer client structure, program visibility, and performance context.</p>
+          <a class="text-link" href="/projects/fitpulse/">View the project <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
     </div>
-
-    <div class="writing-list">
-      <a class="entry reveal" href="/writing/fragments/fragments-4-the-fire/">
-        <span class="entry-meta">Aug 6, 2026 · Fragment</span>
-        <span class="entry-title">Fragments #4 — The Fire</span>
-        <span class="entry-desc">A field note on setbacks: reading a forced slowdown as instruction, not interruption.</span>
-      </a>
-      <a class="entry reveal" href="/writing/essays/discipline-should-not-cost-me-my-heart/">
-        <span class="entry-meta">Jul 27, 2026 · Essay</span>
-        <span class="entry-title">Discipline Should Not Cost Me My Heart</span>
-        <span class="entry-desc">Staying focused without becoming cold.</span>
-      </a>
-      <a class="entry reveal" href="/writing/fragments/fragments-5-refinement/">
-        <span class="entry-meta">Mar 9, 2026 · Fragment</span>
-        <span class="entry-title">Fragments #5 — Refinement</span>
-        <span class="entry-desc">A field note on refinement through faith, responsibility, and the discipline of letting go of limiting beliefs.</span>
-      </a>
-    </div>
-
-    <a class="text-link writing-more reveal" href="/writing/">
-      Explore the writing library <span class="arrow" aria-hidden="true">→</span>
-    </a>
   </section>
 
   <!-- PRINCIPLES -->
-  <section aria-labelledby="principles-heading">
-    <h2 class="sec-title reveal" id="principles-heading">Principles</h2>
-    <ul class="principles">
-      <li class="reveal">Structure beats mood.</li>
-      <li class="reveal">Clear systems protect honest effort.</li>
-      <li class="reveal">Repetition builds identity before confidence arrives.</li>
-      <li class="reveal">Recovery is not starting over — it is returning to the system.</li>
-    </ul>
+  <div class="wrap">
+    <section class="principles" id="principles" aria-labelledby="principles-heading">
+      <div class="principles-head reveal">
+        <span class="kicker">03 — Standing principles</span>
+        <h2 class="display" id="principles-heading">What the system runs on.</h2>
+      </div>
+      <ol>
+        <li class="principle reveal"><span class="principle__num" aria-hidden="true">I.</span><span class="principle__text">Structure beats mood.</span></li>
+        <li class="principle reveal"><span class="principle__num" aria-hidden="true">II.</span><span class="principle__text">Clear systems protect honest effort.</span></li>
+        <li class="principle reveal"><span class="principle__num" aria-hidden="true">III.</span><span class="principle__text">Repetition builds identity before confidence arrives.</span></li>
+        <li class="principle reveal"><span class="principle__num" aria-hidden="true">IV.</span><span class="principle__text">Recovery is not starting over — it is returning to the system.</span></li>
+      </ol>
+    </section>
+
+    <!-- WRITING -->
+    <section class="writing" aria-labelledby="writing-heading">
+      <div class="writing-head reveal">
+        <div>
+          <span class="kicker">04 — Field notes</span>
+          <h2 class="display" id="writing-heading">Writing</h2>
+        </div>
+        <a class="text-link" href="/writing/">Explore the writing library <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="writing-grid">
+        <a class="card card-feature reveal" href="/writing/fragments/fragments-4-the-fire/">
+          <span class="glow" aria-hidden="true"></span>
+          <span class="card-feature__mark" aria-hidden="true">#4</span>
+          <span class="card-meta">Featured · Fragment · Aug 6, 2026</span>
+          <h3>Fragments #4 — The Fire</h3>
+          <p>A field note on setbacks: reading a forced slowdown as instruction, not interruption.</p>
+        </a>
+        <div class="writing-side">
+          <a class="card card-row reveal" href="/writing/essays/discipline-should-not-cost-me-my-heart/">
+            <img src="/assets/writing/essays/discipline-should-not-cost-me-my-heart/hero.webp" alt="" width="1100" height="620" loading="lazy" />
+            <div class="card-row__body">
+              <span class="card-meta">Essay · Jul 27, 2026</span>
+              <h3>Discipline Should Not Cost Me My Heart</h3>
+              <p>Staying focused without becoming cold.</p>
+            </div>
+          </a>
+          <a class="card card-row reveal" href="/writing/fragments/fragments-5-refinement/">
+            <img src="/assets/writing/fragments/fragments-5-refinement/hero.jpeg" alt="" width="800" height="450" loading="lazy" />
+            <div class="card-row__body">
+              <span class="card-meta">Fragment · Mar 9, 2026</span>
+              <h3>Fragments #5 — Refinement</h3>
+              <p>A field note on refinement through faith, responsibility, and the discipline of letting go of limiting beliefs.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE GUIDE + THE SIGNAL -->
+    <section class="offer reveal" id="field-guide" aria-labelledby="discipline-rebuild-title">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="offer-copy">
+        <span class="kicker">05 — Free · 7 days</span>
+        <h2 class="display" id="discipline-rebuild-title">You do not need another dramatic restart. You need a clear way to return.</h2>
+        <p><strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol for restoring structure, rebuilding self-trust, and returning to action.</p>
+        <ul class="offer-list">
+          <li><span aria-hidden="true">01</span>A focused seven-day rebuilding protocol</li>
+          <li><span aria-hidden="true">02</span>Simple daily actions and reflection prompts</li>
+          <li><span aria-hidden="true">03</span>A printable discipline rebuild scorecard</li>
+          <li><span aria-hidden="true">04</span>A sustainable plan for the next 14 days</li>
+        </ul>
+      </div>
+      <div class="signal" id="signal">
+        <form class="signal-form" id="signal-form" novalidate>
+          <label for="signal-email">Email address</label>
+          <input type="email" id="signal-email" name="email_address" placeholder="you@domain.com" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary" id="signal-submit">Send me the guide <span class="arrow" aria-hidden="true">→</span></button>
+        </form>
+        <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
+        <a class="text-link guide-download" id="guide-download" href="/assets/downloads/the-7-day-discipline-rebuild.pdf" download hidden>Download the guide (PDF) <span class="arrow" aria-hidden="true">→</span></a>
+        <p class="signal-fineprint">You’ll also get The Signal: roughly once a month, a system, a fix, or a field note. Tested on me before it reaches you. No spam. Leave anytime.</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="close" aria-label="Closing">
+    <div class="glow" aria-hidden="true"></div>
+    <p class="reveal">The proof is <em>the work.</em></p>
+    <a class="btn btn-ghost reveal" href="#book">Start with the book</a>
   </section>
 
-  </main>
+</main>
 
+<div class="wrap">
   <footer>
-    <p class="footer-mark">The proof is the work.</p>
+    <span class="footer-brand"><img src="/favicon.svg" alt="" width="26" height="26" />© 2026 Garry Tipler</span>
     <nav class="footer-links" aria-label="Connect">
       <a href="https://x.com/garry_tipler">X</a>
       <a href="https://garrytip.gumroad.com">Gumroad</a>
       <a href="https://medium.com/@Garry_Tipler">Medium</a>
-      <span class="footer-copy">© 2026 Garry Tipler</span>
     </nav>
   </footer>
-
 </div>
 
 <script>
-  // staggered reveal on scroll
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal sections as they scroll into view.
   (function () {
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var items = document.querySelectorAll('.reveal');
-    if (reduce || !('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('in'); });
-      return;
-    }
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
     try {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      var heroItems = document.querySelectorAll('.hero .reveal');
-      var sectionItems = document.querySelectorAll('section .reveal, footer .reveal');
-
-      heroItems.forEach(function (el) { el.classList.add('reveal-ready'); });
-      sectionItems.forEach(function (el) {
-        el.classList.add('reveal-ready');
-        io.observe(el);
-      });
-      requestAnimationFrame(function () {
-        heroItems.forEach(function (el) { el.classList.add('in'); });
-      });
+      items.forEach(function (el) { el.classList.add('reveal-ready'); io.observe(el); });
     } catch (error) {
-      items.forEach(function (el) {
-        el.classList.remove('reveal-ready');
-        el.classList.add('in');
-      });
+      items.forEach(function (el) { el.classList.remove('reveal-ready'); el.classList.add('in'); });
     }
   })();
 
@@ -1096,23 +782,36 @@
     if (weeks > Number(el.textContent)) el.textContent = String(weeks);
   })();
 
-  // Field log: latest writing follows the first item in the site's own RSS feed.
+  // Field log: numbers count up once on load. The real values are already in
+  // the HTML, so nothing changes without JavaScript or with reduced motion.
   (function () {
-    var link = document.getElementById('latest-writing');
-    if (!link || !window.fetch || !window.DOMParser) return;
-    fetch('/rss.xml')
-      .then(function (res) { return res.ok ? res.text() : Promise.reject(); })
-      .then(function (xml) {
-        var item = new DOMParser().parseFromString(xml, 'application/xml').querySelector('item');
-        var title = item && item.querySelector('title');
-        var href = item && item.querySelector('link');
-        if (!title || !href) return;
-        var url = new URL(href.textContent.trim());
-        if (url.hostname !== 'garrytipler.com') return;
-        link.textContent = title.textContent.trim();
-        link.setAttribute('href', url.pathname);
-      })
-      .catch(function () {});
+    if (reduceMotion || !window.requestAnimationFrame) return;
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+    var targets = els.map(function (el) { return Number(el.textContent) || 0; });
+    var t0 = null, dur = 1800;
+    function frame(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      els.forEach(function (el, i) { el.textContent = String(Math.round(targets[i] * e)); });
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+
+  // Principles: one at a time takes the light.
+  (function () {
+    var list = document.querySelector('.principles');
+    var items = document.querySelectorAll('.principle');
+    if (!list || !items.length) return;
+    if (reduceMotion) { list.classList.add('is-static'); return; }
+    var i = 0;
+    function show() {
+      items.forEach(function (el, j) { el.classList.toggle('is-active', j === i); });
+      i = (i + 1) % items.length;
+    }
+    show();
+    setInterval(show, 2600);
   })();
 
   // Kit subscription (custom HTML form, AJAX, no redirect).
