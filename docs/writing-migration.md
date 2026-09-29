@@ -138,7 +138,19 @@ The author approved the reviewed Day 1–5 Essay batch for GarryTipler.com publi
 
 The live Medium pages and export packages showed no body images or outbound prose links for Days 1–5. Medium canonical settings remain unchanged.
 
-The next bounded review batch is Days 6–10. Their saved export packages are review-only; no site drafts or publication metadata have been approved for this batch. The owner-facing Medium Published Stories list shows Days 6–10 first published on December 10–14, 2025, respectively. Day 6 and Day 7 packages contain duplicated page-title headings to review against the live stories. Day 9 has one unresolved remote lead image, with no source alt text, and a YouTube URL at the end. Day 10's generated Markdown contains bullet-like text and a YouTube URL that need comparison with the live story before any structural cleanup. Preserve source wording and bring the Day 9 image into a local asset before seeking publication approval.
+The author reviewed and approved the Day 6–10 Essay batch for publication on September 29, 2026. Each entry retains the reviewed title, slug and source-subtitle summary, uses the same Discipline category and tags as Days 1–5, and records `publishedDate: 2026-09-29`. Original Medium dates are December 10–14, 2025, confirmed against the owner-facing date record and live pages. Exact source timestamps and HTML hashes remain in the untouched export packages.
+
+| Day | Medium ID | Original Medium date | Site slug | Approved formatting |
+| ---: | --- | --- | --- | --- |
+| 6 | `4aafc83760d6` | 2025-12-10 | `day-6-i-press-on` | Omit duplicated export title; preserve all eight prose blocks. |
+| 7 | `4c142807c68d` | 2025-12-11 | `day-7-continue-to-write` | Omit duplicated export title; preserve all ten prose blocks. |
+| 8 | `baa06e0fbf7a` | 2025-12-12 | `day-8-keep-at-it` | Repair an invalid Markdown emphasis boundary without changing visible text; preserve separators and bold TipTalks name. |
+| 9 | `d7bc7f463fbc` | 2025-12-13 | `day-9-the-death-of-old-garry` | Save the portrait lead image locally with reviewed alt text; preserve source bullets and bold labels; retain the exact YouTube URL as a clickable link. |
+| 10 | `2e48be9f62ec` | 2025-12-14 | `day-10-i-am-not-for-everyone` | Preserve source list markers and bullet-only lines; retain the exact YouTube URL as a clickable link. |
+
+All 64 prose/list blocks matched the live source after Markdown and whitespace normalization. Private review packages and per-entry hashes are retained under `.migration-output/day-series-review-6-10/`. No prose rewriting, relationship inference or changes to existing articles were approved. Medium canonical settings remain unchanged.
+
+After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 11–30 remain outside this publication approval.
 
 ## Medium export commands
 
