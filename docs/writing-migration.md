@@ -150,7 +150,19 @@ The author reviewed and approved the Day 6–10 Essay batch for publication on S
 
 All 64 prose/list blocks matched the live source after Markdown and whitespace normalization. Private review packages and per-entry hashes are retained under `.migration-output/day-series-review-6-10/`. No prose rewriting, relationship inference or changes to existing articles were approved. Medium canonical settings remain unchanged.
 
-After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 11–30 remain outside this publication approval.
+The author reviewed and approved the Day 11–15 Essay batch for publication on September 29, 2026. Each entry retains its reviewed title and slug, uses the established Discipline category and tags, and records `publishedDate: 2026-09-29`. The live Medium dates below follow the author-calendar date contract; exact UTC timestamps and source hashes remain in the untouched export packages.
+
+| Day | Medium ID | Original Medium date | Site slug | Approved formatting |
+| ---: | --- | --- | --- | --- |
+| 11 | `77fc75623e1a` | 2025-12-15 | `day-11-testimony` | Preserve source lists and bullet-only lines. |
+| 12 | `b3232fb384a5` | 2025-12-16 | `day-12-the-test` | Preserve prose and literal bullet separators. |
+| 13 | `989e229aabb1` | 2025-12-17 | `day-13-today-has-been-a-good-day` | Preserve source lists and bullet-only lines; make the exact YouTube URL clickable. |
+| 14 | `0f4aa7c47d5d` | 2025-12-18 | `day-14-looking-back` | Preserve journal date, emphasis and labels; retain the source slug despite the Faith Before Evidence title. |
+| 15 | `a634190dd45f` | 2025-12-19 | `day-15-everything-i-need-finds-me` | Preserve separators, prose and final emphasis; remove the stray Me prefix from the subtitle summary by explicit author instruction. |
+
+All 90 prose/list blocks matched the live source and rendered preview after Markdown and whitespace normalization. These five source stories have no body images. Private review packages and per-entry hashes remain under `.migration-output/day-series-review-11-15/`. No inferred relationships, existing article edits or Medium canonical changes were approved.
+
+After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 16–30 remain outside this publication approval.
 
 ## Medium export commands
 
