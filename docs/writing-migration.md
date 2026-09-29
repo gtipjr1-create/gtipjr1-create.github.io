@@ -162,7 +162,19 @@ The author reviewed and approved the Day 11–15 Essay batch for publication on 
 
 All 90 prose/list blocks matched the live source and rendered preview after Markdown and whitespace normalization. These five source stories have no body images. Private review packages and per-entry hashes remain under `.migration-output/day-series-review-11-15/`. No inferred relationships, existing article edits or Medium canonical changes were approved.
 
-After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 16–30 remain outside this publication approval.
+The author reviewed and approved Days 16–20 for publication on September 29, 2026. All five retain the reviewed titles, source-subtitle summaries, explicit slugs, established Discipline category and tags, with `publishedDate: 2026-09-29`.
+
+| Day | Medium ID | Original Medium date | Site slug |
+| ---: | --- | --- | --- |
+| 16 | `3752da46a194` | 2025-12-20 | `day-16-through-the-furnace` |
+| 17 | `73f762c7b04e` | 2025-12-21 | `day-17-i-do-reflecting` |
+| 18 | `39c702a3c850` | 2025-12-22 | `day-18-i-havent-had-a-bed-in-almost-a-year` |
+| 19 | `a4ce96c64d5c` | 2025-12-23 | `day-19-i-will-not-flinch` |
+| 20 | `f4bf0e359316` | 2025-12-24 | `day-20-last-christmas-i-was-in-a-shelter` |
+
+All 93 prose blocks and every bold/italic passage match the live Medium source after formatting and whitespace normalization. Day 16 repairs an invalid Markdown emphasis boundary without changing visible prose. Original dates follow the live Medium author-calendar contract, while exact UTC timestamps and saved HTML hashes remain untouched. These five pieces have no body images or outbound prose links. Private review evidence remains under `.migration-output/day-series-review-16-20/`. No inferred relationships, existing article edits or Medium canonical changes were approved.
+
+After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 21–30 remain outside this publication approval.
 
 ## Medium export commands
 
