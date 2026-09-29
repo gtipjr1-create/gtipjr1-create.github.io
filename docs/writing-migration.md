@@ -122,6 +122,20 @@ The author clarified that the dates in the owner-facing Medium Stories list are 
 
 The author also requested that images from published Medium pieces come over. The four previously omitted images for Fragments #5, #6, #7, and #9 are now local site assets. Images for #5, #7, and #9 appear before the article prose; #6 remains between `Order does not reduce ambition. It strengthens it.` and `Fragments continue.` as in the source. The existing Essay image stays unchanged. The author-approved omission of the Medium-only book CTA in #6 remains in effect.
 
+## Day series migration
+
+The author approved the reviewed Day 1–5 Essay batch for GarryTipler.com publication on September 28, 2026. Their source records are in the ignored August 10 Medium export review packages under `.migration-output/essays/`. The owner-facing Medium Published Stories list supplies the original calendar dates below; the export's exact UTC timestamps and source SHA-256 hashes remain in each `source.json`.
+
+| Day | Medium ID | Original Medium date | Site slug | Source formatting decision |
+| ---: | --- | --- | --- | --- |
+| 1 | `7df690cfe384` | 2025-12-05 | `day-1-begin` | Omit duplicated page title; present the long opening subtitle as normal prose at the author's request. |
+| 2 | `0173e86abe50` | 2025-12-06 | `day-2-picking-up-where-i-left-off` | Preserve body prose. |
+| 3 | `4a24aecef70f` | 2025-12-07 | `day-3-continuing-to-write` | Preserve body prose. |
+| 4 | `3e275d12f0ee` | 2025-12-08 | `day-4-im-doing-it` | Omit duplicated page title; preserve remaining prose. |
+| 5 | `7edc3237260a` | 2025-12-09 | `day-5-just-write` | Preserve body prose. |
+
+The live Medium pages and export packages showed no body images or outbound prose links for Days 1–5. Medium canonical settings remain unchanged.
+
 ## Medium export commands
 
 Inspect an explicit ZIP without writing output:
