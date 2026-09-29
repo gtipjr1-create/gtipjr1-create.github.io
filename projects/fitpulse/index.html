@@ -30,130 +30,174 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./fitpulse.css" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <div class="page-shell">
-    <header class="project-masthead">
-      <nav aria-label="Breadcrumb">
-        <a class="back-link" href="../../"><span aria-hidden="true">←</span> Garry Tipler</a>
+  <header class="hero">
+    <div class="hero-texture" aria-hidden="true"><div class="hero-grain"></div><div class="hero-lines"></div></div>
+    <div class="wrap">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-mark" href="../../" aria-label="Garry Tipler home">
+          <img src="/favicon.svg" alt="" width="34" height="34" />
+          <span aria-hidden="true">GARRY TIPLER</span>
+        </a>
+        <div class="site-links">
+          <a class="nav-book" href="../../#book">Book</a>
+          <a href="/writing/">Writing</a>
+          <a class="nav-projects" href="../../#proof" aria-current="page">Projects</a>
+          <a class="nav-guide" href="../../#field-guide">Free 7-day guide</a>
+        </div>
       </nav>
 
-      <p class="eyebrow">Case study / FitPulse</p>
-      <div class="masthead-title-row">
-        <h1>FitPulse</h1>
-        <span class="status-chip">In development</span>
+      <div class="hero-stack">
+        <div class="hero-title">
+          <nav class="crumbs rise" aria-label="Breadcrumb" style="--d:0ms">
+            <a href="../../"><span aria-hidden="true">←&nbsp;</span>Garry Tipler</a><span class="sep" aria-hidden="true">/</span><span>Case study</span><span class="sep" aria-hidden="true">/</span><span aria-current="page">FitPulse</span>
+          </nav>
+          <h1 class="rise" style="--d:120ms">FitPulse</h1>
+          <span class="status-chip rise" style="--d:200ms"><span class="pulse" aria-hidden="true"></span>In development</span>
+        </div>
+        <div class="hero-intro">
+          <p class="thesis rise" style="--d:280ms">FitPulse is a coaching operating system for trainers who need client context, programming, check-ins, and performance signals in one working surface.</p>
+          <p class="body rise" style="--d:360ms">Built for independent trainers and small coaching operations managing multiple clients, programs, check-ins, and performance decisions.</p>
+        </div>
       </div>
-      <p class="thesis">FitPulse is a coaching operating system for trainers who need client context, programming, check-ins, and performance signals in one working surface.</p>
-      <p class="masthead-copy">Built for independent trainers and small coaching operations managing multiple clients, programs, check-ins, and performance decisions.</p>
-    </header>
 
-    <main id="main-content" tabindex="-1">
-      <section aria-labelledby="problem-title">
-        <div class="section-heading">
-          <span class="section-number" aria-hidden="true">01</span>
-          <h2 id="problem-title">The operating problem</h2>
-        </div>
-        <div class="prose">
-          <p>Coaching work often becomes fragmented across spreadsheets, messages, notes, program tools, check-ins, and disconnected dashboards.</p>
-          <p class="prose-detail">Each surface can hold part of the truth while leaving the coach to reconstruct the full client context before deciding what to do next.</p>
-          <p class="prose-detail">FitPulse brings those working contexts together without claiming to automate coaching judgment. It keeps relevant client, program, activity, and performance information close to the next action.</p>
-        </div>
-      </section>
+      <figure class="hero-figure rise" style="--d:440ms">
+        <div class="glow" aria-hidden="true"></div>
+        <img class="shot shot--wide" src="../../assets/fitpulse/fitpulse-dashboard.webp" width="1916" height="835" fetchpriority="high" decoding="async" alt="FitPulse dashboard with client-operations navigation, review-status counts, and a decision queue identifying demo clients who need attention and the reason for each review." />
+        <figcaption><strong class="caption-label">Dashboard / Decision queue</strong><span class="caption-text">The coaching workspace surfaces who needs attention, why they need it, and what the next action is.</span></figcaption>
+      </figure>
+    </div>
+  </header>
 
-      <section aria-labelledby="workflow-title">
-        <div class="section-heading">
-          <span class="section-number" aria-hidden="true">02</span>
-          <h2 id="workflow-title">The coaching workflow</h2>
+  <main id="main-content" tabindex="-1">
+    <section class="statement-section" aria-labelledby="problem-title">
+      <div class="wrap split">
+        <div class="label-col"><h2 class="kicker" id="problem-title">01 — The operating problem</h2></div>
+        <div class="main-col reveal">
+          <p class="statement-lg">Coaching work often becomes <em>fragmented</em> across spreadsheets, messages, notes, program tools, check-ins, and disconnected dashboards.</p>
+          <div class="two-col">
+            <p class="body">Each surface can hold part of the truth while leaving the coach to reconstruct the full client context before deciding what to do next.</p>
+            <p class="body">FitPulse brings those working contexts together without claiming to automate coaching judgment. It keeps relevant client, program, activity, and performance information close to the next action.</p>
+          </div>
         </div>
-        <ol class="workflow">
-          <li><span class="workflow-copy">Review the coaching workspace and identify what needs attention.</span></li>
-          <li><span class="workflow-copy">Open the client record and assess current context.</span></li>
-          <li><span class="workflow-copy">Inspect or adjust the active program.</span></li>
-          <li><span class="workflow-copy">Review check-ins, sessions, adherence, and performance signals.</span></li>
-          <li><span class="workflow-copy">Decide the next coaching action.</span></li>
+      </div>
+    </section>
+
+    <section class="workflow-section" aria-labelledby="workflow-title">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">02 — The coaching workflow</p>
+          <h2 class="h2" id="workflow-title">From what needs attention to the next decision.</h2>
+        </div>
+        <ol class="workflow workflow--five">
+          <li class="step reveal" style="--sd:0s"><span class="step-num" aria-hidden="true">01</span><span class="step-copy">Review the coaching workspace and identify what needs attention.</span></li>
+          <li class="step reveal" style="--sd:2.6s"><span class="step-num" aria-hidden="true">02</span><span class="step-copy">Open the client record and assess current context.</span></li>
+          <li class="step reveal" style="--sd:5.2s"><span class="step-num" aria-hidden="true">03</span><span class="step-copy">Inspect or adjust the active program.</span></li>
+          <li class="step reveal" style="--sd:7.8s"><span class="step-num" aria-hidden="true">04</span><span class="step-copy">Review check-ins, sessions, adherence, and performance signals.</span></li>
+          <li class="step reveal" style="--sd:10.4s"><span class="step-num" aria-hidden="true">05</span><span class="step-copy">Decide the next coaching action.</span></li>
         </ol>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="interface-title">
-        <div class="section-heading">
-          <span class="section-number" aria-hidden="true">03</span>
-          <h2 id="interface-title">Selected interface work</h2>
+    <section class="interface-section" aria-labelledby="interface-title">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">03 — Selected interface work</p>
+          <h2 class="h2" id="interface-title">One client, one working surface.</h2>
         </div>
-
-        <div class="media-list">
-          <figure class="media-item">
-            <div class="media-frame">
-              <img src="../../assets/fitpulse/fitpulse-dashboard.webp" width="1916" height="835" loading="lazy" decoding="async" alt="FitPulse dashboard with client-operations navigation, review-status counts, and a decision queue identifying demo clients who need attention and the reason for each review." />
-            </div>
-            <figcaption><strong>Dashboard / Decision queue</strong><span>The coaching workspace surfaces who needs attention, why they need it, and what the next action is.</span></figcaption>
+        <div class="gallery gallery--wide">
+          <figure class="reveal">
+            <img class="shot shot--wide" src="../../assets/fitpulse/fitpulse-client-brief.webp" width="1911" height="1947" loading="lazy" decoding="async" alt="FitPulse Client Brief for a demo client showing review status, active program, latest session, performance trend, recent activity, check-in timing, and the current coaching read." />
+            <figcaption><strong class="caption-label">Client Brief</strong><span class="caption-text">Each client record brings together current program status, recent activity, check-ins, and the immediate coaching read.</span></figcaption>
           </figure>
-
-          <figure class="media-item">
-            <div class="media-frame">
-              <img src="../../assets/fitpulse/fitpulse-client-brief.webp" width="1911" height="1947" loading="lazy" decoding="async" alt="FitPulse Client Brief for a demo client showing review status, active program, latest session, performance trend, recent activity, check-in timing, and the current coaching read." />
-            </div>
-            <figcaption><strong>Client Brief</strong><span>Each client record brings together current program status, recent activity, check-ins, and the immediate coaching read.</span></figcaption>
+          <figure class="reveal">
+            <img class="shot shot--wide" src="../../assets/fitpulse/fitpulse-program.webp" width="1917" height="1942" loading="lazy" decoding="async" alt="FitPulse Program view for a demo client showing the active Ascend: Precision block, week three of eight, remaining runway, planned end date, and three scheduled training days." />
+            <figcaption><strong class="caption-label">Program</strong><span class="caption-text">Programming remains part of the same operating system, so the coach can move from review to adjustment without losing context.</span></figcaption>
           </figure>
-
-          <figure class="media-item">
-            <div class="media-frame">
-              <img src="../../assets/fitpulse/fitpulse-program.webp" width="1917" height="1942" loading="lazy" decoding="async" alt="FitPulse Program view for a demo client showing the active Ascend: Precision block, week three of eight, remaining runway, planned end date, and three scheduled training days." />
-            </div>
-            <figcaption><strong>Program</strong><span>Programming remains part of the same operating system, so the coach can move from review to adjustment without losing context.</span></figcaption>
-          </figure>
-
-          <figure class="media-item">
-            <div class="media-frame">
-              <img src="../../assets/fitpulse/fitpulse-performance.webp" width="1916" height="1950" loading="lazy" decoding="async" alt="FitPulse Performance view for a demo client showing twelve tracked exercises, an all-time declining signal, and individual trend charts for each lift." />
-            </div>
-            <figcaption><strong>Performance</strong><span>Trend detection helps surface softening performance across tracked lifts before the next coaching decision is made.</span></figcaption>
+          <figure class="reveal">
+            <img class="shot shot--wide" src="../../assets/fitpulse/fitpulse-performance.webp" width="1916" height="1950" loading="lazy" decoding="async" alt="FitPulse Performance view for a demo client showing twelve tracked exercises, an all-time declining signal, and individual trend charts for each lift." />
+            <figcaption><strong class="caption-label">Performance</strong><span class="caption-text">Trend detection helps surface softening performance across tracked lifts before the next coaching decision is made.</span></figcaption>
           </figure>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="decisions-title">
-        <div class="section-heading">
-          <span class="section-number" aria-hidden="true">04</span>
-          <h2 id="decisions-title">Product decisions</h2>
+    <section class="decisions-section decisions-section--ruled" aria-labelledby="decisions-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">04 — Product decisions</p>
+          <h2 class="h2" id="decisions-title">Decision-first, by design.</h2>
         </div>
-        <div class="decision-list">
-          <article><h3>Decision-first, not dashboard-first</h3><p>The interface prioritizes the client who needs attention and the reason a coaching decision is required.</p></article>
-          <article><h3>Context stays with the action</h3><p>Program status, recent activity, check-ins, and performance signals remain attached to the client record.</p></article>
-          <article><h3>Programming and review stay connected</h3><p>The coach can move between review and program adjustment inside the same operating system.</p></article>
-          <article><h3>Signals do not replace judgment</h3><p>FitPulse supports the coaching decision; it does not pretend to replace the coach.</p></article>
+        <div class="decisions decisions--two">
+          <article class="decision reveal"><span class="decision-num" aria-hidden="true">I.</span><h3>Decision-first, not dashboard-first</h3><p>The interface prioritizes the client who needs attention and the reason a coaching decision is required.</p></article>
+          <article class="decision reveal"><span class="decision-num" aria-hidden="true">II.</span><h3>Context stays with the action</h3><p>Program status, recent activity, check-ins, and performance signals remain attached to the client record.</p></article>
+          <article class="decision reveal"><span class="decision-num" aria-hidden="true">III.</span><h3>Programming and review stay connected</h3><p>The coach can move between review and program adjustment inside the same operating system.</p></article>
+          <article class="decision reveal"><span class="decision-num" aria-hidden="true">IV.</span><h3>Signals do not replace judgment</h3><p>FitPulse supports the coaching decision; it does not pretend to replace the coach.</p></article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section aria-labelledby="state-title">
-        <div class="section-heading">
-          <span class="section-number" aria-hidden="true">05</span>
-          <h2 id="state-title">Current development state</h2>
+    <div class="wrap">
+      <section class="status-panel reveal" aria-labelledby="state-title">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="status-copy">
+          <h2 class="kicker" id="state-title">05 — Current development state</h2>
+          <p class="status-value"><span class="pulse" aria-hidden="true"></span>In active development</p>
+          <p class="body">The core trainer workflow and major operating surfaces are implemented. FitPulse remains under refinement and validation.</p>
         </div>
-        <div class="status-block">
-          <p class="status-label">Current status</p>
-          <p class="status-value">In active development</p>
-          <p>The core trainer workflow and major operating surfaces are implemented. FitPulse remains under refinement and validation.</p>
-          <ul class="status-list">
-            <li>The coaching workspace, client context, program view, and performance review surfaces are implemented.</li>
-            <li>Current work focuses on refining the connected trainer workflow and validating the decisions each surface supports.</li>
-            <li>FitPulse remains private during development, and no release timing is being promised.</li>
-            <li>The product is designed and implemented by Garry Tipler.</li>
-          </ul>
-        </div>
+        <ul class="status-list">
+          <li>The coaching workspace, client context, program view, and performance review surfaces are implemented.</li>
+          <li>Current work focuses on refining the connected trainer workflow and validating the decisions each surface supports.</li>
+          <li>FitPulse remains private during development, and no release timing is being promised.</li>
+          <li>The product is designed and implemented by Garry Tipler.</li>
+        </ul>
       </section>
-    </main>
+    </div>
 
-    <footer class="closing" aria-labelledby="closing-title">
-      <p class="eyebrow">Continue</p>
-      <h2 id="closing-title">Coaching decisions stay human.</h2>
-      <p>FitPulse brings the working context together so the coach can make the next decision with a clearer view.</p>
-      <a class="primary-link" href="../../">Return to garrytipler.com <span aria-hidden="true">→</span></a>
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="glow" aria-hidden="true"></div>
+      <p class="kicker">Continue</p>
+      <h2 id="closing-title" class="reveal">Coaching decisions stay <em>human.</em></h2>
+      <p class="body">FitPulse brings the working context together so the coach can make the next decision with a clearer view.</p>
+      <a class="btn-ghost" href="../../">Return to garrytipler.com <span class="arrow" aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <footer>
+      <span class="footer-brand"><img src="/favicon.svg" alt="" width="26" height="26" />© 2026 Garry Tipler</span>
+      <nav class="footer-links" aria-label="Connect">
+        <a href="https://x.com/garry_tipler">X</a>
+        <a href="https://garrytip.gumroad.com">Gumroad</a>
+        <a href="https://medium.com/@Garry_Tipler">Medium</a>
+      </nav>
     </footer>
   </div>
+
+  <script>
+    // Reveal sections as they scroll into view (skipped when motion is reduced).
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+      var items = document.querySelectorAll('.reveal');
+      try {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        items.forEach(function (el) { el.classList.add('reveal-ready'); io.observe(el); });
+      } catch (error) {
+        items.forEach(function (el) { el.classList.remove('reveal-ready'); });
+      }
+    })();
+  </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b5edd775fe9f45bd8d41d54cafb74cc6"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
