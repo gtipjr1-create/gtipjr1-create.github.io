@@ -1,15 +1,39 @@
 :root {
-  --bg: #0b0b0c;
-  --bg-raised: #131315;
-  --bg-card: #141416;
-  --ink: #eceae3;
-  --ink-dim: #9d9b92;
-  --ink-faint: #7f7d76;
-  --line: rgba(236, 234, 227, 0.1);
-  --line-soft: rgba(236, 234, 227, 0.06);
+  /* The Writing Chambers — candlelit by default */
+  --bg: #0c0a07;
+  --bg-2: #110e0a;
+  --bg-card: #14110c;
+  --ink: #ede4d3;
+  --ink-soft: #d8cdb8;
+  --ink-dim: #b3a893;
+  --ink-faint: #8c826f;
+  --line: #2a241a;
+  --line-2: #3a3124;
   --accent: #cba35c;
-  --accent-hi: #e0bd78;
-  --accent-dim: rgba(203, 163, 92, 0.14);
+  --accent-hi: #e8c585;
+  --link: #d4ad67;
+  --glow: rgba(236, 170, 90, 0.2);
   --copy-width: 700px;
+  --maxw: 1280px;
+  --gutter: 80px;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Hanken Grotesk", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+/* Paper reading mode, chosen by the reader on article pages */
+:root[data-reading="paper"] {
+  --bg: #f1ebdf;
+  --bg-2: #ebe3d4;
+  --bg-card: #e6dcc8;
+  --ink: #1b1813;
+  --ink-soft: #2e2a22;
+  --ink-dim: #4d463a;
+  --ink-faint: #6b6354;
+  --line: #d3c7ae;
+  --line-2: #c4b89f;
+  --accent: #7a5719;
+  --accent-hi: #5a3f10;
+  --link: #7a5719;
+  --glow: rgba(0, 0, 0, 0);
+}

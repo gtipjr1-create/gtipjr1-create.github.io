@@ -17,7 +17,7 @@ const entries = sortWritingCollection(await getPublishedWritingEntriesByType("es
   returnHref="/writing/"
   returnLabel="Writing"
 >
-  <section class="library-section collection-index" aria-labelledby="essays-heading">
+  <section class="library-section collection-index library-section--split" aria-labelledby="essays-heading">
     <div class="library-section-heading">
       <p class="library-kicker">{entries.length} {entries.length === 1 ? "essay" : "essays"}</p>
       <h2 id="essays-heading">Essay index</h2>

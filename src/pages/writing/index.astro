@@ -10,30 +10,31 @@ const publishedEntries = await getPublishedWritingEntries();
 const latestEntries = sortWritingByPublicationDate(publishedEntries);
 const fragmentCount = publishedEntries.filter((entry) => entry.data.type === "fragment").length;
 const essayCount = publishedEntries.filter((entry) => entry.data.type === "essay").length;
+const pieces = (count: number) => `${count} ${count === 1 ? "piece" : "pieces"}`;
+const collectionNote = `${fragmentCount} ${fragmentCount === 1 ? "fragment" : "fragments"} · ${essayCount} ${essayCount === 1 ? "essay" : "essays"}`;
 ---
 
 <WritingIndexLayout
   title="Writing"
   description="Essays and fragments on discipline, structure, execution, recovery, self-command, and the long rebuild."
   canonicalPath="/writing/"
-  eyebrow="Writing library"
+  eyebrow="The Writing Chambers"
+  note={collectionNote}
 >
   <section class="library-section" aria-labelledby="collections-heading">
-    <div class="library-section-heading">
-      <p class="library-kicker">Collections</p>
-      <h2 id="collections-heading">Browse the library</h2>
-    </div>
-
+    <h2 id="collections-heading" class="library-kicker" style="margin-bottom: 28px;">Collections</h2>
     <div class="collection-grid">
       <a class="collection-card" href="/writing/fragments/">
-        <span class="collection-count">{fragmentCount} {fragmentCount === 1 ? "piece" : "pieces"}</span>
+        <span class="collection-numeral" aria-hidden="true">{fragmentCount}</span>
+        <span class="collection-count">The first chamber · {pieces(fragmentCount)}</span>
         <span class="collection-title">Fragments</span>
         <span class="collection-description">Numbered field notes from the work of rebuilding.</span>
         <span class="collection-cta">Browse fragments <span aria-hidden="true">→</span></span>
       </a>
 
       <a class="collection-card" href="/writing/essays/">
-        <span class="collection-count">{essayCount} {essayCount === 1 ? "piece" : "pieces"}</span>
+        <span class="collection-numeral" aria-hidden="true">{essayCount}</span>
+        <span class="collection-count">The second chamber · {pieces(essayCount)}</span>
         <span class="collection-title">Essays</span>
         <span class="collection-description">Longer arguments, observations, and systems put into practice.</span>
         <span class="collection-cta">Browse essays <span aria-hidden="true">→</span></span>
@@ -42,27 +43,29 @@ const essayCount = publishedEntries.filter((entry) => entry.data.type === "essay
   </section>
 
   <section class="library-section" aria-labelledby="discovery-heading">
-    <div class="library-section-heading">
-      <p class="library-kicker">Discovery</p>
-      <h2 id="discovery-heading">Find a way in</h2>
-    </div>
-
+    <h2 id="discovery-heading" class="library-kicker" style="margin-bottom: 28px;">Find a way in</h2>
     <div class="discovery-grid">
       <a class="discovery-card" href="/writing/start-here/">
-        <span class="discovery-title">Start Here</span>
-        <span class="discovery-description">A deliberate path through the foundational pieces.</span>
+        <svg class="discovery-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M20 4 V36 M4 20 H36"></path><circle cx="20" cy="20" r="14"></circle></svg>
+        <span class="discovery-text">
+          <span class="discovery-title">Start Here</span>
+          <span class="discovery-description">A deliberate path through the foundational pieces.</span>
+        </span>
         <span class="collection-cta">Begin here <span aria-hidden="true">→</span></span>
       </a>
 
       <a class="discovery-card" href="/writing/archive/">
-        <span class="discovery-title">Archive</span>
-        <span class="discovery-description">Browse every published piece by its effective publication year.</span>
+        <svg class="discovery-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="6" y="8" width="28" height="8"></rect><rect x="6" y="18" width="28" height="8"></rect><rect x="6" y="28" width="28" height="6"></rect></svg>
+        <span class="discovery-text">
+          <span class="discovery-title">Archive</span>
+          <span class="discovery-description">Browse every published piece by its effective publication year.</span>
+        </span>
         <span class="collection-cta">View archive <span aria-hidden="true">→</span></span>
       </a>
     </div>
   </section>
 
-  <section class="library-section" aria-labelledby="latest-heading">
+  <section class="library-section library-section--split" aria-labelledby="latest-heading">
     <div class="library-section-heading">
       <p class="library-kicker">Latest</p>
       <h2 id="latest-heading">Recent writing</h2>

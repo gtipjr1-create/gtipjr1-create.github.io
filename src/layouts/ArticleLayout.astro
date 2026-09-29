@@ -28,6 +28,7 @@ const effectivePublicationDate = getEffectivePublicationDate(data);
 const effectiveDateString = toDateString(effectivePublicationDate);
 const modifiedDate = toDateString(data.updatedDate ?? data.publishedDate ?? effectivePublicationDate);
 const typeLabel = data.type === "fragment" ? `Fragment ${data.fragmentNumber}` : data.type;
+const titleParts = data.title.split(" — ");
 
 if (!Astro.site) {
   throw new Error("Astro site URL is required to generate Article JSON-LD.");
@@ -79,46 +80,72 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
     set:html={serializedJsonLd}
   />
 
-  <div class="article-shell">
+  <script is:inline slot="head">
+    try {
+      if (localStorage.getItem("gt-reading-mode") === "paper") document.documentElement.setAttribute("data-reading", "paper");
+    } catch (error) {}
+  </script>
+
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
+
+  <div class="article-shell chamber-wrap">
     <header class="article-masthead">
-      <nav aria-label="Breadcrumb">
-        <a class="back-link" href={collectionPath}><span aria-hidden="true">←</span> {collectionLabel}</a>
-      </nav>
-      <p class="article-eyebrow">Writing / {typeLabel}</p>
-      <h1>{data.title}</h1>
-      <p class="article-summary">{data.summary}</p>
-      <p class="article-meta">
+      {data.type === "fragment" && <span class="article-watermark" aria-hidden="true">{data.fragmentNumber}</span>}
+      <div class="article-crumbs rise">
+        <nav aria-label="Breadcrumb">
+          <a class="back-link" href={collectionPath}><span aria-hidden="true">←</span> {collectionLabel}</a>
+        </nav>
+        <span class="sep" aria-hidden="true">/</span>
+        <p class="article-eyebrow">{typeLabel}</p>
+      </div>
+      <h1 class="rise" style="--d:120ms">
+        {titleParts.length === 2 ? (
+          <Fragment>{titleParts[0]} — <em>{titleParts[1]}</em></Fragment>
+        ) : (
+          data.title
+        )}
+      </h1>
+      <p class="article-summary rise" style="--d:220ms">{data.summary}</p>
+      <p class="article-meta rise" style="--d:300ms">
         <span>{data.category}</span>
         <span aria-hidden="true">·</span>
         <time datetime={effectiveDateString}>{formatWritingDate(effectivePublicationDate)}</time>
         <span aria-hidden="true">·</span>
         <span>{formatReadingTime(readingTime)}</span>
       </p>
+      <button class="reading-mode rise" type="button" id="reading-mode" aria-pressed="false" style="--d:360ms">
+        <span class="reading-mode-swatch" aria-hidden="true"></span>
+        <span id="reading-mode-label">Read on paper</span>
+      </button>
     </header>
 
     <main id="main-content" tabindex="-1">
+      {
+        data.heroImage && (
+          <figure class="article-hero"><img
+              src={data.heroImage.src}
+              alt={data.heroImage.alt}
+              decoding="async"
+              fetchpriority="high"
+            />
+            {(data.heroImage.caption || data.heroImage.credit) && (
+              <figcaption>
+                {data.heroImage.caption}
+                {data.heroImage.caption && data.heroImage.credit && " "}
+                {data.heroImage.credit && <span>Credit: {data.heroImage.credit}</span>}
+              </figcaption>
+            )}
+          </figure>
+        )
+      }
+
+      <div class="article-ornament" aria-hidden="true"><span></span></div>
+
       <article class="article-prose">
-        {
-          data.heroImage && (
-            <figure class="article-hero">
-              <img
-                src={data.heroImage.src}
-                alt={data.heroImage.alt}
-                decoding="async"
-                fetchpriority="high"
-              />
-              {(data.heroImage.caption || data.heroImage.credit) && (
-                <figcaption>
-                  {data.heroImage.caption}
-                  {data.heroImage.caption && data.heroImage.credit && " "}
-                  {data.heroImage.credit && <span>Credit: {data.heroImage.credit}</span>}
-                </figcaption>
-              )}
-            </figure>
-          )
-        }
         <slot />
       </article>
+
+      <div class="article-end" aria-hidden="true"><span></span></div>
 
       {
         data.mediumUrl && (
@@ -188,13 +215,13 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
       }
     </main>
 
-    <footer class="article-footer">
+    <div class="article-footer">
       {
         (previous || next) && (
           <nav class="article-navigation" aria-label="Writing sequence">
             {previous ? (
               <a class="sequence-link sequence-previous" href={getWritingPath(previous.data)}>
-                <span class="sequence-direction">Previous</span>
+                <span class="sequence-direction"><span aria-hidden="true">← </span>Previous</span>
                 <span class="sequence-title">{previous.data.title}</span>
               </a>
             ) : (
@@ -202,14 +229,52 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
             )}
             {next && (
               <a class="sequence-link sequence-next" href={getWritingPath(next.data)}>
-                <span class="sequence-direction">Next</span>
+                <span class="sequence-direction">Next<span aria-hidden="true"> →</span></span>
                 <span class="sequence-title">{next.data.title}</span>
               </a>
             )}
           </nav>
         )
       }
-      <a class="back-link" href="/writing/">Return to Writing <span aria-hidden="true">→</span></a>
-    </footer>
+      <a class="back-link return-link" href="/writing/">Return to Writing <span aria-hidden="true">→</span></a>
+    </div>
   </div>
+
+  <script is:inline>
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById("reading-mode");
+      var label = document.getElementById("reading-mode-label");
+      function sync() {
+        var paper = root.getAttribute("data-reading") === "paper";
+        button.setAttribute("aria-pressed", paper ? "true" : "false");
+        label.textContent = paper ? "Read by candlelight" : "Read on paper";
+      }
+      if (button) {
+        sync();
+        button.addEventListener("click", function () {
+          var paper = root.getAttribute("data-reading") !== "paper";
+          if (paper) root.setAttribute("data-reading", "paper");
+          else root.removeAttribute("data-reading");
+          try { localStorage.setItem("gt-reading-mode", paper ? "paper" : "candle"); } catch (error) {}
+          sync();
+        });
+      }
+      var bar = document.getElementById("reading-progress-bar");
+      var article = document.querySelector(".article-prose");
+      if (!bar || !article) return;
+      var ticking = false;
+      function update() {
+        var rect = article.getBoundingClientRect();
+        var total = rect.height - window.innerHeight * 0.6;
+        var progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 1;
+        bar.style.transform = "scaleX(" + progress + ")";
+        ticking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    })();
+  </script>
 </BaseLayout>

@@ -22,14 +22,18 @@ const { entries, emptyMessage } = Astro.props;
       {entries.map((entry) => {
         const effectiveDate = getEffectivePublicationDate(entry.data);
         const readingTime = calculateReadingTime(entry.body ?? "");
-        const typeLabel =
-          entry.data.type === "fragment"
-            ? `Fragment ${entry.data.fragmentNumber}`
-            : entry.data.type;
+        const isFragment = entry.data.type === "fragment";
+        const typeLabel = isFragment ? `Fragment ${entry.data.fragmentNumber}` : entry.data.type;
 
         return (
           <li>
             <a class="writing-list-item" href={getWritingPath(entry.data)}>
+              <span
+                class={isFragment ? "writing-list-mark" : "writing-list-mark writing-list-mark--word"}
+                aria-hidden="true"
+              >
+                {isFragment ? `№ ${entry.data.fragmentNumber}` : entry.data.type}
+              </span>
               <span class="writing-list-meta">
                 <span>{typeLabel}</span>
                 <span aria-hidden="true">·</span>
@@ -41,7 +45,6 @@ const { entries, emptyMessage } = Astro.props;
               </span>
               <span class="writing-list-title">{entry.data.title}</span>
               <span class="writing-list-summary">{entry.data.summary}</span>
-              <span class="writing-list-cta">Read <span aria-hidden="true">→</span></span>
             </a>
           </li>
         );

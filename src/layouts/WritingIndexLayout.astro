@@ -6,6 +6,7 @@ interface Props {
   description: string;
   canonicalPath: string;
   eyebrow: string;
+  note?: string;
   returnHref?: string;
   returnLabel?: string;
 }
@@ -15,28 +16,31 @@ const {
   description,
   canonicalPath,
   eyebrow,
+  note,
   returnHref = "/",
   returnLabel = "Garry Tipler",
 } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath}>
-  <div class="article-shell library-shell">
+  <div class="library-shell chamber-wrap">
     <header class="library-masthead">
-      <nav aria-label="Breadcrumb">
+      <svg class="chamber-arch rise" viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <path d="M8 150 V60 A52 52 0 0 1 112 60 V150"></path>
+        <path d="M22 150 V64 A38 38 0 0 1 98 64 V150" stroke-opacity=".45"></path>
+        <circle class="arch-light" cx="60" cy="98" r="3" stroke="none"></circle>
+      </svg>
+      <nav class="rise" aria-label="Breadcrumb" style="--d:80ms">
         <a class="back-link" href={returnHref}><span aria-hidden="true">←</span> {returnLabel}</a>
       </nav>
-      <p class="article-eyebrow">{eyebrow}</p>
-      <h1>{title}</h1>
-      <p class="library-intro">{description}</p>
+      <p class="library-kicker rise" style="--d:140ms">{eyebrow}</p>
+      <h1 class="rise" style="--d:200ms">{title}</h1>
+      <p class="library-intro rise" style="--d:300ms">{description}</p>
+      {note && <p class="library-note rise" style="--d:400ms">{note}</p>}
     </header>
 
     <main id="main-content" tabindex="-1">
       <slot />
     </main>
-
-    <footer class="article-footer">
-      <a class="back-link" href={returnHref}>Return to {returnLabel} <span aria-hidden="true">→</span></a>
-    </footer>
   </div>
 </BaseLayout>

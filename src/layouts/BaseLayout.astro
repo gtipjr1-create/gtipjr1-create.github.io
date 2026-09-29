@@ -58,7 +58,7 @@ const documentTitle = `${title} | Garry Tipler`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{documentTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0b0b0c" />
+    <meta name="theme-color" content="#0c0a07" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" type="application/rss+xml" title="Garry Tipler — Writing" href="/rss.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -88,14 +88,44 @@ const documentTitle = `${title} | Garry Tipler`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
       rel="stylesheet"
     />
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="chamber-light" aria-hidden="true">
+      <div class="candle"></div>
+      <span class="ember" style="top: 620px; left: 48%;"></span>
+      <span class="ember" style="top: 660px; left: 53%;"></span>
+      <span class="ember" style="top: 700px; left: 44%;"></span>
+    </div>
+    <div class="chamber-nav-band chamber-wrap">
+      <nav class="chamber-nav" aria-label="Primary">
+        <a class="chamber-mark" href="/" aria-label="Garry Tipler home">
+          <img src="/favicon.svg" alt="" width="34" height="34" />
+          <span aria-hidden="true">GARRY TIPLER</span>
+        </a>
+        <div class="chamber-links">
+          <a class="chamber-book" href="/#book">Book</a>
+          <a href="/writing/" aria-current="page">Writing</a>
+          <a class="chamber-projects" href="/#proof">Projects</a>
+          <a class="chamber-guide" href="/#field-guide">Free 7-day guide</a>
+        </div>
+      </nav>
+    </div>
     <slot />
+    <div class="chamber-wrap">
+      <footer class="chamber-footer">
+        <span class="chamber-footer-brand"><img src="/favicon.svg" alt="" width="26" height="26" />© 2026 Garry Tipler</span>
+        <nav aria-label="Connect">
+          <a href="/rss.xml">RSS</a>
+          <a href="https://x.com/garry_tipler">X</a>
+          <a href="https://medium.com/@Garry_Tipler">Medium</a>
+        </nav>
+      </footer>
+    </div>
     <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b5edd775fe9f45bd8d41d54cafb74cc6"}'></script><!-- End Cloudflare Web Analytics -->
   </body>
 </html>
