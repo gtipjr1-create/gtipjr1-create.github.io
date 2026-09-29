@@ -57,10 +57,10 @@ The names in this ledger identify source pieces. Except for already approved pub
 | #9 | Fragments #9 — Pride Is a Trap | `cfad708fd606` | `2026-04-27T23:36:11.189Z` | Author-approved reviewed repository draft |
 | #10 | Fragments #10 — Evidence | `35305e3dda5e` | `2026-05-05T06:57:08.415Z` | Author-approved reviewed repository draft |
 | #11 | Fragments #11 — Stewardship | `fb3e11bd3307` | `2026-05-12T02:13:05.728Z` | Author-approved reviewed repository draft |
-| #12 | I Am Not Behind | `52e78d543e3f` | `2026-05-19T05:10:28.217Z` | Author-approved Fragment number |
-| #13 | I Am Learning to Live Again | `e928236b05e7` | `2026-06-02T07:01:21.868Z` | Author-approved Fragment number |
-| #14 | Good Morning, Giant | `1ccc5f50d63b` | `2026-06-16T02:29:50.611Z` | Author-approved Fragment number |
-| #15 | The Quiet Return | `53804a0f815b` | `2026-06-30T04:34:11.957Z` | Author-approved Fragment number |
+| #12 | Fragments #12 — I Am Not Behind | `52e78d543e3f` | `2026-05-19T05:10:28.217Z` | Author-approved reviewed repository draft |
+| #13 | Fragments #13 — I Am Learning to Live Again | `e928236b05e7` | `2026-06-02T07:01:21.868Z` | Author-approved reviewed repository draft |
+| #14 | Fragments #14 — Good Morning, Giant | `1ccc5f50d63b` | `2026-06-16T02:29:50.611Z` | Author-approved reviewed repository draft |
+| #15 | Fragments #15 — The Quiet Return | `53804a0f815b` | `2026-06-30T04:34:11.957Z` | Author-approved reviewed repository draft |
 | #16 | I’m Doing Alright | `c21346d405f0` | `2026-07-07T02:18:11.089Z` | Author-approved Fragment number |
 | #17 | Restraint | `3aa53729ddf0` | `2026-07-16T02:56:32.117Z` | Author-approved Fragment number |
 | #18 | From Thought to Form | `67d0dec5c6f7` | `2026-03-17T03:42:10.864Z` | Recovered, previously unnumbered Fragment; non-chronological placement approved |
@@ -85,6 +85,14 @@ For Fragment #9, retain the exact export timestamp `2026-04-27T23:36:11.189Z` as
 For Fragment #10, retain the exact export timestamp `2026-05-05T06:57:08.415Z` as migration evidence and use the Medium-presented date `2026-05-05` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft uses the source's opening line as its subtitle rather than duplicating it in the body, removes the promotional Amazon Author Page block, preserves `I AM THE PROOF` exactly, and retains the three-line closing. The draft remains unpublished.
 
 For Fragment #11, retain the exact export timestamp `2026-05-12T02:13:05.728Z` as migration evidence and use the Medium-presented date `2026-05-12` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft normalizes the malformed exported title to `Fragments #11 — Stewardship`, uses the opening source line as its subtitle rather than duplicating it in the body, and preserves all remaining prose exactly. The source has no image or CTA. The draft remains unpublished. These drafts do not authorize publication, changes to Medium, or work on Fragment #12.
+
+For Fragment #12, retain the exact export timestamp `2026-05-19T05:10:28.217Z` as migration evidence and use the Medium-presented date `2026-05-19` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft preserves the distinct opening heading and all body prose exactly, normalizing only the exported nonbreaking space in `was behind`. The source subtitle `Sometimes the delay is not failure. Sometimes it is the shape of real work` remains migration metadata rather than being inserted into the body. The source has no image, link, or CTA, and the draft remains unpublished.
+
+For Fragment #13, retain the exact export timestamp `2026-06-02T07:01:21.868Z` as migration evidence and use `2026-06-02` as the public historical date; the timestamp and Los Angeles calendar date agree. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft uses the `Recovery` category and preserves the complete body exactly, including the closing movement. The source subtitle `Discipline gave me structure. Now I am learning to let it give me life back.` remains migration metadata rather than being inserted into the body. The source has no image, link, or CTA, and the draft remains unpublished.
+
+For Fragment #14, retain the exact export timestamp `2026-06-16T02:29:50.611Z` as migration evidence and use the Medium-presented date `2026-06-16` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft omits the duplicate body title, preserves all three `Good morning, Giant` refrains as headings, and normalizes their exported nonbreaking spaces to ordinary spaces. The source subtitle `Reflective. Honest. Strong. Grounded.` remains migration metadata rather than being inserted into the body. The source has no image, link, or CTA, and the draft remains unpublished.
+
+For Fragment #15, retain the exact export timestamp `2026-06-30T04:34:11.957Z` as migration evidence and use the Medium-presented date `2026-06-30` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft uses the `Recovery` category, omits the duplicate body title and subtitle, and preserves all remaining prose exactly, including the repeated doors-and-windows contrast. The source subtitle `Coming back to softness, love, openness, and simple living without losing strength.` remains migration metadata. The source has no image, link, or CTA, and the draft remains unpublished. These drafts do not authorize publication, changes to Medium, or work on Fragment #16.
 
 ## Medium export commands
 

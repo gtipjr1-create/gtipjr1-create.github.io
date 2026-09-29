@@ -44,15 +44,18 @@ src/content/writing/
   letters/
 ```
 
-The current published content inventory contains five real pieces:
+The current published content inventory contains six real pieces:
 
 ```text
 src/content/writing/fragments/fragments-1-feelings-dont-build-futures/index.md
 src/content/writing/fragments/fragments-2-the-test-the-boundary-the-shift/index.md
 src/content/writing/fragments/fragments-3-i-must-write/index.md
 src/content/writing/fragments/fragments-4-the-fire/index.md
+src/content/writing/fragments/fragments-5-refinement/index.md
 src/content/writing/essays/discipline-should-not-cost-me-my-heart/index.md
 ```
+
+Fragments #6–#15 also exist as private repository drafts. They remain excluded from routes, indexes, archive, sitemap, RSS, and all other generated public output.
 
 ### Public route structure
 
@@ -342,6 +345,22 @@ The batch passed the writing-tool tests, full repository validation, corrected-d
 
 On September 13, 2026, the author approved the previously unnumbered Fragment classifications and numbering ledger recorded in `docs/writing-migration.md`. Established numbers #1–#6 remain unchanged; #7–#17 are approved; and recovered `From Thought to Form` is #18 despite its earlier March source timestamp. The two Pride drafts remain retained source evidence for #9 rather than additional pieces. Generated review packages and manifests remain unchanged until individual review.
 
+### Controlled private-draft migration — Fragments #5–#15
+
+Fragment #5 was published in commit `96be366` with its approved September 13, 2026 site publication date and March 9, 2026 historical Medium date.
+
+Fragments #6–#8 were then prepared and pushed as individual private checkpoints:
+
+- `8949b99` — `chore: prepare fragment 6 private draft`
+- `4f50ca2` — `chore: prepare fragment 7 private draft`
+- `ce7dd0b` — `chore: prepare fragment 8 private draft`
+
+After the individual workflow proved stable, Fragments #9–#11 were reviewed separately, prepared together, validated as one private batch, and pushed in `85f89db` — `chore: prepare fragments 9-11 private drafts`.
+
+Fragments #12–#15 completed private-draft preparation and were committed and pushed after author approval. Each source and metadata package was reviewed individually before preparation. The batch passed the writing-tool tests, full validation, exact approved-transformation comparisons, and generated-output exclusion checks. The validator recognized 16 entries: 6 published and 10 drafts. Fragments #6–#15 produced no routes or references in `dist/`.
+
+The private batches establish `Recovery` as an approved Fragment category alongside `Discipline`: Fragments #13 and #15 use `Recovery` based on their focus on reintegration, openness, and life after protective structure. Final display titles, slugs, dates, subtitles, summaries, taxonomy, image/CTA handling, and prose transformations are recorded per entry in `docs/writing-migration.md` and `NEXT_SESSION.md`.
+
 ## Current discovery behavior
 
 ### Writing landing page
@@ -479,7 +498,8 @@ The homepage was verified live after commit `553f052`. The established routes we
 
 - Editorial review and publication of later generated Medium packages.
 - Bulk reclassification of response-ambiguous short records.
-- Individual review and implementation of the approved Fragment #6–#18 migration ledger; numbering is decided, while final display titles, slugs, summaries, tags, historical calendar dates, images, and publication remain deferred.
+- Review and private-draft preparation of Fragments #16–#18; numbering is approved, but their final titles, slugs, summaries, taxonomy, historical dates, images, and transformations remain undecided.
+- Publication selection for the private Fragment #6–#15 drafts.
 - Remote-image downloads or inferred image metadata.
 - Bulk writing publication.
 - Full-text search.
@@ -491,13 +511,13 @@ The homepage was verified live after commit `553f052`. The established routes we
 
 ## Next phase
 
-No next migration item is authorized. Fragment #5 — Refinement is complete; do not begin Fragment #6 without explicit approval.
+Fragments #12–#15 are committed private drafts. The next bounded slice is individual source and metadata review for Fragment #16 when requested. Do not publish any private draft without separate approval.
 
-See `NEXT_SESSION.md` for the bounded review handoff and explicit non-goals.
+See `NEXT_SESSION.md` for the restart-ready handoff, validation evidence, and explicit non-goals.
 
 ## Repository status at this record
 
-At this stop point, `main` includes the importer foundation, parser fidelity fixes, the approved Fragments #1–#3 production migration batch, and the author-approved Fragment #5 publication.
+At this stop point, `main` includes the importer foundation, parser fidelity fixes, published Fragments #1–#5, and committed private Fragments #6–#15. The #12–#15 checkpoint was based on `a101e78`, which also contains the subsequent homepage refresh.
 
 The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
 
