@@ -61,7 +61,7 @@ The names in this ledger identify source pieces. Except for already approved pub
 | #13 | Fragments #13 — I Am Learning to Live Again | `e928236b05e7` | `2026-06-02T07:01:21.868Z` | Published September 28, 2026 |
 | #14 | Fragments #14 — Good Morning, Giant | `1ccc5f50d63b` | `2026-06-16T02:29:50.611Z` | Published September 28, 2026 |
 | #15 | Fragments #15 — The Quiet Return | `53804a0f815b` | `2026-06-30T04:34:11.957Z` | Published September 28, 2026 |
-| #16 | I’m Doing Alright | `c21346d405f0` | `2026-07-07T02:18:11.089Z` | Author-approved Fragment number |
+| #16 | I’m Doing Alright | `c21346d405f0` | `2026-07-07T02:18:11.089Z` | Published September 28, 2026 |
 | #17 | Restraint | `3aa53729ddf0` | `2026-07-16T02:56:32.117Z` | Author-approved Fragment number |
 | #18 | From Thought to Form | `67d0dec5c6f7` | `2026-03-17T03:42:10.864Z` | Recovered, previously unnumbered Fragment; non-chronological placement approved |
 
@@ -93,6 +93,8 @@ For Fragment #13, retain the exact export timestamp `2026-06-02T07:01:21.868Z` a
 For Fragment #14, retain the exact export timestamp `2026-06-16T02:29:50.611Z` as migration evidence and use the Medium-presented date `2026-06-16` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft omits the duplicate body title, preserves all three `Good morning, Giant` refrains as headings, and normalizes their exported nonbreaking spaces to ordinary spaces. The source subtitle `Reflective. Honest. Strong. Grounded.` remains migration metadata rather than being inserted into the body. The source has no image, link, or CTA, and the piece was prepared as an unpublished draft.
 
 For Fragment #15, retain the exact export timestamp `2026-06-30T04:34:11.957Z` as migration evidence and use the Medium-presented date `2026-06-30` as the public historical date. The approved Fragment ledger overrides the importer's earlier Essay proposal. The reviewed repository draft uses the `Recovery` category, omits the duplicate body title and subtitle, and preserves all remaining prose exactly, including the repeated doors-and-windows contrast. The source subtitle `Coming back to softness, love, openness, and simple living without losing strength.` remains migration metadata. The source has no image, link, or CTA, and the piece was prepared as an unpublished draft. At that stage, these drafts did not authorize publication, changes to Medium, or work on Fragment #16.
+
+For Fragment #16, retain the exact export timestamp `2026-07-07T02:18:11.089Z` as migration evidence. The export footer says July 7, while the owner-facing Medium Stories list says July 6; the author approved `2026-07-06` as the historical calendar date. The reviewed repository entry uses the approved Fragment title and number, `Recovery` category, and standard tags. It omits the duplicate body title but retains the opening sentence as body prose once, followed by all remaining prose. The source has no image, link, or CTA. The author approved GarryTipler.com publication on September 28, 2026; Medium canonical settings remain unchanged.
 
 On September 28, 2026, the author approved publication of Fragments #6–#15 as one batch. Each entry kept its reviewed historical date and gained `publishedDate: 2026-09-28` and `status: published`. Medium canonical settings were not changed.
 
