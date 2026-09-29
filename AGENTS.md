@@ -42,6 +42,7 @@ For a narrow request, keep discovery narrow. Do not turn a bounded change into a
   - Fraunces for editorial headings
   - Hanken Grotesk for body text
   - JetBrains Mono for metadata and utility text
+- The approved visual system (September 28, 2026) is recorded in `docs/design-system.md`: "Field Manual" for the homepage and project pages, and "The Writing Chambers" for writing pages. The Writing Chambers use a warmer candlelit background (`#0c0a07`) and an optional reader-controlled paper mode. Both are approved variants of the black-and-gold direction; do not revert them to the base palette.
 - Keep long-form reading width near the established 700–720px range.
 - Use the GT mark as a restrained anchor, not decoration repeated throughout the page.
 - Project pages are evidence, not sales funnels. Avoid inflated claims, urgency language, pricing, availability, or signup calls to action unless the user supplies and approves them.

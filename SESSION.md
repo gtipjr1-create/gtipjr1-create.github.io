@@ -1,6 +1,7 @@
 # GarryTipler.com Writing Library — Project Record
 
 **Record date:** August 10, 2026
+**Last updated:** September 28, 2026 (Session 8 — site-wide visual redesign)
 **Production branch:** `main`
 **Record branch:** `main`
 **Canonical domain:** `https://garrytipler.com/`
@@ -16,7 +17,7 @@ The permanent Writing Library is designed to be:
 - Repository-managed without a CMS or database.
 - Easy to validate and deploy.
 - Self-canonical on GarryTipler.com.
-- Consistent with the restrained black-and-gold editorial design.
+- Consistent with the black-and-gold editorial design; since Session 8 the writing pages use the warmer “Writing Chambers” variant recorded in `docs/design-system.md`.
 - Safe for historical migration without guessed metadata.
 
 ## Approved architecture
@@ -363,16 +364,62 @@ The private batches establish `Recovery` as an approved Fragment category alongs
 
 On September 28, 2026, the author approved publication of Fragments #6–#15 together. Their reviewed historical dates remain unchanged. Each entry gained `publishedDate: 2026-09-28` and `status: published`; titles, slugs, summaries, categories, tags, prose, relationships, and images were not changed. The writing-tool tests and full repository validation passed with 16 published entries. Generated routes, canonical URLs, sitemap, RSS, and Fragment sequence links passed the build verifier. The Fragments index and representative articles were visually reviewed at desktop and 390px mobile widths.
 
+### Session 8 — Site-wide visual redesign (September 28, 2026)
+
+The author asked for the site to feel more alive, immersive, and professional without looking generated. Directions were explored on a private Claude Design canvas (“GarryTipler.com Directions”), reviewed by the author, then built and shipped in three approved slices. The full visual system is recorded in `docs/design-system.md`.
+
+**Homepage — “Field Manual” (A2 direction)**
+
+- `01e93c1` — new `index.html` uploaded by the author. It adds a full-bleed portrait hero, glass navigation, a live field log with count-up numbers, a floating book, numbered field-guide cards, a FitPulse/SelfTrainer showcase in browser and phone frames, cycling principles, featured writing cards, the unchanged Kit signup and guide download, and a closing line.
+- `f49fdb0` — a second author upload with no content change.
+- `3b9ee12` — moved the new hero photo from the repository root into `assets/about/garry-tipler-hero.webp`. The root is not published by the build.
+- `bd4da61` — removed the 3D tilt so the book cover faces straight on, matching the approved design.
+- Kept: all meta/OG/Twitter tags, JSON-LD, Kit form `9676498`, the download reveal, the weeks-in-system counter, Cloudflare analytics, and every link.
+- Removed: the "About" nav item, because no About page exists.
+- Changed: the featured writing card is labelled "Featured" rather than "Latest", because newer migrated pieces exist.
+- The hero photo (1206×1063) was supplied by the author. The older 320px portrait remains for JSON-LD.
+
+**Project pages — SelfTrainer and FitPulse (`355ebd2`)**
+
+- Both case studies adopt the Field Manual look: glass nav with Projects marked, large titles, status tags with a pulsing dot, workflow steps that light up in turn, hover-lift decision cards, a status panel, and the shared closing and footer.
+- Screenshots remain plain evidence without device frames, per AGENTS.md.
+- All existing copy, captions, alt text, and metadata are preserved. Short section headlines were added and approved on the canvas.
+- Two small approved edits: "This is not a visual port alone." became the headline "Not a visual port alone.", and the redundant "Current status" label was removed.
+- `selftrainer.css` and `fitpulse.css` are now identical, kept at both passthrough paths.
+
+**Writing — “The Writing Chambers” (`5987948`)**
+
+- The author chose the candlelit direction over the parchment direction and asked for parchment as a reader toggle.
+- Changed files: `src/styles/tokens.css`, `src/styles/writing.css`, the three layouts, `WritingList.astro`, and the writing, fragments, essays, and start-here pages.
+- Added:
+  - a warmer dark palette with a flickering candle glow and drifting embers;
+  - site nav and footer on every writing page;
+  - an archway entrance on library pages, and arched Fragments/Essays doors;
+  - a numbered ledger list and split list layouts;
+  - a centered article masthead with a fragment-number watermark;
+  - a 700px reading column with a gold small-caps opening line, and a reading-progress line;
+  - a "Read on paper" / "Read by candlelight" toggle remembered in `localStorage` (`gt-reading-mode`).
+- Unchanged: routes, content, metadata, RSS, sitemap, and every piece of markup `scripts/verify-build.mjs` asserts. The "Read →" cue in list rows was removed, since whole rows are links.
+
+**Validation**
+
+- Every push ran the repository's `npm run validate` in GitHub Actions and passed before deploying: content validation, `astro build`, and `verify-build.mjs`. For example, run `36533046461` for `5987948`.
+- In the design session's cloud workspace, `npm ci` could not complete: the package registry policy returned 403 for `zwitch`. Local Astro builds therefore could not run there.
+- Presentation was instead checked by rendering the static pages, and hand-assembled equivalents of the Astro output, at 1440×1000 and 390×844 with reduced motion. Checks covered horizontal overflow and restored copy.
+- Live routes were confirmed after each deploy.
+- Not visually previewed before shipping: the Archive and Start Here pages. Motion was reviewed by the author in a browser.
+- Motion is disabled for visitors with reduced-motion enabled; the author confirmed motion runs once Windows animation effects are on.
+
 ## Current discovery behavior
 
 ### Writing landing page
 
-Provides:
+Provides (styled as the Writing Chambers since Session 8):
 
-- Fragments and Essays collections.
+- The chamber entrance with metadata-driven fragment and essay counts.
+- Fragments and Essays collections as arched “chamber” doors.
 - Start Here and Archive discovery paths.
-- Recent published writing.
-- Metadata-driven collection counts.
+- Recent published writing as a numbered ledger.
 
 ### Archive
 
@@ -454,7 +501,7 @@ git diff --check
 git status --short
 ```
 
-In restricted environments:
+In restricted environments (and note that some sandboxes block individual npm packages; if `npm ci` cannot complete, the GitHub Actions run remains the authoritative build check):
 
 ```powershell
 $env:ASTRO_TELEMETRY_DISABLED='1'
@@ -508,7 +555,7 @@ The homepage was verified live after commit `553f052`. The established routes we
 - Automatic related-work inference.
 - CMS or database adoption.
 - MDX expansion.
-- Further homepage redesign while writing migration is active.
+- Further visual redesign beyond the approved Session 8 system in `docs/design-system.md` without author approval.
 
 ## Next phase
 
@@ -523,3 +570,7 @@ At this stop point, `main` includes the importer foundation, parser fidelity fix
 The local `artifacts/` directory contains untracked homepage-review screenshots and was intentionally excluded from the homepage commit. The next session must inspect and preserve this state rather than assuming a clean worktree.
 
 The untouched Medium ZIP and generated `.migration-output` review queues are ignored private inputs/artifacts and must not be staged. Direct ZIP-stream parsing preserves exact archive entry names and Medium IDs as canonical evidence; sanitized filenames are never canonical content identity. No deployment configuration or external service was changed directly during Session 7.
+
+### Status after Session 8
+
+`main` at `5987948` carries the redesigned homepage, project pages, and Writing Chambers. The writing migration is paused where `NEXT_SESSION.md` leaves it (Days 1–5 of the day series published; Days 6–30 not started). The author is correcting historical dates as part of finishing the Medium migration. One known example: the homepage lists Fragments #4 with its site publication date, August 6, 2026, while its article shows its original Medium date, March 2, 2026.
