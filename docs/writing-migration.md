@@ -100,6 +100,8 @@ For Fragment #17, the export timestamp is `2026-07-16T02:56:32.117Z`, while the 
 
 For Fragment #18, the export timestamp is `2026-03-17T03:42:10.864Z`, while the owner-facing Medium Stories list displays March 16. The author approved `originalPublishedDate: 2026-03-16` and the reviewed numbered title, slug, summary, category, and tags. The entry omits the duplicated body title and subtitle, preserves the remaining prose and source book link, and has no image in the source. The author approved GarryTipler.com publication on September 28, 2026; Medium canonical settings remain unchanged.
 
+For Fragment #19, `What I Carry Forward` (Medium ID `438368cc6eab`) was published after the saved August 10 account export and is reviewed from the live Medium story. The owner-facing Published Stories list says August 10, 2026, while the story page displays August 11; the author approved the #19 classification and metadata using `originalPublishedDate: 2026-08-10`. Its 39 prose and heading blocks, with the duplicate page title omitted, produced SHA-256 `4a18308fe787c4f91cfb7f5db5760c8cd795b2c88d72911010c0e99fe27b1daa` as UTF-8 Markdown with LF line endings. The single lead image is saved locally before the prose. The author approved GarryTipler.com publication on September 28, 2026; Medium canonical settings remain unchanged.
+
 On September 28, 2026, the author approved publication of Fragments #6–#15 as one batch. Each entry kept its reviewed historical date and gained `publishedDate: 2026-09-28` and `status: published`. Medium canonical settings were not changed.
 
 ## Historical date and image reconciliation
