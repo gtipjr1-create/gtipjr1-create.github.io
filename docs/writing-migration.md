@@ -198,7 +198,7 @@ The author approved Days 26–30 for publication on September 29, 2026. The entr
 
 All 119 prose and heading blocks and their emphasis match the live source after whitespace normalization. Heading levels match Medium. The author chose Day 28's current title, Day 28: January 1st, 2026. New Year’s Day., using a supplied screenshot; its duplicate opening date heading is omitted. Day 30 retains the original local lead image and caption “I AM THE PROOF”, and repairs only the invalid emphasis boundary around Dear Writer. Private drafts passed exclusion checks; writing-tool tests and full validation passed, with desktop/mobile review completed. The independent Essay Discipline Should Not Cost Me My Heart remains a separate Essay and is excluded from the 30-day title pass. Medium settings, layouts, schema, dependencies and existing article bodies remain unchanged.
 
-After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. All 30 Day-series pieces now have publication approval.
+All 30 Day-series pieces now have publication approval. After reviewing the complete list on September 29, 2026, the author noted that every series title already carries its day number. The earlier display-title formatting pass is canceled; retain the reviewed titles. Discipline Should Not Cost Me My Heart remains unchanged as a separate Essay.
 
 ## Medium export commands
 
