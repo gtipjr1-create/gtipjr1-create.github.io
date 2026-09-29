@@ -186,7 +186,19 @@ The author reviewed and approved Days 21–25 for publication on September 29, 2
 
 All 75 prose and heading blocks and their emphasis match the live source after mechanical formatting normalization. Day 21 uses the live source title capitalization, repairs a bold-marker boundary, preserves both quotations, and retains the original portrait locally after the closing paragraph with reviewed descriptive alt text. Day 22 repairs a bold-marker boundary and preserves its exact YouTube channel link. Day 25's subsection heading level matches the live source. No prose was rewritten. The private drafts passed draft-exclusion checks; the reviewed published preview passed writing-tool tests, full validation, and desktop/390px visual inspection. Medium settings, layout, schema, dependencies, and existing articles remain unchanged.
 
-After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 26–30 remain outside this publication approval.
+The author approved Days 26–30 for publication on September 29, 2026. The entries retain the reviewed metadata, original Medium calendar dates December 30, 2025 through January 3, 2026, and record publishedDate: 2026-09-29. Their explicit slugs and source IDs are:
+
+| Day | Approved slug | Stable Medium ID |
+| ---: | --- | --- |
+| 26 | day-26-2026-im-ready | 4c5ee1f0edfb |
+| 27 | day-27-you-cant-hit-a-target-you-can-t-see | 412520cda58d |
+| 28 | day-28-we-get-to-make-it-up | e9c216851ff3 |
+| 29 | day-29-if-its-hard-do-it-hard | 6792ef5008f4 |
+| 30 | day-30-i-am-the-proof | 32b9f1120275 |
+
+All 119 prose and heading blocks and their emphasis match the live source after whitespace normalization. Heading levels match Medium. The author chose Day 28's current title, Day 28: January 1st, 2026. New Year’s Day., using a supplied screenshot; its duplicate opening date heading is omitted. Day 30 retains the original local lead image and caption “I AM THE PROOF”, and repairs only the invalid emphasis boundary around Dear Writer. Private drafts passed exclusion checks; writing-tool tests and full validation passed, with desktop/mobile review completed. The independent Essay Discipline Should Not Cost Me My Heart remains a separate Essay and is excluded from the 30-day title pass. Medium settings, layouts, schema, dependencies and existing article bodies remain unchanged.
+
+After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. All 30 Day-series pieces now have publication approval.
 
 ## Medium export commands
 
