@@ -136,6 +136,8 @@ The author approved the reviewed Day 1–5 Essay batch for GarryTipler.com publi
 
 The live Medium pages and export packages showed no body images or outbound prose links for Days 1–5. Medium canonical settings remain unchanged.
 
+The next bounded review batch is Days 6–10. Their saved export packages are review-only; no site drafts or publication metadata have been approved for this batch. The owner-facing Medium Published Stories list shows Days 6–10 first published on December 10–14, 2025, respectively. Day 6 and Day 7 packages contain duplicated page-title headings to review against the live stories. Day 9 has one unresolved remote lead image, with no source alt text, and a YouTube URL at the end. Day 10's generated Markdown contains bullet-like text and a YouTube URL that need comparison with the live story before any structural cleanup. Preserve source wording and bring the Day 9 image into a local asset before seeking publication approval.
+
 ## Medium export commands
 
 Inspect an explicit ZIP without writing output:
