@@ -117,6 +117,8 @@ For migration work:
 
 Do not bulk scrape Medium, bulk migrate the archive, publish drafts, or alter Medium canonical settings unless that exact action is authorized.
 
+New site-first writing (from October 1, 2026) follows `docs/new-writing-workflow.md`: it never sets `originalPublishedDate`, and `mediumUrl` is added only after the Medium copy exists.
+
 ## Project-page boundaries
 
 - SelfTrainer and FitPulse are the current public project case studies.
