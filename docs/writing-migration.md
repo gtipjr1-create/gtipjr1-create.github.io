@@ -174,7 +174,19 @@ The author reviewed and approved Days 16–20 for publication on September 29, 2
 
 All 93 prose blocks and every bold/italic passage match the live Medium source after formatting and whitespace normalization. Day 16 repairs an invalid Markdown emphasis boundary without changing visible prose. Original dates follow the live Medium author-calendar contract, while exact UTC timestamps and saved HTML hashes remain untouched. These five pieces have no body images or outbound prose links. Private review evidence remains under `.migration-output/day-series-review-16-20/`. No inferred relationships, existing article edits or Medium canonical changes were approved.
 
-After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 21–30 remain outside this publication approval.
+The author reviewed and approved Days 21–25 for publication on September 29, 2026. All five preserve the reviewed titles, source-subtitle summaries, explicit slugs, Discipline category and standard tags, and record publishedDate: 2026-09-29. Original Medium calendar dates are December 25–29, 2025, respectively; exact export timestamps and hashes remain in the private source records.
+
+| Day | Approved slug | Stable Medium ID | Original date |
+| ---: | --- | --- | --- |
+| 21 | day-21-i-am-the-proof | 6f8b75e457df | 2025-12-25 |
+| 22 | day-22-the-world-is-new-again | 936d1afd5a68 | 2025-12-26 |
+| 23 | day-23-everything-is-coming-together | 7a19cfdfd204 | 2025-12-27 |
+| 24 | day-24-february-2nd-i-declared-it | 2253e6bd52db | 2025-12-28 |
+| 25 | day-25-i-choose-to-see-rejection-as-redirection | e859a8c44406 | 2025-12-29 |
+
+All 75 prose and heading blocks and their emphasis match the live source after mechanical formatting normalization. Day 21 uses the live source title capitalization, repairs a bold-marker boundary, preserves both quotations, and retains the original portrait locally after the closing paragraph with reviewed descriptive alt text. Day 22 repairs a bold-marker boundary and preserves its exact YouTube channel link. Day 25's subsection heading level matches the live source. No prose was rewritten. The private drafts passed draft-exclusion checks; the reviewed published preview passed writing-tool tests, full validation, and desktop/390px visual inspection. Medium settings, layout, schema, dependencies, and existing articles remain unchanged.
+
+After all 30 Day-series pieces are migrated, the author requested a separate display-title consistency pass using `DAY <number> : <title>`. Defer that pass until the full series is moved; preserve every existing slug, URL, historical date, summary and body. Days 26–30 remain outside this publication approval.
 
 ## Medium export commands
 
