@@ -128,6 +128,7 @@ Approved by the author on September 29, 2026:
 
 These need their own approval and are not part of publishing a piece:
 
-- **Custom 404 page.** Non-blocking backlog item, noted September 29, 2026. Mistyped URLs currently show GitHub Pages' default 404 page.
-- **Start Here expansion.** The sequence proposed in `docs/polish-review.md` stays unapplied until the author decides.
+- **Start Here.** Approved on September 29, 2026 as a five-piece sequence (`startHereOrder` 1–5). Adding a challenge piece to it is an explicit editorial decision.
 - **Challenge landing page or series navigation.** New route and layout work.
+
+A custom 404 page (`src/pages/404.astro`, noindex, excluded from the sitemap) was added on September 29, 2026. It needs no per-piece maintenance.

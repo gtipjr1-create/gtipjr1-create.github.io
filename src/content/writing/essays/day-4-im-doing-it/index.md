@@ -1,5 +1,5 @@
 ---
-title: "Day 4 : Goals aren’t dreams—they’re promises I’m keeping"
+title: "Day 4: Goals aren’t dreams—they’re promises I’m keeping"
 slug: "day-4-im-doing-it"
 type: "essay"
 summary: "From hoping to knowing—my goals are inevitable"

@@ -13,6 +13,7 @@ originalPublishedDate: "2026-03-23"
 publishedDate: "2026-09-28"
 fragmentNumber: 6
 featured: false
+startHereOrder: 2
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-6-ordering-effort-3a9207b6326f"
 status: "published"
 related: []

@@ -1,5 +1,5 @@
 ---
-title: "Day 10 : I Am Not For Everyone"
+title: "Day 10: I Am Not For Everyone"
 slug: "day-10-i-am-not-for-everyone"
 type: "essay"
 summary: "I can’t please everyone, and I’ve stopped trying"

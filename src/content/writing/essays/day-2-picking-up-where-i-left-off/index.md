@@ -1,5 +1,5 @@
 ---
-title: "Day 2 : The Practice Begins"
+title: "Day 2: The Practice Begins"
 slug: "day-2-picking-up-where-i-left-off"
 type: "essay"
 summary: "Showing up is half the battle—I’m here"

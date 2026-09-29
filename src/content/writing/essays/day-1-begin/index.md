@@ -1,5 +1,5 @@
 ---
-title: "Day 1 : No More Waiting—Today I Choose Action"
+title: "Day 1: No More Waiting—Today I Choose Action"
 slug: "day-1-begin"
 type: "essay"
 summary: "Today I write—no more excuses"

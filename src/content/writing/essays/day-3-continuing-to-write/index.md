@@ -1,5 +1,5 @@
 ---
-title: "Day 3 : Building Momentum"
+title: "Day 3: Building Momentum"
 slug: "day-3-continuing-to-write"
 type: "essay"
 summary: "One day at a time, one word after another"

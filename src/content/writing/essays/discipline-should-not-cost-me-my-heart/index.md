@@ -12,6 +12,7 @@ tags:
 originalPublishedDate: "2026-07-27"
 publishedDate: "2026-08-07"
 featured: false
+startHereOrder: 4
 mediumUrl: "https://medium.com/tenacious-individual-performance/discipline-should-not-cost-me-my-heart-1ce503de76b1"
 status: "published"
 related: []

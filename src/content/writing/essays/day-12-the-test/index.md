@@ -1,5 +1,5 @@
 ---
-title: "Day 12 : The Test"
+title: "Day 12: The Test"
 slug: "day-12-the-test"
 type: "essay"
 summary: "forgotten shake, workplace snags—I passed"

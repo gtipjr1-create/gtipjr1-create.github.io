@@ -1,5 +1,5 @@
 ---
-title: "Day 5 : Challenges come, but I keep showing up"
+title: "Day 5: Challenges come, but I keep showing up"
 slug: "day-5-just-write"
 type: "essay"
 summary: "Every obstacle is just proof I’m growing"

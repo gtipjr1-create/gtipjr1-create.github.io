@@ -1,5 +1,5 @@
 ---
-title: "Day 6 : Two words that changed everything—I can, I do"
+title: "Day 6: Two words that changed everything—I can, I do"
 slug: "day-6-i-press-on"
 type: "essay"
 summary: "I can , I do"

@@ -1,5 +1,5 @@
 ---
-title: "Day 11 : Testimony"
+title: "Day 11: Testimony"
 slug: "day-11-testimony"
 type: "essay"
 summary: "I’ve already decided I will make it"

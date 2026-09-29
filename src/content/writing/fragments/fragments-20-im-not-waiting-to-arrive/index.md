@@ -13,6 +13,7 @@ originalPublishedDate: "2026-09-28"
 publishedDate: "2026-09-29"
 fragmentNumber: 20
 featured: false
+startHereOrder: 5
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-20-im-not-waiting-to-arrive-82a4ff5d19db"
 status: "published"
 related: []

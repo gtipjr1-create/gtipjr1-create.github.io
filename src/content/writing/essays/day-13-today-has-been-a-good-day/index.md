@@ -1,5 +1,5 @@
 ---
-title: "Day 13 : Today Has Been a Good Day"
+title: "Day 13: Today Has Been a Good Day"
 slug: "day-13-today-has-been-a-good-day"
 type: "essay"
 summary: "When you feel terrific, terrific things happen"

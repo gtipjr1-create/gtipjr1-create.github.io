@@ -1,5 +1,5 @@
 ---
-title: "Day 8 : Progress over perfection, always"
+title: "Day 8: Progress over perfection, always"
 slug: "day-8-keep-at-it"
 type: "essay"
 summary: "Every word makes me better than yesterday"

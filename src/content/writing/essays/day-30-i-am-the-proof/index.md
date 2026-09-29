@@ -1,5 +1,5 @@
 ---
-title: "Day 30: In Fact , I Am the Proof"
+title: "Day 30: In Fact, I Am the Proof"
 slug: "day-30-i-am-the-proof"
 type: "essay"
 summary: "63 consecutive days—I started, I wrote, and I’ve changed"

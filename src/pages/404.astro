@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page not found"
+  description="This page could not be found on GarryTipler.com."
+  canonicalPath="/404.html"
+  noindex
+  inWriting={false}
+>
+  <div class="library-shell chamber-wrap">
+    <main id="main-content" tabindex="-1" class="library-masthead">
+      <svg class="chamber-arch rise" viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <path d="M8 150 V60 A52 52 0 0 1 112 60 V150"></path>
+        <path d="M22 150 V64 A38 38 0 0 1 98 64 V150" stroke-opacity=".45"></path>
+        <circle class="arch-light" cx="60" cy="98" r="3" stroke="none"></circle>
+      </svg>
+      <p class="library-kicker rise" style="--d:80ms">404 · Page not found</p>
+      <h1 class="rise" style="--d:140ms">Not here.</h1>
+      <p class="library-intro rise" style="--d:220ms">
+        The address may be mistyped or out of date. Everything published is still in the library.
+      </p>
+      <nav
+        class="rise"
+        aria-label="Where to go next"
+        style="--d:300ms; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 28px;"
+      >
+        <a class="back-link" href="/">Home</a>
+        <a class="back-link" href="/writing/">Writing</a>
+        <a class="back-link" href="/writing/start-here/">Start here</a>
+        <a class="back-link" href="/writing/archive/">Archive</a>
+      </nav>
+    </main>
+  </div>
+</BaseLayout>

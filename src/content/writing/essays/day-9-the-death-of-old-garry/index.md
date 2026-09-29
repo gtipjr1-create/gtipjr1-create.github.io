@@ -1,5 +1,5 @@
 ---
-title: "Day 9 : The Death of Old Garry"
+title: "Day 9: The Death of Old Garry"
 slug: "day-9-the-death-of-old-garry"
 type: "essay"
 summary: "Why I finally stopped waiting to be  ready."

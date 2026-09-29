@@ -264,6 +264,14 @@ assert.equal(jsonLd.mainEntityOfPage, canonicalUrl);
 assert.equal(jsonLd.datePublished, "2026-03-02");
 assert.equal(jsonLd.headline, "Fragments #4 — The Fire");
 
+// GitHub Pages serves dist/404.html for unknown paths, so every URL in it must be root-relative.
+const notFoundHtml = await requireOutput("404.html");
+assert.match(notFoundHtml, /<meta name="robots" content="noindex"/);
+assert.doesNotMatch(notFoundHtml, /rel="canonical"/, "The 404 page must not declare a canonical URL.");
+assert.doesNotMatch(notFoundHtml, /aria-current="page"/, "The 404 page must not mark a nav section current.");
+assert.doesNotMatch(notFoundHtml, /(?:href|src)="(?!\/|https?:|#)/, "The 404 page must use root-relative URLs.");
+assert.ok(!sitemapXml.includes("404"), "The sitemap must not list the 404 page.");
+
 console.log(
-  "Verified Writing Library routes, archive, Start Here, sitemap, RSS, robots, and pilot metadata.",
+  "Verified Writing Library routes, archive, Start Here, sitemap, RSS, robots, pilot metadata, and 404 page.",
 );

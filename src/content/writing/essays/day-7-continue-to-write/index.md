@@ -1,5 +1,5 @@
 ---
-title: "Day 7 : Consistency is my superpower—day 7 strong"
+title: "Day 7: Consistency is my superpower—day 7 strong"
 slug: "day-7-continue-to-write"
 type: "essay"
 summary: "One week down, commitment unwavering"
