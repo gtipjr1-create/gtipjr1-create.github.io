@@ -30,7 +30,7 @@ Google Fonts request (all pages): `Fraunces:ital,opsz,wght@0,9..144,300;0,9..144
 - **Kicker**: numbered section label in gold mono, e.g. `01 — The doctrine`.
 - **Status tag**: mono uppercase chip with a pulsing gold dot ("Native rebuild in progress", "In development").
 - **Hover-lift cards**: a 1px border that turns gold, and the card lifts 6px on hover.
-- **Glow**: soft radial gold light behind key sections (`rgba(203,163,92,0.10–0.16)`).
+- **Glow**: soft radial gold light behind key sections (`rgba(var(--accent-rgb), 0.10–0.16)`, i.e. `212,171,95`).
 - **Footer**: GT mark + "© 2026 Garry Tipler"; gold links on the right.
 
 ### Motion rules
@@ -57,7 +57,8 @@ Skip link on every page; semantic headings; 44px minimum touch targets on nav an
 | Primary text | `#eceae3` |
 | Soft / dim / mute / faint text | `#d9d4cb` / `#b9b3a8` / `#a8a39a` / `#8a857c` |
 | Lines | `#26241f`, `#3a372f` |
-| Accent | `#cba35c` (hover `#e2c07e`) |
+| Accent | `#d4ab5f` (hover `#e9c683`; `--accent-rgb: 212, 171, 95`) |
+| Color scheme | `color-scheme: dark` on `:root` plus `<meta name="color-scheme" content="dark">` on every page |
 
 Layout: 1280px content width with 80px gutters (40px ≤1100px, 20px ≤720px); a 12-column grid for split sections.
 
@@ -105,10 +106,11 @@ The "Featured" label (not "Latest") is deliberate: newer migrated pieces exist, 
 | `--ink-dim` | `#b3a893` | `#4d463a` |
 | `--ink-faint` | `#8c826f` | `#6b6354` |
 | `--line` / `--line-2` | `#2a241a` / `#3a3124` | `#d3c7ae` / `#c4b89f` |
-| `--accent` | `#cba35c` | `#7a5719` (bronze) |
-| `--link` | `#d4ad67` | `#7a5719` |
+| `--accent` | `#d4ab5f` (via fixed `--gold`; hover `#eecb8b`) | `#7a5719` (bronze) |
+| `--link` | `#dcb46b` | `#7a5719` |
+| `color-scheme` | `dark` | `only light` |
 
-Paper mode is `:root[data-reading="paper"]`. The nav bar stays dark in both modes; it is the way back to the house.
+Paper mode is `:root[data-reading="paper"]`. `--gold`, `--gold-hi` and `--gold-rgb` never switch, so the nav, skip link and selection stay gold in both modes. The nav bar stays dark in both modes; it is the way back to the house.
 
 ### Shared frame (`BaseLayout.astro`)
 

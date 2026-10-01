@@ -37,7 +37,7 @@ For a narrow request, keep discovery narrow. Do not turn a bounded change into a
 - Preserve the black-and-gold editorial direction:
   - background: `#0b0b0c`
   - primary text: `#eceae3`
-  - accent: `#cba35c`
+  - accent: `#d4ab5f` (raised from `#cba35c` on October 1, 2026 for mobile vibrancy)
 - Preserve the established typography unless a task explicitly changes it:
   - Fraunces for editorial headings
   - Hanken Grotesk for body text
