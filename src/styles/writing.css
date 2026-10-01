@@ -20,14 +20,14 @@ body {
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ol, ul { list-style: none; }
-::selection { background: rgba(203, 163, 92, 0.3); color: var(--ink); }
+::selection { background: rgba(var(--gold-rgb), 0.3); color: var(--ink); }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 4px; }
 
 .skip-link {
   position: fixed; z-index: 60; top: 12px; left: 12px;
   min-height: 44px; padding: 10px 16px;
   transform: translateY(-160%);
-  background: #cba35c; color: #14110a;
+  background: var(--gold); color: #14110a;
   font-size: 14px; font-weight: 600;
 }
 .skip-link:focus { transform: none; }
@@ -65,9 +65,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .chamber-links { display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500; }
 .chamber-links a { display: inline-flex; align-items: center; min-height: 44px; color: #d8cdb8; transition: color .2s ease; }
 .chamber-links a:hover { color: #ede4d3; }
-.chamber-links a[aria-current="page"] { min-height: 44px; color: #ede4d3; box-shadow: inset 0 -1px 0 #cba35c; }
-.chamber-links .chamber-guide { min-height: 44px; padding: 0 18px; background: #cba35c; color: #0c0a07; font-weight: 600; font-size: 14px; transition: background .25s ease; }
-.chamber-links .chamber-guide:hover { background: #e8c585; color: #0c0a07; }
+.chamber-links a[aria-current="page"] { min-height: 44px; color: #ede4d3; box-shadow: inset 0 -1px 0 var(--gold); }
+.chamber-links .chamber-guide { min-height: 44px; padding: 0 18px; background: var(--gold); color: #0c0a07; font-weight: 600; font-size: 14px; transition: background .25s ease; }
+.chamber-links .chamber-guide:hover { background: var(--gold-hi); color: #0c0a07; }
 
 /* ---------- Shared small type ---------- */
 .library-kicker, .article-eyebrow {
@@ -133,7 +133,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .collection-numeral {
   position: absolute; top: 72px; left: 0; right: 0; text-align: center;
   font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 96px; line-height: 1;
-  color: rgba(203, 163, 92, 0.35);
+  color: rgba(var(--gold-rgb), 0.35);
 }
 .collection-count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .collection-title { font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 4.4vw, 64px); line-height: 1; color: var(--ink); }
@@ -197,7 +197,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .article-watermark {
   position: absolute; top: 20px; left: 0; right: 0; z-index: -1;
   font-family: var(--serif); font-style: italic; font-weight: 300;
-  font-size: clamp(220px, 26vw, 380px); line-height: 1; color: rgba(203, 163, 92, 0.07);
+  font-size: clamp(220px, 26vw, 380px); line-height: 1; color: rgba(var(--gold-rgb), 0.07);
   pointer-events: none; user-select: none;
 }
 :root[data-reading="paper"] .article-watermark { color: rgba(122, 87, 25, 0.07); }
@@ -259,7 +259,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .article-prose h2 { font-size: 36px; }
 .article-prose h3 { font-size: 30px; }
 .article-prose h4 { font-size: 26px; }
-.article-prose a { color: var(--link); text-decoration: underline; text-decoration-color: rgba(203, 163, 92, 0.45); text-underline-offset: 0.2em; }
+.article-prose a { color: var(--link); text-decoration: underline; text-decoration-color: rgba(var(--gold-rgb), 0.45); text-underline-offset: 0.2em; }
 .article-prose a:hover { color: var(--accent-hi); }
 .article-prose blockquote {
   padding-left: 24px; border-left: 2px solid var(--accent);
@@ -276,7 +276,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   width: min(var(--copy-width), 100%); margin: 56px auto 0; padding-top: 24px;
   border-top: 1px solid var(--line); font-size: 14px; line-height: 1.6; color: var(--ink-faint);
 }
-.medium-attribution a { color: var(--link); text-underline-offset: 0.2em; text-decoration: underline; text-decoration-color: rgba(203, 163, 92, 0.45); }
+.medium-attribution a { color: var(--link); text-underline-offset: 0.2em; text-decoration: underline; text-decoration-color: rgba(var(--gold-rgb), 0.45); }
 
 .article-discovery { width: min(var(--copy-width), 100%); margin: 72px auto 0; display: flex; flex-direction: column; gap: 48px; }
 .article-discovery-section { display: flex; flex-direction: column; gap: 12px; }

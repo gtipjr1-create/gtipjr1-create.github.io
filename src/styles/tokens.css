@@ -1,5 +1,10 @@
 :root {
   /* The Writing Chambers — candlelit by default */
+  color-scheme: dark;
+  /* Fixed gold: never switched by Paper mode (nav, skip link, selection) */
+  --gold: #d4ab5f;
+  --gold-hi: #eecb8b;
+  --gold-rgb: 212, 171, 95;
   --bg: #0c0a07;
   --bg-2: #110e0a;
   --bg-card: #14110c;
@@ -9,9 +14,9 @@
   --ink-faint: #8c826f;
   --line: #2a241a;
   --line-2: #3a3124;
-  --accent: #cba35c;
-  --accent-hi: #e8c585;
-  --link: #d4ad67;
+  --accent: var(--gold);
+  --accent-hi: var(--gold-hi);
+  --link: #dcb46b;
   --glow: rgba(236, 170, 90, 0.2);
   --copy-width: 700px;
   --maxw: 1280px;
@@ -23,6 +28,7 @@
 
 /* Paper reading mode, chosen by the reader on article pages */
 :root[data-reading="paper"] {
+  color-scheme: only light;
   --bg: #f1ebdf;
   --bg-2: #ebe3d4;
   --bg-card: #e6dcc8;
