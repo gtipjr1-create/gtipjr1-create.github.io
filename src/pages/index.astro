@@ -23,6 +23,11 @@ const shortDate = (entry: WritingEntry) =>
   new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
     .format(getEffectivePublicationDate(entry.data));
 const typeLabel = (entry: WritingEntry) => getWritingCollectionLabel(entry.data.type).replace(/s$/, "");
+
+// Field log: whole weeks since the owner-confirmed start date. Computed at build
+// time for the HTML, then kept current in the browser by the script below.
+const systemStart = "2026-01-01";
+const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:00`)) / 604800000);
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -499,8 +504,8 @@ const typeLabel = (entry: WritingEntry) => getWritingCollectionLabel(entry.data.
 
     <!-- Field log rule: real numbers only, never estimated.
          Sessions comes from the SelfTrainer PWA and is hand-updated with its
-         as-of date. Weeks is counted forward from data-start by the script
-         below (37 weeks on 2026-09-26). -->
+         as-of date. Weeks counts whole weeks since data-start (owner-confirmed
+         2026-01-01): computed at build, then updated in the browser. -->
     <aside class="field-log rise" style="--d:420ms" aria-labelledby="field-log-title">
       <span class="field-log__sweep" aria-hidden="true"></span>
       <div>
@@ -512,7 +517,7 @@ const typeLabel = (entry: WritingEntry) => getWritingCollectionLabel(entry.data.
         <span class="field-log__label">Sessions logged in SelfTrainer</span>
       </div>
       <div>
-        <span class="field-log__value" id="weeks-in-system" data-count data-start="2026-01-10">39</span>
+        <span class="field-log__value" id="weeks-in-system" data-count data-start={systemStart}>{weeksInSystem}</span>
         <span class="field-log__label">Weeks in the system</span>
       </div>
       <div>
