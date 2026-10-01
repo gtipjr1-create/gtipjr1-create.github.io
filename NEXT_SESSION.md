@@ -1,54 +1,30 @@
-# Next session — Site critique follow-up awaiting review
+# Next session — October 1 refinement closed; no slice queued
 
 ## Current state
 
-- `main` is at `d0f2b07`, in sync with `origin/main`. The working tree holds the uncommitted critique follow-up below; untracked `.claude/` and `artifacts/` are intentionally never committed.
-- The writing polish, Start Here sequence (`startHereOrder` 1–5: The Fire, Ordering Effort, I Am Not Behind, Discipline Should Not Cost Me My Heart, I'm Not Waiting to Arrive), Day-title normalization and 404 page are live (`93583f9`, `3cc0be2`). The earlier handoff's open Start Here decision is closed.
+- `main` includes release commit `845b91b` (feat: October editorial and structural refinement), deployed by GitHub Pages run `36917475839` (successful). Untracked `.claude/` and `artifacts/` are intentionally never committed.
+- The writing polish, Start Here sequence (`startHereOrder` 1–5), Day-title normalization and 404 page are live (`93583f9`, `3cc0be2`).
 - New site-first writing follows `docs/new-writing-workflow.md`.
 
-## Completed October 1, 2026
+## Released October 1, 2026 — CLOSED
 
-- `46a660a` fix: every page declares `<meta name="color-scheme" content="dark">` and `color-scheme: dark` on `:root`, so mobile auto-dark modes (Android Chrome, Samsung Internet) stop re-tinting the palette. Paper reading mode sets `color-scheme: only light`.
-- Hero grain overlay reduced to `opacity: 0.04` (was 0.09 homepage, 0.08 project pages).
-- Gold accent raised `#cba35c` → `#d4ab5f`; hover/link golds moved proportionally (`#e9c683` field manual hover, `#eecb8b` writing hover, `#dcb46b` writing link). Translucent golds use `--accent-rgb` (homepage/projects) or `--gold-rgb` (writing). Live status-chip border is solid gold.
-- `d0f2b07` docs: `AGENTS.md` and `docs/design-system.md` record the new palette.
-- Files: `index.html`, `projects/{selftrainer,fitpulse}/{index.html,*.css}` (the two project stylesheets remain identical), `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, `src/styles/writing.css`, plus the two docs.
+Both releases are published and verified; do not reopen them without a new owner request.
 
-## Validation
+- **Mobile palette fix** (`46a660a`, docs `d0f2b07`): dark `color-scheme` declared on every page (Paper mode `only light`), hero grain reduced to 0.04, gold accent `#d4ab5f` with proportional hover/link golds.
+- **Editorial and structural refinement** (`845b91b`): About Garry section and revised hero descriptor; homepage section order 01–06; homepage moved to `src/pages/index.astro` with automatic writing side cards (The Fire stays featured via `featuredSlug`); shared `assets/css/field-manual.css` and `assets/css/case-study.css`; phone nav shows Projects; project pages end with "Follow the build in The Signal →" (`/#field-guide`); SelfTrainer plain-language leads and four jargon swaps; 17 Fragment summaries replaced with verbatim lines; three unreferenced images removed, four legacy `selftrainer-*.jpeg` URLs retained.
+- **Live smoke checks all passed:** homepage and About, dynamic writing cards (The Fire, #20, #19), writing descriptions and article navigation, SelfTrainer and FitPulse pages, project CTA destinations, desktop and 375px navigation, legacy screenshot URLs, no broken assets, no console errors.
 
-- `npm run test:writing-tools` and `npm run validate` passed; `git diff --check` clean. All 60 built pages carry the color-scheme meta.
-- Browser pane at 375px: homepage, SelfTrainer and The Fire (candlelit and paper, toggle round-trip) checked; no horizontal overflow. Homepage also viewed at desktop width.
-- GitHub Pages run for `46a660a` succeeded; live HTML and SelfTrainer CSS confirmed serving the change.
-- WCAG contrast: accent 9.2:1 on `#0b0b0c` (8.6:1 on lightest card); body text 16.3:1; dark text on gold buttons 9.2:1.
-- Not verified: physical-device test. The owner reported it looks much better; whether the auto-dark mode was the specific cause on their phone is unconfirmed.
+## Remaining limitations
 
-## Known leftovers (do not remove without owner approval)
-
-- Stash `stash@{0}` "Preserve homepage before approved polish baseline update".
-- Worktrees: `C:/Users/garry/.codex/worktrees/writing-polish/GarryTipler-Site` (`codex/writing-polish`, already merged into `main`); `.migration-output/day-series-preview` and `.migration-output/publish-fragment-20` (detached, git-ignored path; day-series-preview has untracked image folders).
-- Hero photo keeps `filter: saturate(0.7) contrast(1.05) brightness(0.92)`; easing it is a separate design decision.
-
-## Uncommitted: site critique follow-up (October 1, 2026, awaiting owner review)
-
-Working tree, not committed or pushed:
-
-- **About section + hero.** Author-supplied "Behind the work." About copy (T.I.P. = Tenacious Individual Performance) with a small portrait; hero descriptor now "Author · Software Builder · Founder, Tenacious Individual Performance". Homepage order: hero, field log, About, book, field guides, free guide, projects, writing, principles, closing; kickers renumbered 01–06.
-- **Homepage moved into Astro.** `index.html` → `src/pages/index.astro` (git rename; removed from the build passthrough). The featured card stays The Fire (`featuredSlug`); the two side cards are the newest published pieces, the first labelled "Latest".
-- **Shared CSS.** `assets/css/field-manual.css` holds the Field Manual tokens and 30 rules identical across homepage and projects; `assets/css/case-study.css` replaces the identical `projects/*/selftrainer.css`/`fitpulse.css` (deleted).
-- **Phone nav** shows Projects; guide button reads "Free guide" below 720px (homepage, projects, writing). Project-page current link has a 44px target on phones.
-- **Homepage writing guard:** with zero recent pieces the side column is omitted and the featured card spans full width (renders identically today).
-- **Project closings** add "Follow the build in The Signal →" to `/#field-guide`.
-- **Images:** removed three never-referenced images (`IMG_2174.jpeg`, `IMG_2175.jpeg`, `assets/selftrainer-active-session-pwa.png`). The four root `selftrainer-*.jpeg` screenshots (public April–June 2026) are kept at their original paths for backward compatibility, though no page renders them.
-- **Approved copy applied:** eight SelfTrainer plain-language leads (`.section-lead` in `case-study.css`) above the unchanged evidence copy; four approved jargon swaps; 17 Fragment summaries replaced with verbatim lines from each piece (Fragments #2, #3, #14 unchanged).
-- **Docs:** `docs/design-system.md`, `docs/new-writing-workflow.md` updated.
-- **Validation:** `test:writing-tools` and `validate` pass; `git diff --check` clean; 60/60 pages carry color-scheme. Computed-style snapshots at 1440px and 375px: project pages 0 differences after the CSS merge; homepage differs only in the writing cards (new content). Phone nav fits with no overflow at 320, 360 and 375px.
-- **Scheduled task** `field-log-session-count-reminder` reminds the owner on the 1st of each month at 9:00 to send the SelfTrainer session count. It runs only while the Claude desktop app is open; if the app is closed at 9:00 on the 1st, it runs the next time the app opens. Manage it under Scheduled in the app sidebar.
+- **Real-device smoke test outstanding.** All checks used browser emulation, not a physical phone.
+- **Six unused images intentionally retained:** `assets/selftrainer-history-detail-pwa.png`, `assets/selftrainer-home-up-next-pwa.jpeg`, `assets/selftrainer-profile-adherence-pwa.jpeg`, `assets/selftrainer-program-management-pwa.jpeg`, `assets/selftrainer/selftrainer-home-up-next-crop.webp`, `assets/selftrainer/selftrainer-routine-editor-pwa.jpeg`. Remove only with owner approval.
+- **Monthly reminder is app-open dependent.** Scheduled task `field-log-session-count-reminder` runs at 9:00 on the 1st of each month only while the Claude desktop app is open; otherwise it runs at next launch. It asks the owner for the SelfTrainer session count; the field log values stay hand-updated and are never estimated.
 
 ## Next slice
 
-Commit-ready; awaiting the owner's publication authorization before commit and push.
+None queued. Wait for the owner's next request. When it arrives, follow `AGENTS.md`, `docs/design-system.md` and `docs/new-writing-workflow.md`.
 
-Not yet decided: six more unreferenced images (`assets/selftrainer-history-detail-pwa.png`, `assets/selftrainer-home-up-next-pwa.jpeg`, `assets/selftrainer-profile-adherence-pwa.jpeg`, `assets/selftrainer-program-management-pwa.jpeg`, `assets/selftrainer/selftrainer-home-up-next-crop.webp`, `assets/selftrainer/selftrainer-routine-editor-pwa.jpeg`); removal needs owner approval. The stash and merged worktrees above remain cleanup candidates only with approval.
+Cleanup candidates, only with explicit owner approval: stash `stash@{0}` ("Preserve homepage before approved polish baseline update"); merged worktree `C:/Users/garry/.codex/worktrees/writing-polish/GarryTipler-Site`; detached worktrees under `.migration-output/`.
 
 ## Locked boundaries
 
