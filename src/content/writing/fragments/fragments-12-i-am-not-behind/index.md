@@ -2,7 +2,7 @@
 title: "Fragments #12 — I Am Not Behind"
 slug: "fragments-12-i-am-not-behind"
 type: "fragment"
-summary: "A field note on rejecting borrowed timelines and treating slow, unfinished work as preparation rather than failure."
+summary: "For a while, I thought slow meant I was behind."
 category: "Discipline"
 tags:
   - "discipline"

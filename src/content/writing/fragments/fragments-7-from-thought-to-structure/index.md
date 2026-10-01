@@ -2,7 +2,7 @@
 title: "Fragments #7 — From Thought to Structure"
 slug: "fragments-7-from-thought-to-structure"
 type: "fragment"
-summary: "A field note on giving unstable thoughts enough structure to endure."
+summary: "Thought, by nature, is unstable. Structure is what preserves it."
 category: "Discipline"
 tags:
   - "discipline"

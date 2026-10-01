@@ -2,7 +2,7 @@
 title: "Fragments #6 — Ordering Effort"
 slug: "fragments-6-ordering-effort"
 type: "fragment"
-summary: "A field note on ordering effort through structure, closure, and deliberate arrangement."
+summary: "Lately, I have been learning that progress is not only about effort. It is also about order."
 category: "Discipline"
 tags:
   - "discipline"

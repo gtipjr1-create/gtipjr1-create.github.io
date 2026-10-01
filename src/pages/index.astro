@@ -1,3 +1,29 @@
+---
+// Homepage. Markup and styles are hand-authored (Field Manual, see
+// docs/design-system.md); only the writing cards are built from the
+// Writing collection so the homepage always shows the newest pieces.
+import {
+  getEffectivePublicationDate,
+  getPublishedWritingEntries,
+  getWritingCollectionLabel,
+  getWritingPath,
+  sortWritingByPublicationDate,
+  type WritingEntry,
+} from "../lib/writing";
+
+const featuredSlug = "fragments-4-the-fire";
+const published = await getPublishedWritingEntries();
+const featured = published.find((entry) => entry.data.slug === featuredSlug);
+if (!featured) throw new Error(`Homepage featured piece "${featuredSlug}" is not published.`);
+const latest = sortWritingByPublicationDate(published)
+  .filter((entry) => entry.data.slug !== featuredSlug)
+  .slice(0, 2);
+
+const shortDate = (entry: WritingEntry) =>
+  new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
+    .format(getEffectivePublicationDate(entry.data));
+const typeLabel = (entry: WritingEntry) => getWritingCollectionLabel(entry.data.type).replace(/s$/, "");
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +61,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="preload" as="image" href="/assets/about/garry-tipler-hero.webp" />
 
-<script type="application/ld+json">
+<script type="application/ld+json" is:inline>
 {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -50,69 +76,14 @@
 }
 </script>
 
-<style>
-  :root {
-    color-scheme: dark;
-    --bg:        #0b0b0c;
-    --bg-2:      #0e0e0d;
-    --bg-card:   #121210;
-    --bg-card-2: #141412;
-    --ink:       #eceae3;
-    --ink-soft:  #d9d4cb;
-    --ink-dim:   #b9b3a8;
-    --ink-mute:  #a8a39a;
-    --ink-faint: #8a857c;
-    --ink-off:   #6f6a61;
-    --line:      #26241f;
-    --line-2:    #3a372f;
-    --accent:    #d4ab5f;
-    --accent-hi: #e9c683;
-    --accent-rgb: 212, 171, 95;
-    --glow:      rgba(var(--accent-rgb), 0.14);
-    --maxw: 1280px;
-    --gutter: 80px;
-    --serif: 'Fraunces', Georgia, serif;
-    --sans: 'Hanken Grotesk', system-ui, sans-serif;
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
-  }
+<link rel="stylesheet" href="/assets/css/field-manual.css" />
+<style is:inline>
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-  }
-  img { display: block; max-width: 100%; }
-  a { color: inherit; text-decoration: none; }
-  ::selection { background: rgba(var(--accent-rgb), 0.28); color: var(--ink); }
   a:focus-visible, button:focus-visible, input:focus-visible {
     outline: 2px solid var(--accent-hi);
     outline-offset: 4px;
   }
-  .skip-link {
-    position: fixed; z-index: 50; top: 12px; left: 12px;
-    min-height: 44px; padding: 10px 16px;
-    transform: translateY(-160%);
-    background: var(--accent); color: #14110a;
-    font-size: 14px; font-weight: 600;
-  }
-  .skip-link:focus { transform: none; }
 
-  .wrap { position: relative; max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
-  .kicker {
-    display: block;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
   .display {
     font-family: var(--serif);
     font-weight: 300;
@@ -139,7 +110,6 @@
   .btn-primary { background: var(--accent); color: #0b0b0c; }
   .btn-primary:hover { background: var(--accent-hi); }
   .btn-ghost { border-color: var(--line-2); color: var(--ink); font-weight: 500; }
-  .btn-ghost:hover { border-color: var(--accent); }
   .text-link {
     display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
     color: var(--accent); font-size: 15px; font-weight: 600;
@@ -173,29 +143,8 @@
       linear-gradient(90deg, var(--bg) 0%, rgba(11,11,12,0.55) 32%, rgba(11,11,12,0) 60%),
       linear-gradient(0deg, var(--bg) 0%, rgba(11,11,12,0) 38%);
   }
-  .hero-texture { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
   .hero-texture .glow { top: 120px; right: 12%; width: 720px; height: 720px; background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16) 0%, rgba(var(--accent-rgb), 0) 62%); }
-  .hero-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(236,234,227,0.035) 1px, transparent 1px); background-size: 100% 96px; }
-  .hero-grain {
-    position: absolute; inset: -40px; opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
 
-  .site-nav {
-    position: relative; z-index: 5;
-    margin-top: 24px;
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    min-height: 64px; padding: 0 12px 0 16px;
-    background: rgba(20, 20, 18, 0.62);
-    border: 1px solid rgba(236, 234, 227, 0.08);
-    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  }
-  .site-mark { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; }
-  .site-mark img { width: 34px; height: 34px; }
-  .site-mark span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-mute); }
-  .site-links { display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500; }
-  .site-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-soft); transition: color .2s ease; }
-  .site-links a:hover { color: var(--ink); }
   .nav-guide { min-height: 44px !important; padding: 0 18px; background: var(--accent); color: #0b0b0c !important; font-weight: 600; font-size: 14px; transition: background .25s ease !important; }
   .nav-guide:hover { background: var(--accent-hi); }
 
@@ -234,6 +183,14 @@
   .field-log__now { justify-content: center; gap: 8px !important; }
   .field-log__now .field-log__label { color: var(--accent); }
   .field-log__now p { font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
+
+  /* ---------- ABOUT ---------- */
+  .about { padding: 140px 0 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
+  .about-head { grid-column: span 4; display: flex; flex-direction: column; gap: 22px; }
+  .about-head h2 { font-size: clamp(40px, 3.9vw, 56px); line-height: 1.02; }
+  .about-portrait { width: 160px; height: 160px; margin-top: 18px; object-fit: cover; border: 1px solid var(--line-2); }
+  .about-copy { grid-column: 6 / span 7; max-width: 640px; display: flex; flex-direction: column; gap: 22px; font-size: 18px; line-height: 1.7; color: var(--ink-dim); }
+  .about-copy strong { color: var(--ink); font-weight: 500; }
 
   /* ---------- BOOK ---------- */
   .book { position: relative; padding: 112px 0 140px; overflow: hidden; }
@@ -320,11 +277,12 @@
   .principles.is-static .principle__text { color: var(--ink); }
 
   /* ---------- WRITING ---------- */
-  .writing { padding: 0 0 150px; display: flex; flex-direction: column; gap: 48px; }
+  .writing { padding: 150px 0 0; display: flex; flex-direction: column; gap: 48px; }
   .writing-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 32px; }
   .writing-head > div { display: flex; flex-direction: column; gap: 20px; }
   .writing-head h2 { font-size: clamp(40px, 3.9vw, 56px); line-height: 1.02; }
   .writing-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+  .writing-grid--single { grid-template-columns: minmax(0, 1fr); }
   .writing-side { display: flex; flex-direction: column; gap: 24px; }
   .card { border: 1px solid var(--line); background: var(--bg-card); transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease; }
   .card:hover { transform: translateY(-6px); border-color: var(--accent); }
@@ -339,6 +297,7 @@
   .card-row { flex: 1; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; align-items: center; padding: 20px; }
   .card-row img { width: 180px; height: 160px; object-fit: cover; }
   .book-object img, .showcase-phone img { max-width: none; }
+  .card-row--text { grid-template-columns: minmax(0, 1fr); padding: 28px; }
   .card-row__body { display: flex; flex-direction: column; gap: 10px; }
   .card-row h3 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.12; color: var(--ink); }
   .card-row p { font-size: 15px; line-height: 1.5; color: var(--ink-mute); }
@@ -346,6 +305,7 @@
   /* ---------- FREE GUIDE + SIGNAL ---------- */
   .offer {
     position: relative; overflow: hidden;
+    margin-bottom: 150px;
     padding: 96px 88px;
     display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: center;
     background: var(--bg-card);
@@ -384,18 +344,9 @@
   .close p { position: relative; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(56px, 8.9vw, 128px); line-height: 0.95; letter-spacing: -0.035em; color: var(--ink); }
   .close p em { color: var(--accent); }
   .close .btn { position: relative; }
-  footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; min-height: 96px; padding: 20px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-faint); }
-  .footer-brand { display: flex; align-items: center; gap: 12px; }
-  .footer-brand img { width: 26px; height: 26px; }
-  .footer-links { display: flex; flex-wrap: wrap; gap: 0 32px; }
-  .footer-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); transition: color .2s ease; }
-  .footer-links a:hover { color: var(--accent-hi); }
 
   /* ---------- MOTION (only when the visitor allows it) ---------- */
-  @keyframes gtPulse { 0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), .55); } 70% { box-shadow: 0 0 0 10px rgba(var(--accent-rgb), 0); } 100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); } }
-  @keyframes gtGrain { 0% { transform: translate(0,0); } 25% { transform: translate(-2%,1%); } 50% { transform: translate(1%,-2%); } 75% { transform: translate(2%,2%); } 100% { transform: translate(0,0); } }
   @keyframes gtFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-  @keyframes gtRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes gtSweep { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
   @media (prefers-reduced-motion: no-preference) {
     .pulse { animation: gtPulse 2.2s ease-out infinite; }
@@ -424,6 +375,8 @@
     .book-stage { height: 600px; }
     .book-object { width: 300px; }
     .guides, .writing-grid, .app-notes { grid-template-columns: 1fr; }
+    .about-head, .about-copy { grid-column: 1 / -1; }
+    .about-copy { margin-top: 40px; }
     .principles-head { grid-column: 1 / -1; position: static; margin-bottom: 40px; }
     .principles ol { grid-column: 1 / -1; }
     .offer { padding: 64px 48px; }
@@ -443,7 +396,7 @@
     .site-nav { margin-top: 12px; padding: 0 8px 0 10px; gap: 12px; }
     .site-mark span { display: none; }
     .site-links { gap: 18px; font-size: 14px; }
-    .nav-book, .nav-projects { display: none !important; }
+    .nav-book, .guide-days { display: none !important; }
     .nav-guide { padding: 0 14px; }
     .hero-copy { padding: 250px 0 40px; gap: 24px; }
     .hero-role { align-items: flex-start; font-size: 10px; line-height: 1.7; letter-spacing: 0.14em; }
@@ -455,6 +408,10 @@
     .field-log > div { padding: 18px 14px; }
     .field-log__value { font-size: 38px; }
     .field-log__label { font-size: 9px; line-height: 1.5; letter-spacing: 0.12em; }
+    .about { padding-top: 72px; }
+    .about-head { gap: 18px; }
+    .about-portrait { width: 112px; height: 112px; margin-top: 8px; }
+    .about-copy { margin-top: 28px; gap: 18px; font-size: 17px; }
     .book { padding: 72px 0 80px; }
     .book-grid { grid-template-columns: 1fr; gap: 8px; }
     .book-stage { height: 440px; }
@@ -482,13 +439,13 @@
     .principles { padding: 96px 0; }
     .principles-head { margin-bottom: 24px; }
     .principle { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 22px 0; }
-    .writing { padding-bottom: 96px; gap: 32px; }
+    .writing { padding-top: 96px; gap: 32px; }
     .card-feature { min-height: 400px; padding: 28px 24px; }
     .card-feature__mark { font-size: 150px; top: 8px; left: 16px; }
     .card-row { grid-template-columns: 1fr; padding: 14px; }
     .card-row img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
     .card-row h3 { font-size: 24px; }
-    .offer { padding: 36px 22px; }
+    .offer { padding: 36px 22px; margin-bottom: 96px; }
     .offer-list { grid-template-columns: 1fr; }
     .signal { padding: 24px 18px; margin-top: 32px; }
     .close { padding: 110px 0 80px; gap: 28px; }
@@ -521,12 +478,12 @@
         <a class="nav-book" href="#book">Book</a>
         <a href="/writing/">Writing</a>
         <a class="nav-projects" href="#proof">Projects</a>
-        <a class="nav-guide" href="#field-guide">Free 7-day guide</a>
+        <a class="nav-guide" href="#field-guide">Free <span class="guide-days">7-day </span>guide</a>
       </div>
     </nav>
 
     <div class="hero-copy">
-      <p class="hero-role rise" style="--d:0ms"><span class="pulse" aria-hidden="true"></span><span>Performance Systems Builder · Author · Founder of T.I.P.</span></p>
+      <p class="hero-role rise" style="--d:0ms"><span class="pulse" aria-hidden="true"></span><span>Author · Software Builder · Founder, Tenacious Individual Performance</span></p>
       <h1 class="display rise" style="--d:120ms">Systems for <em>rebuilding</em> a life.</h1>
       <p class="lede rise" style="--d:240ms">
         My rebuild started in a shelter. The systems that carried me out —
@@ -571,6 +528,25 @@
 
 <main id="main-content" tabindex="-1">
 
+  <!-- ABOUT -->
+  <div class="wrap">
+    <section class="about" id="about" aria-labelledby="about-heading">
+      <div class="about-head reveal">
+        <span class="kicker">01 — About Garry</span>
+        <h2 class="display" id="about-heading">Behind the work.</h2>
+        <img class="about-portrait" src="/assets/about/garry-tipler-portrait.webp" alt="Portrait of Garry Tipler outdoors, looking up." width="320" height="320" loading="lazy" />
+      </div>
+      <div class="about-copy reveal">
+        <p>I’m Garry Tipler. Before I was publishing books or building software, I was learning how to rebuild my own life. That journey began in a shelter, where creating a different future meant taking responsibility for the actions I could control.</p>
+        <p>There was no single breakthrough that could replace the daily work. Training gave me something to return to. Writing helped me understand the process. Structure made it possible to keep going when motivation wasn’t enough.</p>
+        <p>Today, I turn those experiences into books, practical field guides, and software, including SelfTrainer and FitPulse.</p>
+        <p><strong>T.I.P. stands for Tenacious Individual Performance.</strong> It brings together the principles behind my work: personal responsibility, consistent execution, and building systems that can withstand real life.</p>
+        <p>I’m not writing from a finish line. I’m still building, learning, testing, and refining.</p>
+        <p>Everything shared here starts with that practice.</p>
+      </div>
+    </section>
+  </div>
+
   <!-- BOOK -->
   <section class="book" id="book" aria-labelledby="book-heading">
     <div class="glow" aria-hidden="true"></div>
@@ -582,7 +558,7 @@
         </a>
       </div>
       <div class="book-body reveal">
-        <span class="kicker">01 — The doctrine</span>
+        <span class="kicker">02 — The doctrine</span>
         <h2 class="display" id="book-heading">I Am the Proof</h2>
         <p class="book-sub">Building in the Dark — A Journey from a Shelter to My Higher Self</p>
         <p class="book-desc">The full story and the framework underneath it: where the rebuild started, and how the systems held when nothing else did.</p>
@@ -615,6 +591,32 @@
         </span>
       </a>
     </div>
+
+    <!-- FREE GUIDE + THE SIGNAL -->
+    <section class="offer reveal" id="field-guide" aria-labelledby="discipline-rebuild-title">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="offer-copy">
+        <span class="kicker">03 — Free · 7 days</span>
+        <h2 class="display" id="discipline-rebuild-title">You do not need another dramatic restart. You need a clear way to return.</h2>
+        <p><strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol for restoring structure, rebuilding self-trust, and returning to action.</p>
+        <ul class="offer-list">
+          <li><span aria-hidden="true">01</span>A focused seven-day rebuilding protocol</li>
+          <li><span aria-hidden="true">02</span>Simple daily actions and reflection prompts</li>
+          <li><span aria-hidden="true">03</span>A printable discipline rebuild scorecard</li>
+          <li><span aria-hidden="true">04</span>A sustainable plan for the next 14 days</li>
+        </ul>
+      </div>
+      <div class="signal" id="signal">
+        <form class="signal-form" id="signal-form" novalidate>
+          <label for="signal-email">Email address</label>
+          <input type="email" id="signal-email" name="email_address" placeholder="you@domain.com" autocomplete="email" required />
+          <button type="submit" class="btn btn-primary" id="signal-submit">Send me the guide <span class="arrow" aria-hidden="true">→</span></button>
+        </form>
+        <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
+        <a class="text-link guide-download" id="guide-download" href="/assets/downloads/the-7-day-discipline-rebuild.pdf" download hidden>Download the guide (PDF) <span class="arrow" aria-hidden="true">→</span></a>
+        <p class="signal-fineprint">You’ll also get The Signal: roughly once a month, a system, a fix, or a field note. Tested on me before it reaches you. No spam. Leave anytime.</p>
+      </div>
+    </section>
   </div>
 
   <!-- PROOF OF PRACTICE -->
@@ -623,7 +625,7 @@
     <div class="glow" aria-hidden="true"></div>
     <div class="wrap">
       <div class="apps-head reveal">
-        <span class="kicker">02 — The operating surface</span>
+        <span class="kicker">04 — The operating surface</span>
         <h2 class="display" id="proof-heading">The books are the doctrine. The apps are where it <em>runs.</em></h2>
         <p>Each system starts from lived pressure, gets tested in real routines, then gets refined into something cleaner, calmer, and repeatable.</p>
       </div>
@@ -657,11 +659,44 @@
     </div>
   </section>
 
-  <!-- PRINCIPLES -->
+  <!-- WRITING + PRINCIPLES -->
   <div class="wrap">
+    <!-- WRITING -->
+    <section class="writing" aria-labelledby="writing-heading">
+      <div class="writing-head reveal">
+        <div>
+          <span class="kicker">05 — Field notes</span>
+          <h2 class="display" id="writing-heading">Writing</h2>
+        </div>
+        <a class="text-link" href="/writing/">Explore the writing library <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class:list={["writing-grid", latest.length === 0 && "writing-grid--single"]}>
+        <a class="card card-feature reveal" href={getWritingPath(featured.data)}>
+          <span class="glow" aria-hidden="true"></span>
+          {featured.data.fragmentNumber && <span class="card-feature__mark" aria-hidden="true">#{featured.data.fragmentNumber}</span>}
+          <span class="card-meta">Featured · {typeLabel(featured)} · {shortDate(featured)}</span>
+          <h3>{featured.data.title}</h3>
+          <p>{featured.data.summary}</p>
+        </a>
+        {latest.length > 0 && <div class="writing-side">
+          {latest.map((entry, index) => (
+            <a class={entry.data.heroImage ? "card card-row reveal" : "card card-row card-row--text reveal"} href={getWritingPath(entry.data)}>
+              {entry.data.heroImage && <img src={entry.data.heroImage.src} alt="" loading="lazy" />}
+              <div class="card-row__body">
+                <span class="card-meta">{index === 0 ? "Latest · " : ""}{typeLabel(entry)} · {shortDate(entry)}</span>
+                <h3>{entry.data.title}</h3>
+                <p>{entry.data.summary}</p>
+              </div>
+            </a>
+          ))}
+        </div>}
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
     <section class="principles" id="principles" aria-labelledby="principles-heading">
       <div class="principles-head reveal">
-        <span class="kicker">03 — Standing principles</span>
+        <span class="kicker">06 — Standing principles</span>
         <h2 class="display" id="principles-heading">What the system runs on.</h2>
       </div>
       <ol>
@@ -672,69 +707,7 @@
       </ol>
     </section>
 
-    <!-- WRITING -->
-    <section class="writing" aria-labelledby="writing-heading">
-      <div class="writing-head reveal">
-        <div>
-          <span class="kicker">04 — Field notes</span>
-          <h2 class="display" id="writing-heading">Writing</h2>
-        </div>
-        <a class="text-link" href="/writing/">Explore the writing library <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-      <div class="writing-grid">
-        <a class="card card-feature reveal" href="/writing/fragments/fragments-4-the-fire/">
-          <span class="glow" aria-hidden="true"></span>
-          <span class="card-feature__mark" aria-hidden="true">#4</span>
-          <span class="card-meta">Featured · Fragment · Mar 2, 2026</span>
-          <h3>Fragments #4 — The Fire</h3>
-          <p>A field note on setbacks: reading a forced slowdown as instruction, not interruption.</p>
-        </a>
-        <div class="writing-side">
-          <a class="card card-row reveal" href="/writing/essays/discipline-should-not-cost-me-my-heart/">
-            <img src="/assets/writing/essays/discipline-should-not-cost-me-my-heart/hero.webp" alt="" width="1100" height="620" loading="lazy" />
-            <div class="card-row__body">
-              <span class="card-meta">Essay · Jul 27, 2026</span>
-              <h3>Discipline Should Not Cost Me My Heart</h3>
-              <p>Staying focused without becoming cold.</p>
-            </div>
-          </a>
-          <a class="card card-row reveal" href="/writing/fragments/fragments-5-refinement/">
-            <img src="/assets/writing/fragments/fragments-5-refinement/hero.jpeg" alt="" width="800" height="450" loading="lazy" />
-            <div class="card-row__body">
-              <span class="card-meta">Fragment · Mar 9, 2026</span>
-              <h3>Fragments #5 — Refinement</h3>
-              <p>A field note on refinement through faith, responsibility, and the discipline of letting go of limiting beliefs.</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
 
-    <!-- FREE GUIDE + THE SIGNAL -->
-    <section class="offer reveal" id="field-guide" aria-labelledby="discipline-rebuild-title">
-      <div class="glow" aria-hidden="true"></div>
-      <div class="offer-copy">
-        <span class="kicker">05 — Free · 7 days</span>
-        <h2 class="display" id="discipline-rebuild-title">You do not need another dramatic restart. You need a clear way to return.</h2>
-        <p><strong>The 7-Day Discipline Rebuild</strong> is a short, practical protocol for restoring structure, rebuilding self-trust, and returning to action.</p>
-        <ul class="offer-list">
-          <li><span aria-hidden="true">01</span>A focused seven-day rebuilding protocol</li>
-          <li><span aria-hidden="true">02</span>Simple daily actions and reflection prompts</li>
-          <li><span aria-hidden="true">03</span>A printable discipline rebuild scorecard</li>
-          <li><span aria-hidden="true">04</span>A sustainable plan for the next 14 days</li>
-        </ul>
-      </div>
-      <div class="signal" id="signal">
-        <form class="signal-form" id="signal-form" novalidate>
-          <label for="signal-email">Email address</label>
-          <input type="email" id="signal-email" name="email_address" placeholder="you@domain.com" autocomplete="email" required />
-          <button type="submit" class="btn btn-primary" id="signal-submit">Send me the guide <span class="arrow" aria-hidden="true">→</span></button>
-        </form>
-        <p class="signal-status" id="signal-status" role="status" aria-live="polite"></p>
-        <a class="text-link guide-download" id="guide-download" href="/assets/downloads/the-7-day-discipline-rebuild.pdf" download hidden>Download the guide (PDF) <span class="arrow" aria-hidden="true">→</span></a>
-        <p class="signal-fineprint">You’ll also get The Signal: roughly once a month, a system, a fix, or a field note. Tested on me before it reaches you. No spam. Leave anytime.</p>
-      </div>
-    </section>
   </div>
 
   <section class="close" aria-label="Closing">
@@ -756,7 +729,7 @@
   </footer>
 </div>
 
-<script>
+<script is:inline>
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Reveal sections as they scroll into view.

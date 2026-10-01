@@ -2,7 +2,7 @@
 title: "Fragments #19 — What I Carry Forward"
 slug: "fragments-19-what-i-carry-forward"
 type: "fragment"
-summary: "A field note on carrying forward wisdom, responsibility, and kindness without the weight of the past."
+summary: "I am responsible. That does not mean everything that happened to me was my fault."
 category: "Recovery"
 tags:
   - "discipline"

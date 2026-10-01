@@ -1,7 +1,7 @@
 # GarryTipler.com — Design System
 
 **Approved:** September 28, 2026, by the author, after reviewing designs on a Claude Design canvas ("GarryTipler.com Directions") and the live pages.
-**Applies to:** the homepage (`index.html`), the project case studies (`projects/selftrainer/`, `projects/fitpulse/`), and every Astro writing page (`src/`).
+**Applies to:** the homepage (`src/pages/index.astro`), the project case studies (`projects/selftrainer/`, `projects/fitpulse/`), and every Astro writing page (`src/`).
 
 The site has two rooms in one house:
 
@@ -26,7 +26,7 @@ Google Fonts request (all pages): `Fraunces:ital,opsz,wght@0,9..144,300;0,9..144
 
 ### Recurring components
 
-- **Glass nav bar**: GT mark + "GARRY TIPLER" (mono) · Book · Writing · Projects · a gold "Free 7-day guide" button. Frosted translucent panel with a hairline border. The current section is marked with a gold underline and `aria-current="page"`. On phones, Book and Projects hide; Writing and the guide button stay.
+- **Glass nav bar**: GT mark + "GARRY TIPLER" (mono) · Book · Writing · Projects · a gold "Free 7-day guide" button (reads "Free guide" on phones). Frosted translucent panel with a hairline border. The current section is marked with a gold underline and `aria-current="page"`. On phones, Book hides; Writing, Projects and the guide button stay (checked to 320px wide).
 - **Kicker**: numbered section label in gold mono, e.g. `01 — The doctrine`.
 - **Status tag**: mono uppercase chip with a pulsing gold dot ("Native rebuild in progress", "In development").
 - **Hover-lift cards**: a 1px border that turns gold, and the card lifts 6px on hover.
@@ -62,25 +62,33 @@ Skip link on every page; semantic headings; 44px minimum touch targets on nav an
 
 Layout: 1280px content width with 80px gutters (40px ≤1100px, 20px ≤720px); a 12-column grid for split sections.
 
-### Homepage (`index.html`)
+### Shared base (`assets/css/field-manual.css`)
+
+The Field Manual palette tokens and every rule the homepage and project pages use identically (reset, skip link, `.wrap`, `.kicker`, nav, footer, hero grain/lines, shared keyframes) live in `assets/css/field-manual.css`. The homepage and both project pages link it **before** their own styles. Change the palette here, not per page.
+
+### Homepage (`src/pages/index.astro`)
+
+The homepage is an Astro page so its writing cards can be built from the Writing collection. Its hand-authored styles and scripts stay inline (`<style is:inline>`, `<script is:inline>`).
 
 In order:
 
 1. **Hero**: full-height, with the portrait `assets/about/garry-tipler-hero.webp` (1206×1063) bleeding off the right edge and fading into black. Film grain, faint horizontal rules and a gold glow sit on top. The headline is "Systems for *rebuilding* a life." with "rebuilding" in gold italic.
 2. **Field log**: a glass panel at the bottom of the hero. Its numbers count up; a gold light sweeps its top edge; "Weeks in the system" counts forward from `data-start="2026-01-10"`. Sessions and titles are hand-updated; never estimate them.
-3. **01 — The doctrine**: *I Am the Proof*, with the real cover floating straight on (no tilt) above a soft shadow.
-4. **Field guides**: two cards with gold italic numerals 01/02. There are no cover images until real covers exist.
-5. **02 — The operating surface**: the FitPulse dashboard in a browser frame and SelfTrainer "Up Next" in a phone frame, over a grid backdrop. Device frames are approved on the homepage only (see AGENTS.md for project pages).
-6. **03 — Standing principles**: four principles; one at a time lights up in gold with a line drawing across it.
-7. **04 — Field notes**: a large featured card (Fragments #4, with a faint "#4" watermark) plus two image cards. The link text "Explore the writing library" is required by `scripts/verify-build.mjs`.
-8. **05 — Free · 7 days**: the Kit signup (form `9676498`) and the PDF download revealed on success. The form logic must not change.
-9. **Closing**: "The proof is *the work.*" and a "Start with the book" button.
+3. **01 — About Garry**: "Behind the work." with a small square portrait (`assets/about/garry-tipler-portrait.webp`) and the author's About copy, including what T.I.P. (Tenacious Individual Performance) stands for. No button or form.
+4. **02 — The doctrine**: *I Am the Proof*, with the real cover floating straight on (no tilt) above a soft shadow.
+5. **Field guides**: two cards with gold italic numerals 01/02. There are no cover images until real covers exist.
+6. **03 — Free · 7 days**: the Kit signup (form `9676498`) and the PDF download revealed on success. The form logic must not change.
+7. **04 — The operating surface**: the FitPulse dashboard in a browser frame and SelfTrainer "Up Next" in a phone frame, over a grid backdrop. Device frames are approved on the homepage only (see AGENTS.md for project pages).
+8. **05 — Field notes**: a large featured card (Fragments #4, with a faint "#4" watermark) plus the two newest published pieces, built at build time; the first is labelled "Latest". Pieces without a hero image get a text-only card. The link text "Explore the writing library" and the link to The Fire are required by `scripts/verify-build.mjs`.
+9. **06 — Standing principles**: four principles; one at a time lights up in gold with a line drawing across it.
+10. **Closing**: "The proof is *the work.*" and a "Start with the book" button.
 
-The "Featured" label (not "Latest") is deliberate: newer migrated pieces exist, so "Latest" would be false.
+The hero descriptor reads "Author · Software Builder · Founder, Tenacious Individual Performance". The JSON-LD `jobTitle` keeps "Performance Systems Builder".
 
-### Project pages (`projects/*/index.html` + CSS)
+### Project pages (`projects/*/index.html` + `assets/css/case-study.css`)
 
-- `selftrainer.css` and `fitpulse.css` are **the same file** kept at both existing paths (the build passthrough lists them individually). Edit one and copy it to the other.
+- Both pages load `assets/css/field-manual.css` then `assets/css/case-study.css` (the former identical `selftrainer.css`/`fitpulse.css` copies, merged October 1, 2026).
+- The closing section offers "Return to garrytipler.com" and a gold "Follow the build in The Signal →" link to the homepage signup.
 - Hero: breadcrumb (`← Garry Tipler / Case study / Name`), a 136px Fraunces title, a status tag, and the thesis in Fraunces italic.
   - SelfTrainer: two phone screenshots float beside the copy.
   - FitPulse: the full dashboard sits under the copy with its caption.

@@ -2,7 +2,7 @@
 title: "Fragments #8 — There Is a Point Where Effort Stops Feeling Like Effort"
 slug: "fragments-8-there-is-a-point-where-effort-stops-feeling-like-effort"
 type: "fragment"
-summary: "A field note on repetition becoming proof, and discipline becoming something that carries itself."
+summary: "I remember when this was just something I said. Something I believed — but hadn’t proven yet."
 category: "Discipline"
 tags:
   - "discipline"

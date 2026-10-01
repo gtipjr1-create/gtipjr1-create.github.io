@@ -6,22 +6,17 @@ import { defineConfig } from "astro/config";
 const projectRoot = fileURLToPath(new URL(".", import.meta.url));
 
 const passthroughPaths = [
-  "index.html",
   "CNAME",
   "favicon.svg",
   "favicon-32x32.png",
   "apple-touch-icon.png",
   "assets",
-  "IMG_2174.jpeg",
-  "IMG_2175.jpeg",
   "selftrainer-history.jpeg",
   "selftrainer-home.jpeg",
   "selftrainer-onboarding.jpeg",
   "selftrainer-session.jpeg",
   "projects/selftrainer/index.html",
-  "projects/selftrainer/selftrainer.css",
   "projects/fitpulse/index.html",
-  "projects/fitpulse/fitpulse.css",
 ];
 
 const preserveExistingStaticSite = {

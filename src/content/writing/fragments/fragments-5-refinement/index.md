@@ -2,7 +2,7 @@
 title: "Fragments #5 — Refinement"
 slug: "fragments-5-refinement"
 type: "fragment"
-summary: "A field note on refinement through faith, responsibility, and the discipline of letting go of limiting beliefs."
+summary: "Simple doesn’t mean easy. Faith is not just something that falls from the sky. It’s built by repetition, belief, and action — toward the vision."
 category: "Discipline"
 tags:
   - "discipline"

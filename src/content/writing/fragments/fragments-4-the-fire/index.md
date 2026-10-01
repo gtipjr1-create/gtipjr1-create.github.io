@@ -2,7 +2,7 @@
 title: "Fragments #4 — The Fire"
 slug: "fragments-4-the-fire"
 type: "fragment"
-summary: "A field note on setbacks: reading a forced slowdown as instruction, not interruption."
+summary: "The fire: random back spasms. The lesson: slow down."
 category: "Recovery"
 tags:
   - "personal-development"

@@ -2,7 +2,7 @@
 title: "Fragments #16 — I’m Doing Alright"
 slug: "fragments-16-im-doing-alright"
 type: "fragment"
-summary: "A field note on appreciating a quieter, healthier season while continuing to build with faith and consistency."
+summary: "I have spent so much of my life thinking about what comes next."
 category: "Recovery"
 tags:
   - "discipline"

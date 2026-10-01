@@ -2,7 +2,7 @@
 title: "Fragments #13 — I Am Learning to Live Again"
 slug: "fragments-13-i-am-learning-to-live-again"
 type: "fragment"
-summary: "A field note on letting discipline create room for presence, warmth, joy, and a life that can be felt—not only improved."
+summary: "I have been locked in for a long time. Training. Building. Learning."
 category: "Recovery"
 tags:
   - "discipline"

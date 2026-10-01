@@ -2,7 +2,7 @@
 title: "Fragments #20 — I’m Not Waiting to Arrive"
 slug: "fragments-20-im-not-waiting-to-arrive"
 type: "fragment"
-summary: "A field note on building with purpose, trusting yourself, and enjoying life before everything is finished."
+summary: "There was a time when I thought progress would feel different."
 category: "Recovery"
 tags:
   - "discipline"

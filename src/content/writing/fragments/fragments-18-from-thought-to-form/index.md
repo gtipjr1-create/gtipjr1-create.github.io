@@ -2,7 +2,7 @@
 title: "Fragments #18 — From Thought to Form"
 slug: "fragments-18-from-thought-to-form"
 type: "fragment"
-summary: "A field note on writing a first book and turning disciplined thought into finished work."
+summary: "Last year, I began calling myself an author."
 category: "Discipline"
 tags:
   - "discipline"

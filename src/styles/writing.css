@@ -367,7 +367,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .chamber-nav { margin-top: 12px; padding: 0 8px 0 10px; gap: 12px; }
   .chamber-mark span { display: none; }
   .chamber-links { gap: 18px; font-size: 14px; }
-  .chamber-links .chamber-book, .chamber-links .chamber-projects { display: none; }
+  .chamber-links .chamber-book, .chamber-links .guide-days { display: none; }
   .chamber-links .chamber-guide { padding: 0 14px; }
   .library-masthead { padding: 72px 0 72px; gap: 20px; }
   .chamber-arch { width: 84px; height: 105px; }

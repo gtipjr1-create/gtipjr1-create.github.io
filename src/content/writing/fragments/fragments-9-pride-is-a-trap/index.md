@@ -2,7 +2,7 @@
 title: "Fragments #9 — Pride Is a Trap"
 slug: "fragments-9-pride-is-a-trap"
 type: "fragment"
-summary: "A field note on releasing the pride that mistakes endurance for progress and choosing structure, clarity, and direction instead."
+summary: "Pride isn’t always a good thing. Sometimes, it’s the reason you stay the same."
 category: "Discipline"
 tags:
   - "discipline"

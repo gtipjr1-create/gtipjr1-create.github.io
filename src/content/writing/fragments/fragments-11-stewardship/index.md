@@ -2,7 +2,7 @@
 title: "Fragments #11 — Stewardship"
 slug: "fragments-11-stewardship"
 type: "fragment"
-summary: "A field note on carrying momentum without turning progress into pride, pressure, or unchecked output."
+summary: "Learning how to carry momentum with gratitude, humility, and discipline."
 category: "Discipline"
 tags:
   - "discipline"

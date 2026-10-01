@@ -2,7 +2,7 @@
 title: "Fragments #1 — Feelings Don’t Build Futures"
 slug: "fragments-1-feelings-dont-build-futures"
 type: "fragment"
-summary: "A field note on discipline, decisions, and the way sustained effort makes opportunity look like luck."
+summary: "What you put in comes back. Not always immediately. Often bigger than you expected."
 category: "Discipline"
 tags:
   - "discipline"

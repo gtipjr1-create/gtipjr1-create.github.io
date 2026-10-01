@@ -32,7 +32,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./selftrainer.css" />
+  <link rel="stylesheet" href="/assets/css/field-manual.css" />
+  <link rel="stylesheet" href="/assets/css/case-study.css" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -49,7 +50,7 @@
           <a class="nav-book" href="../../#book">Book</a>
           <a href="/writing/">Writing</a>
           <a class="nav-projects" href="../../#proof" aria-current="page">Projects</a>
-          <a class="nav-guide" href="../../#field-guide">Free 7-day guide</a>
+          <a class="nav-guide" href="../../#field-guide">Free <span class="guide-days">7-day </span>guide</a>
         </div>
       </nav>
 
@@ -78,6 +79,7 @@
         <div class="label-col"><h2 class="kicker" id="problem-title">01 — The problem</h2></div>
         <div class="main-col reveal">
           <p class="statement-xl">The gym floor is an <em>execution</em> environment.</p>
+          <p class="section-lead">SelfTrainer is built around the active workout — not just planning it beforehand or reviewing it afterward.</p>
           <div class="two-col">
             <p class="body">Many training tools are strongest before or after the workout. Active training asks for faster comprehension: what was planned, what has been logged, what changed, and what remains.</p>
             <p class="body">SelfTrainer reduces the distance between intention and execution, then protects the completed record so later changes cannot quietly rewrite the session.</p>
@@ -91,6 +93,7 @@
         <div class="label-col"><h2 class="kicker" id="audience-title">02 — Who it is for</h2></div>
         <div class="main-col ruled reveal">
           <p class="statement-md">Serious independent lifters who already train with intent and want a calmer system for planning, executing, adjusting, and preserving their work.</p>
+          <p class="section-lead">For lifters who already know how they want to train and want a calm, reliable place to run and record it.</p>
           <p class="body">SelfTrainer is not primarily a social feed, a generic workout-content library, an entertainment-first fitness product, or a substitute for judgment.</p>
         </div>
       </div>
@@ -102,10 +105,11 @@
         <div class="section-head reveal">
           <p class="kicker">03 — Core gym-floor workflow</p>
           <h2 class="h2" id="workflow-title">From the next action to a record you can trust.</h2>
+          <p class="section-lead">Open the app, see today’s workout, log what you actually did, and keep an honest record that never changes behind your back.</p>
         </div>
         <ol class="workflow">
           <li class="step reveal" style="--sd:0s"><span class="step-num" aria-hidden="true">01</span><span class="step-title">Up Next</span><span class="step-copy">The current program determines what should be trained next.</span></li>
-          <li class="step reveal" style="--sd:2.6s"><span class="step-num" aria-hidden="true">02</span><span class="step-title">Start or Resume</span><span class="step-copy">A fresh session begins from planned values; an existing draft returns without reseeding or losing work.</span></li>
+          <li class="step reveal" style="--sd:2.6s"><span class="step-num" aria-hidden="true">02</span><span class="step-title">Start or Resume</span><span class="step-copy">A fresh session begins from planned values; an existing draft returns without starting over from the plan or losing work.</span></li>
           <li class="step reveal" style="--sd:5.2s"><span class="step-num" aria-hidden="true">03</span><span class="step-title">Execute planned sets</span><span class="step-copy">Planned work remains visible while editable logged values reflect what actually happens.</span></li>
           <li class="step reveal" style="--sd:7.8s"><span class="step-num" aria-hidden="true">04</span><span class="step-title">Adjust honestly</span><span class="step-copy">The session can change without rewriting the original prescription or corrupting historical truth.</span></li>
           <li class="step reveal" style="--sd:10.4s"><span class="step-num" aria-hidden="true">05</span><span class="step-title">Finish</span><span class="step-copy">Completion writes once and hands off to the immutable history record.</span></li>
@@ -121,13 +125,14 @@
           <div>
             <p class="kicker">04 — Selected interface work</p>
             <h2 class="h2" id="interface-title">The PWA, in daily use.</h2>
+            <p class="section-lead">These screens come from the web version of SelfTrainer in daily use today. The native app is being built from it.</p>
           </div>
-          <p class="body">The interface evidence below comes from the mature SelfTrainer PWA, the current behavioral and persistence benchmark. The Native rebuild is translating these established workflows into a device-native experience.</p>
+          <p class="body">The interface evidence below comes from the mature SelfTrainer PWA, the reference for how the app behaves and saves workout data. The Native rebuild is translating these established workflows into a device-native experience.</p>
         </div>
         <div class="gallery gallery--phones">
           <figure class="reveal">
             <img class="shot shot--phone" src="../../assets/selftrainer/selftrainer-home-up-next-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA home screen showing Precision Build as session two in the selected rotation, with a start action and a lineup comparing target work with prior performance." />
-            <figcaption><strong class="caption-label">Home / Up Next — PWA</strong><span class="caption-text">Current-program authority turns the home screen into a clear next action while preserving target and prior-performance context.</span></figcaption>
+            <figcaption><strong class="caption-label">Home / Up Next — PWA</strong><span class="caption-text">Your current program decides what’s next, turning the home screen into a clear next action while preserving target and prior-performance context.</span></figcaption>
           </figure>
           <figure class="reveal">
             <img class="shot shot--phone" src="../../assets/selftrainer/selftrainer-active-session-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA session screen showing the second goblet-squat set, its target and previous result, editable weight and reps, completion controls, and a persistent rest timer." />
@@ -143,7 +148,7 @@
           </figure>
           <figure class="reveal">
             <img class="shot shot--phone" src="../../assets/selftrainer/selftrainer-history-detail-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA completed training record showing session duration, sets, volume, best set, and exercise-by-exercise target and actual results." />
-            <figcaption><strong class="caption-label">History Detail — PWA</strong><span class="caption-text">Completed-session-owned facts preserve the original training record, including target, actual work, volume, and outcome.</span></figcaption>
+            <figcaption><strong class="caption-label">History Detail — PWA</strong><span class="caption-text">A finished workout keeps its own record, preserving the original target, actual work, volume, and outcome.</span></figcaption>
           </figure>
           <figure class="reveal">
             <img class="shot shot--phone" src="../../assets/selftrainer/selftrainer-profile-adherence-pwa.webp" width="1080" height="2348" loading="lazy" decoding="async" alt="SelfTrainer PWA profile showing intentionally published session and volume totals, July adherence markers, recovery adjustments, and accumulated record categories." />
@@ -159,6 +164,7 @@
           <div>
             <p class="kicker">05 — PWA-to-Native evolution</p>
             <h2 class="h2" id="evolution-title">Not a visual port alone.</h2>
+            <p class="section-lead">The web app proved what SelfTrainer needs to do. The native app has to do the same things reliably on a phone, mid-workout.</p>
           </div>
           <p class="body">The PWA proved what the product needed to do. Native is proving that the same rules can survive device behavior, interrupted sessions, touch interaction, and the trust demands of a real gym-floor workflow.</p>
         </div>
@@ -177,6 +183,7 @@
         <div class="section-head reveal">
           <p class="kicker">06 — Design and engineering decisions</p>
           <h2 class="h2" id="decisions-title">What the build holds to.</h2>
+          <p class="section-lead">Three rules run through everything: show the next step first, keep what you planned separate from what you did, and never rewrite a finished workout.</p>
         </div>
         <div class="decisions">
           <article class="decision reveal"><span class="decision-num" aria-hidden="true">I.</span><h3>Execution-first hierarchy</h3><p>The next useful action receives priority over secondary analysis.</p></article>
@@ -195,6 +202,7 @@
         <div class="status-copy">
           <h2 class="kicker" id="state-title">07 — Current development state</h2>
           <p class="status-value"><span class="pulse" aria-hidden="true"></span>Native rebuild in progress</p>
+          <p class="section-lead">The web app works and is used daily. The native app is being tested and hardened, with no release date promised.</p>
           <p class="body">The product is mature enough to have a trusted behavioral reference and active native implementation, but it remains under development.</p>
         </div>
         <ul class="status-list">
@@ -211,6 +219,7 @@
       <div class="wrap split reveal">
         <div class="deferred-copy">
           <h2 class="kicker" id="deferred-title">08 — Intentionally deferred</h2>
+          <p class="section-lead">What SelfTrainer won’t add until the core is solid.</p>
           <p class="body">Deferral is part of the product strategy. SelfTrainer is being completed from the execution core outward rather than broadened before its central promises are dependable.</p>
         </div>
         <ul class="deferred-list">
@@ -229,6 +238,7 @@
       <h2 id="closing-title" class="reveal">The proof is <em>the work.</em></h2>
       <p class="body">SelfTrainer is still being built. The native product will be shown more fully when the evidence is ready.</p>
       <a class="btn-ghost" href="../../">Return to garrytipler.com <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="follow-link" href="../../#field-guide">Follow the build in The Signal <span class="arrow" aria-hidden="true">→</span></a>
       <p class="build-note">Development notes and future release information will be added here as the build progresses.</p>
     </section>
   </main>

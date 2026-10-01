@@ -2,7 +2,7 @@
 title: "Fragments #15 — The Quiet Return"
 slug: "fragments-15-the-quiet-return"
 type: "fragment"
-summary: "A field note on returning to softness and openness without surrendering the boundaries, clarity, and strength earned through rebuilding."
+summary: "There are parts of myself I had to put away while I was rebuilding. Not because they were weak."
 category: "Recovery"
 tags:
   - "discipline"

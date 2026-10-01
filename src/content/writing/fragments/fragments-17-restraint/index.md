@@ -2,7 +2,7 @@
 title: "Fragments #17 — Restraint"
 slug: "fragments-17-restraint"
 type: "fragment"
-summary: "A field note on recognizing the proof already present and allowing good work room to grow."
+summary: "I have spent a lot of time looking for what still needs to be fixed."
 category: "Discipline"
 tags:
   - "discipline"

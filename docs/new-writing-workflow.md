@@ -98,7 +98,7 @@ Automatic on publish:
 
 Manual, and only when the author asks:
 
-- **Homepage writing cards** (`index.html`). These three cards stay deliberately curated: currently The Fire, Discipline Should Not Cost Me My Heart, and Refinement. They are not replaced by each new challenge piece. `/writing/`, the archive, and RSS handle chronological discovery.
+- **Homepage featured card** (`src/pages/index.astro`, `featuredSlug`). The large card stays curated (currently The Fire). The two side cards update automatically to the newest published pieces on each build.
 - **Start Here** order (`startHereOrder`) and `featured`.
 - **Related writing** and connections. These are always explicit and never inferred from tags.
 - **`updatedDate`.** Set it only when a published piece's prose is later changed.

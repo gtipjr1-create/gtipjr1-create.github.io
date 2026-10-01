@@ -1,46 +1,55 @@
-# Next session — Writing polish approved for publication
+# Next session — Site critique follow-up awaiting review
 
 ## Current state
 
-- On September 29, 2026 the author approved the bounded polish plan, reviewed the result, and authorized going live. The five-file polish is committed and pushed as the publication slice; check GitHub Pages and the live URLs before treating deployment as complete.
-- All writing has publication approval: 20 Fragments and 31 Essays (Days 1–30 plus Discipline Should Not Cost Me My Heart). The paused Days 1–5 handoff is superseded by the content commits and docs/writing-migration.md.
-- Work lives in the attached managed worktree C:/Users/garry/.codex/worktrees/writing-polish/GarryTipler-Site, on codex/writing-polish, based on origin/main 234b243 (docs: retain reviewed day series titles).
-- The original main checkout remains at 43cb489 with its original modified index.html, untracked portrait, .claude/ and artifacts/ preserved. Main and origin/main diverge (separate Fragment #20 commits); do not reset or overwrite either. The attempted fast-forward failed without moving HEAD.
-- The original homepage was restored byte-for-byte from its backup after Git normalized line endings. A recovery stash named Preserve homepage before approved polish baseline update and artifacts/polish-baseline backups remain available. No stash was dropped.
-- The worktree reuses the existing node_modules through a junction. No package/dependency or lockfile change occurred.
+- `main` is at `d0f2b07`, in sync with `origin/main`. The working tree holds the uncommitted critique follow-up below; untracked `.claude/` and `artifacts/` are intentionally never committed.
+- The writing polish, Start Here sequence (`startHereOrder` 1–5: The Fire, Ordering Effort, I Am Not Behind, Discipline Should Not Cost Me My Heart, I'm Not Waiting to Arrive), Day-title normalization and 404 page are live (`93583f9`, `3cc0be2`). The earlier handoff's open Start Here decision is closed.
+- New site-first writing follows `docs/new-writing-workflow.md`.
 
-## Exact changed files
+## Completed October 1, 2026
 
-- index.html: change The Fire's homepage date from August 6 to March 2, 2026, its original Medium publication date.
-- src/pages/writing/index.astro: show six recent pieces and View all writing linking to the complete archive.
-- src/styles/writing.css: 44px minimum for the current Writing nav link, back/breadcrumb links and reading-mode control.
-- docs/polish-review.md: date findings, scope, limits and proposed Start Here sequence.
-- NEXT_SESSION.md: this corrected handoff.
+- `46a660a` fix: every page declares `<meta name="color-scheme" content="dark">` and `color-scheme: dark` on `:root`, so mobile auto-dark modes (Android Chrome, Samsung Internet) stop re-tinting the palette. Paper reading mode sets `color-scheme: only light`.
+- Hero grain overlay reduced to `opacity: 0.04` (was 0.09 homepage, 0.08 project pages).
+- Gold accent raised `#cba35c` → `#d4ab5f`; hover/link golds moved proportionally (`#e9c683` field manual hover, `#eecb8b` writing hover, `#dcb46b` writing link). Translucent golds use `--accent-rgb` (homepage/projects) or `--gold-rgb` (writing). Live status-chip border is solid gold.
+- `d0f2b07` docs: `AGENTS.md` and `docs/design-system.md` record the new palette.
+- Files: `index.html`, `projects/{selftrainer,fitpulse}/{index.html,*.css}` (the two project stylesheets remain identical), `src/layouts/BaseLayout.astro`, `src/styles/tokens.css`, `src/styles/writing.css`, plus the two docs.
 
 ## Validation
 
-- npm.cmd run test:writing-tools passed.
-- npm.cmd run validate passed: content validation, Astro build and scripts/verify-build.mjs; 51 published entries, zero drafts.
-- One-off audit at the original checkout's artifacts/polish-baseline/verify-polish.mjs passed. All 51 original dates match the recorded author-approved Medium calendar dates; headers, attribution, Open Graph, JSON-LD, collection/archive rows and RSS use those dates. Local article links/assets resolve. Recent writing has six entries; archive has 51. Results are saved as date-audit.json beside the script.
-- Dates were checked against the approved migration records and frontmatter, not a fresh reread of every owner-facing Medium record. Original dates, site publication dates and update dates were preserved in content.
-- Browser review sampled the homepage, writing landing page, Fragments, Essays, Archive, Start Here, The Fire, Day 30 and both project pages. Checked at 1440px and 390px, with additional settled desktop views at 1280px. No page-level horizontal overflow was measured on those surfaces.
-- The Fire and Day 30 were reviewed in candlelit and paper modes. Day 30's mode survives reload, the toggle responds to keyboard Space with visible focus, its target is 44px, and the desktop prose column is 700px. Current Writing link measures 44px.
-- writing-desktop.jpg and writing-mobile.jpg are saved under the original checkout's artifacts/polish-baseline. This is browser viewport review, not physical-device testing or a complete accessibility audit. Signup submission and external purchase flows were not exercised.
-- git diff --check passed on the code diff; repeat after any further edit.
-- A local built preview is running at http://127.0.0.1:4324/ (preview reported PID 14084). Use npm.cmd run preview -- stop to stop the worktree's preview when no longer needed.
+- `npm run test:writing-tools` and `npm run validate` passed; `git diff --check` clean. All 60 built pages carry the color-scheme meta.
+- Browser pane at 375px: homepage, SelfTrainer and The Fire (candlelit and paper, toggle round-trip) checked; no horizontal overflow. Homepage also viewed at desktop width.
+- GitHub Pages run for `46a660a` succeeded; live HTML and SelfTrainer CSS confirmed serving the change.
+- WCAG contrast: accent 9.2:1 on `#0b0b0c` (8.6:1 on lightest card); body text 16.3:1; dark text on gold buttons 9.2:1.
+- Not verified: physical-device test. The owner reported it looks much better; whether the auto-dark mode was the specific cause on their phone is unconfirmed.
 
-## Next decision
+## Known leftovers (do not remove without owner approval)
 
-Review the proposed Start Here sequence in docs/polish-review.md before assigning startHereOrder values:
+- Stash `stash@{0}` "Preserve homepage before approved polish baseline update".
+- Worktrees: `C:/Users/garry/.codex/worktrees/writing-polish/GarryTipler-Site` (`codex/writing-polish`, already merged into `main`); `.migration-output/day-series-preview` and `.migration-output/publish-fragment-20` (detached, git-ignored path; day-series-preview has untracked image folders).
+- Hero photo keeps `filter: saturate(0.7) contrast(1.05) brightness(0.92)`; easing it is a separate design decision.
 
-1. Fragments #4 — The Fire (existing opening)
-2. Fragments #6 — Ordering Effort
-3. Fragments #12 — I Am Not Behind
-4. Discipline Should Not Cost Me My Heart
-5. Fragments #20 — I’m Not Waiting to Arrive
+## Uncommitted: site critique follow-up (October 1, 2026, awaiting owner review)
 
-No sequence metadata was changed. Once the author approves, assign this narrow sequence, rerun validation and review Start Here at both widths. The polish publication is authorized; applying the proposed Start Here sequence still requires editorial approval. Use this worktree for further work so the polish is not applied to the stale original checkout.
+Working tree, not committed or pushed:
+
+- **About section + hero.** Author-supplied "Behind the work." About copy (T.I.P. = Tenacious Individual Performance) with a small portrait; hero descriptor now "Author · Software Builder · Founder, Tenacious Individual Performance". Homepage order: hero, field log, About, book, field guides, free guide, projects, writing, principles, closing; kickers renumbered 01–06.
+- **Homepage moved into Astro.** `index.html` → `src/pages/index.astro` (git rename; removed from the build passthrough). The featured card stays The Fire (`featuredSlug`); the two side cards are the newest published pieces, the first labelled "Latest".
+- **Shared CSS.** `assets/css/field-manual.css` holds the Field Manual tokens and 30 rules identical across homepage and projects; `assets/css/case-study.css` replaces the identical `projects/*/selftrainer.css`/`fitpulse.css` (deleted).
+- **Phone nav** shows Projects; guide button reads "Free guide" below 720px (homepage, projects, writing). Project-page current link has a 44px target on phones.
+- **Homepage writing guard:** with zero recent pieces the side column is omitted and the featured card spans full width (renders identically today).
+- **Project closings** add "Follow the build in The Signal →" to `/#field-guide`.
+- **Images:** removed three never-referenced images (`IMG_2174.jpeg`, `IMG_2175.jpeg`, `assets/selftrainer-active-session-pwa.png`). The four root `selftrainer-*.jpeg` screenshots (public April–June 2026) are kept at their original paths for backward compatibility, though no page renders them.
+- **Approved copy applied:** eight SelfTrainer plain-language leads (`.section-lead` in `case-study.css`) above the unchanged evidence copy; four approved jargon swaps; 17 Fragment summaries replaced with verbatim lines from each piece (Fragments #2, #3, #14 unchanged).
+- **Docs:** `docs/design-system.md`, `docs/new-writing-workflow.md` updated.
+- **Validation:** `test:writing-tools` and `validate` pass; `git diff --check` clean; 60/60 pages carry color-scheme. Computed-style snapshots at 1440px and 375px: project pages 0 differences after the CSS merge; homepage differs only in the writing cards (new content). Phone nav fits with no overflow at 320, 360 and 375px.
+- **Scheduled task** `field-log-session-count-reminder` reminds the owner on the 1st of each month at 9:00 to send the SelfTrainer session count. It runs only while the Claude desktop app is open; if the app is closed at 9:00 on the 1st, it runs the next time the app opens. Manage it under Scheduled in the app sidebar.
+
+## Next slice
+
+Commit-ready; awaiting the owner's publication authorization before commit and push.
+
+Not yet decided: six more unreferenced images (`assets/selftrainer-history-detail-pwa.png`, `assets/selftrainer-home-up-next-pwa.jpeg`, `assets/selftrainer-profile-adherence-pwa.jpeg`, `assets/selftrainer-program-management-pwa.jpeg`, `assets/selftrainer/selftrainer-home-up-next-crop.webp`, `assets/selftrainer/selftrainer-routine-editor-pwa.jpeg`); removal needs owner approval. The stash and merged worktrees above remain cleanup candidates only with approval.
 
 ## Locked boundaries
 
-Preserve docs/design-system.md's Field Manual and Writing Chambers, including Paper mode, fonts, 700px reading width and reduced-motion guards. Prose, reviewed Day-series titles (the title formatting pass was canceled), slugs, Fragment numbering, categories/tags, images, project content/CSS, homepage metrics, signup logic, Medium settings, schema, dependencies and deployment remain unchanged. Fragment #18's later number and historical March 16 date are intentional. The original checkout's local book-tilt edits are preserved there and excluded from the published-source polish diff.
+Preserve `docs/design-system.md` (Field Manual, Writing Chambers, Paper mode, fonts, 700px reading width, reduced-motion guards). Prose, titles, slugs, Fragment numbering, categories/tags, project content, homepage metrics, signup logic, Medium settings, schema, dependencies and deployment stay unchanged unless the owner asks.

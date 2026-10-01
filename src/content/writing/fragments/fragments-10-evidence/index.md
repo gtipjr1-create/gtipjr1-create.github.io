@@ -2,7 +2,7 @@
 title: "Fragments #10 — Evidence"
 slug: "fragments-10-evidence"
 type: "fragment"
-summary: "A field note on a finished book as evidence that small days, written goals, and disciplined identity compound."
+summary: "I almost let Monday pass without a Fragment. Not because I stopped writing. I’ve just been building."
 category: "Discipline"
 tags:
   - "discipline"

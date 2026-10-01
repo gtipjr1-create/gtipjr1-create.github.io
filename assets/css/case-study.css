@@ -1,59 +1,11 @@
-/* Case-study pages — shares the homepage's Field Manual look.
-   The same file ships as selftrainer.css and fitpulse.css so each page keeps
-   its existing stylesheet path. */
-:root {
-  color-scheme: dark;
-  --bg: #0b0b0c;
-  --bg-2: #0e0e0d;
-  --bg-card: #121210;
-  --ink: #eceae3;
-  --ink-soft: #d9d4cb;
-  --ink-dim: #b9b3a8;
-  --ink-mute: #a8a39a;
-  --ink-faint: #8a857c;
-  --ink-off: #6f6a61;
-  --line: #26241f;
-  --line-2: #3a372f;
-  --accent: #d4ab5f;
-  --accent-hi: #e9c683;
-  --accent-rgb: 212, 171, 95;
-  --maxw: 1280px;
-  --gutter: 80px;
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'Hanken Grotesk', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
-}
+/* Case-study pages (SelfTrainer, FitPulse). Loads after /assets/css/field-manual.css. */
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-}
-img { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
-::selection { background: rgba(var(--accent-rgb), 0.28); color: var(--ink); }
 a:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 4px; }
-.skip-link {
-  position: fixed; z-index: 50; top: 12px; left: 12px;
-  min-height: 44px; padding: 10px 16px;
-  transform: translateY(-160%);
-  background: var(--accent); color: #14110a;
-  font-size: 14px; font-weight: 600;
-}
-.skip-link:focus { transform: none; }
 
-.wrap { position: relative; max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
-.kicker { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(38px, 3.9vw, 56px); line-height: 1.02; letter-spacing: -0.025em; color: var(--ink); }
 .body { font-size: 17px; line-height: 1.65; color: var(--ink-mute); }
+.section-lead { max-width: 620px; font-size: 19px; line-height: 1.55; color: var(--ink-soft); }
 .glow { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(var(--accent-rgb), 0.14) 0%, rgba(var(--accent-rgb), 0) 62%); }
 .grid-bg { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(236,234,227,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(236,234,227,0.04) 1px, transparent 1px); background-size: 64px 64px; }
 .pulse { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--accent); }
@@ -64,26 +16,6 @@ a:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 4px; }
 
 /* ---------- HERO + NAV ---------- */
 .hero { position: relative; overflow: hidden; isolation: isolate; }
-.hero-texture { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.hero-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(236,234,227,0.035) 1px, transparent 1px); background-size: 100% 96px; }
-.hero-grain {
-  position: absolute; inset: -40px; opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.site-nav {
-  position: relative; z-index: 5; margin-top: 24px;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  min-height: 64px; padding: 0 12px 0 16px;
-  background: rgba(20, 20, 18, 0.62);
-  border: 1px solid rgba(236, 234, 227, 0.08);
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-}
-.site-mark { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; }
-.site-mark img { width: 34px; height: 34px; }
-.site-mark span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--ink-mute); }
-.site-links { display: flex; align-items: center; gap: 36px; font-size: 15px; font-weight: 500; }
-.site-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-soft); transition: color .2s ease; }
-.site-links a:hover { color: var(--ink); }
 .site-links a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -1px 0 var(--accent); min-height: 30px; }
 .site-links .nav-guide { padding: 0 18px; min-height: 44px; background: var(--accent); color: #0b0b0c; font-weight: 600; font-size: 14px; transition: background .25s ease; }
 .site-links .nav-guide:hover { background: var(--accent-hi); color: #0b0b0c; }
@@ -213,23 +145,17 @@ a:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 4px; }
 .closing h2 em { color: var(--accent); }
 .closing .body { max-width: 580px; }
 .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 30px; border: 1px solid var(--line-2); color: var(--ink); font-weight: 500; font-size: 16px; transition: border-color .25s ease; }
-.btn-ghost:hover { border-color: var(--accent); }
 .btn-ghost .arrow { transition: transform .25s ease; }
 .btn-ghost:hover .arrow { transform: translateX(4px); }
+.follow-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--accent); font-size: 15px; font-weight: 600; transition: color .2s ease; }
+.follow-link:hover { color: var(--accent-hi); }
+.follow-link .arrow { transition: transform .2s ease; }
+.follow-link:hover .arrow { transform: translateX(3px); }
 .build-note { font-size: 13px; color: var(--ink-faint); }
-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; min-height: 96px; padding: 20px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-faint); }
-.footer-brand { display: flex; align-items: center; gap: 12px; }
-.footer-brand img { width: 26px; height: 26px; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 0 32px; }
-.footer-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); transition: color .2s ease; }
-.footer-links a:hover { color: var(--accent-hi); }
 
 /* ---------- MOTION (only when the visitor allows it) ---------- */
-@keyframes gtPulse { 0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), .55); } 70% { box-shadow: 0 0 0 10px rgba(var(--accent-rgb), 0); } 100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0); } }
-@keyframes gtGrain { 0% { transform: translate(0,0); } 25% { transform: translate(-2%,1%); } 50% { transform: translate(1%,-2%); } 75% { transform: translate(2%,2%); } 100% { transform: translate(0,0); } }
 @keyframes gtFloatA { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @keyframes gtFloatB { 0%,100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
-@keyframes gtRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @keyframes gtStep6 { 0%,14% { border-color: var(--accent); background: rgba(var(--accent-rgb), .07); } 18%,100% { border-color: var(--line); background: var(--bg-card); } }
 @keyframes gtStepNum6 { 0%,14% { color: var(--accent); } 18%,100% { color: var(--ink-off); } }
 @keyframes gtStep5 { 0%,17% { border-color: var(--accent); background: rgba(var(--accent-rgb), .07); } 21%,100% { border-color: var(--line); background: var(--bg-card); } }
@@ -286,7 +212,8 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-i
   .site-nav { margin-top: 12px; padding: 0 8px 0 10px; gap: 12px; }
   .site-mark span { display: none; }
   .site-links { gap: 18px; font-size: 14px; }
-  .nav-book, .nav-projects { display: none !important; }
+  .nav-book, .guide-days { display: none !important; }
+  .site-links a[aria-current="page"] { min-height: 44px; }
   .site-links .nav-guide { padding: 0 14px; }
   .hero-split, .hero-stack { padding: 56px 0 64px; }
   .hero-copy, .hero-stack .hero-title { gap: 22px; }
