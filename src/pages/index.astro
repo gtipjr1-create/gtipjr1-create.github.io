@@ -182,7 +182,7 @@ const typeLabel = (entry: WritingEntry) => getWritingCollectionLabel(entry.data.
   .field-log__label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--ink-mute); text-transform: uppercase; }
   .field-log__now { justify-content: center; gap: 8px !important; }
   .field-log__now .field-log__label { color: var(--accent); }
-  .field-log__now p { font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
+  .field-log__now p { font-family: var(--serif); font-size: 22px; font-weight: 300; line-height: 1.25; color: var(--ink); }
 
   /* ---------- ABOUT ---------- */
   .about { padding: 140px 0 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
@@ -407,6 +407,7 @@ const typeLabel = (entry: WritingEntry) => getWritingCollectionLabel(entry.data.
     .field-log { margin-bottom: 40px; }
     .field-log > div { padding: 18px 14px; }
     .field-log__value { font-size: 38px; }
+    .field-log__now p { font-size: 19px; }
     .field-log__label { font-size: 9px; line-height: 1.5; letter-spacing: 0.12em; }
     .about { padding-top: 72px; }
     .about-head { gap: 18px; }
