@@ -29,7 +29,7 @@ Supply with each piece:
 | Fragment number | Fragments only | Next unused number. Gaps are allowed; duplicates are rejected. |
 | Subtitle / summary | Yes | One sentence. If none is supplied, a proposal is drafted for your approval. It is never invented silently. |
 | Go-live date | Yes | The calendar day, in your time zone (Pacific), that the piece should appear. |
-| Challenge day | Challenge pieces | The day number within the October Writing Challenge. It is recorded as the series designation, never folded into the title (see section 7). |
+| Challenge day | Challenge pieces | The day number within the October Writing Challenge. Record it separately as series metadata; preserve the author's supplied title (see section 7). |
 | Images | Optional | The image file itself, plus alt text, and a caption or credit if wanted. |
 | Links | Optional | Any outbound links exactly as intended. |
 
@@ -114,21 +114,31 @@ Manual, and only when the author asks:
 
 Approved by the author on September 29, 2026:
 
-1. **Title.** Each piece uses its actual essay title. Titles do not begin with, or consist of, `Day 1`, `Day 2`, and so on. The December 2025 series keeps its existing `Day N` titles unchanged.
-2. **Series designation.** Each challenge piece carries the designation *October Writing Challenge — Day N*, kept separate from the title. Until the author approves a way to display it on the site, the designation is recorded in the intake notes, the publish commit message (`feat: publish <title> (October Writing Challenge, Day N)`), and the Medium copy. The site shows the piece under its actual title only. Showing the designation on the site would need a schema field and a layout change, which is a separate slice needing its own approval.
+1. **Title.** Preserve the author's supplied title. The October collection request supersedes the earlier no-Day-prefix decision: the initial scaffold is titled **Day 1 — Back to Writing**. The December 2025 titles stay unchanged.
+2. **Series designation.** Set `series: "october-2026"` and `seriesDay: N` (1–31) in each essay's frontmatter. The article masthead displays **OCTOBER WRITING CHALLENGE · 01 / 31** independently of the title. Duplicate day numbers are rejected, including drafts.
 3. **Slug.** Derived from the actual title in lowercase kebab-case, proposed per piece and approved at review. It does not use the `day-N-` prefix of the December series.
 4. **Type.** `essay`.
 5. **Category and tags.** Use the existing taxonomy. Add a new category or tag only if one becomes genuinely necessary, and only with explicit approval.
    - categories: `Discipline`, `Recovery`
    - tags: `discipline`, `personal-development`, `self-improvement`, `mindset`, `fitness`, `lifestyle`
 6. **Canonical and Medium.** GarryTipler.com publishes first and stays canonical. Medium follows through **Import a story**, submitted to *Tenacious Individual Performance* where appropriate.
-7. **Homepage.** The three current writing cards stay curated and are not rotated for challenge pieces.
+7. **Homepage.** The large featured card stays curated. The two side cards already update automatically with the newest published pieces; this collection does not change that behavior.
 
 ## Outside this workflow
 
 These need their own approval and are not part of publishing a piece:
 
 - **Start Here.** Approved on September 29, 2026 as a five-piece sequence (`startHereOrder` 1–5). Adding a challenge piece to it is an explicit editorial decision.
-- **Challenge landing page or series navigation.** New route and layout work.
+- **Additional series.** New route and layout work beyond the approved October collection.
+
+## October collection publishing
+
+The collection is `/writing/october-2026/`, linked from `/writing/`. Content remains in `src/content/writing/essays/<slug>/index.md`; series metadata gives it the permanent public route `/writing/october-2026/<slug>/`. No duplicate essay URL is generated. Published entries also appear in Essays, Recent writing, Archive, RSS, sitemap, and the existing automatic homepage side cards.
+
+Day 1, `back-to-writing/index.md`, contains the author's approved manuscript and subtitle, dated October 1, 2026, under the existing Discipline category. It replaces the initial scaffold in place. Blank summary/category are allowed only for October drafts; publication requires these fields and non-empty prose. No draft URL or list entry is generated.
+
+For each subsequent day, add one Markdown essay using the same fields and a new slug/day number. Supply the approved subtitle, existing category/tags, prose, and actual go-live date; omit `originalPublishedDate` and add `mediumUrl` only after syndication. Review before changing `status` to `published`, then run `npm.cmd run test:writing-tools` and `npm.cmd run validate`. Entries sort by `seriesDay`; previous/next links stay within published October entries and skip unpublished days. The collection return link and article metadata update automatically. No future-day placeholders are needed.
+
+The October landing page and series navigation are now implemented under the owner's collection request. Publishing, committing, pushing, and Medium changes still need their separate authorization.
 
 A custom 404 page (`src/pages/404.astro`, noindex, excluded from the sitemap) was added on September 29, 2026. It needs no per-piece maintenance.

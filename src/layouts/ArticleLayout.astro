@@ -22,12 +22,12 @@ interface Props {
 const { entry, readingTime, previous, next, relatedEntries } = Astro.props;
 const { data } = entry;
 const canonicalPath = getWritingPath(data);
-const collectionPath = getWritingCollectionPath(data.type);
-const collectionLabel = getWritingCollectionLabel(data.type);
+const collectionPath = data.series ? "/writing/october-2026/" : getWritingCollectionPath(data.type);
+const collectionLabel = data.series ? "October: 31 Days of Writing" : getWritingCollectionLabel(data.type);
 const effectivePublicationDate = getEffectivePublicationDate(data);
 const effectiveDateString = toDateString(effectivePublicationDate);
 const modifiedDate = toDateString(data.updatedDate ?? data.publishedDate ?? effectivePublicationDate);
-const typeLabel = data.type === "fragment" ? `Fragment ${data.fragmentNumber}` : data.type;
+const typeLabel = data.series ? `OCTOBER WRITING CHALLENGE · ${String(data.seriesDay).padStart(2, "0")} / 31` : data.type === "fragment" ? `Fragment ${data.fragmentNumber}` : data.type;
 const titleParts = data.title.split(" — ");
 
 if (!Astro.site) {
@@ -88,7 +88,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 
-  <div class="article-shell chamber-wrap">
+  <div class="article-shell chamber-wrap" data-series={data.series}>
     <header class="article-masthead">
       {data.type === "fragment" && <span class="article-watermark" aria-hidden="true">{data.fragmentNumber}</span>}
       <div class="article-crumbs rise">
@@ -107,6 +107,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
       </h1>
       <p class="article-summary rise" style="--d:220ms">{data.summary}</p>
       <p class="article-meta rise" style="--d:300ms">
+        {data.series && <Fragment><span>Garry Tipler</span><span aria-hidden="true">·</span></Fragment>}
         <span>{data.category}</span>
         <span aria-hidden="true">·</span>
         <time datetime={effectiveDateString}>{formatWritingDate(effectivePublicationDate)}</time>
@@ -236,7 +237,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
           </nav>
         )
       }
-      <a class="back-link return-link" href="/writing/">Return to Writing <span aria-hidden="true">→</span></a>
+      <a class="back-link return-link" href={data.series ? collectionPath : "/writing/"}>{data.series ? "Return to October: 31 Days of Writing" : "Return to Writing"} <span aria-hidden="true">→</span></a>
     </div>
   </div>
 

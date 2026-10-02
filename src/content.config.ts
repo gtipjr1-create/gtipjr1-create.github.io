@@ -22,8 +22,10 @@ const writingSchema = z
     title: z.string().trim().min(1),
     slug,
     type: z.enum(["fragment", "essay", "letter"]),
-    summary: z.string().trim().min(1),
-    category: z.string().trim().min(1),
+    summary: z.string().trim(),
+    category: z.string().trim(),
+    series: z.literal("october-2026").optional(),
+    seriesDay: z.number().int().min(1).max(31).optional(),
     tags: z
       .array(slug)
       .default([])
@@ -67,6 +69,17 @@ const writingSchema = z
       .optional(),
   })
   .superRefine((data, context) => {
+    for (const field of ["summary", "category"] as const) {
+      if (!data[field] && !(data.series && data.status === "draft")) {
+        context.addIssue({ code: "custom", path: [field], message: `${field} is required before publication.` });
+      }
+    }
+    if (Boolean(data.series) !== (data.seriesDay !== undefined)) {
+      context.addIssue({ code: "custom", path: ["seriesDay"], message: "series and seriesDay must be supplied together." });
+    }
+    if (data.series && (data.type !== "essay" || data.originalPublishedDate)) {
+      context.addIssue({ code: "custom", path: ["series"], message: "October entries must be site-first essays." });
+    }
     if (data.status === "published" && !data.publishedDate) {
       context.addIssue({
         code: "custom",

@@ -1,0 +1,26 @@
+---
+import WritingList from "../../../components/WritingList.astro";
+import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
+import { getPublishedWritingEntries } from "../../../lib/writing";
+
+const entries = (await getPublishedWritingEntries())
+  .filter((entry) => entry.data.series === "october-2026")
+  .sort((left, right) => left.data.seriesDay! - right.data.seriesDay!);
+---
+
+<WritingIndexLayout
+  title="October: 31 Days of Writing"
+  description="31 days. No central theme. Just the day and what it brings."
+  canonicalPath="/writing/october-2026/"
+  eyebrow="October Writing Challenge · 2026"
+  returnHref="/writing/"
+  returnLabel="Writing"
+>
+  <section class="library-section library-section--split" aria-labelledby="october-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">October 2026</p>
+      <h2 id="october-heading">The entries</h2>
+    </div>
+    <WritingList entries={entries} emptyMessage="Entries will appear here as they are published." />
+  </section>
+</WritingIndexLayout>

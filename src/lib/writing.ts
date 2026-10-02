@@ -58,7 +58,7 @@ export function getEffectivePublicationDate(data: WritingData): Date {
 }
 
 export function getWritingPath(data: WritingData): string {
-  return `/writing/${collectionSegments[data.type]}/${data.slug}/`;
+  return `/writing/${getWritingCollectionSegment(data)}/${data.slug}/`;
 }
 
 export function getWritingIdentifier(data: WritingData): string {
@@ -66,7 +66,7 @@ export function getWritingIdentifier(data: WritingData): string {
 }
 
 export function getWritingCollectionSegment(data: WritingData): string {
-  return collectionSegments[data.type];
+  return data.series ?? collectionSegments[data.type];
 }
 
 export function getWritingCollectionPath(type: WritingType): string {
@@ -123,8 +123,12 @@ export function getAdjacentWritingEntries(
   currentEntry: WritingEntry,
   entries: WritingEntry[],
 ): AdjacentWritingEntries {
-  const collectionEntries = sortWritingCollection(
-    entries.filter((entry) => entry.data.type === currentEntry.data.type),
+  const candidates = entries.filter((entry) => entry.data.status === "published" &&
+    (currentEntry.data.series ? entry.data.series === currentEntry.data.series :
+      !entry.data.series && entry.data.type === currentEntry.data.type));
+  const collectionEntries = currentEntry.data.series ?
+    [...candidates].sort((left, right) => left.data.seriesDay! - right.data.seriesDay!) : sortWritingCollection(
+    candidates,
     "ascending",
   );
   const currentIndex = collectionEntries.findIndex((entry) => entry.id === currentEntry.id);

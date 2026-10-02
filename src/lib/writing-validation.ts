@@ -1,10 +1,13 @@
 export interface WritingValidationEntry {
   id: string;
+  body?: string;
   data: {
     type: "fragment" | "essay" | "letter";
     slug: string;
     fragmentNumber?: number;
     startHereOrder?: number;
+    series?: "october-2026";
+    seriesDay?: number;
     status: "draft" | "published";
     related: string[];
   };
@@ -16,8 +19,17 @@ export function validateWritingCollection<T extends WritingValidationEntry>(entr
   const entriesByKey = new Map<string, WritingValidationEntry>();
   const fragmentNumbers = new Map<number, string>();
   const startHereOrders = new Map<number, string>();
+  const seriesDays = new Map<number, string>();
 
   for (const entry of entries) {
+    if (entry.data.series && entry.data.seriesDay !== undefined) {
+      if (seriesDays.has(entry.data.seriesDay)) {
+        errors.push(`Duplicate October seriesDay ${entry.data.seriesDay} in "${seriesDays.get(entry.data.seriesDay)}" and "${entry.id}".`);
+      } else seriesDays.set(entry.data.seriesDay, entry.id);
+      if (entry.data.status === "published" && !entry.body?.replace(/<!--[\s\S]*?-->/g, "").trim()) {
+        errors.push(`October entry "${entry.id}" requires author-supplied prose before publication.`);
+      }
+    }
     const key = `${entry.data.type}:${entry.data.slug}`;
     const existingKeyEntry = writingKeys.get(key);
 

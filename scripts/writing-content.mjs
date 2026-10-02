@@ -9,6 +9,10 @@ export const collectionByType = {
   letter: "letters",
 };
 
+export function writingRoute(data) {
+  return `writing/${data.series ?? collectionByType[data.type]}/${data.slug}/`;
+}
+
 const exactDatePattern = /^\d{4}-\d{2}-\d{2}$/;
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const relatedPattern = /^(fragment|essay|letter):[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -70,8 +74,25 @@ function validateUniqueStringArray(data, field, errors, label, pattern) {
 export function validateWritingData(data, label = "writing entry") {
   const errors = [];
 
-  for (const field of ["title", "slug", "type", "summary", "category"]) {
+  for (const field of ["title", "slug", "type"]) {
     validateString(data, field, errors, label);
+  }
+  for (const field of ["summary", "category"]) {
+    if (!(data.series === "october-2026" && (data.status ?? "draft") === "draft" && data[field] === "")) {
+      validateString(data, field, errors, label);
+    }
+  }
+  if (data.series !== undefined && data.series !== "october-2026") {
+    addError(errors, label, "series must be october-2026.");
+  }
+  if (Boolean(data.series) !== (data.seriesDay !== undefined)) {
+    addError(errors, label, "series and seriesDay must be supplied together.");
+  }
+  if (data.seriesDay !== undefined && (!Number.isInteger(data.seriesDay) || data.seriesDay < 1 || data.seriesDay > 31)) {
+    addError(errors, label, "seriesDay must be an integer from 1 to 31.");
+  }
+  if (data.series && (data.type !== "essay" || data.originalPublishedDate !== undefined)) {
+    addError(errors, label, "October entries must be site-first essays.");
   }
 
   if (typeof data.slug === "string" && !slugPattern.test(data.slug)) {
@@ -234,6 +255,9 @@ export async function validateWritingRepository({ root = process.cwd() } = {}) {
     errors.push(...validateWritingData(parsed.data, id));
     const entry = { id, path, ...parsed, status: parsed.data.status ?? "draft" };
     entries.push(entry);
+    if (entry.data.series && entry.status === "published" && !entry.body.replace(/<!--[\s\S]*?-->/g, "").trim()) {
+      addError(errors, id, "October entries require author-supplied prose before publication.");
+    }
 
     if (writingTypes.includes(parsed.data.type) && typeof parsed.data.slug === "string") {
       const expected = `${collectionByType[parsed.data.type]}/${parsed.data.slug}/index.md`;
@@ -266,7 +290,13 @@ export async function validateWritingRepository({ root = process.cwd() } = {}) {
   const byKey = new Map();
   const fragmentNumbers = new Map();
   const startHereOrders = new Map();
+  const seriesDays = new Map();
   for (const entry of entries) {
+    if (entry.data.series && Number.isInteger(entry.data.seriesDay)) {
+      if (seriesDays.has(entry.data.seriesDay)) {
+        errors.push(`Duplicate October seriesDay ${entry.data.seriesDay} in "${seriesDays.get(entry.data.seriesDay)}" and "${entry.id}".`);
+      } else seriesDays.set(entry.data.seriesDay, entry.id);
+    }
     const key = `${entry.data.type}:${entry.data.slug}`;
     if (byKey.has(key)) {
       errors.push(`Duplicate writing key "${key}" in "${byKey.get(key).id}" and "${entry.id}".`);

@@ -23,7 +23,7 @@ const { entries, emptyMessage } = Astro.props;
         const effectiveDate = getEffectivePublicationDate(entry.data);
         const readingTime = calculateReadingTime(entry.body ?? "");
         const isFragment = entry.data.type === "fragment";
-        const typeLabel = isFragment ? `Fragment ${entry.data.fragmentNumber}` : entry.data.type;
+        const typeLabel = entry.data.series ? `October Writing Challenge · ${String(entry.data.seriesDay).padStart(2, "0")} / 31` : isFragment ? `Fragment ${entry.data.fragmentNumber}` : entry.data.type;
 
         return (
           <li>
@@ -32,7 +32,7 @@ const { entries, emptyMessage } = Astro.props;
                 class={isFragment ? "writing-list-mark" : "writing-list-mark writing-list-mark--word"}
                 aria-hidden="true"
               >
-                {isFragment ? `№ ${entry.data.fragmentNumber}` : entry.data.type}
+                {entry.data.series ? String(entry.data.seriesDay).padStart(2, "0") : isFragment ? `№ ${entry.data.fragmentNumber}` : entry.data.type}
               </span>
               <span class="writing-list-meta">
                 <span>{typeLabel}</span>

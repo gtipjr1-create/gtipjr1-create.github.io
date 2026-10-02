@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { generateWritingDraft } from "./migrate-writing.mjs";
-import { validateWritingRepository } from "./writing-content.mjs";
+import { validateWritingData, validateWritingRepository, writingRoute } from "./writing-content.mjs";
 
 const fixtureRoot = await mkdtemp(join(tmpdir(), "garry-writing-tools-"));
 
@@ -18,6 +18,19 @@ function entry(frontmatter, body = "Fixture prose.\n") {
 }
 
 try {
+  const october = { title: "Day 1 — Back to Writing", slug: "back-to-writing", type: "essay", series: "october-2026", seriesDay: 1, summary: "", category: "", status: "draft" };
+  assert.deepEqual(validateWritingData(october), []);
+  assert.equal(writingRoute(october), "writing/october-2026/back-to-writing/");
+  assert.ok(validateWritingData({ ...october, seriesDay: 32 }).some((error) => error.includes("seriesDay")));
+  assert.ok(validateWritingData({ ...october, seriesDay: undefined }).some((error) => error.includes("together")));
+  assert.ok(validateWritingData({ ...october, status: "published", publishedDate: "2026-10-01" }).some((error) => error.includes("summary")));
+  await write("src/content/writing/essays/back-to-writing/index.md", entry('title: "Day 1 — Back to Writing"\nslug: "back-to-writing"\ntype: "essay"\nseries: "october-2026"\nseriesDay: 1\nsummary: ""\ncategory: ""\nstatus: "draft"\n', ""));
+  await write("src/content/writing/essays/duplicate-day/index.md", entry('title: "Fixture"\nslug: "duplicate-day"\ntype: "essay"\nseries: "october-2026"\nseriesDay: 1\nsummary: ""\ncategory: ""\nstatus: "draft"\n', ""));
+  await assert.rejects(validateWritingRepository({ root: fixtureRoot }), /Duplicate October seriesDay/);
+  await rm(join(fixtureRoot, "src/content/writing/essays/duplicate-day/index.md"));
+  await write("src/content/writing/essays/back-to-writing/index.md", entry('title: "Day 1 — Back to Writing"\nslug: "back-to-writing"\ntype: "essay"\nseries: "october-2026"\nseriesDay: 1\nsummary: "Fixture subtitle"\ncategory: "Discipline"\nstatus: "published"\npublishedDate: "2026-10-01"\n', "<!-- Scaffold -->"));
+  await assert.rejects(validateWritingRepository({ root: fixtureRoot }), /author-supplied prose/);
+  await rm(join(fixtureRoot, "src/content/writing/essays/back-to-writing/index.md"));
   const source = "First paragraph — unchanged.\n\nSecond *paragraph* with [a link](https://example.com).\n";
   await write("input/source.md", source);
   await write(

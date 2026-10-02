@@ -381,6 +381,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .writing-list-mark { font-size: 30px; }
   .writing-list-mark--word { font-size: 20px; }
   .article-masthead { padding: 64px 0 48px; gap: 18px; }
+  .article-shell[data-series="october-2026"] .article-masthead { padding-bottom: 24px; }
   .article-prose { font-size: 19px; line-height: 1.72; }
   .article-ornament { margin: 48px auto 40px; }
   .related-writing-list a, .connection-list a { grid-template-columns: minmax(0, 1fr) auto; }

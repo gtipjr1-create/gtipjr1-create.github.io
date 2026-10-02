@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { collectionByType, validateWritingRepository } from "./writing-content.mjs";
+import { writingRoute, validateWritingRepository } from "./writing-content.mjs";
 
 const outputRoot = new URL("../dist/", import.meta.url);
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
@@ -38,12 +38,17 @@ const [
 ]);
 
 const pilotHtml = await requireOutput(pilotPath);
+const octoberHtml = await requireOutput("writing/october-2026/index.html");
+assert.match(octoberHtml, /<link rel="canonical" href="https:\/\/garrytipler\.com\/writing\/october-2026\/"/);
+assert.match(writingIndexHtml, /href="\/writing\/october-2026\/"/);
+assert.ok(sitemapXml.includes("<loc>https://garrytipler.com/writing/october-2026/</loc>"));
 const canonicalUrl = "https://garrytipler.com/writing/fragments/fragments-4-the-fire/";
 
 const writingEntries = await validateWritingRepository({ root: projectRoot });
 const draftEntries = writingEntries.filter((entry) => entry.status === "draft");
 const publishedEntries = writingEntries.filter((entry) => entry.status === "published");
 const discoveryOutput = [
+  octoberHtml,
   writingIndexHtml,
   fragmentsIndexHtml,
   essaysIndexHtml,
@@ -53,7 +58,7 @@ const discoveryOutput = [
   rssXml,
 ].join("\n");
 for (const draft of draftEntries) {
-  const draftRoute = `writing/${collectionByType[draft.data.type]}/${draft.data.slug}/`;
+  const draftRoute = writingRoute(draft.data);
   await assert.rejects(
     access(new URL(`${draftRoute}index.html`, outputRoot)),
     (error) => error.code === "ENOENT",
@@ -67,9 +72,21 @@ for (const draft of draftEntries) {
 }
 
 for (const entry of publishedEntries) {
-  const route = `writing/${collectionByType[entry.data.type]}/${entry.data.slug}/`;
+  const route = writingRoute(entry.data);
   const canonical = `https://garrytipler.com/${route}`;
   const articleHtml = await requireOutput(`${route}index.html`);
+  if (entry.data.series) {
+    assert.ok(octoberHtml.includes(`href="/${route}"`));
+    assert.ok(articleHtml.includes(`OCTOBER WRITING CHALLENGE · ${String(entry.data.seriesDay).padStart(2, "0")} / 31`));
+    assert.ok(articleHtml.includes('href="/writing/october-2026/">Return to October: 31 Days of Writing'));
+    const sequence = publishedEntries.filter((candidate) => candidate.data.series === entry.data.series)
+      .sort((left, right) => left.data.seriesDay - right.data.seriesDay);
+    const position = sequence.indexOf(entry);
+    for (const [direction, neighbor] of [["previous", sequence[position - 1]], ["next", sequence[position + 1]]]) {
+      if (neighbor) assert.ok(articleHtml.includes(`class="sequence-link sequence-${direction}" href="/${writingRoute(neighbor.data)}"`));
+      else assert.ok(!articleHtml.includes(`class="sequence-link sequence-${direction}"`));
+    }
+  }
   assert.match(
     articleHtml,
     new RegExp(`<link rel="canonical" href="${canonical}"`),
