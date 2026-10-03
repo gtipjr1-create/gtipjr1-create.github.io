@@ -13,6 +13,9 @@ tags:
   - "lifestyle"
 publishedDate: "2026-10-02"
 status: "published"
+heroImage:
+  src: "/assets/writing/essays/doing-things-differently/buena-vista-park.jpg"
+  alt: "A sunlit San Francisco intersection near Buena Vista Park, with palm-lined streets, historic houses, and a pedestrian crossing."
 ---
 
 October 2nd.
