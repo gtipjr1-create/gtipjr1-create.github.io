@@ -29,6 +29,14 @@ const effectiveDateString = toDateString(effectivePublicationDate);
 const modifiedDate = toDateString(data.updatedDate ?? data.publishedDate ?? effectivePublicationDate);
 const typeLabel = data.series ? `OCTOBER WRITING CHALLENGE · ${String(data.seriesDay).padStart(2, "0")} / 31` : data.type === "fragment" ? `Fragment ${data.fragmentNumber}` : data.type;
 const titleParts = data.title.split(" — ");
+const socialImage = data.series === "october-2026"
+  ? {
+      src: `/assets/social/october-2026/${data.slug}.png`,
+      alt: `${data.title} — October Writing Challenge · ${String(data.seriesDay).padStart(2, "0")} / 31 — Garry Tipler`,
+      width: 1200,
+      height: 630,
+    }
+  : data.heroImage ? { src: data.heroImage.src, alt: data.heroImage.alt } : undefined;
 
 if (!Astro.site) {
   throw new Error("Astro site URL is required to generate Article JSON-LD.");
@@ -71,7 +79,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
   ogType="article"
   publishedDate={effectiveDateString}
   modifiedDate={modifiedDate}
-  socialImage={data.heroImage ? { src: data.heroImage.src, alt: data.heroImage.alt } : undefined}
+  socialImage={socialImage}
 >
   <script
     slot="head"

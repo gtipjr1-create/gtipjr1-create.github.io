@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&amp;family=Hanken+Grotesk:wght@400&amp;family=JetBrains+Mono:wght@400&amp;display=block" />
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+      body { background: #0c0a07; color: #ede4d3; }
+      .card { width: 1200px; height: 630px; padding: 72px 80px; display: flex; flex-direction: column; }
+      .series { margin: 0; color: #d4ab5f; font: 400 20px/1.5 "JetBrains Mono", monospace; letter-spacing: 0.12em; }
+      .title { margin: auto 0; font: 400 76px/1.12 "Fraunces", Georgia, serif; font-optical-sizing: auto; overflow-wrap: anywhere; }
+      .author { margin: 0; padding-top: 24px; border-top: 1px solid #3a3124; font: 400 26px/1.4 "Hanken Grotesk", sans-serif; }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <p class="series">OCTOBER WRITING CHALLENGE · {{day}} / 31</p>
+      <h1 class="title">{{title}}</h1>
+      <p class="author">Garry Tipler</p>
+    </main>
+  </body>
+</html>

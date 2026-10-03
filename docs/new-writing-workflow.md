@@ -139,6 +139,19 @@ Day 1, `back-to-writing/index.md`, contains the author's approved manuscript and
 
 For each subsequent day, add one Markdown essay using the same fields and a new slug/day number. Supply the approved subtitle, existing category/tags, prose, and actual go-live date; omit `originalPublishedDate` and add `mediumUrl` only after syndication. Review before changing `status` to `published`, then run `npm.cmd run test:writing-tools` and `npm.cmd run validate`. Entries sort by `seriesDay`; previous/next links stay within published October entries and skip unpublished days. The collection return link and article metadata update automatically. No future-day placeholders are needed.
 
+### October social preview cards
+
+Each published October entry uses `/assets/social/october-2026/<slug>.png` for Open Graph and Twitter. These images are metadata-only: do not set `heroImage` merely to assign a social card or insert the card into the manuscript. Existing editorial hero photos remain in the article and Article JSON-LD. Other writing keeps its existing hero/fallback behavior.
+
+Before validating a new publication:
+
+1. Run `node scripts/prepare-october-social-cards.mjs --serve`. It reads the validated published October metadata and prepares HTML previews from `scripts/templates/october-social-card.html`, under the untracked `artifacts/october-social-cards/` directory. It serves only those previews at `http://127.0.0.1:4322/<slug>/`.
+2. Open the new entry's preview using browser tooling, set the viewport to **1200 × 630**, and wait for Fraunces, Hanken Grotesk, and JetBrains Mono to finish loading. Check the complete title, day number, and author fit within the card with no clipped text. Long titles require a visual review of wrapping before export.
+3. Save the **1200 × 630 screenshot** to `assets/social/october-2026/<slug>.png`, then run `node scripts/prepare-october-social-cards.mjs --encode`. Browser APIs may return JPEG bytes regardless of the filename; this step uses Astro's already-installed Sharp encoder to convert those exports to PNG, checks dimensions, and leaves existing PNGs alone. Keep existing cards unless their metadata changes. Reset the browser viewport and stop the preview server when finished.
+4. Run the existing writing-tool tests and `npm.cmd run validate`. Build verification rejects a missing card, invalid PNG dimensions, incorrect metadata, or a card inserted as an article image. Commit the PNG with the daily publication.
+
+The template uses the existing cream, candlelit black, honey-gold, and font choices. Generation is a publication-time browser export; the production build needs no new dependency or browser runtime. After deployment, verify the live PNG and metadata before importing the article into Medium again. Previously imported Medium drafts may retain their old selected image.
+
 The October landing page and series navigation are now implemented under the owner's collection request. Publishing, committing, pushing, and Medium changes still need their separate authorization.
 
 A custom 404 page (`src/pages/404.astro`, noindex, excluded from the sitemap) was added on September 29, 2026. It needs no per-piece maintenance.

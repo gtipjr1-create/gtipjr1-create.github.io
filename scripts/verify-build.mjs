@@ -79,6 +79,22 @@ for (const entry of publishedEntries) {
     assert.ok(octoberHtml.includes(`href="/${route}"`));
     assert.ok(articleHtml.includes(`OCTOBER WRITING CHALLENGE · ${String(entry.data.seriesDay).padStart(2, "0")} / 31`));
     assert.ok(articleHtml.includes('href="/writing/october-2026/">Return to October: 31 Days of Writing'));
+    const socialImagePath = `assets/social/october-2026/${entry.data.slug}.png`;
+    const socialImageUrl = `https://garrytipler.com/${socialImagePath}`;
+    const socialImage = await readFile(new URL(socialImagePath, outputRoot));
+    assert.equal(socialImage.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", `${entry.id}: social card must be a PNG.`);
+    assert.equal(socialImage.readUInt32BE(16), 1200, `${entry.id}: social card width must be 1200.`);
+    assert.equal(socialImage.readUInt32BE(20), 630, `${entry.id}: social card height must be 630.`);
+    assert.ok(articleHtml.includes(`<meta property="og:image" content="${socialImageUrl}">`));
+    assert.ok(articleHtml.includes(`<meta name="twitter:image" content="${socialImageUrl}">`));
+    assert.ok(articleHtml.includes('<meta property="og:image:type" content="image/png">'));
+    assert.ok(articleHtml.includes('<meta property="og:image:width" content="1200">'));
+    assert.ok(articleHtml.includes('<meta property="og:image:height" content="630">'));
+    const socialImageAlt = `${entry.data.title} — October Writing Challenge · ${String(entry.data.seriesDay).padStart(2, "0")} / 31 — Garry Tipler`
+      .replace(/[&<>\"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character]);
+    assert.ok(articleHtml.includes(`<meta property="og:image:alt" content="${socialImageAlt}">`));
+    assert.ok(articleHtml.includes(`<meta name="twitter:image:alt" content="${socialImageAlt}">`));
+    assert.ok(!articleHtml.includes(`<img src="/${socialImagePath}"`), "October social cards must remain metadata-only.");
     const sequence = publishedEntries.filter((candidate) => candidate.data.series === entry.data.series)
       .sort((left, right) => left.data.seriesDay - right.data.seriesDay);
     const position = sequence.indexOf(entry);
@@ -103,14 +119,16 @@ for (const entry of publishedEntries) {
 
   if (entry.data.heroImage) {
     const heroImageUrl = `https://garrytipler.com${entry.data.heroImage.src}`;
-    assert.ok(
-      articleHtml.includes(`<meta property="og:image" content="${heroImageUrl}">`),
-      `Published writing "${entry.data.type}:${entry.data.slug}" must use its hero for Open Graph.`,
-    );
-    assert.ok(
-      articleHtml.includes(`<meta name="twitter:image" content="${heroImageUrl}">`),
-      `Published writing "${entry.data.type}:${entry.data.slug}" must use its hero for Twitter.`,
-    );
+    if (!entry.data.series) {
+      assert.ok(
+        articleHtml.includes(`<meta property="og:image" content="${heroImageUrl}">`),
+        `Published writing "${entry.data.type}:${entry.data.slug}" must use its hero for Open Graph.`,
+      );
+      assert.ok(
+        articleHtml.includes(`<meta name="twitter:image" content="${heroImageUrl}">`),
+        `Published writing "${entry.data.type}:${entry.data.slug}" must use its hero for Twitter.`,
+      );
+    }
     assert.ok(
       articleHtml.includes(`<figure class="article-hero"><img src="${entry.data.heroImage.src}"`),
       `Published writing "${entry.data.type}:${entry.data.slug}" must render its hero.`,
