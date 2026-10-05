@@ -325,6 +325,11 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
   .offer-list li { display: flex; gap: 10px; }
   .offer-list li span { color: var(--accent); }
   .signal { position: relative; grid-column: 8 / span 5; padding: 36px; background: rgba(11,11,12,0.7); border: 1px solid #2e2b25; }
+  .guide-preview { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--line-2); }
+  .guide-preview h3 { margin-top: 12px; font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.15; color: var(--ink); }
+  .guide-preview ul { margin: 18px 0; padding-left: 20px; display: grid; gap: 8px; font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+  .guide-preview p { font-size: 15px; line-height: 1.6; color: var(--ink-dim); }
+  .guide-preview p strong { display: block; margin-bottom: 4px; color: var(--accent); font-weight: 500; }
   .signal-form { display: grid; gap: 14px; }
   .signal-form label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--ink-mute); text-transform: uppercase; }
   .signal-form input[type="email"] {
@@ -614,6 +619,17 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
         </ul>
       </div>
       <div class="signal" id="signal">
+        <section class="guide-preview" aria-labelledby="guide-preview-title">
+          <span class="kicker">Inside the guide · Day 1</span>
+          <h3 id="guide-preview-title">Clear the Noise</h3>
+          <ul>
+            <li>Write down every open task or concern currently occupying your attention.</li>
+            <li>Circle one priority that would make today feel complete.</li>
+            <li>Remove or silence one avoidable distraction for the next seven days.</li>
+            <li>Reset one physical space you use every day.</li>
+          </ul>
+          <p><strong>Reflection</strong>What has been consuming attention without producing meaningful progress?</p>
+        </section>
         <form class="signal-form" id="signal-form" novalidate>
           <label for="signal-email">Email address</label>
           <input type="email" id="signal-email" name="email_address" placeholder="you@domain.com" autocomplete="email" required />
