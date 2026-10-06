@@ -18,11 +18,14 @@ Treat this record as the reference before changing any visual surface. Changes t
 
 | Role | Face | Notes |
 | --- | --- | --- |
-| Display and editorial headings | Fraunces | Weight 300 for large display type; 400 for card and section titles. Italic 300 is used for emphasis words, usually in gold. |
-| Body and UI | Hanken Grotesk | 400/500/600. |
-| Labels, metadata, kickers | JetBrains Mono | 11–12px, uppercase, letter-spacing 0.14–0.3em. |
+| Display and editorial headings (`--serif`) | Playfair Display | 400 for display and titles (the 300 weight in CSS falls back to 400). Italic is used for emphasis words, usually in gold. |
+| Article prose (`--prose`) | Cormorant Garamond | Weight 300, 22px, line-height 1.75 in the 700px reading column. |
+| Body and UI (`--sans`) | Hanken Grotesk | 400/500/600. |
+| Labels, metadata, kickers (`--mono`) | Space Mono | 11–12px, uppercase, letter-spacing 0.14–0.3em. |
 
-Google Fonts request (all pages): `Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400`, `Hanken+Grotesk:wght@400;500;600`, `JetBrains+Mono:wght@400;500`.
+Typography changed on October 5, 2026 by owner approval (previously Fraunces headings and prose, JetBrains Mono metadata).
+
+Google Fonts request: `Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500`, `Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400` (writing and homepage only), `Hanken+Grotesk:wght@400;500;600`, `Space+Mono:ital,wght@0,400;0,700;1,400`.
 
 ### Recurring components
 
@@ -89,7 +92,7 @@ The hero descriptor reads "Author · Software Builder · Founder, Tenacious Indi
 
 - Both pages load `assets/css/field-manual.css` then `assets/css/case-study.css` (the former identical `selftrainer.css`/`fitpulse.css` copies, merged October 1, 2026).
 - The closing section offers "Return to garrytipler.com" and a gold "Follow the build in The Signal →" link to the homepage signup.
-- Hero: breadcrumb (`← Garry Tipler / Case study / Name`), a 136px Fraunces title, a status tag, and the thesis in Fraunces italic.
+- Hero: breadcrumb (`← Garry Tipler / Case study / Name`), a 136px Playfair Display title, a status tag, and the thesis in Playfair Display italic.
   - SelfTrainer: two phone screenshots float beside the copy.
   - FitPulse: the full dashboard sits under the copy with its caption.
 - Sections keep their numbered kickers and use short editorial headlines approved on the canvas, e.g. "From the next action to a record you can trust." and "What the build holds to."
@@ -130,7 +133,7 @@ Paper mode is `:root[data-reading="paper"]`. `--gold`, `--gold-hi` and `--gold-r
 - **Entrance**: a thin gold archway line drawing, a breadcrumb, a kicker, a 152px title and an italic intro. The main library shows "N fragments · N essays" as a note.
 - **Main library**: Fragments and Essays are **arched doors** ("The first chamber" / "The second chamber") with a large faint count numeral. They glow on hover.
 - **Ways in**: Start Here and Archive as ruled rows with small line icons.
-- **Lists**: a ledger with a gold numeral column (`№ 19` for fragments, "Essay" for essays), mono meta, a Fraunces title and the summary. Fragments, Essays and Start Here use a split layout: heading left, list right.
+- **Lists**: a ledger with a gold numeral column (`№ 19` for fragments, "Essay" for essays), mono meta, a Playfair Display title and the summary. Fragments, Essays and Start Here use a split layout: heading left, list right.
 
 ### Article pages (`ArticleLayout.astro`)
 
@@ -144,7 +147,7 @@ Paper mode is `:root[data-reading="paper"]`. `--gold`, `--gold-hi` and `--gold-r
 - **Reading progress**: a 2px gold line fixed at the top of the window.
 - **Body**:
   - The hero sits at up to 960px wide, followed by a diamond ornament.
-  - The article runs in a **700px** reading column (Fraunces 300, 22px, line-height 1.75).
+  - The article runs in a **700px** reading column (Cormorant Garamond 300, 22px, line-height 1.75).
   - When the article's first element is a paragraph, its first line is set in gold small caps.
   - The article ends with a diamond, then the Medium attribution.
 - **Sequence**: previous/next cards, then a "Return to Writing" button.

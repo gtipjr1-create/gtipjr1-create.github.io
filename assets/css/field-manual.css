@@ -22,9 +22,9 @@
   --glow:      rgba(var(--accent-rgb), 0.14);
   --maxw: 1280px;
   --gutter: 80px;
-  --serif: 'Fraunces', Georgia, serif;
+  --serif: 'Playfair Display', Georgia, serif;
   --sans: 'Hanken Grotesk', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --mono: 'Space Mono', ui-monospace, monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

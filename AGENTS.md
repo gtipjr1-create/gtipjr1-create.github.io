@@ -39,9 +39,11 @@ For a narrow request, keep discovery narrow. Do not turn a bounded change into a
   - primary text: `#eceae3`
   - accent: `#d4ab5f` (raised from `#cba35c` on October 1, 2026 for mobile vibrancy)
 - Preserve the established typography unless a task explicitly changes it:
-  - Fraunces for editorial headings
+  - Playfair Display for editorial headings
+  - Cormorant Garamond for article prose
   - Hanken Grotesk for body text
-  - JetBrains Mono for metadata and utility text
+  - Space Mono for metadata and utility text
+  - (changed from Fraunces and JetBrains Mono on October 5, 2026 by owner approval)
 - The approved visual system (September 28, 2026) is recorded in `docs/design-system.md`: "Field Manual" for the homepage and project pages, and "The Writing Chambers" for writing pages. The Writing Chambers use a warmer candlelit background (`#0c0a07`) and an optional reader-controlled paper mode. Both are approved variants of the black-and-gold direction; do not revert them to the base palette.
 - Keep long-form reading width near the established 700–720px range.
 - Use the GT mark as a restrained anchor, not decoration repeated throughout the page.
