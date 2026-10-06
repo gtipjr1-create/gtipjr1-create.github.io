@@ -11,15 +11,16 @@ import {
 interface Props {
   entries: WritingEntry[];
   emptyMessage: string;
+  numbered?: boolean;
 }
 
-const { entries, emptyMessage } = Astro.props;
+const { entries, emptyMessage, numbered = false } = Astro.props;
 ---
 
 {
   entries.length > 0 ? (
     <ol class="writing-list">
-      {entries.map((entry) => {
+      {entries.map((entry, index) => {
         const effectiveDate = getEffectivePublicationDate(entry.data);
         const readingTime = calculateReadingTime(entry.body ?? "");
         const isFragment = entry.data.type === "fragment";
@@ -29,10 +30,10 @@ const { entries, emptyMessage } = Astro.props;
           <li>
             <a class="writing-list-item" href={getWritingPath(entry.data)}>
               <span
-                class={isFragment ? "writing-list-mark" : "writing-list-mark writing-list-mark--word"}
+                class={numbered || isFragment ? "writing-list-mark" : "writing-list-mark writing-list-mark--word"}
                 aria-hidden="true"
               >
-                {entry.data.series ? String(entry.data.seriesDay).padStart(2, "0") : isFragment ? `№ ${entry.data.fragmentNumber}` : entry.data.type}
+                {numbered ? String(index + 1).padStart(2, "0") : entry.data.series ? String(entry.data.seriesDay).padStart(2, "0") : isFragment ? `№ ${entry.data.fragmentNumber}` : entry.data.type}
               </span>
               <span class="writing-list-meta">
                 <span>{typeLabel}</span>
