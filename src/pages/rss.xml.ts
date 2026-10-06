@@ -20,7 +20,15 @@ export const GET: APIRoute = async ({ site }) => {
   const items = entries.map((entry) => {
     const url = toCanonicalUrl(getWritingPath(entry.data), canonicalSite);
     const publicationDate = getEffectivePublicationDate(entry.data).toUTCString();
+    // The category often repeats as a tag ("Discipline" / "discipline"); list each once.
+    const seen = new Set<string>();
     const categories = [entry.data.category, ...entry.data.tags]
+      .filter((category) => {
+        const key = category.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
       .map((category) => `      <category>${escapeXml(category)}</category>`)
       .join("\n");
 
