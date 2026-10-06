@@ -40,7 +40,7 @@ For a narrow request, keep discovery narrow. Do not turn a bounded change into a
   - accent: `#d4ab5f` (raised from `#cba35c` on October 1, 2026 for mobile vibrancy)
 - Preserve the established typography unless a task explicitly changes it:
   - Playfair Display for editorial headings
-  - Cormorant Garamond for article prose
+  - Source Serif 4 for article prose
   - Hanken Grotesk for body text
   - Space Mono for metadata and utility text
   - (changed from Fraunces and JetBrains Mono on October 5, 2026 by owner approval)

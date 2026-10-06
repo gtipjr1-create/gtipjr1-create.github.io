@@ -66,7 +66,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .chamber-links a { display: inline-flex; align-items: center; min-height: 44px; color: #d8cdb8; transition: color .2s ease; }
 .chamber-links a:hover { color: #ede4d3; }
 .chamber-links a[aria-current="page"] { min-height: 44px; color: #ede4d3; box-shadow: inset 0 -1px 0 var(--gold); }
-.chamber-links .chamber-guide { min-height: 44px; padding: 0 18px; background: var(--gold); color: #0c0a07; font-weight: 600; font-size: 14px; transition: background .25s ease; }
+.chamber-links .chamber-guide { gap: 0.3em; min-height: 44px; padding: 0 18px; background: var(--gold); color: #0c0a07; font-weight: 600; font-size: 14px; transition: background .25s ease; }
 .chamber-links .chamber-guide:hover { background: var(--gold-hi); color: #0c0a07; }
 
 /* ---------- Shared small type ---------- */
@@ -107,6 +107,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint);
 }
 .library-note::before, .library-note::after { content: ""; width: 48px; height: 1px; background: var(--line-2); }
+.library-masthead--compact { gap: 18px; padding: 64px 0 72px; }
+.library-masthead--compact .chamber-arch { width: 72px; height: 90px; }
+.library-masthead--compact h1 { font-size: clamp(64px, 8vw, 116px); }
 
 .library-section { position: relative; padding: 0 0 130px; }
 .library-section-heading { display: flex; flex-direction: column; gap: 16px; margin-bottom: 44px; }
@@ -124,15 +127,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .collection-card {
   position: relative; overflow: hidden;
   display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;
-  min-height: 520px; padding: 56px 52px;
+  min-height: 400px; padding: 48px 52px;
   border: 1px solid var(--line); border-radius: 260px 260px 0 0;
   background: linear-gradient(180deg, rgba(224, 160, 80, 0.08), var(--bg-card) 55%);
   transition: border-color .4s ease, box-shadow .4s ease, transform .4s cubic-bezier(.2,.7,.2,1);
 }
 .collection-card:hover { border-color: var(--accent); box-shadow: 0 0 80px rgba(224, 160, 80, 0.18); transform: translateY(-6px); }
 .collection-numeral {
-  position: absolute; top: 72px; left: 0; right: 0; text-align: center;
-  font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 96px; line-height: 1;
+  position: absolute; top: 52px; left: 0; right: 0; text-align: center;
+  font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 80px; line-height: 1;
   color: rgba(var(--gold-rgb), 0.35);
 }
 .collection-count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
@@ -272,8 +275,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .article-prose {
   position: relative;
   width: min(var(--copy-width), 100%); margin: 0 auto;
-  font-family: var(--prose); font-weight: 300;
-  font-size: 22px; line-height: 1.75; color: var(--ink-soft);
+  font-family: var(--prose); font-weight: 400;
+  font-size: 21px; line-height: 1.75; color: var(--ink-soft);
   overflow-wrap: break-word;
 }
 .article-prose > :first-child { margin-top: 0; }
@@ -281,7 +284,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .article-prose > p:first-child::first-line {
   font-variant: small-caps; font-weight: 400; letter-spacing: 0.06em; color: var(--link);
 }
-.article-prose strong { font-weight: 500; color: var(--ink); }
+.article-prose strong { font-weight: 600; color: var(--ink); }
 .article-prose h2, .article-prose h3, .article-prose h4 {
   margin: 2.2em 0 0.7em;
   font-family: var(--serif); font-weight: 400; line-height: 1.2; color: var(--ink);
@@ -387,7 +390,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .library-section--split > .library-section-heading,
   .library-section--split > .writing-list,
   .library-section--split > .writing-empty { grid-column: 1 / -1; }
-  .collection-card { min-height: 460px; padding: 48px 40px; }
+  .collection-card { min-height: 380px; padding: 44px 40px; }
 }
 
 /* ---------- Phone ---------- */
@@ -401,12 +404,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .chamber-links .chamber-guide { padding: 0 14px; }
   .library-masthead { padding: 72px 0 72px; gap: 20px; }
   .chamber-arch { width: 84px; height: 105px; }
+  .library-masthead--compact { padding: 44px 0 56px; gap: 16px; }
+  .library-masthead--compact .chamber-arch { width: 56px; height: 70px; }
   .library-section { padding-bottom: 88px; }
   .october-feature { grid-template-columns: 1fr; gap: 36px; padding: 40px 24px; }
   .october-days { gap: 6px; }
   .collection-grid, .discovery-grid { grid-template-columns: 1fr; gap: 20px; }
-  .collection-card { min-height: 400px; padding: 40px 28px; border-radius: 200px 200px 0 0; }
-  .collection-numeral { top: 56px; font-size: 76px; }
+  .collection-card { min-height: 360px; padding: 36px 28px; border-radius: 200px 200px 0 0; }
+  .collection-numeral { top: 40px; font-size: 64px; }
   .discovery-card { grid-template-columns: 44px minmax(0, 1fr); }
   .discovery-card .collection-cta { grid-column: 2; }
   .writing-list-item { grid-template-columns: 64px minmax(0, 1fr); gap: 6px 16px; padding: 24px 0; }

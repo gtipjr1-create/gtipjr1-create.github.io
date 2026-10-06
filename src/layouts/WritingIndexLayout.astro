@@ -9,6 +9,7 @@ interface Props {
   note?: string;
   returnHref?: string;
   returnLabel?: string;
+  compact?: boolean;
 }
 
 const {
@@ -19,12 +20,13 @@ const {
   note,
   returnHref = "/",
   returnLabel = "Garry Tipler",
+  compact = false,
 } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath}>
   <div class="library-shell chamber-wrap">
-    <header class="library-masthead">
+    <header class:list={["library-masthead", { "library-masthead--compact": compact }]}>
       <svg class="chamber-arch rise" viewBox="0 0 120 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
         <path d="M8 150 V60 A52 52 0 0 1 112 60 V150"></path>
         <path d="M22 150 V64 A38 38 0 0 1 98 64 V150" stroke-opacity=".45"></path>

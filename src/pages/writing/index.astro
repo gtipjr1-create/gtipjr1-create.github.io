@@ -28,6 +28,7 @@ const collectionNote = `${fragmentCount} ${fragmentCount === 1 ? "fragment" : "f
   canonicalPath="/writing/"
   eyebrow="The Writing Chambers"
   note={collectionNote}
+  compact
 >
   <section class="library-section" aria-labelledby="october-feature-heading">
     <div class="october-feature">
@@ -55,6 +56,15 @@ const collectionNote = `${fragmentCount} ${fragmentCount === 1 ? "fragment" : "f
         })}
       </ol>
     </div>
+  </section>
+
+  <section class="library-section library-section--split" aria-labelledby="latest-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">Latest</p>
+      <h2 id="latest-heading">Recent writing</h2>
+      <a class="back-link" href="/writing/archive/">View all writing <span aria-hidden="true">→</span></a>
+    </div>
+    <WritingList entries={latestEntries} emptyMessage="Published writing will appear here." />
   </section>
 
   <section class="library-section" aria-labelledby="collections-heading">
@@ -99,14 +109,5 @@ const collectionNote = `${fragmentCount} ${fragmentCount === 1 ? "fragment" : "f
         <span class="collection-cta">View archive <span aria-hidden="true">→</span></span>
       </a>
     </div>
-  </section>
-
-  <section class="library-section library-section--split" aria-labelledby="latest-heading">
-    <div class="library-section-heading">
-      <p class="library-kicker">Latest</p>
-      <h2 id="latest-heading">Recent writing</h2>
-      <a class="back-link" href="/writing/archive/">View all writing <span aria-hidden="true">→</span></a>
-    </div>
-    <WritingList entries={latestEntries} emptyMessage="Published writing will appear here." />
   </section>
 </WritingIndexLayout>
