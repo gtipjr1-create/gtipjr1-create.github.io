@@ -42,6 +42,11 @@ const octoberHtml = await requireOutput("writing/october-2026/index.html");
 assert.match(octoberHtml, /<link rel="canonical" href="https:\/\/garrytipler\.com\/writing\/october-2026\/"/);
 assert.match(writingIndexHtml, /href="\/writing\/october-2026\/"/);
 assert.ok(sitemapXml.includes("<loc>https://garrytipler.com/writing/october-2026/</loc>"));
+const subscribeHtml = await requireOutput("writing/subscribe/index.html");
+assert.match(subscribeHtml, /<link rel="canonical" href="https:\/\/garrytipler\.com\/writing\/subscribe\/"/);
+assert.match(subscribeHtml, /value="https:\/\/garrytipler\.com\/rss\.xml"/);
+assert.match(writingIndexHtml, /<nav aria-label="Connect"><a href="\/writing\/subscribe\/">RSS<\/a>/);
+assert.ok(sitemapXml.includes("<loc>https://garrytipler.com/writing/subscribe/</loc>"));
 const canonicalUrl = "https://garrytipler.com/writing/fragments/fragments-4-the-fire/";
 
 const writingEntries = await validateWritingRepository({ root: projectRoot });

@@ -1,0 +1,75 @@
+---
+import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
+
+const feedUrl = "https://garrytipler.com/rss.xml";
+const readers = [
+  { name: "Feedly", href: "https://feedly.com/", note: "Web, iPhone and Android." },
+  { name: "Inoreader", href: "https://www.inoreader.com/", note: "Web, iPhone and Android." },
+  { name: "NetNewsWire", href: "https://netnewswire.com/", note: "Free and open source, for Mac and iPhone." },
+];
+---
+
+<WritingIndexLayout
+  title="Follow by RSS"
+  description="Get new essays, fragments and October entries in your feed reader as they are published."
+  canonicalPath="/writing/subscribe/"
+  eyebrow="Writing / Subscribe"
+  returnHref="/writing/"
+  returnLabel="Writing"
+  compact
+>
+  <section class="library-section library-section--split" aria-labelledby="feed-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">The feed</p>
+      <h2 id="feed-heading">Copy this address</h2>
+    </div>
+    <div class="subscribe-body">
+      <p>RSS lets a feed reader check the site for you. Add the address below to any reader and new writing arrives there as it is published. No account here, no email.</p>
+      <div class="subscribe-feed">
+        <input id="feed-url" class="subscribe-feed-url" type="text" value={feedUrl} readonly aria-label="Feed address" />
+        <button id="feed-copy" class="subscribe-copy" type="button" hidden>Copy</button>
+      </div>
+      <p id="feed-copy-status" class="subscribe-status" role="status"></p>
+    </div>
+  </section>
+
+  <section class="library-section library-section--split" aria-labelledby="readers-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">No reader yet?</p>
+      <h2 id="readers-heading">Free feed readers</h2>
+    </div>
+    <ul class="subscribe-readers">
+      {readers.map((reader) => (
+        <li>
+          <a href={reader.href} rel="noopener">{reader.name} <span aria-hidden="true">→</span></a>
+          <span>{reader.note}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const button = document.getElementById("feed-copy");
+      const input = document.getElementById("feed-url");
+      const status = document.getElementById("feed-copy-status");
+      if (!button || !input || !navigator.clipboard) return;
+      button.hidden = false;
+      button.addEventListener("click", async () => {
+        try {
+          // Some browsers leave the clipboard request pending; fall back after a moment.
+          await Promise.race([
+            navigator.clipboard.writeText(input.value),
+            new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 1500)),
+          ]);
+          button.textContent = "Copied";
+          status.textContent = "Feed address copied.";
+        } catch (error) {
+          input.select();
+          status.textContent = "Select the address and copy it.";
+        }
+      });
+      input.addEventListener("focus", () => input.select());
+    })();
+  </script>
+</WritingIndexLayout>

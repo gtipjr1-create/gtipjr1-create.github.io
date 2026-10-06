@@ -14,6 +14,7 @@ const staticPaths = [
   "/writing/archive/",
   "/writing/start-here/",
   "/writing/october-2026/",
+  "/writing/subscribe/",
 ];
 
 export const GET: APIRoute = async ({ site }) => {

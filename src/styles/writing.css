@@ -175,6 +175,29 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 }
 .october-day.is-written:hover { background: rgba(var(--gold-rgb), 0.3); border-color: var(--accent); }
 
+/* Subscribe */
+.subscribe-body, .subscribe-readers { grid-column: 5 / span 8; }
+.subscribe-body { display: flex; flex-direction: column; gap: 20px; font-size: 18px; line-height: 1.6; color: var(--ink-soft); }
+.subscribe-feed { display: flex; gap: 12px; }
+.subscribe-feed-url {
+  flex: 1; min-width: 0; min-height: 52px; padding: 0 16px;
+  border: 1px solid var(--line-2); background: var(--bg-card); color: var(--ink);
+  font-family: var(--mono); font-size: 15px;
+}
+.subscribe-feed-url:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.subscribe-copy {
+  min-height: 52px; padding: 0 24px; border: 0; cursor: pointer;
+  background: var(--gold); color: #0c0a07; font: 600 15px var(--sans); transition: background .25s ease;
+}
+.subscribe-copy:hover { background: var(--gold-hi); }
+.subscribe-copy:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.subscribe-status { min-height: 1.6em; font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.subscribe-readers li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; padding: 22px 0; border-top: 1px solid var(--line); }
+.subscribe-readers li:last-child { border-bottom: 1px solid var(--line); }
+.subscribe-readers a { font-family: var(--serif); font-size: 26px; color: var(--ink); }
+.subscribe-readers a:hover { color: var(--accent); }
+.subscribe-readers span:not([aria-hidden]) { font-size: 15px; color: var(--ink-dim); }
+
 /* Ways in */
 .discovery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .discovery-card {
@@ -391,7 +414,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   :root { --gutter: 40px; }
   .library-section--split > .library-section-heading,
   .library-section--split > .writing-list,
-  .library-section--split > .writing-empty { grid-column: 1 / -1; }
+  .library-section--split > .writing-empty,
+  .subscribe-body, .subscribe-readers { grid-column: 1 / -1; }
   .collection-index > .library-section-heading { position: static; }
   .collection-card { min-height: 380px; padding: 44px 40px; }
 }
@@ -412,6 +436,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .library-section { padding-bottom: 88px; }
   .october-feature { grid-template-columns: 1fr; gap: 36px; padding: 40px 24px; }
   .october-days { gap: 6px; }
+  .subscribe-feed { flex-direction: column; }
+  .subscribe-feed-url { padding: 0 12px; font-size: 13px; }
   .collection-grid, .discovery-grid { grid-template-columns: 1fr; gap: 20px; }
   .collection-card { min-height: 360px; padding: 36px 28px; border-radius: 200px 200px 0 0; }
   .collection-numeral { top: 40px; font-size: 64px; }
