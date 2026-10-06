@@ -151,7 +151,9 @@ const publishedFragments = publishedEntries
   .sort((left, right) => left.data.fragmentNumber - right.data.fragmentNumber);
 let previousFragmentIndexPosition = -1;
 for (const [index, entry] of publishedFragments.entries()) {
-  const titleMarker = `<span class="writing-list-title">${entry.data.title}</span>`;
+  // The index shows titles without the "Fragments #N — " prefix; the № mark carries the number.
+  const indexTitle = entry.data.title.replace(/^Fragments #\d+\s+—\s+/, "");
+  const titleMarker = `<span class="writing-list-title">${indexTitle}</span>`;
   const indexPosition = fragmentsIndexHtml.indexOf(titleMarker);
   assert.ok(indexPosition >= 0, `Fragments index must contain "${entry.data.title}".`);
   assert.ok(
@@ -211,7 +213,7 @@ assert.match(
   fragmentsIndexHtml,
   /<link rel="canonical" href="https:\/\/garrytipler\.com\/writing\/fragments\/"/,
 );
-assert.match(fragmentsIndexHtml, /Fragments #4/);
+assert.match(fragmentsIndexHtml, /href="\/writing\/fragments\/fragments-4-the-fire\/"/);
 assert.match(
   essaysIndexHtml,
   /<link rel="canonical" href="https:\/\/garrytipler\.com\/writing\/essays\/"/,

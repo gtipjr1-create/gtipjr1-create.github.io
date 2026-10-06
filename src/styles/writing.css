@@ -119,6 +119,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 }
 .library-section--split { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
 .library-section--split > .library-section-heading { grid-column: span 3; }
+.collection-index > .library-section-heading { position: sticky; top: 40px; align-self: start; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .library-section--split > .writing-list,
 .library-section--split > .writing-empty { grid-column: 5 / span 8; }
 
@@ -390,6 +392,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .library-section--split > .library-section-heading,
   .library-section--split > .writing-list,
   .library-section--split > .writing-empty { grid-column: 1 / -1; }
+  .collection-index > .library-section-heading { position: static; }
   .collection-card { min-height: 380px; padding: 44px 40px; }
 }
 

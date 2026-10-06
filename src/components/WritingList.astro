@@ -12,9 +12,13 @@ interface Props {
   entries: WritingEntry[];
   emptyMessage: string;
   numbered?: boolean;
+  // Fragment index: the № mark carries the number, so the meta label is
+  // kept for screen readers only and the "Fragments #N — " prefix is dropped.
+  fragmentIndex?: boolean;
 }
 
-const { entries, emptyMessage, numbered = false } = Astro.props;
+const { entries, emptyMessage, numbered = false, fragmentIndex = false } = Astro.props;
+const fragmentPrefix = /^Fragments #\d+\s+—\s+/;
 ---
 
 {
@@ -36,15 +40,15 @@ const { entries, emptyMessage, numbered = false } = Astro.props;
                 {numbered ? String(index + 1).padStart(2, "0") : entry.data.series ? String(entry.data.seriesDay).padStart(2, "0") : isFragment ? `№ ${entry.data.fragmentNumber}` : entry.data.type}
               </span>
               <span class="writing-list-meta">
-                <span>{typeLabel}</span>
-                <span aria-hidden="true">·</span>
+                <span class={fragmentIndex ? "visually-hidden" : undefined}>{typeLabel}</span>
+                {!fragmentIndex && <span aria-hidden="true">·</span>}
                 <time datetime={effectiveDate.toISOString().slice(0, 10)}>
                   {formatWritingDate(effectiveDate)}
                 </time>
                 <span aria-hidden="true">·</span>
                 <span>{formatReadingTime(readingTime)}</span>
               </span>
-              <span class="writing-list-title">{entry.data.title}</span>
+              <span class="writing-list-title">{fragmentIndex ? entry.data.title.replace(fragmentPrefix, "") : entry.data.title}</span>
               <span class="writing-list-summary">{entry.data.summary}</span>
             </a>
           </li>

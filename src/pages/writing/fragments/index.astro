@@ -3,6 +3,7 @@ import WritingList from "../../../components/WritingList.astro";
 import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
 import {
   getPublishedWritingEntriesByType,
+  getWritingPath,
   sortWritingCollection,
 } from "../../../lib/writing";
 
@@ -10,6 +11,7 @@ const entries = sortWritingCollection(
   await getPublishedWritingEntriesByType("fragment"),
   "ascending",
 );
+const latest = entries.at(-1);
 ---
 
 <WritingIndexLayout
@@ -19,12 +21,16 @@ const entries = sortWritingCollection(
   eyebrow="Writing / Fragments"
   returnHref="/writing/"
   returnLabel="Writing"
+  compact
 >
   <section class="library-section collection-index library-section--split" aria-labelledby="fragments-heading">
     <div class="library-section-heading">
       <p class="library-kicker">{entries.length} {entries.length === 1 ? "fragment" : "fragments"}</p>
       <h2 id="fragments-heading">Numbered index</h2>
+      {latest && (
+        <a class="back-link" href={getWritingPath(latest.data)}>Latest: № {latest.data.fragmentNumber} <span aria-hidden="true">→</span></a>
+      )}
     </div>
-    <WritingList entries={entries} emptyMessage="Published fragments will appear here." />
+    <WritingList entries={entries} emptyMessage="Published fragments will appear here." fragmentIndex />
   </section>
 </WritingIndexLayout>
