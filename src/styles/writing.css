@@ -140,6 +140,36 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .collection-description { font-size: 17px; line-height: 1.55; color: var(--ink-dim); }
 .collection-cta { font-size: 15px; font-weight: 600; color: var(--link); }
 
+/* October feature */
+.october-feature {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center;
+  padding: 56px 52px;
+  border: 1px solid var(--line-2);
+  background: linear-gradient(135deg, rgba(224, 160, 80, 0.1), var(--bg-card) 60%);
+}
+.october-feature-text { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.october-feature-title { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 4vw, 58px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); }
+.october-feature-progress { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); }
+.october-feature-latest {
+  display: flex; flex-direction: column; gap: 4px; width: 100%;
+  padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  transition: background .3s ease;
+}
+.october-feature-latest:hover { background: rgba(224, 160, 80, 0.04); }
+.october-feature-latest-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.october-feature-latest-title { font-family: var(--serif); font-size: 26px; line-height: 1.2; color: var(--ink); }
+.october-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; list-style: none; }
+.october-day {
+  display: flex; align-items: center; justify-content: center; aspect-ratio: 1;
+  border: 1px solid var(--line);
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--ink-faint);
+}
+.october-day.is-written {
+  border-color: rgba(var(--gold-rgb), 0.55); background: rgba(var(--gold-rgb), 0.14); color: var(--accent);
+  transition: background .3s ease, border-color .3s ease;
+}
+.october-day.is-written:hover { background: rgba(var(--gold-rgb), 0.3); border-color: var(--accent); }
+
 /* Ways in */
 .discovery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .discovery-card {
@@ -372,6 +402,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .library-masthead { padding: 72px 0 72px; gap: 20px; }
   .chamber-arch { width: 84px; height: 105px; }
   .library-section { padding-bottom: 88px; }
+  .october-feature { grid-template-columns: 1fr; gap: 36px; padding: 40px 24px; }
+  .october-days { gap: 6px; }
   .collection-grid, .discovery-grid { grid-template-columns: 1fr; gap: 20px; }
   .collection-card { min-height: 400px; padding: 40px 28px; border-radius: 200px 200px 0 0; }
   .collection-numeral { top: 56px; font-size: 76px; }
