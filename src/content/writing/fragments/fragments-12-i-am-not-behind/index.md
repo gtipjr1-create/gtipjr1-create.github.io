@@ -16,7 +16,8 @@ featured: false
 startHereOrder: 3
 mediumUrl: "https://medium.com/@Garry_Tipler/i-am-not-behind-52e78d543e3f"
 status: "published"
-related: []
+related:
+  - "fragment:fragments-6-ordering-effort"
 connections: []
 ---
 

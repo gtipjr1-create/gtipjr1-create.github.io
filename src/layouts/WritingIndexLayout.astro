@@ -39,6 +39,7 @@ const {
       <h1 class="rise" style="--d:200ms">{title}</h1>
       <p class="library-intro rise" style="--d:300ms">{description}</p>
       {note && <p class="library-note rise" style="--d:400ms">{note}</p>}
+      <slot name="intro-links" />
     </header>
 
     <main id="main-content" tabindex="-1">

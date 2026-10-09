@@ -3,11 +3,13 @@ import WritingList from "../../components/WritingList.astro";
 import WritingIndexLayout from "../../layouts/WritingIndexLayout.astro";
 import {
   getPublishedWritingEntries,
+  getStartHereEntries,
   getWritingPath,
   sortWritingByPublicationDate,
 } from "../../lib/writing";
 
 const publishedEntries = await getPublishedWritingEntries();
+const startHereCount = getStartHereEntries(publishedEntries).length;
 const octoberEntries = publishedEntries
   .filter((entry) => entry.data.series === "october-2026")
   .sort((left, right) => left.data.seriesDay! - right.data.seriesDay!);
@@ -30,6 +32,10 @@ const collectionNote = `${fragmentCount} ${fragmentCount === 1 ? "fragment" : "f
   note={collectionNote}
   compact
 >
+  <nav slot="intro-links" class="library-entry-links" aria-label="Explore the writing">
+    <a href="/writing/start-here/">New here? Start with these {startHereCount} pieces <span aria-hidden="true">→</span></a>
+    <a href="/writing/archive/#topics">Browse by topic <span aria-hidden="true">→</span></a>
+  </nav>
   <section class="library-section" aria-labelledby="october-feature-heading">
     <div class="october-feature">
       <div class="october-feature-text">

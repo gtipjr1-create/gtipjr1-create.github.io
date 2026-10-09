@@ -52,6 +52,8 @@ a:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 4px; }
 
 .caption-label { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
 .caption-text { font-size: 15px; line-height: 1.55; color: var(--ink-mute); }
+.screenshot-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 12px; color: var(--accent); font-size: 15px; }
+.screenshot-link:hover { color: var(--accent-hi); text-decoration: underline; text-underline-offset: 4px; }
 
 /* ---------- STATEMENT SECTIONS ---------- */
 .statement-section { padding: 150px 0; }

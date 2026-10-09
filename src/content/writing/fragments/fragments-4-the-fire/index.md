@@ -18,6 +18,8 @@ featured: true
 startHereOrder: 1
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-4-the-fire-7301b68ca8b1"
 status: "published"
+related:
+  - "fragment:fragments-20-im-not-waiting-to-arrive"
 ---
 
 The fire: random back spasms.

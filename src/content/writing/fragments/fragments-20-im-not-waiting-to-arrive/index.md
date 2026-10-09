@@ -16,7 +16,9 @@ featured: false
 startHereOrder: 5
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-20-im-not-waiting-to-arrive-82a4ff5d19db"
 status: "published"
-related: []
+related:
+  - "fragment:fragments-4-the-fire"
+  - "fragment:fragments-12-i-am-not-behind"
 connections: []
 heroImage:
   src: "/assets/writing/fragments/fragments-20-im-not-waiting-to-arrive/hero.webp"

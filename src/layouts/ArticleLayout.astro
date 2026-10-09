@@ -17,9 +17,13 @@ interface Props {
   previous?: WritingEntry;
   next?: WritingEntry;
   relatedEntries: WritingEntry[];
+  startHereEntries: WritingEntry[];
 }
 
-const { entry, readingTime, previous, next, relatedEntries } = Astro.props;
+const { entry, readingTime, previous, next, relatedEntries, startHereEntries } = Astro.props;
+const startHereIndex = startHereEntries.findIndex((candidate) => candidate.id === entry.id);
+const startHerePrevious = startHereEntries[startHereIndex - 1];
+const startHereNext = startHereIndex >= 0 ? startHereEntries[startHereIndex + 1] : undefined;
 const { data } = entry;
 const canonicalPath = getWritingPath(data);
 const collectionPath = data.series ? "/writing/october-2026/" : getWritingCollectionPath(data.type);
@@ -156,6 +160,22 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 
       <div class="article-end" aria-hidden="true"><span></span></div>
 
+      {startHereIndex >= 0 && (
+        <nav class="curated-path" aria-label="Start Here reading path">
+          <p class="library-kicker">Start Here · {startHereIndex + 1} of {startHereEntries.length}</p>
+          {startHereNext ? (
+            <a class="curated-next" href={getWritingPath(startHereNext.data)}>
+              <span>Next in Start Here</span>
+              <strong>{startHereNext.data.title} <span aria-hidden="true">→</span></strong>
+            </a>
+          ) : <p>You’ve reached the end of the Start Here reading path.</p>}
+          <div class="curated-path-links">
+            {startHerePrevious && <a href={getWritingPath(startHerePrevious.data)}>← Previous in Start Here</a>}
+            <a href="/writing/start-here/">View the full reading path</a>
+          </div>
+        </nav>
+      )}
+
       {
         data.mediumUrl && (
           <aside class="medium-attribution" aria-label="Medium attribution">
@@ -225,6 +245,10 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
     </main>
 
     <div class="article-footer">
+      <aside class="article-follow" aria-label="Follow new writing">
+        <a href="/writing/subscribe/">Follow new writing <span aria-hidden="true">→</span></a>
+        <p>Get new essays and fragments in your feed reader. No email needed.</p>
+      </aside>
       {
         (previous || next) && (
           <nav class="article-navigation" aria-label="Writing sequence">

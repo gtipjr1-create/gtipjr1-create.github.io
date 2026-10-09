@@ -5,12 +5,14 @@ import {
   calculateReadingTime,
   getAdjacentWritingEntries,
   getPublishedWritingEntries,
+  getStartHereEntries,
   getWritingCollectionSegment,
   resolveRelatedWritingEntries,
 } from "../../../lib/writing";
 
 export async function getStaticPaths() {
   const entries = await getPublishedWritingEntries();
+  const startHereEntries = getStartHereEntries(entries);
 
   return entries.map((entry) => {
     const adjacentEntries = getAdjacentWritingEntries(entry, entries);
@@ -21,7 +23,7 @@ export async function getStaticPaths() {
         collection: getWritingCollectionSegment(entry.data),
         slug: entry.data.slug,
       },
-      props: { entry, relatedEntries, ...adjacentEntries },
+      props: { entry, relatedEntries, startHereEntries, ...adjacentEntries },
     };
   });
 }
@@ -31,9 +33,10 @@ interface Props {
   previous?: CollectionEntry<"writing">;
   next?: CollectionEntry<"writing">;
   relatedEntries: CollectionEntry<"writing">[];
+  startHereEntries: CollectionEntry<"writing">[];
 }
 
-const { entry, previous, next, relatedEntries } = Astro.props;
+const { entry, previous, next, relatedEntries, startHereEntries } = Astro.props;
 const { Content } = await render(entry);
 const readingTime = calculateReadingTime(entry.body ?? "");
 ---
@@ -44,6 +47,7 @@ const readingTime = calculateReadingTime(entry.body ?? "");
   previous={previous}
   next={next}
   relatedEntries={relatedEntries}
+  startHereEntries={startHereEntries}
 >
   <Content />
 </ArticleLayout>

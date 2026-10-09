@@ -236,6 +236,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .writing-empty { color: var(--ink-dim); }
 
 /* Archive years */
+.library-entry-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; }
+.library-entry-links a, .curated-path-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--link); }
+.archive-topics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 28px; }
+.archive-topic { border-top: 1px solid var(--line-2); padding-top: 24px; }
+.archive-topic h3 { font: 400 28px/1.2 var(--serif); color: var(--ink); }
+.archive-topic p { margin: 12px 0; color: var(--ink-dim); }
+.archive-topic a { display: block; padding: 12px 0; color: var(--link); border-bottom: 1px solid var(--line); }
 .archive-year-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
 .archive-year-heading p { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
 
@@ -296,6 +303,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
 .article-ornament::before, .article-ornament::after { content: ""; width: 80px; height: 1px; background: var(--line-2); }
 .article-ornament span, .article-end span { width: 10px; height: 10px; transform: rotate(45deg); background: var(--accent); }
 .article-end { display: flex; justify-content: center; margin: 32px auto 0; }
+.curated-path { width: min(var(--copy-width), 100%); margin: 48px auto 0; padding: 24px 0; border-block: 1px solid var(--line-2); display: grid; gap: 16px; }
+.curated-next { display: flex; flex-direction: column; gap: 8px; color: var(--link); }
+.curated-next strong { font: 400 26px/1.25 var(--serif); }
+.curated-path-links { display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15px; }
+.article-follow { width: min(var(--copy-width), 100%); text-align: center; }
+.article-follow a { display: inline-flex; align-items: center; min-height: 44px; color: var(--link); font-weight: 600; }
+.article-follow p { color: var(--ink-dim); font-size: 15px; }
 
 .article-prose {
   position: relative;
@@ -446,10 +460,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-hi); out
   .writing-list-item { grid-template-columns: 64px minmax(0, 1fr); gap: 6px 16px; padding: 24px 0; }
   .writing-list-mark { font-size: 26px; }
   .writing-list-mark--word { font-size: 20px; }
-  .article-masthead { padding: 64px 0 48px; gap: 18px; }
+  .article-masthead { padding: 40px 0 24px; gap: 14px; }
   .article-shell[data-series="october-2026"] .article-masthead { padding-bottom: 24px; }
   .article-prose { font-size: 19px; line-height: 1.72; }
-  .article-ornament { margin: 48px auto 40px; }
+  .article-ornament { margin: 24px auto 28px; }
+  .archive-topics { grid-template-columns: 1fr; gap: 24px; }
   .related-writing-list a, .connection-list a { grid-template-columns: minmax(0, 1fr) auto; }
   .related-writing-type, .connection-kind { grid-column: 1 / -1; }
   .article-footer { gap: 48px; padding: 72px 0 80px; }

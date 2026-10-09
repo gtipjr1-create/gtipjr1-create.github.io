@@ -1,9 +1,35 @@
 ---
 import WritingList from "../../../components/WritingList.astro";
 import WritingIndexLayout from "../../../layouts/WritingIndexLayout.astro";
-import { getPublishedWritingEntries, groupWritingArchive } from "../../../lib/writing";
+import { getPublishedWritingEntries, getWritingIdentifier, getWritingPath, groupWritingArchive } from "../../../lib/writing";
 
-const archiveGroups = groupWritingArchive(await getPublishedWritingEntries());
+const entries = await getPublishedWritingEntries();
+const archiveGroups = groupWritingArchive(entries);
+// Editorial entry points, not automatic recommendations or new taxonomy.
+const topics = [
+  {
+    title: "Recovery",
+    description: "Slowing down, finding your rhythm, and returning to the work.",
+    identifiers: ["fragment:fragments-4-the-fire", "fragment:fragments-20-im-not-waiting-to-arrive"],
+  },
+  {
+    title: "Discipline",
+    description: "Giving effort structure and building at a pace you can sustain.",
+    identifiers: ["fragment:fragments-6-ordering-effort", "fragment:fragments-12-i-am-not-behind"],
+  },
+  {
+    title: "Self-command",
+    description: "Holding your boundaries while staying open to life and other people.",
+    identifiers: ["essay:discipline-should-not-cost-me-my-heart", "fragment:fragments-20-im-not-waiting-to-arrive"],
+  },
+].map((topic) => ({
+  ...topic,
+  entries: topic.identifiers.map((identifier) => {
+    const entry = entries.find((candidate) => getWritingIdentifier(candidate.data) === identifier);
+    if (!entry) throw new Error(`Archive topic "${topic.title}" references unavailable writing "${identifier}".`);
+    return entry;
+  }),
+}));
 ---
 
 <WritingIndexLayout
@@ -14,6 +40,21 @@ const archiveGroups = groupWritingArchive(await getPublishedWritingEntries());
   returnHref="/writing/"
   returnLabel="Writing"
 >
+  <section class="library-section" id="topics" aria-labelledby="topics-heading">
+    <div class="library-section-heading">
+      <p class="library-kicker">Selected ways in</p>
+      <h2 id="topics-heading">Browse by topic</h2>
+    </div>
+    <div class="archive-topics">
+      {topics.map((topic) => (
+        <section class="archive-topic" aria-label={topic.title}>
+          <h3>{topic.title}</h3>
+          <p>{topic.description}</p>
+          <ul>{topic.entries.map((entry) => <li><a href={getWritingPath(entry.data)}>{entry.data.title}</a></li>)}</ul>
+        </section>
+      ))}
+    </div>
+  </section>
   {
     archiveGroups.map((group) => (
       <section class="library-section archive-year" aria-labelledby={`archive-${group.year}`}>

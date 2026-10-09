@@ -80,6 +80,20 @@ for (const entry of publishedEntries) {
   const route = writingRoute(entry.data);
   const canonical = `https://garrytipler.com/${route}`;
   const articleHtml = await requireOutput(`${route}index.html`);
+  assert.ok(articleHtml.includes('href="/writing/subscribe/">Follow new writing'));
+  const related = entry.data.related ?? [];
+  const connections = entry.data.connections ?? [];
+  if (related.length || connections.length) {
+    assert.match(articleHtml, /class="article-discovery"/);
+    for (const identifier of related) {
+      const target = publishedEntries.find((candidate) => `${candidate.data.type}:${candidate.data.slug}` === identifier);
+      assert.ok(target, `${identifier} must be published.`);
+      const relatedSection = articleHtml.match(/<ul class="related-writing-list">([\s\S]*?)<\/ul>/)?.[1];
+      assert.ok(relatedSection?.includes(`href="/${writingRoute(target.data)}"`));
+    }
+  } else {
+    assert.doesNotMatch(articleHtml, /class="article-discovery"/, "Do not render empty discovery sections.");
+  }
   if (entry.data.series) {
     assert.ok(octoberHtml.includes(`href="/${route}"`));
     assert.ok(articleHtml.includes(`OCTOBER WRITING CHALLENGE · ${String(entry.data.seriesDay).padStart(2, "0")} / 31`));
@@ -258,11 +272,43 @@ assert.match(
 );
 assert.match(pilotHtml, /href="\/writing\/fragments\/"/);
 assert.match(pilotHtml, /href="\/writing\/">Return to Writing/);
-assert.doesNotMatch(
-  pilotHtml,
-  /class="article-discovery"/,
-  "Articles without explicit related or connection metadata must not render empty discovery sections.",
-);
+const startHereEntries = publishedEntries.filter((entry) => entry.data.startHereOrder !== undefined)
+  .sort((left, right) => left.data.startHereOrder - right.data.startHereOrder);
+for (const [index, entry] of startHereEntries.entries()) {
+  const html = await requireOutput(`${writingRoute(entry.data)}index.html`);
+  const path = html.match(/<nav class="curated-path"[\s\S]*?<\/nav>/)?.[0];
+  assert.ok(path, `${entry.id} needs its Start Here path.`);
+  assert.ok(path.includes(`Start Here · ${index + 1} of ${startHereEntries.length}`));
+  for (const neighbor of [startHereEntries[index - 1], startHereEntries[index + 1]].filter(Boolean)) {
+    assert.ok(path.includes(`href="/${writingRoute(neighbor.data)}"`));
+  }
+  if (index === 0) assert.ok(!path.includes("Previous in Start Here"));
+  if (index === startHereEntries.length - 1) {
+    assert.ok(!path.includes('class="curated-next"'));
+    assert.ok(path.includes("end of the Start Here reading path"));
+  }
+}
+assert.ok(homepageHtml.includes('href="/writing/subscribe/">Follow new writing'));
+assert.ok(homepageHtml.includes('id="signal-signup"'));
+assert.ok(writingIndexHtml.includes('href="/writing/archive/#topics"'));
+assert.ok(writingIndexHtml.indexOf("New here?") < writingIndexHtml.indexOf('id="october-feature-heading"'));
+const topicsHtml = archiveHtml.match(/<div class="archive-topics">([\s\S]*?)<section class="library-section archive-year"/)?.[1];
+assert.ok(topicsHtml, "Archive must provide topic entry points before its year lists.");
+for (const [, href] of topicsHtml.matchAll(/href="([^"]+)"/g)) {
+  assert.ok(publishedEntries.some((entry) => href === `/${writingRoute(entry.data)}`), `Topic link ${href} must resolve to published writing.`);
+}
+for (const project of ["selftrainer", "fitpulse"]) {
+  const html = await requireOutput(`projects/${project}/index.html`);
+  assert.ok(html.includes('class="follow-link" href="../../#signal-signup"'));
+  const figures = [...html.matchAll(/<figure\b[^>]*>([\s\S]*?)<\/figure>/g)];
+  assert.ok(figures.length > 0);
+  for (const [, figure] of figures) {
+    const src = figure.match(/<img[^>]*src="([^"]+)"/)?.[1];
+    const link = figure.match(/class="screenshot-link" href="([^"]+)"/)?.[1];
+    assert.equal(link, src, "Full-size links must open the displayed evidence image.");
+    await access(new URL(link, new URL(`projects/${project}/`, outputRoot)));
+  }
+}
 
 const sitemapLocations = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
   (match) => match[1],

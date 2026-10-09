@@ -15,7 +15,8 @@ featured: false
 startHereOrder: 4
 mediumUrl: "https://medium.com/tenacious-individual-performance/discipline-should-not-cost-me-my-heart-1ce503de76b1"
 status: "published"
-related: []
+related:
+  - "fragment:fragments-20-im-not-waiting-to-arrive"
 connections: []
 heroImage:
   src: "/assets/writing/essays/discipline-should-not-cost-me-my-heart/hero.webp"

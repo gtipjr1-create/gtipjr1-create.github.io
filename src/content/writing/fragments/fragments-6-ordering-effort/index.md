@@ -16,7 +16,8 @@ featured: false
 startHereOrder: 2
 mediumUrl: "https://medium.com/@Garry_Tipler/fragments-6-ordering-effort-3a9207b6326f"
 status: "published"
-related: []
+related:
+  - "essay:discipline-should-not-cost-me-my-heart"
 connections: []
 ---
 
