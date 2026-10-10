@@ -53,14 +53,22 @@ When I got home, I did—for 30 minutes.
 
 But what I didn't do was skip my workout.
 
+When my alarm went off for the gym, it was like my system came online.
+
+My attitude changed. I was focused on today's workout.
+
+And when I got to the gym, the energy came. My session was a success.
+
 See, this is where discipline lives.
 
-Things will happen, and you have to hold the line. You have to do the hard thing you don't feel like doing. You find the energy because your goals are more important than your feelings.
+Things will happen, and sometimes you have to hold the line. You have to do the hard thing you don't feel like doing.
+
+Sometimes you have to look beyond how you feel in the moment and remember what you've committed to. But you also have to know when your body genuinely needs rest.
 
 And I'm not saying taking a day off or resting is terrible.
 
 I'm simply saying, go back and forth with yourself. Challenge that little voice. Push back if it's safe for you.
 
-Meaning, yes, listen to your body, but also don't be lazy on purpose.
+Meaning, yes, listen to your body, but also recognize when you're making excuses rather than making a necessary decision to recover.
 
 — Tip
