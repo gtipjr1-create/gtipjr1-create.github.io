@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import type { CollectionEntry } from "astro:content";
 import {
   formatReadingTime,
   formatWritingDate,
@@ -12,15 +13,16 @@ import {
 } from "../lib/writing";
 
 interface Props {
-  entry: WritingEntry;
+  entry: WritingEntry | CollectionEntry<"previewWriting">;
   readingTime: number;
   previous?: WritingEntry;
   next?: WritingEntry;
   relatedEntries: WritingEntry[];
   startHereEntries: WritingEntry[];
+  preview?: boolean;
 }
 
-const { entry, readingTime, previous, next, relatedEntries, startHereEntries } = Astro.props;
+const { entry, readingTime, previous, next, relatedEntries, startHereEntries, preview = false } = Astro.props;
 const startHereIndex = startHereEntries.findIndex((candidate) => candidate.id === entry.id);
 const startHerePrevious = startHereEntries[startHereIndex - 1];
 const startHereNext = startHereIndex >= 0 ? startHereEntries[startHereIndex + 1] : undefined;
@@ -80,17 +82,18 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
   title={data.title}
   description={data.summary}
   canonicalPath={canonicalPath}
+  noindex={preview}
   ogType="article"
-  publishedDate={effectiveDateString}
-  modifiedDate={modifiedDate}
-  socialImage={socialImage}
+  publishedDate={preview ? undefined : effectiveDateString}
+  modifiedDate={preview ? undefined : modifiedDate}
+  socialImage={preview ? undefined : socialImage}
 >
-  <script
+  {!preview && <script
     slot="head"
     id="article-jsonld"
     type="application/ld+json"
     set:html={serializedJsonLd}
-  />
+  />}
 
   <script is:inline slot="head">
     try {
@@ -101,6 +104,7 @@ const serializedJsonLd = JSON.stringify(jsonLd).replace(/</g, "\\u003c");
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
 
   <div class="article-shell chamber-wrap" data-series={data.series}>
+    {preview && <p class="library-kicker">Private local preview · Not published</p>}
     <header class="article-masthead">
       {data.type === "fragment" && <span class="article-watermark" aria-hidden="true">{data.fragmentNumber}</span>}
       <div class="article-crumbs rise">

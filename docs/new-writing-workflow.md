@@ -7,7 +7,7 @@ From October 1, GarryTipler.com is the first place new writing is published. Med
 
 ## The rule in one line
 
-Write → drop the manuscript → review draft → approve → publish on GarryTipler.com → verify live → share to Medium with the site as canonical → record the Medium link.
+Write → drop the manuscript → review the private draft in a local browser → approve → publish on GarryTipler.com → verify live → share to Medium with the site as canonical → record the Medium link.
 
 ## 1. Dropping a new piece
 
@@ -47,7 +47,16 @@ Supply with each piece:
    ```
 
 4. **Images:** save them under `assets/writing/<essays|fragments>/<slug>/` and reference them with root-relative paths. The validator fails on a missing file.
-5. **Author review.** Show the draft and its metadata. Nothing moves forward until the author approves the prose, title, slug, summary, category, tags, and any image text.
+5. **Author review.** Show the draft and its metadata, then offer the local browser preview below. Nothing moves forward until the author approves the prose, title, slug, summary, category, tags, and any image text.
+
+### Local browser preview before publication
+
+The `/review/<slug>/` route reads drafts from the ignored `.migration-output/new/` directory only in the local Astro development server. It uses the article layout and displays a **Private local preview · Not published** label. The route produces no HTML in a production build and the draft remains outside `src/content/writing/`.
+
+1. Add the proposed Pacific go-live date as `publishedDate: "YYYY-MM-DD"` to the private draft, leaving `status: "draft"`. This date is for the article layout preview; confirm it again at publication.
+2. Start the local server with `npm.cmd run dev -- --host 127.0.0.1` and open `http://127.0.0.1:4321/review/<slug>/` in a browser. Use the port Astro reports if 4321 is occupied. Do not expose this private preview on the LAN.
+3. Review the full page at desktop and narrow-mobile widths, including title, subtitle, prose, sign-off, and any image. Apply corrections to the ignored source and regenerate the draft, or edit the private draft with the author's approval; refresh the browser.
+4. Obtain approval for the prose and metadata before moving the draft into public content. The preview URL is local only and is never the article's public URL.
 
 ## 3. Publishing on GarryTipler.com
 
@@ -55,6 +64,7 @@ Only after explicit approval:
 
 1. Move the draft to `src/content/writing/<essays|fragments>/<slug>/index.md`.
 2. Set `publishedDate` to the approved go-live date and `status: "published"`. Leave `originalPublishedDate` unset.
+   The private `/review/<slug>/` URL stops working when the draft moves. If it is open, switch the browser to the local article URL (`http://127.0.0.1:4321/writing/<collection>/<slug>/`) before continuing.
 3. Validate:
 
    ```powershell

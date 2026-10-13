@@ -135,4 +135,13 @@ const writing = defineCollection({
   schema: writingSchema,
 });
 
-export const collections = { writing };
+const previewWriting = defineCollection({
+  loader: glob({
+    pattern: "**/*.md",
+    base: "./.migration-output/new",
+    retainBody: true,
+  }),
+  schema: writingSchema,
+});
+
+export const collections = { writing, previewWriting };
