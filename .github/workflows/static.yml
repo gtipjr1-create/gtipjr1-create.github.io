@@ -40,6 +40,10 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Test writing tools
+        run: npm run test:writing-tools
+      - name: Test signup
+        run: npm run test:signup
       - name: Build and validate
         run: npm run validate
       - name: Setup Pages
