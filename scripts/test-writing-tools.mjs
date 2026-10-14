@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { generateWritingDraft } from "./migrate-writing.mjs";
 import { validateWritingData, validateWritingRepository, writingRoute } from "./writing-content.mjs";
+import { selectPrivateWritingPreviews } from "../src/lib/writing-validation.ts";
 
 const fixtureRoot = await mkdtemp(join(tmpdir(), "garry-writing-tools-"));
 
@@ -18,6 +19,59 @@ function entry(frontmatter, body = "Fixture prose.\n") {
 }
 
 try {
+  const previewFixture = (id, data = {}, body = "Unpublished author prose.") => ({
+    id, body,
+    data: { type: "essay", slug: id, status: "draft", related: [], ...data },
+  });
+  const unpublished = previewFixture("unpublished", { series: "october-2026", seriesDay: 14 });
+  const published = previewFixture("published-day-nine", {
+    slug: "day-nine", status: "published", series: "october-2026", seriesDay: 9,
+  }, "Approved published manuscript.");
+  const stale = previewFixture("stale-day-nine", {
+    slug: "day-nine", series: "october-2026", seriesDay: 9,
+  }, "Outdated draft manuscript that must never be served.");
+  const originalStale = JSON.stringify(stale);
+  const selected = selectPrivateWritingPreviews([stale, unpublished], [published]);
+  assert.deepEqual(selected.entries, [unpublished], "stale artifacts must not block a genuine unpublished preview");
+  assert.match(selected.rejected[0], /collides with published/);
+  assert.equal(selected.entries[0].body, unpublished.body, "preview selection must preserve the author's prose");
+  assert.equal(JSON.stringify(stale), originalStale, "rejection must preserve historical draft evidence");
+  assert.equal(published.body, "Approved published manuscript.");
+  assert.deepEqual(selectPrivateWritingPreviews([unpublished], [previewFixture("unpublished")]).entries, [unpublished]);
+  assert.deepEqual(selectPrivateWritingPreviews([unpublished], [
+    { ...unpublished, data: { ...unpublished.data, status: "published" } },
+  ]).entries, [], "a previously valid preview must be revoked after publication");
+
+  const collisions = [
+    previewFixture("same-slug-other-type", { slug: "day-nine", type: "letter" }),
+    previewFixture("renamed-day-nine", { series: "october-2026", seriesDay: 9 }),
+    previewFixture("published-preview-artifact", { status: "published" }),
+  ];
+  for (const collision of collisions) {
+    const result = selectPrivateWritingPreviews([collision], [published]);
+    assert.deepEqual(result.entries, []);
+    assert.equal(result.rejected.length, 1);
+  }
+  const publishedFragment = previewFixture("published-fragment", {
+    type: "fragment", fragmentNumber: 20, status: "published",
+  });
+  assert.deepEqual(selectPrivateWritingPreviews([
+    previewFixture("renamed-fragment", { type: "fragment", fragmentNumber: 20 }),
+  ], [publishedFragment]).entries, []);
+
+  for (const duplicates of [
+    [previewFixture("one", { slug: "duplicate" }), previewFixture("two", { slug: "duplicate", type: "letter" })],
+    [previewFixture("one", { series: "october-2026", seriesDay: 14 }), previewFixture("two", { series: "october-2026", seriesDay: 14 })],
+    [previewFixture("one", { type: "fragment", fragmentNumber: 21 }), previewFixture("two", { type: "fragment", fragmentNumber: 21 })],
+  ]) {
+    const result = selectPrivateWritingPreviews(duplicates, []);
+    assert.deepEqual(result.entries, [], "both ambiguous private previews must be rejected");
+    assert.equal(result.rejected.length, 2);
+    assert.ok(result.rejected.every((reason) => reason.includes("duplicate private preview identity")));
+  }
+  assert.deepEqual(selectPrivateWritingPreviews([], [published]), { entries: [], rejected: [] });
+  console.log("Private preview integrity regressions passed: unpublished prose, published collisions, stale artifacts, and duplicate identities.");
+
   const october = { title: "Day 1 — Back to Writing", slug: "back-to-writing", type: "essay", series: "october-2026", seriesDay: 1, summary: "", category: "", status: "draft" };
   assert.deepEqual(validateWritingData(october), []);
   assert.equal(writingRoute(october), "writing/october-2026/back-to-writing/");

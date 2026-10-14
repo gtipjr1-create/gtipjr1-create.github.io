@@ -62,6 +62,16 @@ const discoveryOutput = [
   sitemapXml,
   rssXml,
 ].join("\n");
+await assert.rejects(
+  access(new URL("review/", outputRoot)),
+  (error) => error.code === "ENOENT",
+  "Private preview routes must not be generated in production.",
+);
+assert.doesNotMatch(
+  discoveryOutput,
+  /(?:href="|<loc>|<link>)(?:https:\/\/garrytipler\.com)?\/review\//,
+  "Private preview routes must not enter production discovery output.",
+);
 for (const draft of draftEntries) {
   const draftRoute = writingRoute(draft.data);
   await assert.rejects(

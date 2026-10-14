@@ -13,6 +13,47 @@ export interface WritingValidationEntry {
   };
 }
 
+export function selectPrivateWritingPreviews<T extends WritingValidationEntry>(
+  previews: T[],
+  writingEntries: WritingValidationEntry[],
+): { entries: T[]; rejected: string[] } {
+  const identityKeys = (data: WritingValidationEntry["data"]): string[] => [
+    `slug:${data.slug}`,
+    ...(data.type === "fragment" && data.fragmentNumber !== undefined
+      ? [`fragment:${data.fragmentNumber}`] : []),
+    ...(data.series && data.seriesDay !== undefined
+      ? [`series:${data.series}:${data.seriesDay}`] : []),
+  ];
+  const publishedKeys = new Map<string, string>();
+  for (const entry of writingEntries.filter((entry) => entry.data.status === "published")) {
+    for (const key of identityKeys(entry.data)) publishedKeys.set(key, entry.id);
+  }
+  const previewKeyCounts = new Map<string, number>();
+  for (const entry of previews) {
+    for (const key of identityKeys(entry.data)) {
+      previewKeyCounts.set(key, (previewKeyCounts.get(key) ?? 0) + 1);
+    }
+  }
+
+  const entries: T[] = [];
+  const rejected: string[] = [];
+  for (const entry of previews) {
+    const keys = identityKeys(entry.data);
+    const publishedCollision = keys.find((key) => publishedKeys.has(key));
+    const previewCollision = keys.find((key) => previewKeyCounts.get(key)! > 1);
+    if (entry.data.status !== "draft") {
+      rejected.push(`"${entry.id}" must have status draft.`);
+    } else if (publishedCollision) {
+      rejected.push(`"${entry.id}" collides with published "${publishedKeys.get(publishedCollision)}" (${publishedCollision}).`);
+    } else if (previewCollision) {
+      rejected.push(`"${entry.id}" has a duplicate private preview identity (${previewCollision}).`);
+    } else {
+      entries.push(entry);
+    }
+  }
+  return { entries, rejected };
+}
+
 export function validateWritingCollection<T extends WritingValidationEntry>(entries: T[]): T[] {
   const errors: string[] = [];
   const writingKeys = new Map<string, string>();

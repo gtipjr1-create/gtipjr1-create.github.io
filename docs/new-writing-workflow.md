@@ -73,6 +73,10 @@ Supply with each piece:
 
 The `/review/<slug>/` route reads drafts from the ignored `.migration-output/new/` directory only in the local Astro development server. It uses the article layout and displays a **Private local preview · Not published** label. The route produces no HTML in a production build and the draft remains outside `src/content/writing/`.
 
+Only genuinely unpublished drafts receive preview routes. A published slug, October series day, or Fragment number cannot be reused by a private preview; duplicate identities among private drafts are also rejected. Rejected entries produce a development warning and no route, while unrelated unpublished drafts remain reviewable. Production verification rejects any generated `/review/` directory or discovery link.
+
+After confirming that committed published content is authoritative, preserve completed or superseded review drafts under `.migration-output/archive/published-previews/<YYYY-MM-DD>/<slug>/index.md`, outside the preview collection. Keep the historical bytes and inbox source evidence; never replace published prose from a stale preview. Archiving requires the author's authorization.
+
 1. Add the proposed Pacific go-live date as `publishedDate: "YYYY-MM-DD"` to the private draft, leaving `status: "draft"`. This date is for the article layout preview; confirm it again at publication.
 2. Start the local server with `npm.cmd run dev -- --host 127.0.0.1` and open `http://127.0.0.1:4321/review/<slug>/` in a browser. Use the port Astro reports if 4321 is occupied. Do not expose this private preview on the LAN.
 3. Review the full page at desktop and narrow-mobile widths, including title, subtitle, prose, sign-off, and any image. Apply corrections to the ignored source and regenerate the draft, or edit the private draft with the author's approval; refresh the browser.

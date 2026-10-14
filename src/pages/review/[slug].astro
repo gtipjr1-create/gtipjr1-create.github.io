@@ -1,13 +1,21 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
-import { calculateReadingTime } from "../../lib/writing";
+import { calculateReadingTime, getPublishedWritingEntries } from "../../lib/writing";
+import { selectPrivateWritingPreviews } from "../../lib/writing-validation";
 
 export async function getStaticPaths() {
   if (!import.meta.env.DEV) return [];
 
-  const drafts = await getCollection("previewWriting");
-  return drafts.map((entry) => ({
+  const [drafts, published] = await Promise.all([
+    getCollection("previewWriting"),
+    getPublishedWritingEntries(),
+  ]);
+  const { entries, rejected } = selectPrivateWritingPreviews(drafts, published);
+  for (const reason of rejected) {
+    console.warn(`Private preview rejected: ${reason} Preserve stale drafts outside .migration-output/new/.`);
+  }
+  return entries.map((entry) => ({
     params: { slug: entry.data.slug },
     props: { entry },
   }));
@@ -17,7 +25,14 @@ interface Props {
   entry: CollectionEntry<"previewWriting">;
 }
 
-const { entry } = Astro.props;
+// Recheck current content on every request, even if Astro cached static-path props.
+const [currentDrafts, currentPublished] = await Promise.all([
+  getCollection("previewWriting"),
+  getPublishedWritingEntries(),
+]);
+const { entries: currentPreviews } = selectPrivateWritingPreviews(currentDrafts, currentPublished);
+const entry = currentPreviews.find((candidate) => candidate.data.slug === Astro.props.entry.data.slug);
+if (!entry) return new Response("Private preview unavailable.", { status: 404 });
 const { Content } = await render(entry);
 const readingTime = calculateReadingTime(entry.body ?? "");
 ---
