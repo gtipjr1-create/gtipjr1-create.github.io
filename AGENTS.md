@@ -175,6 +175,16 @@ Also verify, when relevant:
 
 Never claim “fully verified,” “responsive,” “accessible,” “device-tested,” or “production-ready” without naming the evidence. If a check could not run, state exactly what remains unverified and why.
 
+## Codex Windows Astro execution
+
+The October 13, 2026 audit confirmed an execution-environment limitation: inside the affected Codex Windows filesystem sandbox, Node's `fs.realpathSync.native()` returns `EPERM` for the project and dependency paths, although ordinary `fs.realpathSync()` succeeds. Vite's native package-path resolution can then fail to externalize CommonJS `picomatch`, imported through `src/content.config.ts` → `astro/loaders` → Astro's glob loader. Its module runner evaluates that CommonJS file without `require`, producing `require is not defined` during content synchronization.
+
+The failure reproduced with an untouched HEAD checkout and a fresh `npm ci` installation inside the sandbox. The same checkout, Node executable, and dependency files passed outside that sandbox; GitHub Actions also passed. Do not treat this confirmed signature as a content defect or repeatedly reinstall dependencies, upgrade packages, patch `node_modules`, or add per-day aliases.
+
+For affected Astro development, content sync, build, and release verification commands, use the normal repository commands through explicitly authorized native execution outside the affected sandbox, as described in `docs/new-writing-workflow.md`. Native execution here means a scoped command invocation, not administrator privileges or a global sandbox-setting change. Authorization must cover the specific commands and purpose; use authorization already supplied in the current session, otherwise explain the confirmed limitation and obtain authorization before requesting the approved execution path. Never broadly disable sandbox protections or bypass an approval rejection.
+
+If the signature is uncertain, compare `fs.realpathSync.native(process.cwd())` inside and outside the sandbox using authorized execution. If native execution also fails, investigate the new evidence rather than assuming this limitation explains it. Preserve all standard publication approvals and validation gates.
+
 ## Session documents
 
 `NEXT_SESSION.md` is an active handoff, not permanent product documentation. Keep it concise and factual when the task or user asks for a handoff.

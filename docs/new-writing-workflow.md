@@ -9,6 +9,26 @@ From October 1, GarryTipler.com is the first place new writing is published. Med
 
 Write → drop the manuscript → review the private draft in a local browser → approve → publish on GarryTipler.com → verify live → share to Medium with the site as canonical → record the Medium link.
 
+### Astro commands in the affected Codex Windows sandbox
+
+The October 13, 2026 audit confirmed that the Codex Windows filesystem sandbox can deny `fs.realpathSync.native()` with `EPERM`. Vite then fails to resolve and externalize CommonJS `picomatch` normally, causing `require is not defined` during Astro content sync. An untouched checkout with a fresh lockfile installation reproduced the failure inside the sandbox and passed outside it. This confirmed signature does not require another daily diagnosis or a day-specific preview configuration.
+
+Use the unchanged commands below through explicitly authorized native execution outside the affected sandbox, from the repository root:
+
+```powershell
+npm.cmd run dev -- --host 127.0.0.1
+node .\node_modules\astro\bin\astro.mjs sync
+npm.cmd run test:writing-tools
+npm.cmd run test:signup
+npm.cmd run validate
+```
+
+`npm.cmd run validate` includes writing validation, the production build, and `scripts/verify-build.mjs`. If running those steps separately, use `npm.cmd run validate:writing`, `npm.cmd run build`, and `node scripts/verify-build.mjs` through the same authorized native path. Keep the existing quality gates and `git diff --check`.
+
+Before native execution, confirm that the owner has explicitly authorized the affected commands and their purpose in the current session. If authorization is missing, explain the confirmed sandbox limitation and ask for that scoped authorization. Do not disable sandbox protections globally, change application permission settings, patch installed dependencies, or add aliases. An approval rejection must be respected and reported. Native execution does not itself authorize publication, commit, push, deployment, or Medium changes.
+
+Keep private previews bound to `127.0.0.1` and open the actual `/review/<slug>/` page for author review. If commands also fail outside the sandbox, investigate the new failure. The precise execution rule and audit evidence are recorded in `AGENTS.md`.
+
 ## 1. Dropping a new piece
 
 Either paste the piece into the session, or save it as a plain Markdown file in:
