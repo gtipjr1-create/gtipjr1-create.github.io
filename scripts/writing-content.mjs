@@ -188,6 +188,20 @@ export function validateWritingData(data, label = "writing entry") {
       validateString(data.heroImage, "alt", errors, `${label} heroImage`);
       validateString(data.heroImage, "caption", errors, `${label} heroImage`, { optional: true });
       validateString(data.heroImage, "credit", errors, `${label} heroImage`, { optional: true });
+      validateString(data.heroImage, "creditUrl", errors, `${label} heroImage`, { optional: true });
+      if (data.heroImage.creditUrl !== undefined) {
+        if (!data.heroImage.credit) {
+          addError(errors, label, "heroImage.credit is required when creditUrl is supplied.");
+        }
+        try {
+          const creditUrl = new URL(data.heroImage.creditUrl);
+          if (!["http:", "https:"].includes(creditUrl.protocol)) {
+            addError(errors, label, "heroImage.creditUrl must use HTTP or HTTPS.");
+          }
+        } catch {
+          addError(errors, label, "heroImage.creditUrl must be a valid URL.");
+        }
+      }
     }
   }
 

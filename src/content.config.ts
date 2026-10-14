@@ -65,6 +65,7 @@ const writingSchema = z
         alt: z.string().trim().min(1),
         caption: z.string().trim().min(1).optional(),
         credit: z.string().trim().min(1).optional(),
+        creditUrl: z.string().url().regex(/^https?:\/\//).optional(),
       })
       .optional(),
   })
