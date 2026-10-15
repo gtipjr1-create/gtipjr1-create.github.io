@@ -445,6 +445,11 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
     .field-log__label { font-size: 9px; line-height: 1.5; letter-spacing: 0.12em; }
     .about { padding-top: 46px; }
     .about-head { gap: 18px; }
+    /* Phones show the portrait full width, so it is quieted further and
+       vignetted to sit inside the page rather than on top of it. */
+    .about-portrait { position: relative; }
+    .about-portrait img { filter: saturate(0.55) contrast(1.06) brightness(0.8); }
+    .about-portrait::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 64px rgba(11,11,12,0.6); }
     .about-copy { margin-top: 28px; gap: 20px; font-size: 17px; }
     .about-copy > p:first-child { font-size: 19px; }
     .book { padding: 72px 0 80px; }
@@ -536,10 +541,10 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
       <span class="field-log__sweep" aria-hidden="true"></span>
       <div>
         <h2 class="field-log__title" id="field-log-title"><span class="pulse" aria-hidden="true"></span>Field log</h2>
-        <p class="field-log__note">Proof of practice. Sessions as of Oct 7, 2026.</p>
+        <p class="field-log__note">Proof of practice. Sessions as of Oct 14, 2026.</p>
       </div>
       <div>
-        <span class="field-log__value" data-count>106</span>
+        <span class="field-log__value" data-count>108</span>
         <span class="field-log__label">Sessions logged in SelfTrainer</span>
       </div>
       <div>
