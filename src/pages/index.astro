@@ -305,6 +305,7 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
   .card-feature > *:not(.glow):not(.card-feature__mark) { position: relative; }
   .card-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-faint); text-transform: uppercase; }
   .card-feature .card-meta { color: var(--accent); }
+  .card-feature__img { flex: 1 1 200px; width: 100%; min-height: 200px; object-fit: cover; margin-bottom: 8px; }
   .card-feature h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 3.9vw, 56px); line-height: 1; color: var(--ink); }
   .card-feature p { max-width: 520px; font-size: 17px; line-height: 1.55; color: var(--ink-mute); }
   .card-row { flex: 1; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 24px; align-items: center; padding: 20px; }
@@ -475,6 +476,7 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
     .writing { padding-top: 96px; gap: 32px; }
     .card-feature { min-height: 400px; padding: 28px 24px; }
     .card-feature__mark { font-size: 150px; top: 8px; left: 16px; }
+    .card-feature__img { flex: none; min-height: 0; height: auto; aspect-ratio: 16 / 9; }
     .card-row { grid-template-columns: 1fr; padding: 14px; }
     .card-row img { width: 100%; height: auto; aspect-ratio: 16 / 9; }
     .card-row h3 { font-size: 24px; }
@@ -719,7 +721,9 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
       <div class:list={["writing-grid", latest.length === 0 && "writing-grid--single"]}>
         <a class="card card-feature reveal" href={getWritingPath(featured.data)}>
           <span class="glow" aria-hidden="true"></span>
-          {featured.data.fragmentNumber && <span class="card-feature__mark" aria-hidden="true">#{featured.data.fragmentNumber}</span>}
+          {featured.data.heroImage
+            ? <img class="card-feature__img" src={featured.data.heroImage.src} alt="" loading="lazy" />
+            : featured.data.fragmentNumber && <span class="card-feature__mark" aria-hidden="true">#{featured.data.fragmentNumber}</span>}
           <span class="card-meta">Latest · {typeLabel(featured)} · {shortDate(featured)}</span>
           <h3>{featured.data.title}</h3>
           <p>{featured.data.summary}</p>
