@@ -18,7 +18,7 @@ Treat this record as the reference before changing any visual surface. Changes t
 
 | Role | Face | Notes |
 | --- | --- | --- |
-| Display and editorial headings (`--serif`) | Playfair Display | 400 for display and titles (the 300 weight in CSS falls back to 400). Italic is used for emphasis words, usually in gold. |
+| Display and editorial headings (`--serif`) | Playfair Display | 400 for display and titles (Playfair has no 300; CSS declares 400 directly). Italic is used for emphasis words, usually in gold. |
 | Article prose (`--prose`) | Source Serif 4 | Weight 400 (strong 600), 21px desktop / 19px phone, line-height 1.75 in the 700px reading column. Chosen over Cormorant Garamond 300, which was too thin on dark backgrounds. |
 | Body and UI (`--sans`) | Hanken Grotesk | 400/500/600. |
 | Labels, metadata, kickers (`--mono`) | Space Mono | 11–12px, uppercase, letter-spacing 0.14–0.3em. |
