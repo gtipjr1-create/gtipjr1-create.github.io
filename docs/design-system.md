@@ -75,9 +75,9 @@ The homepage is an Astro page so its writing cards can be built from the Writing
 
 In order:
 
-1. **Hero**: full-height, with the portrait `assets/about/garry-tipler-hero.webp` (1206×1063) bleeding off the right edge and fading into black. Film grain, faint horizontal rules and a gold glow sit on top. The headline is "Systems for *rebuilding* a life." with "rebuilding" in gold italic.
+1. **Hero**: typography-first, with no photograph. A CSS-only atmosphere (one distant warm light at the top right, a faint diagonal shaft, a vignette) settles into the page black; film grain and faint horizontal rules fade out at its base. The headline is "Systems for *rebuilding* a life." with "rebuilding" in gold italic, set as two lines ("Systems for" / "*rebuilding* a life."); "a life." never breaks apart. The descriptor above it separates the roles ("Author · Software Builder") from "Founder, Tenacious Individual Performance", which sits a shade dimmer and moves to its own line on phones.
 2. **Field log**: a glass panel at the bottom of the hero. Its numbers count up; a gold light sweeps its top edge; "Weeks in the system" counts forward from `data-start="2026-01-10"`. Sessions and titles are hand-updated; never estimate them.
-3. **01 — About Garry**: "Behind the work." with a small square portrait (`assets/about/garry-tipler-portrait.webp`) and the author's About copy, including what T.I.P. (Tenacious Individual Performance) stands for. No button or form.
+3. **01 — About Garry**: opens on a fine hairline divider below the hero; "Behind the work." with the author's About copy (first paragraph set as a lead), including what T.I.P. (Tenacious Individual Performance) stands for. The site's only portrait sits below the heading: `assets/about/garry-tipler-hero.webp` in a muted, bordered 4:5 frame (6:5 on tablet and phone). `assets/about/garry-tipler-portrait.webp` stays in use as the JSON-LD image. No button or form.
 4. **02 — The doctrine**: *I Am the Proof*, with the real cover floating straight on (no tilt) above a soft shadow.
 5. **Field guides**: two cards with gold italic numerals 01/02. There are no cover images until real covers exist.
 6. **03 — Free · 7 days**: the Kit signup (form `9676498`) and the PDF download revealed on success. The form logic must not change.

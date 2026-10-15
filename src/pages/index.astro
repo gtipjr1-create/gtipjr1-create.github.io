@@ -64,7 +64,6 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="/assets/about/garry-tipler-hero.webp" />
 
 <script type="application/ld+json" is:inline>
 {
@@ -127,28 +126,28 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
-    min-height: 940px;
+    min-height: min(940px, 100vh);
+    min-height: min(940px, 100svh);
     display: flex; flex-direction: column;
     overflow: hidden;
     isolation: isolate;
   }
-  .hero-media {
-    position: absolute; top: 0; right: 0; bottom: 0;
-    width: 49%;
-    z-index: -2;
-  }
-  .hero-media img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: 58% 50%;
-    filter: saturate(0.7) contrast(1.05) brightness(0.92);
-  }
-  .hero-media::after {
-    content: ""; position: absolute; inset: 0;
+  /* Atmosphere: one distant warm light, a faint diagonal shaft and a vignette,
+     settling into the page black so the hero meets About without a seam. */
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
     background:
-      linear-gradient(90deg, var(--bg) 0%, rgba(11,11,12,0.55) 32%, rgba(11,11,12,0) 60%),
-      linear-gradient(0deg, var(--bg) 0%, rgba(11,11,12,0) 38%);
+      linear-gradient(180deg, rgba(11,11,12,0) 62%, var(--bg) 100%),
+      radial-gradient(ellipse 120% 90% at 40% 35%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.5) 100%),
+      linear-gradient(112deg, rgba(236,234,227,0) 46%, rgba(236,234,227,0.03) 58%, rgba(236,234,227,0) 72%),
+      radial-gradient(ellipse 55% 60% at 84% 14%, rgba(var(--accent-rgb), 0.11) 0%, rgba(var(--accent-rgb), 0.04) 45%, rgba(var(--accent-rgb), 0) 75%),
+      radial-gradient(ellipse 85% 95% at 100% 0%, rgba(var(--accent-rgb), 0.05) 0%, rgba(var(--accent-rgb), 0) 70%),
+      linear-gradient(180deg, #0f0e0d 0%, #0d0d0d 55%, var(--bg) 100%);
   }
-  .hero-texture .glow { top: 120px; right: 12%; width: 720px; height: 720px; background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16) 0%, rgba(var(--accent-rgb), 0) 62%); }
+  .hero-texture {
+    -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  }
 
   .nav-guide { gap: 0.3em; min-height: 44px !important; padding: 0 18px; background: var(--accent); color: #0b0b0c !important; font-weight: 600; font-size: 14px; transition: background .25s ease !important; }
   .nav-guide:hover { background: var(--accent-hi); }
@@ -156,15 +155,19 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
   .hero-copy {
     position: relative; z-index: 2;
     flex: 1;
-    display: flex; flex-direction: column; justify-content: center; gap: 36px;
-    max-width: 760px;
-    padding: 96px 0 72px;
+    display: flex; flex-direction: column; justify-content: center;
+    max-width: 1040px;
+    padding: 112px 0 88px;
   }
-  .hero-role { display: flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--ink-mute); text-transform: uppercase; }
+  .hero-role { display: flex; align-items: center; gap: 14px; margin-bottom: 36px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; color: var(--ink-mute); text-transform: uppercase; }
+  .hero-role__sep { margin: 0 0.9em; color: var(--ink-off); }
+  .hero-role__org { color: var(--ink-faint); }
   .pulse { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--accent); }
-  .hero h1 { font-size: clamp(56px, 8.9vw, 128px); line-height: 0.95; letter-spacing: -0.035em; }
-  .lede { max-width: 560px; font-size: 20px; line-height: 1.6; color: var(--ink-dim); }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero h1 { margin-bottom: 36px; font-size: clamp(56px, 8.4vw, 120px); line-height: 0.98; letter-spacing: -0.035em; }
+  .hero h1 .line { display: block; }
+  .hero h1 .keep { white-space: nowrap; }
+  .lede { max-width: 30em; margin-bottom: 48px; font-size: 20px; line-height: 1.6; color: var(--ink-dim); text-wrap: pretty; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; }
 
   /* Field log: real numbers only, never estimated. */
   .field-log {
@@ -190,11 +193,18 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
   .field-log__now p { font-family: var(--serif); font-size: 22px; font-weight: 300; line-height: 1.25; color: var(--ink); }
 
   /* ---------- ABOUT ---------- */
-  .about { padding: 140px 0 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start; }
+  /* A hairline fading at both ends marks the move from hero to About. */
+  .about {
+    padding: 96px 0 0;
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start;
+    background: linear-gradient(90deg, rgba(58,55,47,0), var(--line-2) 18%, var(--line-2) 82%, rgba(58,55,47,0)) top / 100% 1px no-repeat;
+  }
   .about-head { grid-column: span 4; display: flex; flex-direction: column; gap: 22px; }
   .about-head h2 { font-size: clamp(40px, 3.9vw, 56px); line-height: 1.02; }
-  .about-portrait { width: 160px; height: 160px; margin-top: 18px; object-fit: cover; border: 1px solid var(--line-2); }
-  .about-copy { grid-column: 6 / span 7; max-width: 640px; display: flex; flex-direction: column; gap: 22px; font-size: 18px; line-height: 1.7; color: var(--ink-dim); }
+  .about-portrait { width: 100%; max-width: 360px; margin-top: 18px; border: 1px solid var(--line-2); background: var(--bg-card); }
+  .about-portrait img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 48% 46%; filter: saturate(0.72) contrast(1.05) brightness(0.92); }
+  .about-copy { grid-column: 6 / span 7; max-width: 620px; display: flex; flex-direction: column; gap: 24px; font-size: 18px; line-height: 1.75; color: var(--ink-dim); }
+  .about-copy > p:first-child { font-size: 21px; line-height: 1.6; color: var(--ink-soft); }
   .about-copy strong { color: var(--ink); font-weight: 500; }
 
   /* ---------- BOOK ---------- */
@@ -380,7 +390,6 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
   /* ---------- TABLET ---------- */
   @media (max-width: 1100px) {
     :root { --gutter: 40px; }
-    .hero-media { width: 56%; }
     .field-log { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .field-log > div:first-of-type, .field-log__now { grid-column: 1 / -1; }
     .field-log > div + div { border-left: 0; }
@@ -391,6 +400,8 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
     .guides, .writing-grid, .app-notes { grid-template-columns: 1fr; }
     .about-head, .about-copy { grid-column: 1 / -1; }
     .about-copy { margin-top: 40px; }
+    .about-portrait { max-width: 480px; }
+    .about-portrait img { aspect-ratio: 6 / 5; }
     .principles-head { grid-column: 1 / -1; position: static; margin-bottom: 40px; }
     .principles ol { grid-column: 1 / -1; }
     .offer { padding: 64px 48px; }
@@ -404,30 +415,38 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
     :root { --gutter: 20px; }
     body { font-size: 16px; }
     .hero { min-height: 0; }
-    .hero-media { left: 0; width: 100%; bottom: auto; height: 560px; }
-    .hero-media img { object-position: 62% 30%; }
-    .hero-media::after { background: linear-gradient(0deg, var(--bg) 6%, rgba(11,11,12,0.72) 40%, rgba(11,11,12,0.15) 100%); }
-    .hero-texture .glow { display: none; }
+    .hero::before {
+      background:
+        linear-gradient(180deg, rgba(11,11,12,0) 70%, var(--bg) 100%),
+        radial-gradient(ellipse 140% 80% at 50% 30%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%),
+        linear-gradient(118deg, rgba(236,234,227,0) 40%, rgba(236,234,227,0.028) 56%, rgba(236,234,227,0) 72%),
+        radial-gradient(ellipse 120% 42% at 92% 4%, rgba(var(--accent-rgb), 0.115) 0%, rgba(var(--accent-rgb), 0.04) 50%, rgba(var(--accent-rgb), 0) 80%),
+        radial-gradient(ellipse 140% 70% at 100% 0%, rgba(var(--accent-rgb), 0.045) 0%, rgba(var(--accent-rgb), 0) 70%),
+        linear-gradient(180deg, #0f0e0d 0%, #0d0d0d 55%, var(--bg) 100%);
+    }
     .site-nav { margin-top: 12px; padding: 0 8px 0 10px; gap: 12px; }
     .site-mark span { display: none; }
     .site-links { gap: 18px; font-size: 14px; }
     .nav-book, .guide-days { display: none !important; }
     .nav-guide { padding: 0 14px; }
-    .hero-copy { padding: 250px 0 40px; gap: 24px; }
-    .hero-role { align-items: flex-start; font-size: 10px; line-height: 1.7; letter-spacing: 0.14em; }
+    .hero-copy { padding: 64px 0 48px; }
+    .hero-role { align-items: flex-start; margin-bottom: 24px; font-size: 10px; line-height: 1.7; letter-spacing: 0.14em; }
     .hero-role .pulse { margin-top: 5px; }
-    .hero h1 { font-size: 54px; line-height: 0.98; }
-    .lede { font-size: 17px; }
+    .hero-role__roles, .hero-role__org { display: block; }
+    .hero-role__sep { display: none; }
+    .hero h1 { margin-bottom: 24px; font-size: clamp(44px, 13.6vw, 56px); line-height: 1; }
+    .lede { margin-bottom: 32px; font-size: 17px; }
+    .hero-actions { gap: 12px; }
     .hero-actions .btn { width: 100%; }
     .field-log { margin-bottom: 40px; }
     .field-log > div { padding: 18px 14px; }
     .field-log__value { font-size: 38px; }
     .field-log__now p { font-size: 19px; }
     .field-log__label { font-size: 9px; line-height: 1.5; letter-spacing: 0.12em; }
-    .about { padding-top: 72px; }
+    .about { padding-top: 46px; }
     .about-head { gap: 18px; }
-    .about-portrait { width: 112px; height: 112px; margin-top: 8px; }
-    .about-copy { margin-top: 28px; gap: 18px; font-size: 17px; }
+    .about-copy { margin-top: 28px; gap: 20px; font-size: 17px; }
+    .about-copy > p:first-child { font-size: 19px; }
     .book { padding: 72px 0 80px; }
     .book-grid { grid-template-columns: 1fr; gap: 8px; }
     .book-stage { height: 440px; }
@@ -475,11 +494,7 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="hero">
-  <div class="hero-media">
-    <img src="/assets/about/garry-tipler-hero.webp" alt="Garry Tipler outdoors under the trees, looking up." width="1206" height="1063" fetchpriority="high" />
-  </div>
   <div class="hero-texture" aria-hidden="true">
-    <div class="glow"></div>
     <div class="hero-grain"></div>
     <div class="hero-lines"></div>
   </div>
@@ -499,8 +514,8 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
     </nav>
 
     <div class="hero-copy">
-      <p class="hero-role rise" style="--d:0ms"><span class="pulse" aria-hidden="true"></span><span>Author · Software Builder · Founder, Tenacious Individual Performance</span></p>
-      <h1 class="display rise" style="--d:120ms">Systems for <em>rebuilding</em> a life.</h1>
+      <p class="hero-role rise" style="--d:0ms"><span class="pulse" aria-hidden="true"></span><span><span class="hero-role__roles">Author · Software Builder</span><span class="hero-role__sep"> · </span><span class="hero-role__org">Founder, Tenacious Individual Performance</span></span></p>
+      <h1 class="display rise" style="--d:120ms"><span class="line">Systems for</span> <span class="line"><em>rebuilding</em> <span class="keep">a life.</span></span></h1>
       <p class="lede rise" style="--d:240ms">
         My rebuild started in a shelter. The systems that carried me out —
         discipline, training, and writing — are all here. I tested them on
@@ -551,7 +566,9 @@ const weeksInSystem = Math.floor((Date.now() - Date.parse(`${systemStart}T00:00:
       <div class="about-head reveal">
         <span class="kicker">01 — About Garry</span>
         <h2 class="display" id="about-heading">Behind the work.</h2>
-        <img class="about-portrait" src="/assets/about/garry-tipler-portrait.webp" alt="Portrait of Garry Tipler outdoors, looking up." width="320" height="320" loading="lazy" />
+        <figure class="about-portrait">
+          <img src="/assets/about/garry-tipler-hero.webp" alt="Garry Tipler outdoors under the trees, looking up." width="1206" height="1063" loading="lazy" decoding="async" />
+        </figure>
       </div>
       <div class="about-copy reveal">
         <p>I’m Garry Tipler. Before I was publishing books or building software, I was learning how to rebuild my own life. That journey began in a shelter, where creating a different future meant taking responsibility for the actions I could control.</p>
