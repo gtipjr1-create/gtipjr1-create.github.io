@@ -117,7 +117,7 @@ The hero descriptor reads "Author · Software Builder · Founder, Tenacious Indi
 | `--ink-dim` | `#b3a893` | `#4d463a` |
 | `--ink-faint` | `#8c826f` | `#6b6354` |
 | `--line` / `--line-2` | `#2a241a` / `#3a3124` | `#d3c7ae` / `#c4b89f` |
-| `--accent` | `#d4ab5f` (via fixed `--gold`; hover `#eecb8b`) | `#7a5719` (bronze) |
+| `--accent` | `#d4ab5f` (via fixed `--gold`; hover `#e9c683`, matching the Field Manual) | `#7a5719` (bronze) |
 | `--link` | `#dcb46b` | `#7a5719` |
 | `color-scheme` | `dark` | `only light` |
 
