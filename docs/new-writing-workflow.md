@@ -132,7 +132,7 @@ Automatic on publish:
 
 Manual, and only when the author asks:
 
-- **Homepage featured card** (`src/pages/index.astro`, `featuredSlug`). The large card stays curated (currently The Fire). The two side cards update automatically to the newest published pieces on each build.
+- **Homepage writing cards** (`src/pages/index.astro`). The large card is the newest published piece, labeled Latest; the two side cards are the next two newest. All three update automatically on each build.
 - **Start Here** order (`startHereOrder`) and `featured`.
 - **Related writing** and connections. These are always explicit and never inferred from tags.
 - **`updatedDate`.** Set it only when a published piece's prose is later changed.

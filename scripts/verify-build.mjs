@@ -221,8 +221,8 @@ for (const [index, entry] of publishedFragments.entries()) {
 
 assert.match(
   homepageHtml,
-  /href="\/writing\/fragments\/fragments-4-the-fire\/"/,
-  "Homepage pilot teaser must link to the GarryTipler.com article route.",
+  /class="card card-feature[^"]*" href="\/writing\/[^"]+\/"/,
+  "Homepage featured card must link to a GarryTipler.com article route.",
 );
 assert.match(
   homepageHtml,
