@@ -18,7 +18,7 @@ connections: []
 heroImage:
   src: "/assets/writing/essays/how-others-see-me/micheile-henderson-TBaiZDMojyg-unsplash.jpg"
   alt: "A stone church tower under a blue sky, reflected in the glass facade of a nearby building."
-  credit: "micheile henderson"
+  caption: "Photo Credit: micheile henderson"
 ---
 
 October 15th.
